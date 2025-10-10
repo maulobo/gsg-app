@@ -1,0 +1,203 @@
+/**
+ * Server-side product queries
+ * All functions use createServerSupabaseClient for SSR compatibility
+ */
+
+import { createServerSupabaseClient } from '@/lib/supabase-server'
+import type { ProductWithRelations, ProductListItem } from '../types'
+
+/**
+ * Get all products with basic info (for lists)
+ */
+export async function getProducts(): Promise<ProductListItem[]> {
+  const supabase = await createServerSupabaseClient()
+
+  const { data, error } = await supabase
+    .from('products')
+    .select(
+      `
+      id,
+      code,
+      name,
+      is_featured,
+      created_at,
+      category:categories ( id, name, slug ),
+      product_variants ( id )
+    `
+    )
+    .order('created_at', { ascending: false })
+
+  if (error) {
+    console.error('getProducts error:', error)
+    throw new Error(error.message)
+  }
+
+  return (data ?? []).map((p) => ({
+    id: p.id,
+    code: p.code,
+    name: p.name,
+    is_featured: p.is_featured,
+    created_at: p.created_at,
+    category: p.category as any,
+    variants_count: (p.product_variants as any[])?.length || 0,
+  }))
+}
+
+/**
+ * Get a single product by code with all relations
+ */
+export async function getProductByCode(code: string): Promise<ProductWithRelations | null> {
+  if (!code) return null
+
+  const supabase = await createServerSupabaseClient()
+
+  // Primero obtenemos el producto con sus variantes
+  const { data, error } = await supabase
+    .from('products')
+    .select(`
+      id, code, name, description, category_id, is_featured, created_at,
+      category:categories ( id, slug, name ),
+      media_assets:media_assets!product_id ( id, path, kind, alt_text ),
+      product_finishes (
+        finish:finishes ( id, slug, name )
+      ),
+      product_variants (
+        id, variant_code, name, includes_led, includes_driver,
+        variant_light_tones (
+          light_tone:light_tones ( id, slug, name, kelvin )
+        ),
+        variant_configurations (
+          id, sku, watt, lumens, diameter_description,
+          length_mm, width_mm, voltage, specs
+        )
+      )
+    `)
+    .eq('code', code)
+    .single()
+
+  if (error) {
+    console.error('getProductByCode error:', error)
+    return null
+  }
+
+  // Ahora obtenemos las imágenes de las variantes por separado
+  if (data.product_variants && data.product_variants.length > 0) {
+    const variantIds = data.product_variants.map((v: any) => v.id)
+    
+    const { data: variantImages, error: imagesError } = await supabase
+      .from('media_assets')
+      .select('id, variant_id, path, kind, alt_text')
+      .in('variant_id', variantIds)
+      .not('variant_id', 'is', null)
+
+    if (!imagesError && variantImages) {
+      // Asociar las imágenes a cada variante
+      data.product_variants = data.product_variants.map((variant: any) => ({
+        ...variant,
+        media_assets: variantImages.filter((img: any) => img.variant_id === variant.id)
+      }))
+    }
+  }
+
+  return data as unknown as ProductWithRelations
+}
+
+/**
+ * Get a single product by ID with all relations
+ */
+export async function getProductById(id: number): Promise<ProductWithRelations | null> {
+  if (!id) return null
+
+  const supabase = await createServerSupabaseClient()
+
+  // Primero obtenemos el producto con sus variantes
+  const { data, error } = await supabase
+    .from('products')
+    .select(
+      `
+      id, code, name, description, category_id, is_featured, created_at,
+      category:categories ( id, slug, name ),
+      media_assets:media_assets!product_id ( id, path, kind, alt_text ),
+      product_variants (
+        id, variant_code, name,
+        variant_finishes (
+          finishes ( id, slug, name )
+        ),
+        variant_light_tones (
+          light_tone:light_tones ( id, slug, name, kelvin )
+        ),
+        variant_configurations (
+          id, sku, watt, lumens, diameter_description,
+          length_mm, width_mm, voltage, 
+          includes_led, includes_driver, specs
+        )
+      )
+    `
+    )
+    .eq('id', id)
+    .single()
+
+  if (error) {
+    console.error('getProductById error:', error)
+    return null
+  }
+
+  // Ahora obtenemos las imágenes de las variantes por separado
+  if (data.product_variants && data.product_variants.length > 0) {
+    const variantIds = data.product_variants.map((v: any) => v.id)
+    
+    const { data: variantImages, error: imagesError } = await supabase
+      .from('media_assets')
+      .select('id, variant_id, path, kind, alt_text')
+      .in('variant_id', variantIds)
+      .not('variant_id', 'is', null)
+
+    if (!imagesError && variantImages) {
+      // Asociar las imágenes a cada variante
+      data.product_variants = data.product_variants.map((variant: any) => ({
+        ...variant,
+        media_assets: variantImages.filter((img: any) => img.variant_id === variant.id)
+      }))
+    }
+  }
+
+  return data as unknown as ProductWithRelations
+}
+
+/**
+ * Get featured products
+ */
+export async function getFeaturedProducts(): Promise<ProductListItem[]> {
+  const supabase = await createServerSupabaseClient()
+
+  const { data, error } = await supabase
+    .from('products')
+    .select(
+      `
+      id,
+      code,
+      name,
+      is_featured,
+      created_at,
+      category:categories ( id, name, slug ),
+      product_variants ( id )
+    `
+    )
+    .eq('is_featured', true)
+    .order('created_at', { ascending: false })
+
+  if (error) {
+    console.error('getFeaturedProducts error:', error)
+    throw new Error(error.message)
+  }
+
+  return (data ?? []).map((p) => ({
+    id: p.id,
+    code: p.code,
+    name: p.name,
+    is_featured: p.is_featured,
+    created_at: p.created_at,
+    category: p.category as any,
+    variants_count: (p.product_variants as any[])?.length || 0,
+  }))
+}
