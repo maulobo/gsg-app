@@ -1,14 +1,14 @@
 import { Metadata } from 'next'
 import { getProducts } from '@/features/products/queries'
 import { getCategories } from '@/features/categories/queries'
-import { ProductsDashboard } from '@/components/products/ProductsDashboard'
+import { ProductList } from '@/components/products/ProductList'
 
 export const metadata: Metadata = {
-  title: 'Dashboard de Productos | Admin',
-  description: 'Resumen y estadísticas de productos',
+  title: 'Productos | Dashboard',
+  description: 'Listado de todos los productos',
 }
 
-export default async function AdminProductsPage() {
+export default async function ProductsPage() {
   const [products, categories] = await Promise.all([
     getProducts(),
     getCategories()
@@ -16,7 +16,7 @@ export default async function AdminProductsPage() {
 
   return (
     <div className="p-6">
-      <ProductsDashboard products={products} categories={categories} />
+      <ProductList products={products} categories={categories} />
     </div>
   )
 }

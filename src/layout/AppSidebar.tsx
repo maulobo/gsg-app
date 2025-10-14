@@ -26,13 +26,21 @@ const navItems: NavItem[] = [
   {
     icon: <GridIcon />,
     name: "Dashboard",
-    subItems: [{ name: "Ecommerce", path: "/", pro: false }],
+    subItems: [
+      { name: "Productos", path: "/products", pro: false },
+      { name: "Accesorios", path: "/accessories", pro: false }
+    ],
   },
 
   {
     icon: <FolderIcon />,
-    name: "Products",
-    path: "/products",
+    name: "Productos",
+    path: "/products/list",
+  },
+  {
+    icon: <PlugInIcon />,
+    name: "Accesorios",
+    path: "/accessories/list",
   },
   {
     icon: <UserCircleIcon />,

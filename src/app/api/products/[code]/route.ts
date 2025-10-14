@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createServerSupabaseClient } from '@/lib/supabase-server'
+import { deleteFromR2, extractKeyFromUrl } from '@/lib/r2client'
 
 export async function PATCH(
   request: NextRequest,
@@ -70,7 +71,7 @@ export async function DELETE(
 
     const supabase = await createServerSupabaseClient()
 
-    // Validar que el producto existe
+    // 1. Validar que el producto existe
     const { data: existingProduct, error: fetchError } = await supabase
       .from('products')
       .select('id')
@@ -84,23 +85,51 @@ export async function DELETE(
       )
     }
 
-    // Eliminar el producto (las cascadas deberían manejar las relaciones)
+    // 2. Obtener todas las imágenes del producto (de todas las variantes)
+    const { data: mediaAssets, error: mediaError } = await supabase
+      .from('media_assets')
+      .select('id, path')
+      .eq('product_id', existingProduct.id)
+
+    // 3. Eliminar imágenes de R2
+    if (mediaAssets && mediaAssets.length > 0) {
+      console.log(`Eliminando ${mediaAssets.length} imágenes de R2...`)
+      
+      for (const asset of mediaAssets) {
+        const key = extractKeyFromUrl(asset.path)
+        if (key) {
+          try {
+            await deleteFromR2(key)
+            console.log(`✅ Imagen eliminada de R2: ${key}`)
+          } catch (r2Error) {
+            console.error(`❌ Error eliminando imagen de R2: ${key}`, r2Error)
+            // Continuar con las demás imágenes aunque falle una
+          }
+        }
+      }
+    }
+
+    // 4. Eliminar el producto de la base de datos
+    // (las cascadas eliminarán: variants, configurations, media_assets, etc.)
     const { error: deleteError } = await supabase
       .from('products')
       .delete()
       .eq('code', code)
 
     if (deleteError) {
-      console.error('Error eliminando producto:', deleteError)
+      console.error('Error eliminando producto de DB:', deleteError)
       return NextResponse.json(
-        { error: 'Error al eliminar el producto' },
+        { error: 'Error al eliminar el producto de la base de datos' },
         { status: 500 }
       )
     }
 
+    console.log(`✅ Producto ${code} eliminado completamente (DB + R2)`)
+
     return NextResponse.json({
       success: true,
       message: 'Producto eliminado exitosamente',
+      deletedImages: mediaAssets?.length || 0,
     })
   } catch (error) {
     console.error('Error en DELETE /api/products/[code]:', error)

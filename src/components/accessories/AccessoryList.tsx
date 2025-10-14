@@ -4,6 +4,7 @@ import { useMemo, useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button, Pagination } from '@heroui/react'
 import { PlusIcon } from '@/icons'
+import type { AccessoryListItem } from '@/features/accessories/types'
 
 // Iconos simples inline
 const SearchIcon = ({ className = "w-4 h-4" }) => (
@@ -30,66 +31,29 @@ const TrashIcon = ({ className = "w-4 h-4" }) => (
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
   </svg>
 )
-import type { ProductListItem } from '@/features/products/types'
 
-type Category = {
-  id: number
-  name: string
-  slug: string
-}
-
-const INITIAL_VISIBLE_COLUMNS = ['name', 'code', 'category', 'variants_count', 'actions']
+const INITIAL_VISIBLE_COLUMNS = ['photo', 'code', 'name', 'specs', 'tones', 'finishes', 'actions']
 
 const columns = [
-  { name: 'NOMBRE', uid: 'name', sortable: true },
   { name: 'CÓDIGO', uid: 'code', sortable: true },
-  { name: 'CATEGORÍA', uid: 'category', sortable: true },
-  { name: 'VARIANTES', uid: 'variants_count', sortable: true },
+  { name: 'NOMBRE', uid: 'name', sortable: true },
+  { name: 'TONOS', uid: 'tones' },
+  { name: 'ACABADOS', uid: 'finishes' },
   { name: 'ACCIONES', uid: 'actions' },
 ]
 
-type ProductListProps = {
-  products: ProductListItem[]
-  categories: Category[]
+interface Props {
+  accessories: AccessoryListItem[]
 }
 
-export function ProductList({ products, categories }: ProductListProps) {
+export default function AccessoryList({ accessories }: Props) {
   const router = useRouter()
   const [filterValue, setFilterValue] = useState('')
-  const [categoryFilter, setCategoryFilter] = useState<string>('all')
   const [selectedKeys, setSelectedKeys] = useState(new Set([]))
   const [visibleColumns, setVisibleColumns] = useState(new Set(INITIAL_VISIBLE_COLUMNS))
   const [rowsPerPage, setRowsPerPage] = useState(10)
   const [sortDescriptor, setSortDescriptor] = useState({ column: 'name', direction: 'ascending' })
   const [page, setPage] = useState(1)
-  const [isDeleting, setIsDeleting] = useState<string | null>(null)
-
-  const handleDelete = async (code: string) => {
-    if (!confirm('⚠️ ¿Estás seguro de eliminar este producto?\n\nSe eliminarán:\n- El producto\n- Todas sus variantes\n- Todas las configuraciones\n- Todas las imágenes en R2\n\nEsta acción no se puede deshacer.')) {
-      return
-    }
-
-    setIsDeleting(code)
-
-    try {
-      const res = await fetch(`/api/products/${code}`, {
-        method: 'DELETE',
-      })
-
-      if (!res.ok) {
-        const errorData = await res.json()
-        throw new Error(errorData.error || 'Error al eliminar el producto')
-      }
-
-      alert('✅ Producto eliminado exitosamente')
-      router.refresh()
-    } catch (error: any) {
-      console.error('Error eliminando producto:', error)
-      alert(`❌ Error: ${error.message}`)
-    } finally {
-      setIsDeleting(null)
-    }
-  }
 
   const hasSearchFilter = Boolean(filterValue)
 
@@ -98,25 +62,18 @@ export function ProductList({ products, categories }: ProductListProps) {
   }, [visibleColumns])
 
   const filteredItems = useMemo(() => {
-    let filteredProducts = [...products]
+    let filteredAccessories = [...accessories]
 
     // Filtro por búsqueda
     if (hasSearchFilter) {
-      filteredProducts = filteredProducts.filter((product) =>
-        product.name.toLowerCase().includes(filterValue.toLowerCase()) ||
-        product.code.toLowerCase().includes(filterValue.toLowerCase())
+      filteredAccessories = filteredAccessories.filter((accessory) =>
+        accessory.name.toLowerCase().includes(filterValue.toLowerCase()) ||
+        accessory.code.toLowerCase().includes(filterValue.toLowerCase())
       )
     }
 
-    // Filtro por categoría
-    if (categoryFilter !== 'all') {
-      filteredProducts = filteredProducts.filter(
-        (product) => product.category.id.toString() === categoryFilter
-      )
-    }
-
-    return filteredProducts
-  }, [products, filterValue, categoryFilter, hasSearchFilter])
+    return filteredAccessories
+  }, [accessories, filterValue, hasSearchFilter])
 
   const pages = Math.ceil(filteredItems.length / rowsPerPage)
 
@@ -127,79 +84,132 @@ export function ProductList({ products, categories }: ProductListProps) {
   }, [page, filteredItems, rowsPerPage])
 
   const sortedItems = useMemo(() => {
-    return [...items].sort((a: ProductListItem, b: ProductListItem) => {
-      const first = a[sortDescriptor.column as keyof ProductListItem] as string
-      const second = b[sortDescriptor.column as keyof ProductListItem] as string
+    return [...items].sort((a: AccessoryListItem, b: AccessoryListItem) => {
+      const first = a[sortDescriptor.column as keyof AccessoryListItem] as string
+      const second = b[sortDescriptor.column as keyof AccessoryListItem] as string
       const cmp = first < second ? -1 : first > second ? 1 : 0
 
       return sortDescriptor.direction === 'descending' ? -cmp : cmp
     })
   }, [sortDescriptor, items])
 
-  const renderCell = useCallback((product: ProductListItem, columnKey: React.Key): React.ReactNode => {
+  const handleDelete = async (code: string) => {
+    if (!confirm('¿Estás seguro de eliminar este accesorio?')) return
+
+    try {
+      const res = await fetch(`/api/accessories/${code}`, { method: 'DELETE' })
+      if (!res.ok) throw new Error('Error al eliminar')
+      router.refresh()
+    } catch (error) {
+      alert('Error al eliminar el accesorio')
+      console.error(error)
+    }
+  }
+
+  const renderCell = useCallback((accessory: AccessoryListItem, columnKey: React.Key): React.ReactNode => {
     switch (columnKey) {
-      case 'name':
+      case 'photo':
         return (
-          <div className="flex flex-col">
-            <span className="text-theme-sm font-medium text-gray-900 dark:text-white">{product.name}</span>
-            <span className="text-theme-xs text-gray-500 dark:text-gray-400">ID: {product.id}</span>
+          <div className="flex items-center">
+            {accessory.photo_url ? (
+              <img
+                src={accessory.photo_url}
+                alt={accessory.name}
+                className="h-12 w-12 rounded-lg border border-gray-200 object-cover dark:border-gray-700"
+              />
+            ) : (
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-gray-200 bg-gray-100 dark:border-gray-700 dark:bg-gray-800">
+                <svg className="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+            )}
           </div>
         )
       case 'code':
-        return <div className="font-mono text-sm text-gray-700 dark:text-gray-200">{product.code}</div>
-      case 'category':
+        return <div className="font-mono text-sm text-gray-700 dark:text-gray-200">{accessory.code}</div>
+      case 'name':
         return (
-          <span className="inline-block px-2 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-theme-xs text-gray-700 dark:text-gray-300 capitalize">{product.category.name}</span>
+          <div className="flex flex-col">
+            <span className="text-theme-sm font-medium text-gray-900 dark:text-white">{accessory.name}</span>
+            <span className="text-theme-xs text-gray-500 dark:text-gray-400">ID: {accessory.id}</span>
+          </div>
         )
-      case 'variants_count':
+      case 'specs':
         return (
-          <div className="flex items-center justify-center">
-            <span className="inline-flex items-center justify-center rounded-full bg-brand-50 px-2.5 py-0.5 text-sm font-medium text-brand-700 dark:bg-brand-500/[0.12] dark:text-brand-400">
-              {product.variants_count}
-            </span>
+          <div className="flex flex-col gap-1 text-xs text-gray-600 dark:text-gray-400">
+            {accessory.watt && <span>{accessory.watt}W</span>}
+            {accessory.voltage_label && <span>⚡ {accessory.voltage_label}V</span>}
+            {!accessory.watt && !accessory.voltage_label && <span className="text-gray-400">-</span>}
+          </div>
+        )
+      case 'tones':
+        return (
+          <div className="flex flex-wrap gap-1">
+            {accessory.light_tones && accessory.light_tones.length > 0 ? (
+              accessory.light_tones.map((tone) => (
+                <span
+                  key={tone.id}
+                  className="inline-flex items-center rounded-full bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 dark:bg-blue-900/20 dark:text-blue-400"
+                >
+                  {tone.name}
+                </span>
+              ))
+            ) : (
+              <span className="text-sm text-gray-400">-</span>
+            )}
+          </div>
+        )
+      case 'finishes':
+        return (
+          <div className="flex flex-wrap gap-1">
+            {accessory.finishes && accessory.finishes.length > 0 ? (
+              accessory.finishes.map((finish) => (
+                <span
+                  key={finish.id}
+                  className="inline-flex items-center rounded-full bg-purple-50 px-2 py-1 text-xs font-medium text-purple-700 dark:bg-purple-900/20 dark:text-purple-400"
+                >
+                  {finish.name}
+                </span>
+              ))
+            ) : (
+              <span className="text-sm text-gray-400">-</span>
+            )}
           </div>
         )
       case 'actions':
         return (
           <div className="flex justify-end gap-2">
             <Button 
-              isIconOnly
               size="sm" 
               variant="flat" 
-              onPress={() => router.push(`/products/${product.code}`)} 
-              className="text-brand-600 dark:text-brand-400 hover:bg-brand-50 dark:hover:bg-brand-500/10"
-              aria-label="Ver producto"
+              isIconOnly
+              onPress={() => router.push(`/accessories/${accessory.code}`)} 
+              className="text-gray-700 dark:text-gray-300"
+              aria-label="Ver accesorio"
             >
-              <EyeIcon className="w-4 h-4" />
+              <EyeIcon />
             </Button>
             <Button 
-              isIconOnly
               size="sm" 
               variant="flat" 
-              onPress={() => router.push(`/products/${product.code}/edit`)} 
-              className="text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
-              aria-label="Editar producto"
+              isIconOnly
+              onPress={() => router.push(`/accessories/${accessory.code}/edit`)} 
+              className="text-gray-700 dark:text-gray-300"
+              aria-label="Editar accesorio"
             >
-              <PencilIcon className="w-4 h-4" />
+              <PencilIcon />
             </Button>
             <Button 
-              isIconOnly
               size="sm" 
               variant="flat" 
               color="danger" 
-              onPress={() => handleDelete(product.code)}
-              isDisabled={isDeleting === product.code}
-              className="text-error-600 dark:text-error-400 hover:bg-error-50 dark:hover:bg-error-500/10"
-              aria-label="Eliminar producto"
+              isIconOnly
+              onPress={() => handleDelete(accessory.code)} 
+              className="text-error-600 dark:text-error-400"
+              aria-label="Eliminar accesorio"
             >
-              {isDeleting === product.code ? (
-                <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-              ) : (
-                <TrashIcon className="w-4 h-4" />
-              )}
+              <TrashIcon />
             </Button>
           </div>
         )
@@ -267,36 +277,21 @@ export function ProductList({ products, categories }: ProductListProps) {
                 </button>
               )}
             </div>
-            <select
-              className="w-full sm:w-auto bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg px-3 py-2 text-theme-sm text-gray-900 dark:text-white shadow-theme-xs focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10"
-              value={categoryFilter}
-              onChange={(e) => {
-                setCategoryFilter(e.target.value)
-                setPage(1)
-              }}
-            >
-              <option value="all">Todas las categorías</option>
-              {categories.map((cat) => (
-                <option key={cat.id} value={cat.id.toString()}>
-                  {cat.name}
-                </option>
-              ))}
-            </select>
           </div>
           <div className="flex gap-3">
             <Button 
               color="primary" 
               endContent={<PlusIcon className="w-4 h-4" />}
-              onPress={() => router.push('/products/new')}
+              onPress={() => router.push('/accessories/new')}
               className="bg-brand-500 hover:bg-brand-600 text-white shadow-theme-xs"
             >
-              Crear Producto
+              Crear Accesorio
             </Button>
           </div>
         </div>
         <div className="flex justify-between items-center">
           <span className="text-gray-500 dark:text-gray-400 text-theme-sm">
-            {filteredItems.length} de {products.length} productos
+            {filteredItems.length} de {accessories.length} accesorios
           </span>
           <label className="flex items-center text-gray-500 dark:text-gray-400 text-theme-sm">
             Filas por página:
@@ -313,7 +308,7 @@ export function ProductList({ products, categories }: ProductListProps) {
         </div>
       </div>
     )
-  }, [filterValue, categoryFilter, onSearchChange, onRowsPerPageChange, products.length, filteredItems.length, onClear, router, rowsPerPage, categories])
+  }, [filterValue, onSearchChange, onRowsPerPageChange, accessories.length, filteredItems.length, onClear, router, rowsPerPage])
 
   const bottomContent = useMemo(() => {
     const start = (page - 1) * rowsPerPage + 1
@@ -322,9 +317,7 @@ export function ProductList({ products, categories }: ProductListProps) {
     return (
       <div className="py-4 px-2 flex justify-between items-center border-t border-gray-200 dark:border-gray-700 mt-4">
         <span className="w-[30%] text-theme-sm text-gray-500 dark:text-gray-400">
-          {filteredItems.length === 0 
-            ? 'Sin productos'
-            : `${start}-${end} de ${filteredItems.length}`}
+          {filteredItems.length > 0 ? `${start}-${end} de ${filteredItems.length}` : '0 de 0'}
         </span>
         <Pagination
           isCompact
@@ -368,9 +361,9 @@ export function ProductList({ products, categories }: ProductListProps) {
     <div className="w-full">
       <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-theme-xs dark:border-gray-800 dark:bg-white/[0.03]">
         <div className="border-b border-gray-200 px-6 py-4 dark:border-gray-800 dark:bg-white/[0.02]">
-          <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">Productos</h1>
+          <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">Accesorios</h1>
           <p className="mt-1 text-theme-sm text-gray-500 dark:text-gray-400">
-            Gestiona todos los productos de tu inventario
+            Gestiona todos los accesorios de tu inventario
           </p>
         </div>
         <div className="p-6">
@@ -378,55 +371,55 @@ export function ProductList({ products, categories }: ProductListProps) {
           <div className="overflow-auto shadow-sm rounded-md">
             <table className="w-full table-fixed border-collapse rounded-md">
               <thead className="bg-white/95 dark:bg-gray-900/95 sticky top-0 z-10 border-b border-gray-200 dark:border-gray-800">
-                  <tr>
+                <tr>
                   {headerColumns.map((col) => (
-                      <th
-                        key={col.uid}
-                        className={`text-left px-4 py-3 text-theme-sm text-gray-700 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700 ${col.uid === 'actions' ? 'text-right' : ''} ${col.sortable ? 'cursor-pointer select-none' : ''}`}
-                        onClick={() => {
-                          if (!col.sortable) return
-                          setSortDescriptor((s) => {
-                            if (s.column === col.uid) {
-                              return { column: col.uid, direction: s.direction === 'ascending' ? 'descending' : 'ascending' }
-                            }
-                            return { column: col.uid, direction: 'ascending' }
-                          })
-                        }}
-                      >
-                        <div className="flex items-center gap-2">
-                          <span className="font-medium">{col.name}</span>
-                          {col.sortable && sortDescriptor.column === col.uid && (
-                            <svg className="w-3 h-3 text-gray-400 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                              {sortDescriptor.direction === 'ascending' ? (
-                                <path d="M5 12h10l-5-8-5 8z" />
-                              ) : (
-                                <path d="M5 8h10l-5 8-5-8z" />
-                              )}
-                            </svg>
-                          )}
-                        </div>
-                      </th>
+                    <th
+                      key={col.uid}
+                      className={`text-left px-4 py-3 text-theme-sm text-gray-700 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700 ${col.uid === 'actions' ? 'text-right' : ''} ${col.sortable ? 'cursor-pointer select-none' : ''}`}
+                      onClick={() => {
+                        if (!col.sortable) return
+                        setSortDescriptor((s) => {
+                          if (s.column === col.uid) {
+                            return { column: col.uid, direction: s.direction === 'ascending' ? 'descending' : 'ascending' }
+                          }
+                          return { column: col.uid, direction: 'ascending' }
+                        })
+                      }}
+                    >
+                      <div className="flex items-center gap-2">
+                        <span className="font-medium">{col.name}</span>
+                        {col.sortable && sortDescriptor.column === col.uid && (
+                          <svg className="w-3 h-3 text-gray-400 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                            {sortDescriptor.direction === 'ascending' ? (
+                              <path d="M5 12h10l-5-8-5 8z" />
+                            ) : (
+                              <path d="M5 8h10l-5 8-5-8z" />
+                            )}
+                          </svg>
+                        )}
+                      </div>
+                    </th>
                   ))}
                 </tr>
               </thead>
               <tbody>
-                  {sortedItems.length === 0 ? (
-                    <tr>
-                      <td colSpan={headerColumns.length} className="px-4 py-6 text-center text-gray-400 dark:text-gray-500">
-                        No se encontraron productos
-                      </td>
+                {sortedItems.length === 0 ? (
+                  <tr>
+                    <td colSpan={headerColumns.length} className="px-4 py-6 text-center text-gray-400 dark:text-gray-500">
+                      No se encontraron accesorios
+                    </td>
+                  </tr>
+                ) : (
+                  sortedItems.map((item) => (
+                    <tr key={item.id} className="transition-colors odd:bg-white even:bg-gray-50 hover:bg-gray-100 dark:odd:bg-gray-900 dark:even:bg-gray-800 dark:hover:bg-gray-800">
+                      {headerColumns.map((col) => (
+                        <td key={col.uid} className={`px-4 py-3 align-top text-theme-sm text-gray-700 dark:text-gray-300 border-b border-gray-100 dark:border-gray-800 ${col.uid === 'actions' ? 'text-right' : ''}`}>
+                          {renderCell(item, col.uid)}
+                        </td>
+                      ))}
                     </tr>
-                  ) : (
-                    sortedItems.map((item) => (
-                      <tr key={item.id} className="transition-colors odd:bg-white even:bg-gray-50 hover:bg-gray-100 dark:odd:bg-gray-900 dark:even:bg-gray-800 dark:hover:bg-gray-800">
-                        {headerColumns.map((col) => (
-                          <td key={col.uid} className={`px-4 py-3 align-top text-theme-sm text-gray-700 dark:text-gray-300 border-b border-gray-100 dark:border-gray-800 ${col.uid === 'actions' ? 'text-right' : ''}`}>
-                            {renderCell(item, col.uid)}
-                          </td>
-                        ))}
-                      </tr>
-                    ))
-                  )}
+                  ))
+                )}
               </tbody>
             </table>
           </div>

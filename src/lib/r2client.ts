@@ -39,7 +39,7 @@ export async function deleteFromR2(key: string): Promise<void> {
 }
 
 // Procesamiento de imágenes de productos
-export async function processProductImage(buffer: Buffer, type: 'cover' | 'gallery' | 'tech') {
+export async function processProductImage(buffer: Buffer, type: 'cover' | 'tech') {
   let width: number, height: number, quality: number
 
   switch (type) {
@@ -47,11 +47,6 @@ export async function processProductImage(buffer: Buffer, type: 'cover' | 'galle
       width = 800
       height = 600
       quality = 90
-      break
-    case 'gallery':
-      width = 1200
-      height = 900
-      quality = 85
       break
     case 'tech':
       width = 1600
@@ -77,8 +72,8 @@ export function validateImageFile(file: File) {
   if (!ALLOWED_IMAGE_TYPES.includes(file.type)) {
     return { isValid: false, error: 'Tipo de archivo no permitido. Solo JPG, PNG, WebP y AVIF.' }
   }
-  if (file.size > 5 * 1024 * 1024) { // 5MB max para productos
-    return { isValid: false, error: 'Archivo muy grande. Máximo 5MB.' }
+  if (file.size > 10 * 1024 * 1024) { // 10MB max para productos
+    return { isValid: false, error: 'Archivo muy grande. Máximo 10MB.' }
   }
   return { isValid: true }
 }

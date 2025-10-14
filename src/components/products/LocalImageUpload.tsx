@@ -29,7 +29,7 @@ export function LocalImageUpload({
     'image/png': ['.png'],
     'image/webp': ['.webp'],
   },
-  maxSize = 5 * 1024 * 1024, // 5MB
+  maxSize = 10 * 1024 * 1024, // 10MB
   disabled = false
 }: LocalImageUploadProps) {
   

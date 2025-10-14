@@ -162,7 +162,7 @@ export type Database = {
           product_id: number | null
           variant_id: number | null
           path: string
-          kind: 'cover' | 'gallery' | 'tech'
+          kind: 'cover' | 'tech'
           alt_text: string | null
           created_at: string
         }
@@ -171,7 +171,7 @@ export type Database = {
           product_id?: number | null
           variant_id?: number | null
           path: string
-          kind: 'cover' | 'gallery' | 'tech'
+          kind: 'cover' | 'tech'
           alt_text?: string | null
           created_at?: string
         }
@@ -180,7 +180,7 @@ export type Database = {
           product_id?: number | null
           variant_id?: number | null
           path?: string
-          kind?: 'cover' | 'gallery' | 'tech'
+          kind?: 'cover' | 'tech'
           alt_text?: string | null
           created_at?: string
         }

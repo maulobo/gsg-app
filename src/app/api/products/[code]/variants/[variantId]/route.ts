@@ -46,7 +46,7 @@ export async function PATCH(
     const { data: product, error: productError } = await supabase
       .from('products')
       .select('id')
-      .eq('product_code', code)
+      .eq('code', code)
       .single()
 
     if (productError || !product) {
@@ -62,7 +62,6 @@ export async function PATCH(
         variant_code,
         includes_led,
         includes_driver,
-        updated_at: new Date().toISOString(),
       })
       .eq('id', variantId)
       .eq('product_id', product.id)
@@ -191,7 +190,7 @@ export async function DELETE(
     const { data: product, error: productError } = await supabase
       .from('products')
       .select('id')
-      .eq('product_code', code)
+      .eq('code', code)
       .single()
 
     if (productError || !product) {
@@ -199,13 +198,10 @@ export async function DELETE(
       return NextResponse.json({ error: 'Producto no encontrado' }, { status: 404 })
     }
 
-    // Soft delete: marcar como eliminado
+    // Eliminar la variante (CASCADE eliminará configuraciones y relaciones)
     const { error: deleteError } = await supabase
       .from('product_variants')
-      .update({
-        deleted_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-      })
+      .delete()
       .eq('id', variantId)
       .eq('product_id', product.id)
 

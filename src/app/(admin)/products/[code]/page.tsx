@@ -52,14 +52,7 @@ export default async function ProductPage({ params }: { params: { code: string }
         </a>
       </div>
 
-      {/* portada */}
-  {product.media_assets?.find?.((m: any) => m.kind === 'cover') && (
-        <img
-          className="mt-4 rounded-xl"
-          src={product.media_assets.find((m: any) => m.kind === 'cover')!.path}
-          alt={product.name}
-        />
-      )}
+
 
       {/* Acabados a nivel de producto */}
       {product.product_finishes && product.product_finishes.length > 0 && (

@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
     const productId = formData.get('productId') as string
     const productCode = formData.get('productCode') as string
     const variantId = formData.get('variantId') as string || null
-    const kind = formData.get('kind') as 'cover' | 'gallery' | 'tech' || 'gallery'
+    const kind = formData.get('kind') as 'cover' | 'tech' || 'cover'
     const altText = formData.get('altText') as string || ''
 
     if (!file) {

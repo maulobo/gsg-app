@@ -7,14 +7,14 @@
  * Features:
  * - Drag-and-drop file upload with react-dropzone
  * - Image processing and optimization with Sharp (WebP conversion)
- * - Multiple image types support (cover, gallery, tech)
+ * - Multiple image types support (cover, tech)
  * - File validation (5MB limit, supported formats)
  * - Progress tracking and toast notifications
  * - Database synchronization with Supabase
  * 
  * Usage:
  * <ProductImageUpload
- *   kind="cover" // or "gallery" or "tech"
+ *   kind="cover" // or "tech"
  *   productId={productId}
  *   onImageUploaded={(image) => handleImageUploaded(image)}
  *   maxImages={1}
@@ -31,7 +31,7 @@ type ImageUploadProps = {
   productId?: number
   productCode?: string
   variantId?: number
-  kind: 'cover' | 'gallery' | 'tech'
+  kind: 'cover' | 'tech'
   currentImages?: MediaAsset[]
   onImageUploaded?: (mediaAsset: MediaAsset) => void
   onImageDeleted?: (mediaAssetId: number) => void
@@ -182,7 +182,7 @@ export function ProductImageUpload({
     accept: {
       'image/*': ['.jpg', '.jpeg', '.png', '.webp', '.avif']
     },
-    maxSize: 5 * 1024 * 1024, // 5MB
+    maxSize: 10 * 1024 * 1024, // 10MB
     multiple: maxImages > 1,
     disabled: disabled || !canUploadMore,
     onDragEnter: () => setIsDragActive(true),
@@ -192,7 +192,6 @@ export function ProductImageUpload({
   const getKindLabel = () => {
     switch (kind) {
       case 'cover': return 'Imagen principal'
-      case 'gallery': return 'Galería'
       case 'tech': return 'Ficha técnica'
       default: return 'Imágenes'
     }

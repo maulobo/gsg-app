@@ -1,0 +1,2803 @@
+[{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b7d"
+  },
+  "code": "sat",
+  "nombre": "Saturno",
+  "categoria": "colgantes",
+  "descripcion": "Un delgado aro de aluminio nos ilumina desde su interior, como flotando en el aire gracias a sus casi imperceptibles tensores dando una imagen moderna y llamativa. Permite diferentes configuraciones al momento de instalarlo.",
+  "modelos": [
+    {
+      "id": "sat-s",
+      "subnombre": "Colgante Saturno Simple",
+      "fotos_producto": "sat_sim100_prin.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/sat-s.png",
+      "caracteristicasTecnicas": {
+        "watt": [
+          26,
+          38,
+          48,
+          60
+        ],
+        "volt": 220,
+        "tono": [
+          "frio",
+          " calida",
+          " neutro",
+          " super Calida"
+        ],
+        "kelvin": [
+          6000,
+          4000,
+          3000,
+          2700
+        ],
+        "lumen": [
+          "2340",
+          "3500",
+          "4500",
+          "5400"
+        ],
+        "acabado": [
+          "Aluminio anodizado",
+          " Negro",
+          " Blanco",
+          " Champagne",
+          " Oro"
+        ],
+        "cantidad": 1,
+        "diametro": [
+          "120",
+          "80",
+          "60",
+          "45"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": true
+      }
+    },
+    {
+      "id": "sat-d",
+      "subnombre": "Colgante Saturno Doble",
+      "fotos_producto": "sat_dob_prin.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/sat-d.png",
+      "caracteristicasTecnicas": {
+        "watt": [
+          64,
+          86,
+          108
+        ],
+        "volt": 220,
+        "tono": [
+          "frio",
+          " calida",
+          " neutro",
+          " super Calida"
+        ],
+        "kelvin": [
+          6000,
+          4000,
+          3000,
+          2700
+        ],
+        "lumen": [
+          "5700",
+          "7600",
+          "9600"
+        ],
+        "acabado": [
+          "Aluminio anodizado",
+          " Negro",
+          " Blanco",
+          " Champagne",
+          " Oro"
+        ],
+        "cantidad": 2,
+        "diametro": [
+          "45/60",
+          " 60/80",
+          " 80/100"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": true
+      }
+    },
+    {
+      "id": "sat-t",
+      "subnombre": "Colgante Saturno Triple",
+      "fotos_producto": "sat_trip6080100_prin.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/sat-t.png",
+      "caracteristicasTecnicas": {
+        "watt": [
+          86,
+          146
+        ],
+        "volt": 220,
+        "tono": [
+          "frio",
+          " calida",
+          " neutro",
+          " super Calida"
+        ],
+        "kelvin": [
+          6000,
+          4000,
+          3000,
+          2700
+        ],
+        "lumen": [
+          "5700",
+          "7600",
+          "9600"
+        ],
+        "acabado": [
+          "Aluminio anodizado",
+          " Negro",
+          " Blanco",
+          " Champagne",
+          " Oro"
+        ],
+        "diametro": [
+          "45x60x80",
+          " 60x80x100"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": true
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b7e"
+  },
+  "code": "qdr",
+  "nombre": "Quadra",
+  "categoria": "colgantes",
+  "descripcion": "La geometría en su máxima expresión nos dislumbra con su minimalismo en estos puros elementos geométricos. Diferentes configuraciones posibles gracias a su regulación de tensores.",
+  "modelos": [
+    {
+      "id": "qdr-s",
+      "subnombre": "Colgante Quadra Simple",
+      "fotos_producto": "quad_sim9090_prin.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/qdr-s.png",
+      "caracteristicasTecnicas": {
+        "watt": "[23. 34, 46, 57, 69]",
+        "volt": 220,
+        "tono": [
+          "frio",
+          " calida",
+          " neutro",
+          " super Calida"
+        ],
+        "kelvin": [
+          6000,
+          4000,
+          3000,
+          2700
+        ],
+        "lumen": [
+          "2000",
+          "3200"
+        ],
+        "acabado": [
+          "Aluminio anodizado",
+          " Negro",
+          " Blanco",
+          " Champagne",
+          " Oro"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "300",
+          "600",
+          "900",
+          "1200"
+        ],
+        "ancho": [
+          "300",
+          "600",
+          "900",
+          "1200"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": true
+      }
+    },
+    {
+      "id": "qdr-d",
+      "subnombre": "Colgante Quadra Doble",
+      "fotos_producto": "quad_dob3060_prin.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/qdr-d.png",
+      "caracteristicasTecnicas": {
+        "watt": [
+          46,
+          57,
+          69
+        ],
+        "volt": 220,
+        "tono": [
+          "frio",
+          " calida",
+          " neutro",
+          " super Calida"
+        ],
+        "kelvin": [
+          6000,
+          4000,
+          3000,
+          2700
+        ],
+        "lumen": [
+          "4200",
+          "5400",
+          "6500",
+          "6500"
+        ],
+        "acabado": [
+          "Aluminio anodizado",
+          " Negro",
+          " Blanco",
+          " Champagne",
+          " Oro"
+        ],
+        "cantidad": 2,
+        "largo": [
+          "30",
+          "60",
+          "90"
+        ],
+        "ancho": [
+          "30",
+          "60",
+          "90"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": true
+      }
+    },
+    {
+      "id": "qdr-t",
+      "subnombre": "Colgante Quadra Triple",
+      "fotos_producto": "quad_tri_prin.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/qdr-t.png",
+      "caracteristicasTecnicas": {
+        "watt": [
+          115,
+          138
+        ],
+        "volt": 220,
+        "tono": [
+          "frio",
+          " calida",
+          " neutro",
+          " super Calida"
+        ],
+        "kelvin": [
+          6000,
+          4000,
+          3000,
+          2700
+        ],
+        "lumen": [
+          "10300",
+          "12400"
+        ],
+        "acabado": [
+          "Aluminio anodizado",
+          " Negro",
+          " Blanco",
+          " Champagne",
+          " Oro"
+        ],
+        "cantidad": 3,
+        "largo": [
+          "90"
+        ],
+        "ancho": [
+          "90"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": true
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b7f"
+  },
+  "code": "hex",
+  "nombre": "Hexa",
+  "categoria": "Colgantes",
+  "descripcion": "El hexágono proveniente de un panal de abejas es utilizado en este destacado diseño de colgante. Combinando varios podemos llegar al diseño del panal.",
+  "modelos": [
+    {
+      "id": "hex-s",
+      "subnombre": "Colgante Hexa Simple",
+      "fotos_producto": "hexa_sim60_prin.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/hex-s.png",
+      "caracteristicasTecnicas": {
+        "watt": [
+          26,
+          40,
+          53
+        ],
+        "volt": 220,
+        "tono": [
+          "frio",
+          " calida",
+          " neutro",
+          " super Calida"
+        ],
+        "kelvin": [
+          6000,
+          4000,
+          3000,
+          2700
+        ],
+        "lumen": [
+          "2300",
+          "3500",
+          "4700"
+        ],
+        "acabado": [
+          "Aluminio anodizado",
+          " Negro",
+          " Blanco",
+          " Champagne",
+          " Oro"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "400",
+          "600",
+          "800"
+        ],
+        "ancho": [
+          "400",
+          "600",
+          "800"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": true
+      }
+    },
+    {
+      "id": "hex-d",
+      "subnombre": "Colgante Hexa Doble",
+      "fotos_producto": "hexa_dob4060_prin.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/hex-d.png",
+      "caracteristicasTecnicas": {
+        "watt": [
+          66,
+          83
+        ],
+        "volt": 220,
+        "tono": [
+          "frio",
+          " calida",
+          " neutro",
+          " super Calida"
+        ],
+        "kelvin": [
+          6000,
+          4000,
+          3000,
+          2700
+        ],
+        "lumen": [
+          "5900",
+          "8300"
+        ],
+        "acabado": [
+          "Aluminio anodizado",
+          " Negro",
+          " Blanco",
+          " Champagne",
+          " Oro"
+        ],
+        "cantidad": 2,
+        "largo": [
+          "60",
+          "80"
+        ],
+        "ancho": [
+          "60",
+          "80"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": true
+      }
+    },
+    {
+      "id": "hex-t",
+      "subnombre": "Colgante Hexa Triple",
+      "fotos_producto": "hexa_tri_prin.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/hex-t.png",
+      "caracteristicasTecnicas": {
+        "watt": [
+          119
+        ],
+        "volt": 220,
+        "tono": [
+          "frio",
+          " calida",
+          " neutro",
+          " super Calida"
+        ],
+        "kelvin": [
+          6000,
+          4000,
+          3000,
+          2700
+        ],
+        "lumen": [
+          "10500"
+        ],
+        "acabado": [
+          "Aluminio anodizado",
+          " Negro",
+          " Blanco",
+          " Champagne",
+          " Oro"
+        ],
+        "cantidad": 3,
+        "largo": [
+          "80"
+        ],
+        "ancho": [
+          "80"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": true
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b80"
+  },
+  "code": "sxl",
+  "nombre": "Saturno XL",
+  "categoria": "Colgantes",
+  "descripcion": "Este imponente colgante resalta por el tamaño de sus aros logrando un gran impacto visual. Combinando varios aros podemos obtener un elemento dinámico con solo mover los aros a la posición deseada.",
+  "modelos": [
+    {
+      "id": "sxl-s",
+      "subnombre": "Colgante Saturno XL simple",
+      "fotos_producto": "satxl_sim100_prin.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/sxl-s.png",
+      "caracteristicasTecnicas": {
+        "watt": [
+          68,
+          90,
+          108,
+          132
+        ],
+        "volt": 220,
+        "tono": [
+          "frio",
+          " calida",
+          " neutro",
+          " super Calida"
+        ],
+        "kelvin": [
+          6000,
+          4000,
+          3000,
+          2700
+        ],
+        "lumen": [
+          "6100",
+          "7200",
+          "8600",
+          "10500"
+        ],
+        "acabado": [
+          "Aluminio anodizado",
+          " Negro",
+          " Blanco",
+          " Champagne",
+          " Oro"
+        ],
+        "cantidad": 1,
+        "diametro": [
+          "60",
+          "80",
+          "100",
+          "120"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": true
+      }
+    },
+    {
+      "id": "sxl-d",
+      "subnombre": "Colgante Saturno XL doble",
+      "fotos_producto": "satxl_dob100120_prin.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/sxl-d.png",
+      "caracteristicasTecnicas": {
+        "watt": [
+          158,
+          198,
+          240
+        ],
+        "volt": 220,
+        "tono": [
+          "frio",
+          " calida",
+          " neutro",
+          " super Calida"
+        ],
+        "kelvin": [
+          6000,
+          4000,
+          3000,
+          2700
+        ],
+        "lumen": [
+          "14200",
+          "15800",
+          "19200"
+        ],
+        "acabado": [
+          "Aluminio anodizado",
+          " Negro",
+          " Blanco",
+          " Champagne",
+          " Oro"
+        ],
+        "cantidad": 2,
+        "diametro": [
+          "60/80",
+          " 80/100",
+          " 100/120"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": true
+      }
+    },
+    {
+      "id": "sxl-t",
+      "subnombre": "Colgante Saturno XL triple",
+      "fotos_producto": "satxl_tri6080100_prin.jpg",
+      "caracteristicasTecnicas": {
+        "watt": [
+          260,
+          339
+        ],
+        "volt": 220,
+        "tono": [
+          "frio",
+          " calida",
+          " neutro",
+          " super Calida"
+        ],
+        "kelvin": [
+          6000,
+          4000,
+          3000,
+          2700
+        ],
+        "lumen": [
+          "20800",
+          "26400"
+        ],
+        "acabado": [
+          "Aluminio anodizado",
+          " Negro",
+          " Blanco",
+          " Champagne",
+          " Oro"
+        ],
+        "cantidad": 3,
+        "diametro": [
+          "80",
+          "100",
+          "120"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": true
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b81"
+  },
+  "code": "bur-s",
+  "nombre": "Buro Directo",
+  "categoria": "Colgantes",
+  "descripcion": "La sencillez no quita funcionalidad. Es ideal para colocar sobre escritorios para tener una luz uniforme y agradable. Disponible en luz directa e indirecta permite generar ambientes modernos y funcionales.",
+  "modelos": [
+    {
+      "id": "bur-s",
+      "subnombre": "Colgante Buro Directo",
+      "fotos_producto": "buro_prin1.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/bur-s.png",
+      "caracteristicasTecnicas": {
+        "watt": [
+          20,
+          35,
+          30,
+          60,
+          50
+        ],
+        "volt": 220,
+        "tono": [
+          "frio",
+          " calida",
+          " neutro",
+          " super Calida"
+        ],
+        "kelvin": [
+          6000,
+          4000,
+          3000,
+          2700
+        ],
+        "lumen": [
+          "3200",
+          "1900",
+          " "
+        ],
+        "acabado": [
+          "Aluminio anodizado",
+          "Negro",
+          " Blanco",
+          " Champagne",
+          " Oro"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "1000",
+          "1200",
+          "1500",
+          "2000",
+          "2500"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": true
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b82"
+  },
+  "code": "wal",
+  "nombre": "Aplique de pared",
+  "categoria": "Pared",
+  "descripcion": "Este aplique direccionable está especialmente diseñado para baños. Permite regular el ángulo para modificar la dirección de la luz. Colocándolo sobre un espejo lograremos una luz ideal para maquillarse o simplemente mirarse.",
+  "modelos": [
+    {
+      "id": "wal-600",
+      "subnombre": "Aplique de pared Wall",
+      "fotos_producto": "wall_prin.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/wal-600.png",
+      "caracteristicasTecnicas": {
+        "watt": [
+          11
+        ],
+        "volt": 220,
+        "tono": [
+          "frio",
+          " calida",
+          " neutro",
+          " super Calida"
+        ],
+        "kelvin": [
+          6000,
+          4000,
+          3000,
+          2700
+        ],
+        "lumen": [
+          "990"
+        ],
+        "acabado": [
+          "Aluminio anodizado",
+          " Negro",
+          " Blanco"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "600"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": true
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b83"
+  },
+  "code": "Lai",
+  "nombre": "Aplique Lazo indirecto",
+  "categoria": "Pared",
+  "descripcion": "Este aplique direccionable está especialmente diseñado para baños. Permite regular el ángulo para modificar la dirección de la luz. Colocándolo sobre un espejo lograremos una luz ideal para maquillarse o simplemente mirarse.",
+  "modelos": [
+    {
+      "id": "lai-600",
+      "subnombre": "Aplique Lazo indirecto",
+      "fotos_producto": "lazo_ind_prin.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/lai-600.png",
+      "caracteristicasTecnicas": {
+        "watt": [
+          30
+        ],
+        "volt": 220,
+        "tono": [
+          "frio",
+          " calida"
+        ],
+        "kelvin": [
+          6000,
+          3000
+        ],
+        "lumen": [
+          "2500"
+        ],
+        "acabado": [
+          "Alumino anodizado",
+          " Blanco Semi-mate",
+          " Negro mate"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "570"
+        ],
+        "ancho": [
+          "570"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": true
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b84"
+  },
+  "code": "Bod",
+  "nombre": "Lampara de pie boden",
+  "categoria": "Pie",
+  "descripcion": "Creado con una nueva tecnología de led permite dimmerizar, asi como encender/ apagar con solo pasar la mano por encima del sensor",
+  "modelos": [
+    {
+      "id": "bod-170",
+      "subnombre": "Lampara de pie boden",
+      "fotos_producto": "boden_prin.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/bod-170.png",
+      "caracteristicasTecnicas": {
+        "watt": [
+          28
+        ],
+        "volt": 220,
+        "tono": [
+          "frio",
+          " calida",
+          " neutro",
+          " super Calida"
+        ],
+        "kelvin": [
+          6000,
+          4000,
+          3000,
+          2700
+        ],
+        "lumen": [
+          "2600"
+        ],
+        "acabado": [
+          "Blanco semi mate"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "170"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": true
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b85"
+  },
+  "code": "Kro",
+  "nombre": "Plafón Krov",
+  "categoria": "Techo",
+  "descripcion": "Un nuevo concepto dentro de un plafón de lineas marcadamente geométricas impacta por sus cuadrados concéntricos.",
+  "modelos": [
+    {
+      "id": "kro-500",
+      "subnombre": "Plafón Krov",
+      "fotos_producto": "krov_prin.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/kro-500.png",
+      "caracteristicasTecnicas": {
+        "watt": [
+          70
+        ],
+        "volt": 220,
+        "tono": [
+          "frio",
+          " calida",
+          " neutro",
+          " super Calida"
+        ],
+        "lumen": [
+          "6400"
+        ],
+        "acabado": [
+          "Aluminio anodizado",
+          " Negro",
+          " Blanco"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "500"
+        ],
+        "ancho": [
+          "500"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": true
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b86"
+  },
+  "code": "Lad",
+  "nombre": "Plafón Lazo Directo",
+  "categoria": "Techo",
+  "descripcion": "Moderno y minimalista. Geométrico y asimétrico, así nos ilumina este nuevo plafón que ilumina con un diseño distinguido y modernsita. Especialmente diseñado para techos bajos.",
+  "modelos": [
+    {
+      "id": "lad-600",
+      "subnombre": "Plafón Lazo Directo",
+      "fotos_producto": "lazo_dir_prin.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/lad-600.png",
+      "caracteristicasTecnicas": {
+        "watt": [
+          60
+        ],
+        "volt": 220,
+        "tono": [
+          "frio",
+          " calida",
+          " neutro",
+          " super Calida"
+        ],
+        "lumen": [
+          "5400"
+        ],
+        "acabado": [
+          "aluminio mate",
+          " negro",
+          " blanco"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "570"
+        ],
+        "ancho": [
+          "570"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": true
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b87"
+  },
+  "code": "Est",
+  "nombre": "Estaca Exterior",
+  "categoria": "Exterior",
+  "descripcion": "Inspirado en ligeras curvas femeninas creamos este pequeño artefacto torneado en aluminio.",
+  "modelos": [
+    {
+      "id": "est-ext",
+      "subnombre": "Estaca Exterior",
+      "fotos_producto": "esta_prin.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/est-ext.png",
+      "caracteristicasTecnicas": {
+        "watt": [
+          3
+        ],
+        "volt": 220,
+        "tono": [
+          "frio",
+          " calida",
+          " Azul",
+          " Verde",
+          " Amarillo",
+          " Rojo"
+        ],
+        "acabado": [
+          "Negro"
+        ],
+        "cantidad": 1,
+        "incluyeLed": true,
+        "incluyeEquipo": false
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b88"
+  },
+  "code": "Gar",
+  "nombre": "Embutido de piso Garten",
+  "categoria": "Exterior",
+  "descripcion": "Este pequeño embutido de piso permite lograr efectos muy decorativos si los hubicamos cerca de paredes o columnas. Permite el alto tránsito gracias a su frente de acero inoxidable y posee una protección IP67 contra agentes externos como el agua de lluvia o riego.",
+  "modelos": [
+    {
+      "id": "gar-ext",
+      "subnombre": "Embutido de piso Garten",
+      "fotos_producto": "garten_prin.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/gar-ext.png",
+      "caracteristicasTecnicas": {
+        "watt": [
+          3
+        ],
+        "volt": 12,
+        "tono": [
+          "calido"
+        ],
+        "kelvin": [
+          3000
+        ],
+        "lumen": [
+          "320"
+        ],
+        "acabado": [
+          "acero inoxidable"
+        ],
+        "cantidad": 1,
+        "dimension": 3.5,
+        "incluyeLed": true,
+        "incluyeEquipo": true
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b89"
+  },
+  "code": "Pla",
+  "nombre": "Mini Embutido Planar",
+  "categoria": "Techo",
+  "descripcion": "Este embutido de dimensiones reducidas aporta un diseño minimalista en cualquiera de sus presentaciones.",
+  "modelos": [
+    {
+      "id": "pla",
+      "subnombre": "Mini Embutido Planar",
+      "fotos_producto": "plan_prin.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/pla.png",
+      "caracteristicasTecnicas": {
+        "watt": [
+          3
+        ],
+        "volt": 220,
+        "tono": [
+          "frio",
+          " calida"
+        ],
+        "kelvin": [
+          6000,
+          3000
+        ],
+        "lumen": [
+          "300",
+          "287"
+        ],
+        "acabado": [
+          "Aluminio mate",
+          " Aluminio brillante",
+          " Blanco micro",
+          " Negro micro"
+        ],
+        "cantidad": 1,
+        "dimension": 5,
+        "incluyeLed": true,
+        "incluyeEquipo": true
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b8a"
+  },
+  "code": "hol",
+  "nombre": "Mini embutido Hole",
+  "categoria": "Techo",
+  "descripcion": "Su diseño de suave curva refleja un degradé lumínico que parece salir de un agujero.",
+  "modelos": [
+    {
+      "id": "hol",
+      "subnombre": "Mini embutido Hole",
+      "fotos_producto": "hol_prin.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/hol.png",
+      "caracteristicasTecnicas": {
+        "watt": [
+          3
+        ],
+        "volt": 220,
+        "tono": [
+          "frio",
+          " calida"
+        ],
+        "kelvin": [
+          6000,
+          3000
+        ],
+        "lumen": [
+          "300",
+          "287"
+        ],
+        "acabado": [
+          "Aluminio mate",
+          " Aluminio brillante",
+          " Blanco micro",
+          " Negro micro"
+        ],
+        "cantidad": 1,
+        "dimension": 5,
+        "incluyeLed": true,
+        "incluyeEquipo": true
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b8b"
+  },
+  "code": "p01",
+  "nombre": "Perfil 01",
+  "categoria": "Perfiles",
+  "descripcion": "Un Perfil con amplia versatilidad. Permite alojar tiras de led de hasta 12 mm de espesor. Puede colocarse de varias maneras que permitien múltiples usos. Ofrece una disipación de temperatura que alarga la vida útil del led y un excelente acabado visual.",
+  "modelos": [
+    {
+      "id": "p01-op",
+      "subnombre": "Perfil P01 ",
+      "fotos_producto": "po1_prin.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/p01-op.png",
+      "caracteristicasTecnicas": {
+        "acabado": [
+          "Aluminio anodizado",
+          " champagne anodizado",
+          "Negro anodizado"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "100",
+          "200",
+          "300"
+        ],
+        "ancho": [
+          "21.2"
+        ],
+        "dimension": [
+          "7.7"
+        ],
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b8c"
+  },
+  "code": "pv8",
+  "nombre": "Perfil  v8",
+  "categoria": "Perfiles",
+  "descripcion": "Especialmente diseñado para colocar en vidrios de 8 mm, brinda una iluminación muy util en exhibidores de productos y muebles con estantes de vidrio. Ilumina la zona y sin molestar a la vista, debido a su diseño en ángulo.",
+  "modelos": [
+    {
+      "id": "pv8-100-op",
+      "subnombre": "Perfil PV8 ",
+      "fotos_producto": "pv8_prin.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/pv8-100-op.png",
+      "caracteristicasTecnicas": {
+        "acabado": [
+          "Aluminio anodizado"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "100",
+          "200",
+          "300"
+        ],
+        "ancho": [
+          "17.7"
+        ],
+        "dimension": [
+          "18.5"
+        ],
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "pv8-100-tr",
+      "subnombre": "Perfil PV8 C/Difusor Transparente ",
+      "fotos_producto": "pv8_prin.jpg",
+      "caracteristicasTecnicas": {
+        "acabado": [
+          "Aluminio anodizado",
+          " Negro Mate"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "100",
+          "200",
+          "300"
+        ],
+        "ancho": [
+          "0.17"
+        ],
+        "dimension": 0.18,
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b8d"
+  },
+  "code": "pan",
+  "nombre": "Perfil Angulo",
+  "categoria": "Perfiles",
+  "descripcion": "Este perfil permite colocar una tira de led en un ángulo de 45°, lo que genera una iluminación focalizada en la zona que preferimos. Es también muy útil para colocar en ángulos que permiten iluminar con estilo y a la vez de dar terminación.",
+  "modelos": [
+    {
+      "id": "pan",
+      "subnombre": "Perfil Ángulo ",
+      "fotos_producto": "ang_prin.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/pan.png",
+      "caracteristicasTecnicas": {
+        "acabado": [
+          "Negro anodizado",
+          " Aluminio anodizado"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "100",
+          "200",
+          "300"
+        ],
+        "ancho": [
+          "16"
+        ],
+        "dimension": [
+          "16"
+        ],
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b8e"
+  },
+  "code": "ph1-led",
+  "nombre": "Perfil H",
+  "categoria": "Perfiles",
+  "descripcion": "Diseñado para múltiples usos. Desde sujetarse sin grampas visibles, hasta crear diseños colgantes. Gracias a su forma de “H” puede alojar tiras de led de ambos lados, creando una iluminación directaNo Corespondeindirecta.",
+  "modelos": [
+    {
+      "id": "ph1-led",
+      "subnombre": "Perfil H1",
+      "fotos_producto": "h_prin.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/ph1-led.png",
+      "caracteristicasTecnicas": {
+        "acabado": [
+          "Aluminio anodizado",
+          " blanco microtexturado",
+          " Negro microtexturado"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "100",
+          "200",
+          "300"
+        ],
+        "ancho": [
+          "19.2"
+        ],
+        "dimension": [
+          "24"
+        ],
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "ph1-tr",
+      "subnombre": "Perfil H C/Difusor transparente ",
+      "fotos_producto": "h_prin.jpg",
+      "caracteristicasTecnicas": {
+        "acabado": [
+          "Aluminio anodizado",
+          " blanco microtexturado",
+          " Negro mictrotexturado"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "300"
+        ],
+        "ancho": [
+          "0.19"
+        ],
+        "dimension": 0.24,
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b8f"
+  },
+  "code": "ph2",
+  "nombre": "Perfil H2",
+  "categoria": "perfiles",
+  "descripcion": "Perfil específicamente diseñado para realizar diseños colgantes LED lineales y con diferentes formas y uniones en ángulo. La creatividad con este perfil no tiene límites.",
+  "modelos": [
+    {
+      "id": "ph2-op",
+      "subnombre": "Perfil H2",
+      "fotos_producto": "h2_prin.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/ph2.png",
+      "caracteristicasTecnicas": {
+        "acabado": [
+          "Aluminio anodizado",
+          " Blanco microtexturado",
+          "Negro microtexturado"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "100",
+          "200",
+          "300"
+        ],
+        "ancho": [
+          "19.2"
+        ],
+        "dimension": [
+          "24"
+        ],
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "ph2-tr",
+      "subnombre": "Perfil H C/Difusor transparente ",
+      "fotos_producto": "h2_prin.jpg",
+      "caracteristicasTecnicas": {
+        "cantidad": 1,
+        "dimension": 0.24,
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b90"
+  },
+  "code": "pem",
+  "nombre": "Perfil embutir",
+  "categoria": "Perfiles",
+  "descripcion": "Crear lineas infinitas y diseños únicos ahora es posible gracias al perfil de embutir, el cual permite crear “lineas de luz” en cielorrasos y paredes. Se fija mediante resortes lo que permite instalarlo en placas de cualquier espesor.",
+  "modelos": [
+    {
+      "id": "pem",
+      "subnombre": "Perfil de embutir",
+      "fotos_producto": "embutir_prin.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/pem.png",
+      "caracteristicasTecnicas": {
+        "acabado": [
+          "Aluminio anodizado",
+          " Blanco microtexturado",
+          "Negro microtexturado"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "100",
+          "200",
+          "300"
+        ],
+        "ancho": [
+          "38.6"
+        ],
+        "dimension": [
+          "18.7"
+        ],
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b91"
+  },
+  "code": "pex",
+  "nombre": "perfil embutir XL",
+  "categoria": "Perfiles",
+  "descripcion": "Las mismas posibilidades de crear lineas de luz continuas se hacen posible en un mayor tamaño permitiendo la utilización de tiras de led con mayor flujo luminoso. Lineas continuas sin puntos de led.",
+  "modelos": [
+    {
+      "id": "pex",
+      "subnombre": "Perfil de embutir XL",
+      "fotos_producto": "embutirxl_prin.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/pex.jpg",
+      "caracteristicasTecnicas": {
+        "acabado": [
+          "Aluminio anodizado",
+          " Blanco microtexturado",
+          "Negro microtexturado"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "100",
+          "200",
+          "300"
+        ],
+        "ancho": [
+          "84.4"
+        ],
+        "dimension": [
+          "30"
+        ],
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b92"
+  },
+  "code": "P02",
+  "nombre": "Perfil P02",
+  "categoria": "perfiles",
+  "descripcion": "Sus reducidas dimensiones lo hacen delicado e ideal para pequeños espacios brindando una “linea de luz” al combinarlo con nuestra tira 2835-120 de 9,6w. Fue diseñado para tiras de 8 mm de ancho con una disipación que permite alojar tiras de hasta 10w/m.",
+  "modelos": [
+    {
+      "id": "p02",
+      "subnombre": "Perfil P02  ",
+      "fotos_producto": "P02.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/p02.png",
+      "caracteristicasTecnicas": {
+        "acabado": [
+          "Aluminio anodizado"
+        ],
+        "cantidad": 1,
+        "largo": "[\"100\",\"200\",\"300]",
+        "ancho": [
+          "11.9"
+        ],
+        "dimension": [
+          "8"
+        ],
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b93"
+  },
+  "code": "MPE",
+  "nombre": "Perfil Mini PEM",
+  "categoria": "perfiles",
+  "descripcion": "La tecnología LED avanza constantemente,\nofreciendo prestaciones\nsuperiores en formatos\nmás compactos. Por eso, hemos\ndesarrollado este perfil ultra\npequeño, ideal para espacios\nreducidos, que proporciona una\nelegante \"línea de luz\" al combinarse\ncon nuestras tiras COB.\nEste diseño es compatible con\ntiras de 8 mm de ancho y permite\nuna adecuada disipación de\ncalor, admitiendo tiras de hasta\n14 W/m.",
+  "modelos": [
+    {
+      "id": "mpe",
+      "subnombre": "Perfil Mini PEM",
+      "fotos_producto": "mpe.jpg",
+      "caracteristicasTecnicas": {
+        "acabado": [
+          "Aluminio anodizado"
+        ],
+        "cantidad": 1,
+        "largo": "[\"100\",\"200\",\"300]",
+        "ancho": [
+          "19.3"
+        ],
+        "dimension": [
+          "10.7"
+        ],
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b94"
+  },
+  "code": "PPI",
+  "nombre": "Perfil Piso",
+  "categoria": "Perfiles",
+  "descripcion": "Con este pequeño perfil es\nposible delimitar, crear\ncaminos, y cualquier diseño\ndeseado en el suelo.\nSu difusor de gran espesor\nasegura el alto tránsito sin\ngenerar daños.\nPara lograr un mejor sellado y\nestanqueidad se recomienda\nutilizar silicona neutra en\nextremos y laterales donde\nencastra el difusor.",
+  "modelos": [
+    {
+      "id": "ppi",
+      "subnombre": "Perfil de Piso",
+      "fotos_producto": "PPI.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/ppi.png",
+      "caracteristicasTecnicas": {
+        "acabado": [
+          "Aluminio anodizado"
+        ],
+        "cantidad": 1,
+        "largo": "[\"100\",\"200\",\"300]",
+        "ancho": [
+          "27"
+        ],
+        "dimension": [
+          "11"
+        ],
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b95"
+  },
+  "code": "PGA",
+  "nombre": "Perfil Garganta",
+  "categoria": "perfiles",
+  "descripcion": "La luz indirecta brinda\r\nambientes cálidos y da\r\nsensación de bienestar.\r\nCon éste perfil se abre la\r\nposibilidad de crear una\r\ngarganta donde antes era\r\nimposible.\r\nCasi imperceptible, se pierde\r\ncon la pared abriendo paso a\r\nla iluminación.",
+  "modelos": [
+    {
+      "id": "PGA",
+      "subnombre": "Perfil Garganta",
+      "fotos_producto": "PGA.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/pga.png",
+      "caracteristicasTecnicas": {
+        "acabado": [
+          "Aluminio anodizado"
+        ],
+        "cantidad": 1,
+        "largo": "[\"100\",\"200\",\"300]",
+        "ancho": [
+          "22"
+        ],
+        "dimension": [
+          "56"
+        ],
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b96"
+  },
+  "code": "PIN",
+  "nombre": "Perfil invisible",
+  "categoria": "Perfiles",
+  "descripcion": "Este es un perfil Bi-funcional.\r\nPor un lado funciona como un\r\nperfil estructural, fijando los\r\nlaterales de placas de 12mm.\r\nPor el otro lado, genera una\r\niluminación en todo el recorrido\r\ncon el led totalmente oculto.",
+  "modelos": [
+    {
+      "id": "PIN",
+      "subnombre": "Perfil Invisible",
+      "fotos_producto": "PIN.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/pin.png",
+      "caracteristicasTecnicas": {
+        "acabado": [
+          "Aluminio anodizado"
+        ],
+        "cantidad": 1,
+        "largo": "[\"100\",\"200\",\"300]",
+        "ancho": [
+          "29.73"
+        ],
+        "dimension": [
+          "45.7"
+        ],
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b97"
+  },
+  "code": "PNE",
+  "nombre": "perfil nariz escalera",
+  "categoria": "Perfiles",
+  "descripcion": "Diseñado específicamente para\r\ncolocar en escaleras, dando\r\nuna iluminación sobre el\r\nescalón de abajo mientras que\r\nbrinda terminacion y un\r\nexcelente agarre al momento\r\nde transitar la misma.\r\nPuede automatizarse su\r\nencendido colocando un sensor\r\npir en un extremo.",
+  "modelos": [
+    {
+      "id": "Pne",
+      "subnombre": "Perfil Nariz escalera",
+      "fotos_producto": "Pne.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/pne.png",
+      "caracteristicasTecnicas": {
+        "acabado": [
+          "Aluminio anodizado"
+        ],
+        "cantidad": 1,
+        "largo": "[\"100\",\"200\",\"300]",
+        "ancho": [
+          "60"
+        ],
+        "dimension": [
+          "22"
+        ],
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b98"
+  },
+  "code": "PAB",
+  "nombre": "Panal de abejas",
+  "categoria": "Colgantes",
+  "descripcion": "El diseño modular permite crear\r\nincreibles colgantes en forma\r\nde panal de abejas. sujeto con\r\ntensores al techo diferentes e\r\nincreibles diseños pueden\r\nllevarse a la realidad. Con\r\nuniones por detras se logra una\r\nsencilla instalacion y práctica a\r\nla hora del transporte.\r\nescalable sin límites.\r\nDisponible en medidas de 40/\r\n60 y 80 cm entre caras no\r\ncombinables entre si.",
+  "modelos": [
+    {
+      "id": "PAB",
+      "subnombre": "Panal de abejas 400",
+      "fotos_producto": "PAB.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/PAB.png",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "18"
+        ],
+        "volt": 220,
+        "tono": [
+          "frio",
+          " calida",
+          " neutro",
+          " super Calida"
+        ],
+        "kelvin": [
+          "6000",
+          "4000",
+          "3000",
+          "2700"
+        ],
+        "lumen": [
+          "2300"
+        ],
+        "acabado": [
+          "Aluminio anodizado",
+          " Blanco microtexturado",
+          "Negro microtexturado"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "400"
+        ],
+        "ancho": [
+          "461"
+        ],
+        "dimension": [
+          "22"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "pab-600",
+      "subnombre": "Panal de abejas 600",
+      "fotos_producto": "PAB.jpg",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "27"
+        ],
+        "volt": [
+          "220"
+        ],
+        "tono": [
+          "frio",
+          " calida",
+          " neutro",
+          " super Calida"
+        ],
+        "kelvin": [
+          "6000",
+          "4000",
+          "3000",
+          "2700"
+        ],
+        "lumen": [
+          "3560"
+        ],
+        "acabado": [
+          "Aluminio anodizado",
+          " blanco microtexturado",
+          " Negro microtexturado"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "600"
+        ],
+        "ancho": [
+          "692"
+        ],
+        "dimension": [
+          "22"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "pab-800",
+      "subnombre": "Panal de abejas 800",
+      "fotos_producto": "PAB.jpg",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "36"
+        ],
+        "volt": [
+          "220"
+        ],
+        "tono": [
+          "frio",
+          " calida",
+          " neutro",
+          " super Calida"
+        ],
+        "kelvin": [
+          "6000",
+          "4000",
+          "3000",
+          "2700"
+        ],
+        "lumen": [
+          "4700"
+        ],
+        "acabado": [
+          "Aluminio anodizado",
+          " blanco microtexturado",
+          " Negro microtexturado"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "800"
+        ],
+        "ancho": [
+          "923"
+        ],
+        "dimension": [
+          "22"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": false
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b99"
+  },
+  "code": "URA-C",
+  "nombre": "Urano colgante",
+  "categoria": "Colgantes",
+  "descripcion": "La iluminación superior-directa\nque brinda Urano sumado a su\nesteticidad minimalista hacen\nen conjunto un artefacto con\namplia versatilidad. Desde\nsalas de reunión hasta espacios\nen común. Existiendo dos\nformas de instalacion: standard\ncon florón o aplicado a techos\nflotantes con un conjunto de\nimanes. Es sin dudas un\nartefacto sin fecha de caducidad.\nEl usuario puede combinar los\naros a gusto en un solo colgante",
+  "modelos": [
+    {
+      "id": "ura-c-s",
+      "subnombre": "Urano colgante simple",
+      "fotos_producto": "ura-c-s.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/ura-c-s.png",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "36",
+          "47",
+          "60",
+          "71",
+          "83"
+        ],
+        "volt": 220,
+        "tono": [
+          "frio",
+          " calida",
+          " neutro",
+          " super Calida"
+        ],
+        "kelvin": [
+          "6000",
+          "4000",
+          "3000",
+          "2700"
+        ],
+        "lumen": [
+          "3500",
+          "4500",
+          "5400",
+          "6900",
+          "7800"
+        ],
+        "acabado": [
+          "Alumat",
+          "Blanco microtexturado",
+          "Negro microtexturado",
+          "Oro mate",
+          "Cobre mate"
+        ],
+        "cantidad": 1,
+        "diametro": [
+          "60",
+          "80",
+          "100",
+          "120",
+          "140"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": true
+      }
+    },
+    {
+      "id": "URA-C-2",
+      "subnombre": "Urano colgante doble",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "83",
+          "107",
+          "131",
+          "154"
+        ],
+        "volt": 220,
+        "tono": [
+          "frio",
+          " calida",
+          " neutro",
+          " super Calida"
+        ],
+        "kelvin": [
+          "6000",
+          "4000",
+          "3000",
+          "2700"
+        ],
+        "lumen": [
+          "6900",
+          "8100",
+          "10200",
+          "12300"
+        ],
+        "acabado": [
+          "Alumat",
+          "Blanco microtexturado",
+          "Negro microtexturado",
+          "Oro mate",
+          "Cobre mate"
+        ],
+        "cantidad": 1,
+        "diametro": [
+          "60/80",
+          " 80/100",
+          " 100/120",
+          "120/140"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": true
+      },
+      "fotos_producto": "URA-C-2.jpg"
+    },
+    {
+      "id": "URA-C-3",
+      "subnombre": "Urano colgante triple",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "143",
+          "174"
+        ],
+        "volt": 220,
+        "tono": [
+          "frio",
+          " calida",
+          " neutro",
+          " super Calida"
+        ],
+        "kelvin": [
+          "6000",
+          "4000",
+          "3000",
+          "2700"
+        ],
+        "lumen": [
+          "11700",
+          "14900"
+        ],
+        "acabado": [
+          "Alumat",
+          "Blanco microtexturado",
+          "Negro microtexturado",
+          "Oro mate",
+          "Cobre mate"
+        ],
+        "cantidad": 1,
+        "diametro": [
+          "60/80/100",
+          " 80/100/120"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": true
+      },
+      "fotos_producto": "URA-C-3.jpg"
+    },
+    {
+      "id": "URA-APL",
+      "subnombre": "Urano aplicado",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "36",
+          "47",
+          "60",
+          "71",
+          "83"
+        ],
+        "volt": 220,
+        "tono": [
+          "frio",
+          " calida",
+          " neutro",
+          " super Calida"
+        ],
+        "kelvin": [
+          "6000",
+          "4000",
+          "3000",
+          "2700"
+        ],
+        "lumen": [
+          "3500",
+          "4500",
+          "5400",
+          "6900",
+          "7800"
+        ],
+        "acabado": [
+          "Alumat",
+          "Blanco microtexturado",
+          "Negro microtexturado",
+          "Oro mate",
+          "Cobre mate"
+        ],
+        "cantidad": 1,
+        "diametro": [
+          "60",
+          "80",
+          "100",
+          "120",
+          "140"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": true
+      },
+      "fotos_producto": "URA-APL.jpg"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b9a"
+  },
+  "code": "SNK",
+  "nombre": "Snake",
+  "categoria": "Colgantes",
+  "descripcion": "Una forma recta y dura sostiene\r\nuna morfología orgánica que\r\nrecorre diferentes configuraciones\r\nfácilmente modificables,\r\ngenerando dinamismo y adaptabilidad",
+  "modelos": [
+    {
+      "id": "snk",
+      "subnombre": "Colgante Snake ",
+      "fotos_producto": "snk.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/snk.png",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "43",
+          "58"
+        ],
+        "volt": 220,
+        "tono": [
+          "calida"
+        ],
+        "kelvin": [
+          "3000"
+        ],
+        "lumen": [
+          "3000",
+          "4000"
+        ],
+        "acabado": [
+          "Cromo",
+          " Bronce",
+          "Negro microtexturado"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "120",
+          "150"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": true
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b9b"
+  },
+  "code": "STK",
+  "nombre": "Stick",
+  "categoria": "Colgantes",
+  "descripcion": "La iluminación indirecta se\nha convertido en un recurso\nmuy útil a la hora de ambientar\nun espacio ya que no\ngenera molestias visuales ni\nluz excesiva lo cual es ideal\npara momentos de relax.",
+  "modelos": [
+    {
+      "id": "STK-H",
+      "subnombre": "Stick horizontal",
+      "fotos_producto": "STK-H.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/stk-h.png",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "13",
+          "15",
+          "19"
+        ],
+        "volt": 220,
+        "tono": [
+          "frio",
+          " calida",
+          " neutro",
+          " super Calida"
+        ],
+        "kelvin": [
+          6000,
+          4000,
+          3000,
+          2700
+        ],
+        "lumen": [
+          "1900",
+          "2200",
+          "2850"
+        ],
+        "acabado": [
+          "Aluminio anodizado",
+          "Negro anodizado",
+          "Blanco semi-mate"
+        ],
+        "largo": [
+          "100",
+          "120",
+          "150"
+        ],
+        "ancho": [
+          "22"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": true
+      }
+    },
+    {
+      "id": "stk-V",
+      "subnombre": "Stick Vertical",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "13",
+          "15",
+          "19"
+        ],
+        "volt": 220,
+        "tono": [
+          "frio",
+          " calida",
+          " neutro",
+          " super Calida"
+        ],
+        "kelvin": [
+          6000,
+          4000,
+          3000,
+          2700
+        ],
+        "lumen": [
+          "1900",
+          "2200",
+          "2850"
+        ],
+        "acabado": [
+          "Aluminio anodizado",
+          "Negro anodizado",
+          "Blanco semi-mate"
+        ],
+        "largo": [
+          "100",
+          "120",
+          "150"
+        ],
+        "ancho": [
+          "22"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": true
+      },
+      "foto_portada": "",
+      "fotos_producto": ""
+    },
+    {
+      "id": "STK-TP",
+      "subnombre": "Stick Techo Piso",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "13",
+          "15",
+          "19"
+        ],
+        "volt": 220,
+        "tono": [
+          "frio",
+          " calida",
+          " neutro",
+          " super Calida"
+        ],
+        "kelvin": [
+          6000,
+          4000,
+          3000,
+          2700
+        ],
+        "lumen": [
+          "1900",
+          "2200",
+          "2850"
+        ],
+        "acabado": [
+          "Aluminio anodizado",
+          "Negro anodizado",
+          "Blanco semi-mate"
+        ],
+        "largo": [
+          "100",
+          "120",
+          "150"
+        ],
+        "ancho": [
+          "22"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": true
+      },
+      "foto_portada": "",
+      "fotos_producto": ""
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b9c"
+  },
+  "code": "WOR",
+  "nombre": "Worm",
+  "categoria": "Pie",
+  "descripcion": "Una ligera curva envolvente\r\ngenera una lámpara de mesa\r\ndinámica y novedosa.\r\nCreado con una nueva tecnología\r\nde led permite dimmerizar,\r\nasi como encender/ apagar con\r\nsolo pasar la mano por encima\r\ndel sensor.",
+  "modelos": [
+    {
+      "id": "worm",
+      "subnombre": "Velador Worm",
+      "fotos_producto": "worm.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/wrm.png",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "10"
+        ],
+        "volt": 220,
+        "tono": [
+          "calida"
+        ],
+        "kelvin": [
+          "3000"
+        ],
+        "lumen": [
+          "530"
+        ],
+        "acabado": [
+          "Negro microtexturado"
+        ],
+        "cantidad": 1,
+        "incluyeLed": true,
+        "incluyeEquipo": true
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b9d"
+  },
+  "code": "TEX",
+  "nombre": "Texo",
+  "categoria": "Pared",
+  "descripcion": "Nacido desde la unión de\r\nvolúmenes perfectamente\r\ngemoétricos, los cuales\r\ninsinúan una morfología\r\nsimple y minimalista generando\r\nuna luz tenue e\r\nindirecta.",
+  "modelos": [
+    {
+      "id": "tex",
+      "subnombre": "Aplique Texo",
+      "fotos_producto": "tex.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/tex.png",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "10"
+        ],
+        "volt": 220,
+        "tono": [
+          "calida",
+          "fria"
+        ],
+        "kelvin": [
+          "3000",
+          "6000"
+        ],
+        "lumen": [
+          "900"
+        ],
+        "acabado": [
+          "Negro anodizado"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "1000"
+        ],
+        "ancho": [
+          "120"
+        ],
+        "dimension": [
+          "80"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": true
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b9e"
+  },
+  "code": "LEC",
+  "nombre": "Lectus",
+  "categoria": "Pared",
+  "descripcion": "La iluminación debe brindar\r\ncalidez y bienestar, y por\r\nsobre todo debe ser útil en\r\nlas tareas como la lectura.\r\nEs por eso que diseñamos\r\neste pequeño aplique que\r\npermite direccionar la luz a\r\nla zona que se desee.\r\nAdemás posee una tecla de\r\nencendido/apagado para\r\ntener el control en todo\r\nmomento. Es ideal para\r\ncabeceras de cama.",
+  "modelos": [
+    {
+      "id": "lec",
+      "subnombre": "Lectus",
+      "fotos_producto": "lec.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/lec.png",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "5"
+        ],
+        "volt": 220,
+        "tono": [
+          "calida",
+          "fria"
+        ],
+        "kelvin": [
+          "3000",
+          "6000"
+        ],
+        "lumen": [
+          "320"
+        ],
+        "acabado": [
+          "Negro microtexturado",
+          "Blanco microtexturado"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "130"
+        ],
+        "ancho": [
+          "120"
+        ],
+        "dimension": [
+          "130"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": true
+      }
+    }
+  ],
+  "esDestacado": true
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282b9f"
+  },
+  "code": "HAL",
+  "nombre": "Aplique de pared Hall",
+  "categoria": "Pared",
+  "descripcion": "Aplique fijo de luz directa. Su\nsimpicidad permite múltiples\nusos como en pasillos, baños o\nescaleras.\nSu tecnología LED brinda una luz\nuniforme, ideal para baños y\ntoilettes.",
+  "modelos": [
+    {
+      "id": "hall",
+      "subnombre": "Hall",
+      "fotos_producto": "hall.jpg",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/hall.png",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "8",
+          "10"
+        ],
+        "volt": 220,
+        "tono": [
+          "frio",
+          " calida",
+          " neutro",
+          " super Calida"
+        ],
+        "kelvin": [
+          6000,
+          4000,
+          3000,
+          2700
+        ],
+        "lumen": [
+          "750",
+          "950"
+        ],
+        "acabado": [
+          "Negro microtexturado",
+          "Blanco microtexturado"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "600",
+          "800"
+        ],
+        "ancho": [
+          "90"
+        ],
+        "dimension": [
+          "70"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": true
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67bb9c6836f7ed30e4282ba0"
+  },
+  "code": "LED",
+  "nombre": "Tiras led",
+  "categoria": "Tiras de led",
+  "descripcion": "Ofrecemos una amplia variedad de tiras LED para múltiples aplicaciones. Contamos con tiras COB, 2835, RGB, blanco dinámico y opciones de alto flujo lumínico. Con un CRI de 90 y una eficiencia de 100 lm/W, garantizan una iluminación de calidad y alto rendimiento  ",
+  "modelos": [
+    {
+      "id": "LED-04w",
+      "subnombre": "Led 2835-60 4,8w",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "4,8"
+        ],
+        "volt": 12,
+        "tono": [
+          "calida",
+          "fria"
+        ],
+        "kelvin": [
+          "3000",
+          "6000"
+        ],
+        "lumen": [
+          "650",
+          "662"
+        ],
+        "acabado": [
+          "blanco"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "5000"
+        ],
+        "ancho": [
+          "8"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "LED-09w",
+      "subnombre": "Led 2835-120 9,6w",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "9,6"
+        ],
+        "volt": 12,
+        "tono": [
+          "calida",
+          "fria"
+        ],
+        "kelvin": [
+          "3000",
+          "6000"
+        ],
+        "lumen": [
+          "1300",
+          "1310"
+        ],
+        "acabado": [
+          "blanco"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "5000"
+        ],
+        "ancho": [
+          "8"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "LED-14w",
+      "subnombre": "Led 2835-60 14,4w",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "14,4"
+        ],
+        "volt": 12,
+        "tono": [
+          "fria",
+          "neutra",
+          "calida",
+          "super calida"
+        ],
+        "kelvin": [
+          6000,
+          4000,
+          3000,
+          2700
+        ],
+        "lumen": [
+          "1220",
+          "1322",
+          "1360",
+          "1375"
+        ],
+        "acabado": [
+          "blanco"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "5000"
+        ],
+        "ancho": [
+          "8"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "Led 5050 14,4w",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "14,4"
+        ],
+        "volt": 12,
+        "tono": [
+          "calida",
+          "fria"
+        ],
+        "kelvin": [
+          3000,
+          6000
+        ],
+        "lumen": [
+          "1500",
+          "1560"
+        ],
+        "acabado": [
+          "blanco"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "5000"
+        ],
+        "ancho": [
+          "10"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "LED-19w",
+      "subnombre": "Led 2835-120 19,2w",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "19,2"
+        ],
+        "volt": 12,
+        "tono": [
+          "fria",
+          "neutra",
+          "calida",
+          "super calida"
+        ],
+        "kelvin": [
+          6000,
+          4000,
+          3000,
+          2700
+        ],
+        "lumen": [
+          "2020",
+          "1990",
+          "1975",
+          "1940"
+        ],
+        "acabado": [
+          "blanco"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "5000"
+        ],
+        "ancho": [
+          "8"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "LED-36w",
+      "subnombre": "Led 2835-240 36w",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "36"
+        ],
+        "volt": 12,
+        "tono": [
+          "fria",
+          "neutra",
+          "calida",
+          "super calida"
+        ],
+        "kelvin": [
+          6000,
+          4000,
+          3000,
+          2700
+        ],
+        "lumen": [
+          "3920",
+          "3760",
+          "3445",
+          "3380"
+        ],
+        "acabado": [
+          "blanco"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "5000"
+        ],
+        "ancho": [
+          "30"
+        ],
+        "incluyeLed": true
+      }
+    },
+    {
+      "id": "LED-COB-10w",
+      "subnombre": "Led COB 512l/m",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "10"
+        ],
+        "volt": 12,
+        "tono": [
+          "neutra",
+          "calida"
+        ],
+        "kelvin": [
+          4000,
+          3000
+        ],
+        "lumen": [
+          "1150",
+          "1100"
+        ],
+        "acabado": [
+          "blanco"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "5000"
+        ],
+        "ancho": [
+          "8"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "IC 2835-80",
+      "subnombre": "led IC 2835-80",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "10"
+        ],
+        "volt": 24,
+        "tono": [
+          "calida"
+        ],
+        "kelvin": [
+          "3000"
+        ],
+        "lumen": [
+          "1220"
+        ],
+        "acabado": [
+          "blanco"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "5000"
+        ],
+        "ancho": [
+          "10"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "5050 RGB",
+      "subnombre": "Led 5050 RGB",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "14,4"
+        ],
+        "volt": 12,
+        "tono": [
+          "RGB"
+        ],
+        "kelvin": [
+          "RGB"
+        ],
+        "acabado": [
+          "blanco"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "5000"
+        ],
+        "ancho": [
+          "10"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "5050 RGB+W",
+      "subnombre": "Led 5050 RGBW",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "19,2"
+        ],
+        "volt": 12,
+        "tono": [
+          "RGB+CW",
+          "RGB+WW"
+        ],
+        "kelvin": [
+          "RGB+6000K",
+          "RGB+3000K"
+        ],
+        "acabado": [
+          "blanco"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "5000"
+        ],
+        "ancho": [
+          "12"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "LED-COB-5w",
+      "subnombre": "Led COB 320l/m",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "5"
+        ],
+        "volt": 12,
+        "tono": [
+          "calida"
+        ],
+        "kelvin": [
+          "3000"
+        ],
+        "lumen": [
+          "550"
+        ],
+        "acabado": [
+          "blanco"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "5000"
+        ],
+        "ancho": [
+          "8"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "LED-COB-RGB",
+      "subnombre": "Led COB 450l/m",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "12"
+        ],
+        "volt": 12,
+        "tono": [
+          "RGB PIXEL"
+        ],
+        "kelvin": [
+          "RGB"
+        ],
+        "lumen": [
+          "RGB"
+        ],
+        "acabado": [
+          "blanco"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "5000"
+        ],
+        "ancho": [
+          "10"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "LED-COB-CCT",
+      "subnombre": "Led COB 605l/m",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "22"
+        ],
+        "volt": 12,
+        "tono": [
+          "Calido+Frio"
+        ],
+        "kelvin": [
+          "3000+6000"
+        ],
+        "lumen": [
+          "1100"
+        ],
+        "acabado": [
+          "blanco"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "5000"
+        ],
+        "ancho": [
+          "10"
+        ],
+        "incluyeLed": true,
+        "incluyeEquipo": false
+      },
+      "esDestacad": true
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "689651916d06006b93a5a929"
+  },
+  "code": "mini PE",
+  "nombre": "Perfil mini PE",
+  "categoria": "Perfiles",
+  "descripcion": "La tecnología LED avanza constantemente, ofreciendo prestaciones superiores en formatos más compactos. Por eso, hemos desarrollado este perfil ultra pequeño, ideal para espacios reducidos, que proporciona una elegante \"línea de luz\" al combinarse con nuestras tiras COB. Este diseño es compatible con tiras de 8 mm de ancho y permite una adecuada disipación de calor, admitiendo tiras de hasta 14 W/m..",
+  "modelos": [
+    {
+      "id": "mini-pe",
+      "subnombre": "Perfil mini PE ",
+      "fotos_producto": "mini-pe.png",
+      "foto_portada": "https://images.smartcloudstudio.com/gsg/mini-pe.png",
+      "caracteristicasTecnicas": {
+        "acabado": [
+          "Aluminio anodizado"
+        ],
+        "cantidad": 1,
+        "largo": [
+          100,
+          200,
+          300
+        ],
+        "ancho": [
+          19.3
+        ],
+        "dimension": [
+          10.7
+        ],
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    }
+  ],
+  "esDestacado": true
+}]

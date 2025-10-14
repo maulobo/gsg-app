@@ -1,0 +1,777 @@
+[{
+  "_id": {
+    "$oid": "67d1edcd6c433ab8de9e6625"
+  },
+  "code": "ACC",
+  "nombre": "Accesorios",
+  "categoria": "Accesorios",
+  "descripcion": "Complementa tu instalación de iluminación LED con nuestra amplia gama de accesorios. Contamos con controladoras, dimmers, sensores y más para brindarte el máximo control, eficiencia y personalización en tus proyectos. Optimiza el rendimiento de tus luminarias con productos de alta calidad y tecnología avanzada.",
+  "modelos": [
+    {
+      "id": "con-001-rgb",
+      "subnombre": "Ficha RGB con cable",
+      "description": "Ficha con 4 pines para conectar tira de led al controlador",
+      "caracteristicasTecnicas": {
+        "volt": "12/24",
+        "tono": [
+          "RGB"
+        ],
+        "acabado": [
+          "Blanco"
+        ],
+        "cantidad": 1,
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "con-002-rgb",
+      "subnombre": "Ficha RGB macho/hembre con traba y cable 10 cm",
+      "description": "Ideal para conectar tiras RGB con la mayor presicion",
+      "caracteristicasTecnicas": {
+        "volt": "12/24",
+        "tono": [
+          "RGB"
+        ],
+        "acabado": [
+          "Blanco"
+        ],
+        "cantidad": 1,
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "con-001-rgw",
+      "subnombre": "Ficha RGBW con cable de 15 cm",
+      "description": "Ficha de 5 pines para conectar tiras RGBW a la controladora",
+      "caracteristicasTecnicas": {
+        "volt": "12/24",
+        "tono": [
+          "RGB"
+        ],
+        "acabado": [
+          "Blanco"
+        ],
+        "cantidad": 1,
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "pin-001-rgb",
+      "subnombre": "Pin RGB",
+      "description": "Pines de conexión para tira RGB",
+      "caracteristicasTecnicas": {
+        "volt": "12/24",
+        "tono": [
+          "RGB"
+        ],
+        "acabado": [
+          "Blanco"
+        ],
+        "cantidad": 1,
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "pin-001-rgw",
+      "subnombre": "Pin RGBW",
+      "description": "Pines de conexión para tiras RGB+W",
+      "caracteristicasTecnicas": {
+        "volt": [
+          "12/24"
+        ],
+        "tono": [
+          "RGBW"
+        ],
+        "kelvin": [
+          "RGBW"
+        ],
+        "cantidad": 1,
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "con-plu-hem",
+      "subnombre": "Conector Plug 5.5 x 2.1 mm hembra c/cable 15 cm",
+      "description": "Conector hembra 5.5 x 2.1 mm con cable de 15 cm, ideal para conexiones seguras y rápidas en proyectos de iluminación LED, electrónica y alimentación de dispositivos. Fácil de instalar y compatible con fuentes de alimentación estándar.",
+      "caracteristicasTecnicas": {
+        "volt": [
+          "12/24"
+        ],
+        "diametro": false,
+        "incluyeLed": false
+      }
+    },
+    {
+      "id": "con-plu-mac",
+      "subnombre": "Conector Plug 5.5 x 2.1 mm macho c/cable 15 cm",
+      "description": "Conector macho 5.5 x 2.1 mm con cable de 15 cm, ideal para conexiones seguras y confiables en sistemas de iluminación LED, electrónica y fuentes de alimentación. Fácil de instalar y compatible con conexiones estándar.",
+      "caracteristicasTecnicas": {
+        "volt": [
+          "12/24"
+        ],
+        "cantidad": 1,
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "plu-bor-mac",
+      "subnombre": "Conector Plug 5.5 x 2.1 mm macho con bornera de conexión",
+      "description": "Conector macho 5.5 x 2.1 mm con bornera de conexión, ideal para una instalación rápida y segura sin necesidad de soldadura. Perfecto para proyectos de iluminación LED, electrónica y alimentación de dispositivos. Compatible con fuentes de alimentación estándar.",
+      "caracteristicasTecnicas": {
+        "volt": [
+          "12/24"
+        ],
+        "tono": [
+          "monocromática"
+        ],
+        "cantidad": 1,
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "plu-bor-hem",
+      "subnombre": "Conector Plug 5.5 x 2.1 mm hembra con bornera de conexión",
+      "description": "Conector hembra con bornera de conexión para una instalación rápida y sin soldadura. Ideal para iluminación LED, electrónica y fuentes de alimentación.",
+      "caracteristicasTecnicas": {
+        "volt": [
+          "12/24"
+        ],
+        "tono": [
+          "monocromatica"
+        ],
+        "cantidad": 1,
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "con-ryn-mon",
+      "subnombre": "Conector macho/hembra con trab cable 10 cm",
+      "description": "Conector macho/hembra con traba y cable de 10 cm, ideal para conexiones seguras en iluminación LED y electrónica. Fácil de instalar y resistente a desconexiones accidentales.",
+      "caracteristicasTecnicas": {
+        "volt": [
+          "12/24"
+        ],
+        "tono": [
+          "monocromatico"
+        ],
+        "cantidad": 1,
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "con-dup-mon",
+      "subnombre": "Conector macho/hembra DUPONT cable 10 cm",
+      "description": "Conector macho/hembra DUPONT de tamaño muy pequeño y cable de 10 cm, ideal para conexiones rápidas y seguras en proyectos de electrónica e iluminación donde el espacio es limitado. Perfecto para aplicaciones que requieren flexibilidad y precisión.",
+      "caracteristicasTecnicas": {
+        "volt": [
+          "12/24"
+        ],
+        "tono": [
+          "monocromatico"
+        ],
+        "cantidad": 1,
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "ext-dup-150",
+      "subnombre": "Extension cable DUPONT 150cm largo",
+      "description": "Cable de extensión DUPONT de 150 cm de largo, ideal para proyectos de electrónica e iluminación donde se requiere mayor alcance. Flexible y fácil de instalar, perfecto para conexiones seguras y ordenadas en espacios amplios o difíciles de alcanzar.",
+      "caracteristicasTecnicas": {
+        "volt": [
+          "12/24"
+        ],
+        "tono": [
+          "monocromatico"
+        ],
+        "cantidad": 1,
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "der-dup-4x1",
+      "subnombre": "Derivador DUPONT 4x1",
+      "description": "Derivador DUPONT 4x1 especialmente diseñado para iluminación, ideal para distribuir señales o alimentación a múltiples tiras LED o componentes de manera ordenada y eficiente. Con cuatro salidas y un conector, facilita las conexiones en proyectos de iluminación de mayor complejidad.",
+      "caracteristicasTecnicas": {
+        "volt": [
+          "12/24"
+        ],
+        "tono": [
+          "monocromatico"
+        ],
+        "cantidad": 1,
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "sen-tou-mon",
+      "subnombre": "Encendido Perfiles Touch + dimmer 12/24v (8A)",
+      "description": "DIMMER TOUCH\r\nEste maravilloso interruptor\r\npermite controlar la luminosidad\r\nde una tira de led dentro\r\nde un perfil de aluminio con\r\ndifusor. Además permite\r\nencender y apagarla y posee\r\nmemoria de la última dimmerización.\r\nCon solo tocar el difusor\r\nplástico logramos encender/\r\napagar o dimmerizar la tira\r\nde led monocromática.\r\nFUNCIONES\r\nON/OFF + DIMMER",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "96/12v - 192w/24v"
+        ],
+        "volt": [
+          "12/24"
+        ],
+        "tono": [
+          "monocromático"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "40"
+        ],
+        "ancho": [
+          "10"
+        ],
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "sen-ir1-mon",
+      "subnombre": "Encendido Perfiles IR sensor (on/off + dimmer) 12/24v (8A)",
+      "description": "Este pequeño sensor permite\r\ncontrolar la iluminación de una\r\ntira de led colocada en un perfil\r\nde aluminio GSG design.\r\ndesplazando la mano sobre el\r\nsensor podremos encender/\r\napagar o dimmerizar el led.\r\nIdeal para utilizarlo en lugares\r\ndonde se necesite no tener\r\ncontacto directo ya que\r\nfunciona a distancia de hasta\r\n60 mm.\r\nFUNCIONES\r\nON/OFF + DIMMER",
+      "caracteristicasTecnicas": {
+        "volt": [
+          "96/12v - 192w/24v"
+        ],
+        "tono": [
+          "12/24"
+        ],
+        "kelvin": [
+          "monocromático"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "46"
+        ],
+        "ancho": [
+          "12"
+        ],
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "sen-pi1-mon",
+      "subnombre": "Encendido Perfiles Sensor PIR (on/off) 12/24v (3A)",
+      "description": "ENCENDIDO INTELIGENTE\r\nEste sensor automatiza el\r\nencendido de los led cuando\r\ndetecta presencia humana\r\ndentro del rango de los 2\r\nmetros. Ideal para pasillos,\r\nbaños y lugares donde, al\r\nautomatizar, ayude a\r\nahorrar energía.",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "36/12v - 72w/24v"
+        ],
+        "volt": [
+          "12/24"
+        ],
+        "tono": [
+          "monocromático"
+        ],
+        "acabado": 1,
+        "cantidad": [
+          "41"
+        ],
+        "largo": [
+          "11"
+        ],
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67d1edcd6c433ab8de9e6626"
+  },
+  "code": "ACC",
+  "nombre": "Accesorios",
+  "categoria": "Accesorios",
+  "descripcion": "Complementa tu instalación de iluminación LED con nuestra amplia gama de accesorios. Contamos con controladoras, dimmers, sensores y más para brindarte el máximo control, eficiencia y personalización en tus proyectos. Optimiza el rendimiento de tus luminarias con productos de alta calidad y tecnología avanzada.",
+  "modelos": [
+    {
+      "id": "sen-pi2-mon",
+      "subnombre": "Encendido Perfiles Sensor PIR p/P01 (on/off) 12/24v (3A)",
+      "description": "ENCENDIDO INTELIGENTE\r\nEste sensor automatiza el\r\nencendido de los led cuando\r\ndetecta presencia humana\r\ndentro del rango de los 2\r\nmetros. Ideal para pasillos,\r\nbaños y lugares donde, al\r\nautomatizar, ayude a\r\nahorrar energía.",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "36/12v - 72w/24v"
+        ],
+        "volt": [
+          "12/24"
+        ],
+        "tono": [
+          "monocromático"
+        ],
+        "acabado": 1,
+        "cantidad": [
+          "41"
+        ],
+        "largo": [
+          "11"
+        ],
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "sen-dor-mon",
+      "subnombre": "Encendido Perfiles Door iSensor (on/off) 12/24v (8A)",
+      "description": "SMART LED CONTROLLER\r\nUna pequeña pieza puede\r\nautomatizar la iluminación\r\nde zonas que no posean\r\ntecla de encendido.\r\nSimplemente al abrir un\r\ncajón o una puerta se\r\nenciende la luz.\r\nCuando el sensor no\r\ndetecta nada a menos de\r\n10 cm, se enciende el led,\r\npero cuando se detecta un\r\nobjeto a menos de esa\r\ndistancia, el led se apaga",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "60/12v - 120w/24v"
+        ],
+        "volt": [
+          "12/24"
+        ],
+        "tono": [
+          "monocromático"
+        ],
+        "acabado": 1,
+        "cantidad": [
+          "42"
+        ],
+        "largo": [
+          "26"
+        ],
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "sen-pir-mon",
+      "subnombre": "Encendido Perfiles PIR embutido 3A",
+      "description": "ENCENDIDO INTELIGENTE\r\nEste sensor automatiza el\r\nencendido de los led cuando\r\ndetecta presencia humana\r\ndentro del rango de los 2\r\nmetros. Ideal para pasillos,\r\nbaños y lugares donde, al\r\nautomatizar, ayude a\r\nahorrar energía.",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "36/12v - 72w/24v"
+        ],
+        "volt": [
+          "12/24"
+        ],
+        "tono": [
+          "monocromático"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "12"
+        ],
+        "diametro": [
+          "22"
+        ],
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "sen-ir2-mon",
+      "subnombre": "Encendido Perfiles IR embutido 3A",
+      "description": "Este nuevo sensor nos\r\npermite embutirlo pasando\r\ndesapercibido y automatizar\r\nel encendido en un\r\nmueble, placard, u otros.\r\nViene incluida una sujeción\r\npor grampa en los casos\r\ndonde no se pueda colocar\r\nembutido.\r\nEste sensor inteligente\r\npermite elegir entre dos\r\nmodos, el modo door o el\r\nmodo IR para encendido y\r\ndimerizacion.",
+      "caracteristicasTecnicas": {
+        "volt": [
+          "36/12v - 72w/24v"
+        ],
+        "tono": [
+          "12/24"
+        ],
+        "kelvin": [
+          "monocromático"
+        ],
+        "cantidad": 1,
+        "ancho": [
+          "12"
+        ],
+        "diametro": [
+          "22"
+        ],
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "sen-woo-mon",
+      "subnombre": "Sensor inductivo para para detrás de maderas (6A)",
+      "description": "El sensor inductivo WOOD para\r\ntiras de LED es un dispositivo que\r\npermite activar o desactivar la\r\niluminación de forma automática\r\nal detectar la presencia o movi)\r\nmiento de un objeto, sin necesi)\r\ndad de contacto físico con\r\ncualquier componente eléctrico.\r\nEste tipo de sensor es ideal para\r\ninstalar detrás de superficies de\r\nmadera.",
+      "caracteristicasTecnicas": {
+        "volt": [
+          "72/12v - 96w/24v"
+        ],
+        "tono": [
+          "12/24"
+        ],
+        "kelvin": [
+          "monocromático"
+        ],
+        "cantidad": 1,
+        "ancho": [
+          "12"
+        ],
+        "diametro": [
+          "22"
+        ],
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "sen-esc-pro",
+      "subnombre": "Sensor de escalera encendido inteligente",
+      "description": "Nada mejor que una escalera",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "1A x canal"
+        ],
+        "volt": [
+          "12/24"
+        ],
+        "tono": [
+          "monocromático"
+        ],
+        "cantidad": 1,
+        "largo": [
+          "186"
+        ],
+        "ancho": [
+          "86"
+        ],
+        "dimension": [
+          "26"
+        ],
+        "diametro": false,
+        "incluyeLed": false
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67d1edcd6c433ab8de9e6624"
+  },
+  "code": "ACC",
+  "nombre": "Accesorios",
+  "categoria": "Accesorios",
+  "descripcion": "Complementa tu instalación de iluminación LED con nuestra amplia gama de accesorios. Contamos con controladoras, dimmers, sensores y más para brindarte el máximo control, eficiencia y personalización en tus proyectos. Optimiza el rendimiento de tus luminarias con productos de alta calidad y tecnología avanzada.",
+  "modelos": [
+    {
+      "id": "dim-30a-lla",
+      "subnombre": "Dimmer llavero",
+      "description": "Controlá con un pequeño\r\ncontrol remoto cualquier tira de\r\nled.\r\nPosee encendido/apagado y\r\ndimmerización desde el control\r\ntipo llavero. Al ser tecnología de\r\nradiofrecuencia permite un\r\nalcance de 10 metros sin tener\r\nque dirigir el control hacia el\r\nreceptor.",
+      "fotos_producto": "http://gsgdesign.com.ar/bbd/fotos_prod/accesorios/amp-24w-prin.jpg",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "30"
+        ],
+        "volt": "12/24",
+        "tono": [
+          "monocromático"
+        ],
+        "acabado": [
+          "Negro"
+        ],
+        "cantidad": 1,
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "dim-25a-tac",
+      "subnombre": "Dimmer tactil",
+      "description": "Para controlar la intensidad\r\npodemos optar por este\r\ncontrol remoto de última\r\ntecnología. Posee una rueda\r\ndonde permite regular el nivel\r\nde intensidad, al igual que los\r\notros elementos de control se\r\nmanejan con una interfaz\r\ntáctil.\r\nAdemás gracias a su potente\r\nreceptor podemos controlar\r\ngran cantidad de metros de led\r\nteniendo en cuenta de no\r\nsuperar su potencia maxima.",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "25"
+        ],
+        "volt": "12/24",
+        "tono": [
+          "monocromático"
+        ],
+        "acabado": [
+          "Negro"
+        ],
+        "cantidad": 1,
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "dim-08a-sma",
+      "subnombre": "Dimmer smart wifi",
+      "description": "Controlá tu iluminación con\r\neste pequeño dispositivo\r\nobteniendo un control de la\r\niluminación, desde controlar\r\nla intensidad, hasta programar\r\nsu encendido/apagado.\r\nTodo desde la comodidad de\r\ntu smartphone. Descarga la\r\naplicación Magic Home,\r\n(apta para IOS y Android)\r\nconectala por wifi a tu\r\nteléfono y disfrutá",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "8"
+        ],
+        "volt": "12/24",
+        "tono": [
+          "monocromático"
+        ],
+        "acabado": [
+          "Negro"
+        ],
+        "cantidad": 1,
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "con-24t-rgb",
+      "subnombre": "Controladora 24 teclas RGB",
+      "description": "Controladora básica y eficiente,\r\npermite controlar una gama\r\nbásica de colores desde su\r\npequeño control remoto.\r\nAdemás posee diferentes\r\nsecuencias de cambios de\r\ncolor, aumento y disminución\r\nde la velocidad y el brillo y\r\nencendido y apagado.\r\nEs de tecnología infrarroja por\r\nlo cual debemos dirigir el\r\ncontrol remoto hacia el receptor\r\n(el cual debe estar a la vista)",
+      "caracteristicasTecnicas": {
+        "volt": [
+          "12/24"
+        ],
+        "tono": [
+          "RGB"
+        ],
+        "kelvin": [
+          "RGB"
+        ],
+        "cantidad": 1,
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "con-tac-rgb",
+      "subnombre": "Controladora táctil RGB",
+      "description": "Un control remoto táctil con\r\nexcelentes prestaciones.\r\nPermite controlar tiras de led\r\nRGB o RGB + blanco (según el\r\nmodelo) con 640 mil colores y\r\n20 modos de cambio automático.\r\nCuenta con memoria la cual al\r\nencender iniciará con el último\r\nseteo.\r\nPosee una tecnología de alta\r\nfrecuencia de 2.4GH y bajo\r\nconsumo eléctrico, larga\r\ndistancia de transmisión y baja\r\ninterferencia.\r\nSimplicidad de instalación y\r\nuso son características de esta\r\ncontroladora.",
+      "caracteristicasTecnicas": {
+        "volt": [
+          "12/24"
+        ],
+        "tono": [
+          "RGB"
+        ],
+        "kelvin": [
+          "RGB"
+        ],
+        "cantidad": 1,
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "con-sma-rgb",
+      "subnombre": "Controladora smart wifi RGB",
+      "description": "Controlá tu iluminación con\r\neste pequeño dispositivo\r\nobteniendo una gama de\r\ncolores altisima y muchas\r\nmás funciones que con\r\ncualquier otro control. Todo\r\ndesde la comodidad de tu\r\nsmartphone. Descarga la\r\naplicación Magic Home,\r\n(apta para IOS y Android)\r\nconectala por wifi a tu\r\nteléfono y disfrutá.",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "144"
+        ],
+        "volt": [
+          "12/24"
+        ],
+        "tono": [
+          "RGB"
+        ],
+        "acabado": 1,
+        "diametro": false,
+        "incluyeLed": false
+      }
+    },
+    {
+      "id": "con-dig-rgb",
+      "subnombre": "Controladora RGB digital",
+      "description": "Toma el control total de tu iluminación con la Controladora Digital RGB, diseñada para gestionar tiras LED digitales con efectos dinámicos, transiciones suaves y colores vibrantes. Compatible con distintos protocolos y fácil de configurar, es ideal para crear ambientes personalizados en muebles, techos, bares y proyectos decorativos.",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "144"
+        ],
+        "volt": [
+          "12/24"
+        ],
+        "tono": [
+          "RGB pixel"
+        ],
+        "cantidad": 1,
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "con-tac-rgw",
+      "subnombre": "Controladora tactil RGBW",
+      "description": "Un control remoto táctil con\nexcelentes prestaciones.\nPermite controlar tiras de led\nRGB o RGB + blanco (según el\nmodelo) con 640 mil colores y\n20 modos de cambio automático.\nCuenta con memoria la cual al\nencender iniciará con el último\nseteo.\nPosee una tecnología de alta\nfrecuencia de 2.4GH y bajo\nconsumo eléctrico, larga\ndistancia de transmisión y baja\ninterferencia.\nSimplicidad de instalación y\nuso son características de esta\ncontroladora.",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "96"
+        ],
+        "volt": [
+          "12/24"
+        ],
+        "tono": [
+          "12/24"
+        ],
+        "cantidad": 1,
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "con-sma-rgw",
+      "subnombre": "Controladora smart wifi RGBW",
+      "description": "Controlá tu iluminación con\r\neste pequeño dispositivo\r\nobteniendo una gama de\r\ncolores altisima y muchas\r\nmás funciones que con\r\ncualquier otro control. Todo\r\ndesde la comodidad de tu\r\nsmartphone. Descarga la\r\naplicación Magic Home,\r\n(apta para IOS y Android)\r\nconectala por wifi a tu\r\nteléfono y disfrutá.",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "144"
+        ],
+        "volt": [
+          "12/24"
+        ],
+        "tono": [
+          "RGBW"
+        ],
+        "cantidad": 1,
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "con-tac-cct",
+      "subnombre": "Controladora tactil blanco dinamico",
+      "description": "Controla la iluminación con un simple toque gracias a la Controladora Táctil CCT, diseñada para regular la temperatura de color de tiras LED CCT entre luz cálida (3000K) y fría (6000K). Su interfaz táctil intuitiva permite un ajuste suave y preciso, ideal para crear ambientes personalizados en hogares, oficinas y espacios comerciales.",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "240"
+        ],
+        "volt": [
+          "12/24"
+        ],
+        "tono": [
+          "CCT"
+        ],
+        "cantidad": 1,
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "amp-06a-rgb",
+      "subnombre": "Mini amplificador RGB",
+      "description": "Se utilizan en casos donde\r\ncolocamos un dimmer y el\r\ntendido supera los 5 metros de\r\ntira de led continua en una\r\nsola línea. Para realizar una\r\ndimmerización de varios\r\nmetros debemos utilizar\r\namplificadores los cuales nos\r\naseguran un voltaje parejo en\r\ntodo el tramo sin caidas de\r\ntensión y por ende una pareja\r\niluminación a lo largo de la\r\ntira. Si fuéramos a conectar\r\nvarios metros solo desde una\r\npunta la caída de tensión\r\nafectaría la iluminación y\r\ntendríamos una caída de luz a\r\nlo largo del tramo",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "144"
+        ],
+        "volt": [
+          "12/24"
+        ],
+        "tono": [
+          "RGB"
+        ],
+        "cantidad": 1,
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "amp-24a-rgb",
+      "subnombre": "Amplificador RGB",
+      "description": "Su utilización es igual al mini\r\namplificador pero con un\r\nmayor amperaje de salida,\r\npermitiendo alimentar mayor\r\ncantidad de metros de led.\r\nPermite controlar hasta 24\r\namper en tres o cuatro canales\r\nsegún el modelo.\r\nRecordar que para lineas\r\ncontinuas de led con dimmerización\r\nno se debe alimentar\r\nsólo de un extremo ya que la\r\ncaída de tensión genera una\r\nbaja en la iluminación a\r\nmedida que aumentan los\r\nmetros conectados. No\r\nconectar mas de 5 metros\r\ndesde un solo extremo.",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "288"
+        ],
+        "volt": [
+          "12/24"
+        ],
+        "tono": [
+          "RGB"
+        ],
+        "cantidad": 1,
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "amp-08a-rgw",
+      "subnombre": "Mini amplificador RGBW",
+      "description": "Estos dos modelos de\r\namplificadores permiten\r\namplificar un tendido de led\r\nRGB o RGBW de mas de cinco\r\nmetros sin caidas de tensión\r\nmanteniendo constante la\r\niluminación en la cantidad de\r\nmetros que se deseen siempre\r\nrespetando las potencias y\r\ndejando un margen de\r\nseguridad.",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "96"
+        ],
+        "volt": [
+          "12/24"
+        ],
+        "tono": [
+          "RGBW"
+        ],
+        "cantidad": 1,
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "amp-24a-rgw",
+      "subnombre": "Amplificador RGBW",
+      "description": "Su utilización es igual al mini\r\namplificador pero con un\r\nmayor amperaje de salida,\r\npermitiendo alimentar mayor\r\ncantidad de metros de led.\r\nPermite controlar hasta 24\r\namper en tres o cuatro canales\r\nsegún el modelo.\r\nRecordar que para lineas\r\ncontinuas de led con dimmerización\r\nno se debe alimentar\r\nsólo de un extremo ya que la\r\ncaída de tensión genera una\r\nbaja en la iluminación a\r\nmedida que aumentan los\r\nmetros conectados. No\r\nconectar mas de 5 metros\r\ndesde un solo extremo.",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "286"
+        ],
+        "volt": [
+          "12/24"
+        ],
+        "tono": [
+          "RGBW"
+        ],
+        "cantidad": 1,
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "amp-06a-mon",
+      "subnombre": "Mini amplificador monocromático",
+      "description": "Se utilizan en casos donde\r\ncolocamos un dimmer y el\r\ntendido supera los 5 metros de\r\ntira de led continua en una\r\nsola línea. Para realizar una\r\ndimmerización de varios\r\nmetros debemos utilizar\r\namplificadores los cuales nos\r\naseguran un voltaje parejo en\r\ntodo el tramo sin caidas de\r\ntensión y por ende una pareja\r\niluminación a lo largo de la\r\ntira. Si fuéramos a conectar\r\nvarios metros solo desde una\r\npunta la caída de tensión\r\nafectaría la iluminación y\r\ntendríamos una caída de luz a\r\nlo largo del tramo",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "72"
+        ],
+        "volt": [
+          "12/24"
+        ],
+        "tono": [
+          "monocromatico"
+        ],
+        "cantidad": 1,
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    },
+    {
+      "id": "amp-25a-mon",
+      "subnombre": "Amplificador monocromático",
+      "description": "Su utilización es igual al mini\r\namplificador pero con un\r\nmayor amperaje de salida,\r\npermitiendo alimentar mayor\r\ncantidad de tiras de led.\r\nPermite controlar hasta 25\r\namper en un canal monocromático.\r\nRecordar que para lineas\r\ncontinuas de led con dimmerización\r\nno se debe alimentar\r\nsólo de un extremo ya que la\r\ncaída de tensión cae sobrepasando\r\nlos 5 metros.",
+      "caracteristicasTecnicas": {
+        "watt": [
+          "300"
+        ],
+        "volt": [
+          "12/24"
+        ],
+        "tono": [
+          "monocromatico"
+        ],
+        "cantidad": 1,
+        "incluyeLed": false,
+        "incluyeEquipo": false
+      }
+    }
+  ]
+}]

@@ -10,7 +10,7 @@ export type MediaAssetFormData = {
   product_id?: number
   variant_id?: number
   path: string
-  kind: 'cover' | 'gallery' | 'tech'
+  kind: 'cover' | 'tech'
   alt_text?: string
 }
 
