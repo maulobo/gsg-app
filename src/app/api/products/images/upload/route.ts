@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
     const productId = formData.get('productId') as string
     const productCode = formData.get('productCode') as string
     const variantId = formData.get('variantId') as string || null
-    const kind = formData.get('kind') as 'cover' | 'tech' || 'cover'
+    const kind = formData.get('kind') as 'cover' | 'tech' | 'datasheet' | 'spec' || 'cover'
     const altText = formData.get('altText') as string || ''
 
     if (!file) {
@@ -44,9 +44,9 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // 3. Procesar imagen
+    // 3. Procesar imagen o documento
     const fileBuffer = await fileToBuffer(file)
-    const { optimizedBuffer, contentType } = await processProductImage(fileBuffer, kind)
+    const { optimizedBuffer, contentType } = await processProductImage(fileBuffer, kind, file.type)
 
     // 4. Generar nombre único
     const fileName = generateUniqueFileName(file.name, productCode, kind)

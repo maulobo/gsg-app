@@ -75,6 +75,9 @@ export type AccessoryListItem = {
   light_tones: { id: number; name: string }[]
   finishes: { id: number; name: string }[]
   created_at: string
+  has_photo: boolean
+  has_tech: boolean
+  has_pdf: boolean
 }
 
 // Update (parcial)

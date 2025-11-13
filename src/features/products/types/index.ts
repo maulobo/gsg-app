@@ -29,6 +29,9 @@ export type ProductListItem = {
   is_featured: boolean
   created_at: string
   variants_count: number
+  variants_with_pdf: number
+  variants_with_tech: number
+  variants_with_cover: number
 }
 
 export type ProductDetail = ProductWithRelations

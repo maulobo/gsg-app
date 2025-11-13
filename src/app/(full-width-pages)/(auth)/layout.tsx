@@ -24,13 +24,14 @@ export default function AuthLayout({
                 <Link href="/" className="block mb-4">
                   <Image
                     width={231}
-                    height={48}
-                    src="./images/logo/auth-logo.svg"
-                    alt="Logo"
+                    height={153}
+                    src="/logo.svg"
+                    alt="GSG Logo"
+                    className="object-contain"
                   />
                 </Link>
                 <p className="text-center text-gray-400 dark:text-white/60">
-                  Free and Open-Source Tailwind CSS Admin Dashboard Template
+                  Sistema de Gestión GSG
                 </p>
               </div>
             </div>

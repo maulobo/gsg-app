@@ -107,21 +107,61 @@ export async function PATCH(
       }
     }
 
-    // 4. Actualizar configuraciones (borrar y recrear)
+    // 4. Actualizar configuraciones
     if (configurations && Array.isArray(configurations)) {
-      // Eliminar configuraciones actuales
-      const { error: deleteConfigError } = await supabase
+      // Obtener configuraciones existentes
+      const { data: existingConfigs, error: fetchError } = await supabase
         .from('variant_configurations')
-        .delete()
+        .select('id, sku')
         .eq('variant_id', variantId)
 
-      if (deleteConfigError) {
-        console.error('[Variant Update] Error al eliminar configuraciones:', deleteConfigError)
+      if (fetchError) {
+        console.error('[Variant Update] Error al obtener configuraciones:', fetchError)
+        return NextResponse.json(
+          { error: 'Error al obtener configuraciones existentes' },
+          { status: 500 }
+        )
       }
 
-      // Insertar nuevas configuraciones
-      if (configurations.length > 0) {
-        const configsToInsert = configurations.map((config) => ({
+      const existingConfigsMap = new Map(
+        (existingConfigs || []).map((c) => [c.sku, c.id])
+      )
+      const newSkus = new Set(configurations.map((c) => c.sku))
+      const existingSkus = new Set((existingConfigs || []).map((c) => c.sku))
+
+      // Eliminar configuraciones que ya no existen (primero eliminar embeddings)
+      const skusToDelete = [...existingSkus].filter((sku) => !newSkus.has(sku))
+      if (skusToDelete.length > 0) {
+        const configIdsToDelete = skusToDelete
+          .map((sku) => existingConfigsMap.get(sku))
+          .filter((id): id is number => id !== undefined)
+
+        // Primero eliminar los embeddings relacionados
+        const { error: deleteEmbeddingsError } = await supabase
+          .from('product_embeddings')
+          .delete()
+          .in('configuration_id', configIdsToDelete)
+
+        if (deleteEmbeddingsError) {
+          console.error('[Variant Update] Error al eliminar embeddings:', deleteEmbeddingsError)
+        }
+
+        // Luego eliminar las configuraciones
+        const { error: deleteConfigError } = await supabase
+          .from('variant_configurations')
+          .delete()
+          .in('id', configIdsToDelete)
+
+        if (deleteConfigError) {
+          console.error('[Variant Update] Error al eliminar configuraciones:', deleteConfigError)
+        }
+      }
+
+      // Actualizar o insertar configuraciones
+      for (const config of configurations) {
+        const existingId = existingConfigsMap.get(config.sku)
+
+        const configData = {
           variant_id: parseInt(variantId),
           sku: config.sku,
           watt: config.watt,
@@ -131,18 +171,35 @@ export async function PATCH(
           length_mm: config.length_mm,
           width_mm: config.width_mm,
           specs: config.specs,
-        }))
+        }
 
-        const { error: insertConfigError } = await supabase
-          .from('variant_configurations')
-          .insert(configsToInsert)
+        if (existingId) {
+          // Actualizar configuración existente
+          const { error: updateError } = await supabase
+            .from('variant_configurations')
+            .update(configData)
+            .eq('id', existingId)
 
-        if (insertConfigError) {
-          console.error('[Variant Update] Error al insertar configuraciones:', insertConfigError)
-          return NextResponse.json(
-            { error: 'Error al actualizar las configuraciones' },
-            { status: 500 }
-          )
+          if (updateError) {
+            console.error('[Variant Update] Error al actualizar configuración:', updateError)
+            return NextResponse.json(
+              { error: 'Error al actualizar configuración' },
+              { status: 500 }
+            )
+          }
+        } else {
+          // Insertar nueva configuración
+          const { error: insertError } = await supabase
+            .from('variant_configurations')
+            .insert(configData)
+
+          if (insertError) {
+            console.error('[Variant Update] Error al insertar configuración:', insertError)
+            return NextResponse.json(
+              { error: 'Error al insertar configuración' },
+              { status: 500 }
+            )
+          }
         }
       }
     }

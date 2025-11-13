@@ -9,4 +9,5 @@ export type { Finish }
 export type FinishFormData = {
   slug: string
   name: string
+  hex_color?: string | null
 }

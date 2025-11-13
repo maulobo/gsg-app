@@ -43,3 +43,24 @@ export async function getFinishById(id: number): Promise<Finish | null> {
 
   return data
 }
+
+/**
+ * Update finish
+ */
+export async function updateFinish(id: number, updates: Partial<Finish>): Promise<Finish> {
+  const supabase = await createServerSupabaseClient()
+
+  const { data, error } = await supabase
+    .from('finishes')
+    .update(updates)
+    .eq('id', id)
+    .select()
+    .single()
+
+  if (error) {
+    console.error('updateFinish error:', error)
+    throw new Error(error.message)
+  }
+
+  return data
+}

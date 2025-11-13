@@ -31,6 +31,8 @@ type VariantData = {
   imageFiles?: {
     cover?: File
     tech?: File
+    datasheet?: File  // PDF de cartilla técnica
+    spec?: File       // PDF de especificaciones
   }
 }
 
@@ -238,6 +240,32 @@ export function ProductCreationForm({ categories, finishes: initialFinishes, lig
               )
             )
           }
+
+          // Subir datasheet PDF si existe
+          if (variant.imageFiles?.datasheet) {
+            uploadPromises.push(
+              uploadVariantImage(
+                variant.imageFiles.datasheet,
+                result.product.id,
+                result.product.code,
+                createdVariant.id,
+                'datasheet'
+              )
+            )
+          }
+
+          // Subir spec PDF si existe
+          if (variant.imageFiles?.spec) {
+            uploadPromises.push(
+              uploadVariantImage(
+                variant.imageFiles.spec,
+                result.product.id,
+                result.product.code,
+                createdVariant.id,
+                'spec'
+              )
+            )
+          }
         }
       } else {
         console.warn('No se encontraron variantes en la respuesta del servidor')
@@ -264,7 +292,7 @@ export function ProductCreationForm({ categories, finishes: initialFinishes, lig
     productId: number,
     productCode: string,
     variantId: number,
-    kind: 'cover' | 'tech'
+    kind: 'cover' | 'tech' | 'datasheet' | 'spec'
   ): Promise<void> => {
     const formData = new FormData()
     formData.append('image', file)
@@ -744,6 +772,42 @@ export function ProductCreationForm({ categories, finishes: initialFinishes, lig
                         imageFiles: {
                           ...currentVariant.imageFiles,
                           tech: file || undefined
+                        }
+                      })
+                    }}
+                  />
+
+                  <LocalImageUpload
+                    label="Cartilla Técnica (Datasheet) - PDF"
+                    description="Documento PDF con información técnica detallada (opcional)"
+                    file={currentVariant.imageFiles?.datasheet || null}
+                    accept={{
+                      'application/pdf': ['.pdf']
+                    }}
+                    onFileSelect={(file) => {
+                      setCurrentVariant({
+                        ...currentVariant,
+                        imageFiles: {
+                          ...currentVariant.imageFiles,
+                          datasheet: file || undefined
+                        }
+                      })
+                    }}
+                  />
+
+                  <LocalImageUpload
+                    label="Especificaciones (Spec) - PDF"
+                    description="Documento PDF con especificaciones adicionales (opcional)"
+                    file={currentVariant.imageFiles?.spec || null}
+                    accept={{
+                      'application/pdf': ['.pdf']
+                    }}
+                    onFileSelect={(file) => {
+                      setCurrentVariant({
+                        ...currentVariant,
+                        imageFiles: {
+                          ...currentVariant.imageFiles,
+                          spec: file || undefined
                         }
                       })
                     }}

@@ -78,6 +78,8 @@ export default async function ProductPage({ params }: { params: { code: string }
           // Obtener imágenes de la variante
           const coverImage = v.media_assets?.find((m: any) => m.kind === 'cover')
           const techImage = v.media_assets?.find((m: any) => m.kind === 'tech')
+          const datasheetPdf = v.media_assets?.find((m: any) => m.kind === 'datasheet')
+          const specPdf = v.media_assets?.find((m: any) => m.kind === 'spec')
 
           return (
             <div key={v.id} className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-theme-xs dark:border-gray-800 dark:bg-white/[0.03]">
@@ -124,6 +126,58 @@ export default async function ProductPage({ params }: { params: { code: string }
                         </div>
                       </div>
                     )}
+                  </div>
+                )}
+                
+                {/* PDFs de la variante */}
+                {(datasheetPdf || specPdf) && (
+                  <div className="mb-6 space-y-3">
+                    <h4 className="text-sm font-semibold text-gray-900 dark:text-white">Documentos</h4>
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      {datasheetPdf && (
+                        <a
+                          href={datasheetPdf.path}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-3 rounded-lg border border-gray-200 bg-white p-4 transition hover:border-brand-500 hover:bg-brand-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:border-brand-500 dark:hover:bg-brand-900/20"
+                        >
+                          <svg className="h-8 w-8 flex-shrink-0 text-error-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18.5,19H16.5V18H18.5V19M18.5,17H16.5V14H18.5V17M13,19H11V18H13V19M13,17H11V14H13V17M15,13H5V11H15V13M13,9V3.5L18.5,9H13Z" />
+                          </svg>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Cartilla Técnica</p>
+                            <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                              {datasheetPdf.path.split('/').pop()?.split('-').slice(2).join('-') || 'datasheet.pdf'}
+                            </p>
+                          </div>
+                          <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                          </svg>
+                        </a>
+                      )}
+                      
+                      {specPdf && (
+                        <a
+                          href={specPdf.path}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-3 rounded-lg border border-gray-200 bg-white p-4 transition hover:border-brand-500 hover:bg-brand-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:border-brand-500 dark:hover:bg-brand-900/20"
+                        >
+                          <svg className="h-8 w-8 flex-shrink-0 text-error-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18.5,19H16.5V18H18.5V19M18.5,17H16.5V14H18.5V17M13,19H11V18H13V19M13,17H11V14H13V17M15,13H5V11H15V13M13,9V3.5L18.5,9H13Z" />
+                          </svg>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Especificaciones</p>
+                            <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                              {specPdf.path.split('/').pop()?.split('-').slice(2).join('-') || 'spec.pdf'}
+                            </p>
+                          </div>
+                          <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                          </svg>
+                        </a>
+                      )}
+                    </div>
                   </div>
                 )}
                 
