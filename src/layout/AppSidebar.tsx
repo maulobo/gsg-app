@@ -11,8 +11,12 @@ import {
   PlugInIcon,
   TableIcon,
  UserCircleIcon,
-  FolderIcon
-} from "../icons/index";
+  FolderIcon,
+  ShootingStarIcon,
+  SwatchIcon,
+  BoxIconLine,
+  LedStripIcon
+} from "../icons";
 import SidebarWidget from "./SidebarWidget";
 
 type NavItem = {
@@ -43,27 +47,35 @@ const navItems: NavItem[] = [
     path: "/accessories/list",
   },
   {
+    icon: <BoxIconLine />,
+    name: "Acabados",
+    path: "/finishes",
+  },
+  {
+    icon: <LedStripIcon />,
+    name: "Perfiles LED",
+    path: "/led-profiles",
+  },
+  {
+    icon: <LedStripIcon />,
+    name: "Rollos LED",
+    path: "/led-rolls",
+  },
+  {
+    icon: <ShootingStarIcon />,
+    name: "Items Destacados",
+    path: "/featured-items",
+  },
+  {
     icon: <UserCircleIcon />,
     name: "User Profile",
     path: "/profile",
-  },
-  {
-    name: "Tables",
-    icon: <TableIcon />,
-    subItems: [{ name: "Basic Tables", path: "/basic-tables", pro: false }],
   },
 ];
 
 const othersItems: NavItem[] = [
 
-  {
-    icon: <PlugInIcon />,
-    name: "Authentication",
-    subItems: [
-      { name: "Sign In", path: "/signin", pro: false },
-      { name: "Sign Up", path: "/signup", pro: false },
-    ],
-  },
+
 ];
 
 const AppSidebar: React.FC = () => {
@@ -277,33 +289,25 @@ const AppSidebar: React.FC = () => {
     >
       <div
         className={`py-8 flex  ${
-          !isExpanded && !isHovered ? "lg:justify-center" : "justify-start"
+          !isExpanded && !isHovered ? "lg:justify-center" : "justify-center"
         }`}
       >
         <Link href="/">
           {isExpanded || isHovered || isMobileOpen ? (
-            <>
-              <Image
-                className="dark:hidden"
-                src="/images/logo/logo.svg"
-                alt="Logo"
-                width={150}
-                height={40}
-              />
-              <Image
-                className="hidden dark:block"
-                src="/images/logo/logo-dark.svg"
-                alt="Logo"
-                width={150}
-                height={40}
-              />
-            </>
+            <Image
+              src="/logo.svg"
+              alt="GSG Logo"
+              width={80}
+              height={42}
+              className="object-contain"
+            />
           ) : (
             <Image
-              src="/images/logo/logo-icon.svg"
-              alt="Logo"
+              src="/logo.svg"
+              alt="GSG Logo"
               width={32}
               height={32}
+              className="object-contain"
             />
           )}
         </Link>

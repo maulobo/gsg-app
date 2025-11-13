@@ -55,11 +55,15 @@ export function VariantEditForm({ variant, productCode, lightTones }: VariantEdi
   const [existingImages, setExistingImages] = useState({
     cover: variant.media_assets?.find((m: any) => m.kind === 'cover'),
     tech: variant.media_assets?.find((m: any) => m.kind === 'tech'),
+    datasheet: variant.media_assets?.find((m: any) => m.kind === 'datasheet'),
+    spec: variant.media_assets?.find((m: any) => m.kind === 'spec'),
   })
 
   const [newImages, setNewImages] = useState<{
     cover?: File
     tech?: File
+    datasheet?: File
+    spec?: File
   }>({})
 
   const handleToggleLightTone = (toneId: number) => {
@@ -91,11 +95,12 @@ export function VariantEditForm({ variant, productCode, lightTones }: VariantEdi
     setConfigurations(updated)
   }
 
-  const handleDeleteImage = async (kind: 'cover' | 'tech') => {
+  const handleDeleteImage = async (kind: 'cover' | 'tech' | 'datasheet' | 'spec') => {
     const image = existingImages[kind]
     if (!image) return
 
-    if (!confirm(`¿Estás seguro de eliminar la imagen de ${kind}?`)) return
+    const kindLabel = kind === 'datasheet' ? 'cartilla técnica' : kind === 'spec' ? 'especificación' : kind
+    if (!confirm(`¿Estás seguro de eliminar ${kindLabel}?`)) return
 
     try {
       const response = await fetch(`/api/products/images/upload?mediaId=${image.id}`, {
@@ -103,14 +108,14 @@ export function VariantEditForm({ variant, productCode, lightTones }: VariantEdi
       })
 
       if (!response.ok) {
-        throw new Error('Error al eliminar la imagen')
+        throw new Error('Error al eliminar el archivo')
       }
 
       setExistingImages({ ...existingImages, [kind]: null })
-      alert('Imagen eliminada exitosamente')
+      alert('Archivo eliminado exitosamente')
     } catch (error) {
       console.error(error)
-      alert('Error al eliminar la imagen')
+      alert('Error al eliminar el archivo')
     }
   }
 
@@ -149,6 +154,18 @@ export function VariantEditForm({ variant, productCode, lightTones }: VariantEdi
         )
       }
 
+      if (newImages.datasheet) {
+        uploadPromises.push(
+          uploadImage(newImages.datasheet, 'datasheet')
+        )
+      }
+
+      if (newImages.spec) {
+        uploadPromises.push(
+          uploadImage(newImages.spec, 'spec')
+        )
+      }
+
       if (uploadPromises.length > 0) {
         await Promise.all(uploadPromises)
       }
@@ -163,7 +180,7 @@ export function VariantEditForm({ variant, productCode, lightTones }: VariantEdi
     }
   }
 
-  const uploadImage = async (file: File, kind: 'cover' | 'tech') => {
+  const uploadImage = async (file: File, kind: 'cover' | 'tech' | 'datasheet' | 'spec') => {
     const formData = new FormData()
     formData.append('image', file)
     formData.append('productId', variant.product.id.toString())
@@ -179,7 +196,7 @@ export function VariantEditForm({ variant, productCode, lightTones }: VariantEdi
 
     if (!response.ok) {
       const error = await response.json()
-      throw new Error(`Error subiendo imagen ${kind}: ${error.error}`)
+      throw new Error(`Error subiendo archivo ${kind}: ${error.error}`)
     }
   }
 
@@ -280,7 +297,7 @@ export function VariantEditForm({ variant, productCode, lightTones }: VariantEdi
             {existingImages.cover && !newImages.cover ? (
               <div className="relative inline-block">
                 <img
-                  src={existingImages.cover.path}
+                  src={existingImages.cover.path.startsWith('http') ? existingImages.cover.path : `${process.env.NEXT_PUBLIC_R2_URL || ''}${existingImages.cover.path}`}
                   alt="Cover actual"
                   className="h-32 w-32 rounded-lg border border-gray-200 object-cover dark:border-gray-700"
                 />
@@ -310,7 +327,7 @@ export function VariantEditForm({ variant, productCode, lightTones }: VariantEdi
             {existingImages.tech && !newImages.tech ? (
               <div className="relative inline-block">
                 <img
-                  src={existingImages.tech.path}
+                  src={existingImages.tech.path.startsWith('http') ? existingImages.tech.path : `${process.env.NEXT_PUBLIC_R2_URL || ''}${existingImages.tech.path}`}
                   alt="Tech actual"
                   className="h-32 w-32 rounded-lg border border-gray-200 object-cover dark:border-gray-700"
                 />
@@ -330,6 +347,86 @@ export function VariantEditForm({ variant, productCode, lightTones }: VariantEdi
                 description="Selecciona una nueva imagen técnica"
                 file={newImages.tech || null}
                 onFileSelect={(file) => setNewImages({ ...newImages, tech: file || undefined })}
+              />
+            )}
+          </div>
+
+          {/* Datasheet PDF */}
+          <div>
+            <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">Cartilla Técnica (PDF)</h3>
+            {existingImages.datasheet && !newImages.datasheet ? (
+              <div className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+                <svg className="h-10 w-10 text-error-600" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18.5,19H16.5V18H18.5V19M18.5,17H16.5V14H18.5V17M13,19H11V18H13V19M13,17H11V14H13V17M15,13H5V11H15V13M13,9V3.5L18.5,9H13Z" />
+                </svg>
+                <div className="flex-1">
+                  <p className="font-medium text-gray-900 dark:text-gray-100">Datasheet actual</p>
+                  <a 
+                    href={existingImages.datasheet.path.startsWith('http') ? existingImages.datasheet.path : `${process.env.NEXT_PUBLIC_R2_URL || ''}${existingImages.datasheet.path}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-brand-600 hover:text-brand-700 dark:text-brand-400"
+                  >
+                    Ver PDF
+                  </a>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => handleDeleteImage('datasheet')}
+                  className="rounded-full bg-error-500 p-1.5 text-white shadow-lg hover:bg-error-600"
+                >
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+            ) : (
+              <LocalImageUpload
+                label="Cartilla Técnica (Datasheet)"
+                description="Selecciona un PDF con información técnica detallada"
+                file={newImages.datasheet || null}
+                accept={{ 'application/pdf': ['.pdf'] }}
+                onFileSelect={(file) => setNewImages({ ...newImages, datasheet: file || undefined })}
+              />
+            )}
+          </div>
+
+          {/* Spec PDF */}
+          <div>
+            <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">Especificaciones (PDF)</h3>
+            {existingImages.spec && !newImages.spec ? (
+              <div className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+                <svg className="h-10 w-10 text-error-600" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18.5,19H16.5V18H18.5V19M18.5,17H16.5V14H18.5V17M13,19H11V18H13V19M13,17H11V14H13V17M15,13H5V11H15V13M13,9V3.5L18.5,9H13Z" />
+                </svg>
+                <div className="flex-1">
+                  <p className="font-medium text-gray-900 dark:text-gray-100">Especificaciones actuales</p>
+                  <a 
+                    href={existingImages.spec.path.startsWith('http') ? existingImages.spec.path : `${process.env.NEXT_PUBLIC_R2_URL || ''}${existingImages.spec.path}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-brand-600 hover:text-brand-700 dark:text-brand-400"
+                  >
+                    Ver PDF
+                  </a>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => handleDeleteImage('spec')}
+                  className="rounded-full bg-error-500 p-1.5 text-white shadow-lg hover:bg-error-600"
+                >
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+            ) : (
+              <LocalImageUpload
+                label="Especificaciones (Spec)"
+                description="Selecciona un PDF con especificaciones adicionales"
+                file={newImages.spec || null}
+                accept={{ 'application/pdf': ['.pdf'] }}
+                onFileSelect={(file) => setNewImages({ ...newImages, spec: file || undefined })}
               />
             )}
           </div>

@@ -60,6 +60,12 @@ export function LocalImageUpload({
   }
 
   const previewUrl = file ? URL.createObjectURL(file) : null
+  const isPDF = file?.type === 'application/pdf'
+  
+  // Detectar si se aceptan PDFs
+  const acceptsPDF = accept && Object.keys(accept).some(key => key === 'application/pdf')
+  const fileTypeHint = acceptsPDF ? 'PDF (máx. 10MB)' : 'JPG, PNG o WebP (máx. 10MB)'
+  const dragText = acceptsPDF ? 'Arrastra un PDF o haz clic para seleccionar' : 'Arrastra una imagen o haz clic para seleccionar'
 
   return (
     <div>
@@ -74,14 +80,33 @@ export function LocalImageUpload({
 
       {file && previewUrl ? (
         <div className="relative">
-          <div className="relative aspect-video overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700">
-            <Image
-              src={previewUrl}
-              alt={label}
-              fill
-              className="object-cover"
-            />
-          </div>
+          {isPDF ? (
+            // Vista para PDFs
+            <div className="relative overflow-hidden rounded-lg border border-gray-200 p-6 bg-gray-50 dark:border-gray-700 dark:bg-gray-800">
+              <div className="flex items-center gap-4">
+                <svg className="h-12 w-12 text-error-600" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18.5,19H16.5V18H18.5V19M18.5,17H16.5V14H18.5V17M13,19H11V18H13V19M13,17H11V14H13V17M15,13H5V11H15V13M13,9V3.5L18.5,9H13Z" />
+                </svg>
+                <div className="flex-1 min-w-0">
+                  <p className="font-medium text-gray-900 dark:text-gray-100">PDF Document</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 truncate">{file.name}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-500">
+                    {(file.size / 1024 / 1024).toFixed(2)} MB
+                  </p>
+                </div>
+              </div>
+            </div>
+          ) : (
+            // Vista para imágenes
+            <div className="relative aspect-video overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700">
+              <Image
+                src={previewUrl}
+                alt={label}
+                fill
+                className="object-cover"
+              />
+            </div>
+          )}
           <div className="mt-2 flex items-center justify-between rounded-lg bg-gray-50 p-3 dark:bg-gray-800">
             <span className="truncate text-theme-sm text-gray-700 dark:text-gray-300">
               {file.name}
@@ -121,10 +146,10 @@ export function LocalImageUpload({
             />
           </svg>
           <p className="mt-2 text-theme-sm text-gray-600 dark:text-gray-400">
-            {isDragActive ? 'Suelta la imagen aquí' : 'Arrastra una imagen o haz clic para seleccionar'}
+            {isDragActive ? 'Suelta el archivo aquí' : dragText}
           </p>
           <p className="mt-1 text-theme-xs text-gray-500 dark:text-gray-500">
-            JPG, PNG o WebP (máx. 5MB)
+            {fileTypeHint}
           </p>
         </div>
       )}

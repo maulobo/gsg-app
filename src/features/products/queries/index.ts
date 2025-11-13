@@ -32,15 +32,71 @@ export async function getProducts(): Promise<ProductListItem[]> {
     throw new Error(error.message)
   }
 
-  return (data ?? []).map((p) => ({
-    id: p.id,
-    code: p.code,
-    name: p.name,
-    is_featured: p.is_featured,
-    created_at: p.created_at,
-    category: p.category as any,
-    variants_count: (p.product_variants as any[])?.length || 0,
-  }))
+  // Para cada producto, obtener info de media de sus variantes
+  const productsWithMediaInfo = await Promise.all(
+    (data ?? []).map(async (p) => {
+      const variantIds = (p.product_variants as any[])?.map(v => v.id) || []
+      const variantsCount = variantIds.length
+      
+      if (variantsCount === 0) {
+        return {
+          id: p.id,
+          code: p.code,
+          name: p.name,
+          is_featured: p.is_featured,
+          created_at: p.created_at,
+          category: p.category as any,
+          variants_count: 0,
+          variants_with_pdf: 0,
+          variants_with_tech: 0,
+          variants_with_cover: 0,
+        }
+      }
+
+      // Obtener todos los media_assets de las variantes
+      const { data: mediaData } = await supabase
+        .from('media_assets')
+        .select('variant_id, kind')
+        .in('variant_id', variantIds)
+
+      const variantsWithPdf = [] as number[]
+      const variantsWithTech = [] as number[]
+      const variantsWithCover = [] as number[]
+
+      (mediaData || []).forEach((m: any) => {
+        if (m.kind === 'datasheet' || m.kind === 'spec') {
+          if (!variantsWithPdf.includes(m.variant_id)) {
+            variantsWithPdf.push(m.variant_id)
+          }
+        }
+        if (m.kind === 'tech') {
+          if (!variantsWithTech.includes(m.variant_id)) {
+            variantsWithTech.push(m.variant_id)
+          }
+        }
+        if (m.kind === 'cover') {
+          if (!variantsWithCover.includes(m.variant_id)) {
+            variantsWithCover.push(m.variant_id)
+          }
+        }
+      })
+
+      return {
+        id: p.id,
+        code: p.code,
+        name: p.name,
+        is_featured: p.is_featured,
+        created_at: p.created_at,
+        category: p.category as any,
+        variants_count: variantsCount,
+        variants_with_pdf: variantsWithPdf.length,
+        variants_with_tech: variantsWithTech.length,
+        variants_with_cover: variantsWithCover.length,
+      }
+    })
+  )
+
+  return productsWithMediaInfo
 }
 
 /**
@@ -191,13 +247,69 @@ export async function getFeaturedProducts(): Promise<ProductListItem[]> {
     throw new Error(error.message)
   }
 
-  return (data ?? []).map((p) => ({
-    id: p.id,
-    code: p.code,
-    name: p.name,
-    is_featured: p.is_featured,
-    created_at: p.created_at,
-    category: p.category as any,
-    variants_count: (p.product_variants as any[])?.length || 0,
-  }))
+  // Para cada producto, obtener info de media de sus variantes
+  const productsWithMediaInfo = await Promise.all(
+    (data ?? []).map(async (p) => {
+      const variantIds = (p.product_variants as any[])?.map(v => v.id) || []
+      const variantsCount = variantIds.length
+      
+      if (variantsCount === 0) {
+        return {
+          id: p.id,
+          code: p.code,
+          name: p.name,
+          is_featured: p.is_featured,
+          created_at: p.created_at,
+          category: p.category as any,
+          variants_count: 0,
+          variants_with_pdf: 0,
+          variants_with_tech: 0,
+          variants_with_cover: 0,
+        }
+      }
+
+      // Obtener todos los media_assets de las variantes
+      const { data: mediaData } = await supabase
+        .from('media_assets')
+        .select('variant_id, kind')
+        .in('variant_id', variantIds)
+
+      const variantsWithPdf = [] as number[]
+      const variantsWithTech = [] as number[]
+      const variantsWithCover = [] as number[]
+
+      (mediaData || []).forEach((m: any) => {
+        if (m.kind === 'datasheet' || m.kind === 'spec') {
+          if (!variantsWithPdf.includes(m.variant_id)) {
+            variantsWithPdf.push(m.variant_id)
+          }
+        }
+        if (m.kind === 'tech') {
+          if (!variantsWithTech.includes(m.variant_id)) {
+            variantsWithTech.push(m.variant_id)
+          }
+        }
+        if (m.kind === 'cover') {
+          if (!variantsWithCover.includes(m.variant_id)) {
+            variantsWithCover.push(m.variant_id)
+          }
+        }
+      })
+
+      return {
+        id: p.id,
+        code: p.code,
+        name: p.name,
+        is_featured: p.is_featured,
+        created_at: p.created_at,
+        category: p.category as any,
+        variants_count: variantsCount,
+        variants_with_pdf: variantsWithPdf.length,
+        variants_with_tech: variantsWithTech.length,
+        variants_with_cover: variantsWithCover.length,
+      }
+    })
+  )
+
+  return productsWithMediaInfo
 }

@@ -19,7 +19,8 @@ export async function getAccessories(): Promise<AccessoryListItem[]> {
       voltage_label,
       created_at,
       accessory_light_tones ( light_tone:light_tones ( id, name ) ),
-      accessory_finishes ( finish:finishes ( id, name ) )
+      accessory_finishes ( finish:finishes ( id, name ) ),
+      accessory_media ( kind )
     `
     )
     .order('created_at', { ascending: false })
@@ -29,17 +30,28 @@ export async function getAccessories(): Promise<AccessoryListItem[]> {
     throw new Error(error.message)
   }
 
-  return (data ?? []).map((a: any) => ({
-    id: a.id,
-    code: a.code,
-    name: a.name,
-    photo_url: a.photo_url,
-    watt: a.watt,
-    voltage_label: a.voltage_label,
-    light_tones: (a.accessory_light_tones || []).map((rel: any) => rel.light_tone),
-    finishes: (a.accessory_finishes || []).map((rel: any) => rel.finish),
-    created_at: a.created_at,
-  }))
+  return (data ?? []).map((a: any) => {
+    const media = a.accessory_media || []
+    const hasTech = media.some((m: any) => m.kind === 'tech')
+    const hasDatasheet = media.some((m: any) => m.kind === 'datasheet')
+    const hasSpec = media.some((m: any) => m.kind === 'spec')
+    const hasPdf = hasDatasheet || hasSpec
+
+    return {
+      id: a.id,
+      code: a.code,
+      name: a.name,
+      photo_url: a.photo_url,
+      watt: a.watt,
+      voltage_label: a.voltage_label,
+      light_tones: (a.accessory_light_tones || []).map((rel: any) => rel.light_tone),
+      finishes: (a.accessory_finishes || []).map((rel: any) => rel.finish),
+      created_at: a.created_at,
+      has_photo: !!a.photo_url,
+      has_tech: hasTech,
+      has_pdf: hasPdf,
+    }
+  })
 }
 
 /**

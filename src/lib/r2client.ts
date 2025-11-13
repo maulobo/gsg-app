@@ -3,6 +3,8 @@ import sharp from 'sharp'
 
 const BUCKET_NAME = process.env.CLOUDFLARE_R2_BUCKET_NAME!
 const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/avif']
+const ALLOWED_DOCUMENT_TYPES = ['application/pdf']
+const ALLOWED_FILE_TYPES = [...ALLOWED_IMAGE_TYPES, ...ALLOWED_DOCUMENT_TYPES]
 
 // Configuración usando AWS S3 SDK (R2 es compatible)
 const r2Client = new S3Client({
@@ -39,7 +41,16 @@ export async function deleteFromR2(key: string): Promise<void> {
 }
 
 // Procesamiento de imágenes de productos
-export async function processProductImage(buffer: Buffer, type: 'cover' | 'tech') {
+export async function processProductImage(
+  buffer: Buffer, 
+  type: 'cover' | 'tech' | 'datasheet' | 'spec',
+  contentType?: string
+) {
+  // Si es PDF, no procesar, solo retornar el buffer original
+  if (contentType === 'application/pdf' || type === 'datasheet' || type === 'spec') {
+    return { optimizedBuffer: buffer, contentType: 'application/pdf' }
+  }
+
   let width: number, height: number, quality: number
 
   switch (type) {
@@ -69,8 +80,8 @@ export async function processProductImage(buffer: Buffer, type: 'cover' | 'tech'
 
 // Validaciones
 export function validateImageFile(file: File) {
-  if (!ALLOWED_IMAGE_TYPES.includes(file.type)) {
-    return { isValid: false, error: 'Tipo de archivo no permitido. Solo JPG, PNG, WebP y AVIF.' }
+  if (!ALLOWED_FILE_TYPES.includes(file.type)) {
+    return { isValid: false, error: 'Tipo de archivo no permitido. Solo JPG, PNG, WebP, AVIF y PDF.' }
   }
   if (file.size > 10 * 1024 * 1024) { // 10MB max para productos
     return { isValid: false, error: 'Archivo muy grande. Máximo 10MB.' }
@@ -82,7 +93,11 @@ export function validateImageFile(file: File) {
 export function generateUniqueFileName(originalName: string, productCode?: string, type?: string): string {
   const timestamp = Date.now()
   const randomId = Math.random().toString(36).substring(2, 8)
-  const extension = 'webp' // Siempre convertimos a WebP
+  
+  // Determinar extensión basada en el archivo original
+  const originalExt = originalName.split('.').pop()?.toLowerCase()
+  const isPDF = originalExt === 'pdf'
+  const extension = isPDF ? 'pdf' : 'webp' // PDFs mantienen su extensión, imágenes a WebP
   
   if (productCode && type) {
     return `products/${productCode}/${type}/${timestamp}-${randomId}.${extension}`

@@ -32,13 +32,12 @@ const TrashIcon = ({ className = "w-4 h-4" }) => (
   </svg>
 )
 
-const INITIAL_VISIBLE_COLUMNS = ['photo', 'code', 'name', 'specs', 'tones', 'finishes', 'actions']
+const INITIAL_VISIBLE_COLUMNS = ['code', 'name', 'has_media', 'actions']
 
 const columns = [
   { name: 'CÓDIGO', uid: 'code', sortable: true },
   { name: 'NOMBRE', uid: 'name', sortable: true },
-  { name: 'TONOS', uid: 'tones' },
-  { name: 'ACABADOS', uid: 'finishes' },
+  { name: 'MEDIA', uid: 'has_media' },
   { name: 'ACCIONES', uid: 'actions' },
 ]
 
@@ -108,24 +107,6 @@ export default function AccessoryList({ accessories }: Props) {
 
   const renderCell = useCallback((accessory: AccessoryListItem, columnKey: React.Key): React.ReactNode => {
     switch (columnKey) {
-      case 'photo':
-        return (
-          <div className="flex items-center">
-            {accessory.photo_url ? (
-              <img
-                src={accessory.photo_url}
-                alt={accessory.name}
-                className="h-12 w-12 rounded-lg border border-gray-200 object-cover dark:border-gray-700"
-              />
-            ) : (
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-gray-200 bg-gray-100 dark:border-gray-700 dark:bg-gray-800">
-                <svg className="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-              </div>
-            )}
-          </div>
-        )
       case 'code':
         return <div className="font-mono text-sm text-gray-700 dark:text-gray-200">{accessory.code}</div>
       case 'name':
@@ -135,12 +116,36 @@ export default function AccessoryList({ accessories }: Props) {
             <span className="text-theme-xs text-gray-500 dark:text-gray-400">ID: {accessory.id}</span>
           </div>
         )
-      case 'specs':
+      case 'has_media':
         return (
-          <div className="flex flex-col gap-1 text-xs text-gray-600 dark:text-gray-400">
-            {accessory.watt && <span>{accessory.watt}W</span>}
-            {accessory.voltage_label && <span>⚡ {accessory.voltage_label}V</span>}
-            {!accessory.watt && !accessory.voltage_label && <span className="text-gray-400">-</span>}
+          <div className="flex items-center gap-3">
+            {/* Has Photo */}
+            <div className="flex items-center gap-1" title={accessory.has_photo ? 'Tiene foto' : 'Sin foto'}>
+              {accessory.has_photo ? (
+                <svg className="w-5 h-5 text-success-600 dark:text-success-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+              ) : (
+                <svg className="w-5 h-5 text-gray-300 dark:text-gray-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                </svg>
+              )}
+              <span className="text-xs text-gray-600 dark:text-gray-400">Foto</span>
+            </div>
+            
+            {/* Has PDF */}
+            <div className="flex items-center gap-1" title={accessory.has_pdf ? 'Tiene PDF' : 'Sin PDF'}>
+              {accessory.has_pdf ? (
+                <svg className="w-5 h-5 text-success-600 dark:text-success-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+              ) : (
+                <svg className="w-5 h-5 text-gray-300 dark:text-gray-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                </svg>
+              )}
+              <span className="text-xs text-gray-600 dark:text-gray-400">PDF</span>
+            </div>
           </div>
         )
       case 'tones':
