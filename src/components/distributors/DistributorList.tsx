@@ -376,8 +376,6 @@ export function DistributorList({ distributors }: DistributorListProps) {
             wrapper: 'gap-2 overflow-visible h-10',
             item: 'w-9 h-9 sm:w-10 sm:h-10 text-sm sm:text-base min-w-9 sm:min-w-10 text-gray-700 dark:text-gray-200',
             cursor: 'bg-primary-500 text-white dark:text-white',
-            forwardBtn: 'text-gray-700 dark:text-gray-200',
-            prevBtn: 'text-gray-700 dark:text-gray-200',
             next: 'text-gray-700 dark:text-gray-200',
             prev: 'text-gray-700 dark:text-gray-200',
           }}
