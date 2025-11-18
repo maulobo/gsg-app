@@ -79,7 +79,7 @@ async function getLightTones() {
   return data || []
 }
 
-export async function generateMetadata({ params }: { params: { code: string; variantId: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ code: string; variantId: string }> }): Promise<Metadata> {
   const resolvedParams = await params
   const variant = await getVariant(resolvedParams.code, resolvedParams.variantId)
   
@@ -89,7 +89,7 @@ export async function generateMetadata({ params }: { params: { code: string; var
   }
 }
 
-export default async function VariantEditPage({ params }: { params: { code: string; variantId: string } }) {
+export default async function VariantEditPage({ params }: { params: Promise<{ code: string; variantId: string }> }) {
   const resolvedParams = await params
   const [variant, lightTones] = await Promise.all([
     getVariant(resolvedParams.code, resolvedParams.variantId),
