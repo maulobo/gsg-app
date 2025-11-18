@@ -355,7 +355,6 @@ export function LedProfileList({ profiles }: LedProfileListProps) {
             : `${start}-${end} de ${filteredItems.length}`}
         </span>
         <Pagination
-          isCompact
           showControls
           showShadow
           color="primary"

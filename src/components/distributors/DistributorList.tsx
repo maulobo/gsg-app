@@ -357,19 +357,30 @@ export function DistributorList({ distributors }: DistributorListProps) {
   const bottomContent = useMemo(() => {
     return (
       <div className="py-2 px-2 flex justify-between items-center">
-        <span className="w-[30%] text-small text-default-400">
+        <span className="w-[30%] text-small text-gray-600 dark:text-gray-400">
           {filteredItems.length > 0
             ? `${(page - 1) * rowsPerPage + 1}-${Math.min(page * rowsPerPage, filteredItems.length)} de ${filteredItems.length}`
             : '0 resultados'}
         </span>
         <Pagination
-          isCompact
           showControls
           showShadow
           color="primary"
           page={page}
           total={pages || 1}
           onChange={setPage}
+          className="gap-2"
+          size="lg"
+          variant="bordered"
+          classNames={{
+            wrapper: 'gap-2 overflow-visible h-10',
+            item: 'w-9 h-9 sm:w-10 sm:h-10 text-sm sm:text-base min-w-9 sm:min-w-10 text-gray-700 dark:text-gray-200',
+            cursor: 'bg-primary-500 text-white dark:text-white',
+            forwardBtn: 'text-gray-700 dark:text-gray-200',
+            prevBtn: 'text-gray-700 dark:text-gray-200',
+            next: 'text-gray-700 dark:text-gray-200',
+            prev: 'text-gray-700 dark:text-gray-200',
+          }}
         />
         <div className="hidden sm:flex w-[30%] justify-end gap-2">
           {/* Placeholder for future actions */}

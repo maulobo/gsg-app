@@ -325,14 +325,16 @@ export default function AccessoryList({ accessories }: Props) {
           {filteredItems.length > 0 ? `${start}-${end} de ${filteredItems.length}` : '0 de 0'}
         </span>
         <Pagination
-          isCompact
           showControls
           showShadow
           color="primary"
           page={page}
           total={pages}
           onChange={setPage}
+          size="lg"
           classNames={{
+            wrapper: 'gap-2 overflow-visible h-10',
+            item: 'w-9 h-9 text-sm min-w-9',
             wrapper: 'gap-0 overflow-visible h-8',
             item: 'w-8 h-8 text-sm',
             cursor: 'bg-brand-500 text-white font-medium shadow-theme-xs',

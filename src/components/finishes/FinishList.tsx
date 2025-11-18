@@ -268,7 +268,6 @@ export function FinishList({ finishes: initialFinishes }: FinishListProps) {
             : `${start}-${end} de ${filteredItems.length}`}
         </span>
         <Pagination
-          isCompact
           showControls
           showShadow
           color="primary"
@@ -276,8 +275,8 @@ export function FinishList({ finishes: initialFinishes }: FinishListProps) {
           total={pages || 1}
           onChange={setPage}
           classNames={{
-            wrapper: 'gap-0 overflow-visible h-8',
-            item: 'w-7 h-7 sm:w-8 sm:h-8 text-xs sm:text-sm min-w-7 sm:min-w-8',
+            wrapper: 'gap-2 overflow-visible h-10',
+            item: 'w-9 h-9 sm:w-10 sm:h-10 text-sm sm:text-base min-w-9 sm:min-w-10',
             cursor: 'bg-brand-500 text-white font-medium shadow-theme-xs',
             prev: 'w-7 h-7 sm:w-8 sm:h-8 min-w-7 sm:min-w-8',
             next: 'w-7 h-7 sm:w-8 sm:h-8 min-w-7 sm:min-w-8',
