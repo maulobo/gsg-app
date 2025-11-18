@@ -3,10 +3,11 @@ import { getLedRollById, updateLedRoll, deleteLedRoll } from '@/features/led-rol
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = parseInt(params.id, 10)
+    const resolvedParams = await params
+    const id = parseInt(resolvedParams.id, 10)
     if (isNaN(id)) {
       return NextResponse.json(
         { error: 'ID inválido' },
@@ -25,7 +26,8 @@ export async function GET(
 
     return NextResponse.json({ roll }, { status: 200 })
   } catch (error) {
-    console.error(`Error in GET /api/led-rolls/${params.id}:`, error)
+    const resolvedParams = await params
+    console.error(`Error in GET /api/led-rolls/${resolvedParams.id}:`, error)
     return NextResponse.json(
       { error: 'Error al obtener el rollo LED' },
       { status: 500 }
@@ -35,10 +37,11 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = parseInt(params.id, 10)
+    const resolvedParams = await params
+    const id = parseInt(resolvedParams.id, 10)
     if (isNaN(id)) {
       return NextResponse.json(
         { error: 'ID inválido' },
@@ -59,7 +62,8 @@ export async function PUT(
 
     return NextResponse.json({ roll }, { status: 200 })
   } catch (error) {
-    console.error(`Error in PUT /api/led-rolls/${params.id}:`, error)
+    const resolvedParams = await params
+    console.error(`Error in PUT /api/led-rolls/${resolvedParams.id}:`, error)
     return NextResponse.json(
       { error: 'Error al actualizar el rollo LED' },
       { status: 500 }
@@ -69,10 +73,11 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = parseInt(params.id, 10)
+    const resolvedParams = await params
+    const id = parseInt(resolvedParams.id, 10)
     if (isNaN(id)) {
       return NextResponse.json(
         { error: 'ID inválido' },
@@ -91,7 +96,8 @@ export async function DELETE(
 
     return NextResponse.json({ success: true }, { status: 200 })
   } catch (error) {
-    console.error(`Error in DELETE /api/led-rolls/${params.id}:`, error)
+    const resolvedParams = await params
+    console.error(`Error in DELETE /api/led-rolls/${resolvedParams.id}:`, error)
     return NextResponse.json(
       { error: 'Error al eliminar el rollo LED' },
       { status: 500 }

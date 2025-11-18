@@ -4,10 +4,11 @@ import type { LedProfileFormData } from '@/features/led-profiles/types'
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const resolvedParams = await params
   try {
-    const id = parseInt(params.id, 10)
+    const id = parseInt(resolvedParams.id, 10)
     if (isNaN(id)) {
       return NextResponse.json(
         { error: 'ID inválido' },
@@ -26,7 +27,7 @@ export async function GET(
 
     return NextResponse.json({ profile }, { status: 200 })
   } catch (error) {
-    console.error(`Error fetching LED profile ${params.id}:`, error)
+    console.error(`Error fetching LED profile ${resolvedParams.id}:`, error)
     return NextResponse.json(
       { error: 'Error al obtener el perfil LED' },
       { status: 500 }
@@ -36,10 +37,11 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const resolvedParams = await params
   try {
-    const id = parseInt(params.id, 10)
+    const id = parseInt(resolvedParams.id, 10)
     if (isNaN(id)) {
       return NextResponse.json(
         { error: 'ID inválido' },
@@ -61,7 +63,7 @@ export async function PUT(
 
     return NextResponse.json({ profile }, { status: 200 })
   } catch (error) {
-    console.error(`Error updating LED profile ${params.id}:`, error)
+    console.error(`Error updating LED profile ${resolvedParams.id}:`, error)
     return NextResponse.json(
       { error: 'Error al actualizar el perfil LED' },
       { status: 500 }
@@ -71,10 +73,11 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const resolvedParams = await params
   try {
-    const id = parseInt(params.id, 10)
+    const id = parseInt(resolvedParams.id, 10)
     if (isNaN(id)) {
       return NextResponse.json(
         { error: 'ID inválido' },
@@ -93,7 +96,7 @@ export async function DELETE(
 
     return NextResponse.json({ success: true }, { status: 200 })
   } catch (error) {
-    console.error(`Error deleting LED profile ${params.id}:`, error)
+    console.error(`Error deleting LED profile ${resolvedParams.id}:`, error)
     return NextResponse.json(
       { error: 'Error al eliminar el perfil LED' },
       { status: 500 }

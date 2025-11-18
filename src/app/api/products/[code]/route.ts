@@ -4,7 +4,7 @@ import { deleteFromR2, extractKeyFromUrl } from '@/lib/r2client'
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { code: string } }
+  { params }: { params: Promise<{ code: string }> }
 ) {
   try {
     const resolvedParams = await params
@@ -63,7 +63,7 @@ export async function PATCH(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { code: string } }
+  { params }: { params: Promise<{ code: string }> }
 ) {
   try {
     const resolvedParams = await params

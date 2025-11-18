@@ -4,10 +4,11 @@ import { uploadToR2 } from '@/lib/r2client'
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const resolvedParams = await params
   try {
-    const id = parseInt(params.id, 10)
+    const id = parseInt(resolvedParams.id, 10)
     if (isNaN(id)) {
       return NextResponse.json(
         { error: 'ID inválido' },
@@ -66,7 +67,7 @@ export async function POST(
 
     return NextResponse.json({ url: r2Url }, { status: 201 })
   } catch (error) {
-    console.error(`Error in POST /api/led-rolls/${params.id}/images/upload:`, error)
+    console.error(`Error in POST /api/led-rolls/${resolvedParams.id}/images/upload:`, error)
     return NextResponse.json(
       { error: 'Error al subir la imagen' },
       { status: 500 }

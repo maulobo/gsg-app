@@ -1,3 +1,5 @@
+'use client'
+
 import { VariantImageManager } from '@/components/products/VariantImageManager'
 
 export default function TestUploadPage() {

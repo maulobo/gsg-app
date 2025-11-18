@@ -12,7 +12,9 @@ type LedProfileEditFormProps = {
 }
 
 type DiffuserRelation = {
-  tone: string
+  diffuser_id?: number
+  id?: number
+  tone?: string
   material: string
   notes: string
 }
@@ -44,7 +46,7 @@ export function LedProfileEditForm({ profile, diffusers, finishes }: LedProfileE
   // Relations - preloaded from profile
   const [selectedDiffusers, setSelectedDiffusers] = useState<DiffuserRelation[]>(
     profile.diffusers.map(d => ({
-      tone: d.tone || '',
+      id: d.id,
       material: d.material || '',
       notes: (d as any).notes || ''
     }))
@@ -98,6 +100,7 @@ export function LedProfileEditForm({ profile, diffusers, finishes }: LedProfileE
 
   // Temp states for adding relations
   const [tempDiffuser, setTempDiffuser] = useState({
+    id: 0,
     tone: '', // 'opal' | 'transparente'
     material: '', // 'PVC' | 'PC' | 'Silicona'
     notes: ''
@@ -228,7 +231,7 @@ export function LedProfileEditForm({ profile, diffusers, finishes }: LedProfileE
       return
     }
     setSelectedDiffusers([...selectedDiffusers, { ...tempDiffuser }])
-    setTempDiffuser({ tone: '', material: '', notes: '' })
+    setTempDiffuser({ id: 0, tone: '', material: '', notes: '' })
   }
 
   const removeDiffuser = (index: number) => {

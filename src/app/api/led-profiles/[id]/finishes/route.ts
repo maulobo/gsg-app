@@ -3,10 +3,11 @@ import { addFinishToProfile } from '@/features/led-profiles/queries'
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const resolvedParams = await params
   try {
-    const id = parseInt(params.id, 10)
+    const id = parseInt(resolvedParams.id, 10)
     if (isNaN(id)) {
       return NextResponse.json(
         { error: 'ID inválido' },
@@ -40,7 +41,7 @@ export async function POST(
 
     return NextResponse.json({ success: true }, { status: 201 })
   } catch (error) {
-    console.error(`Error adding finish to LED profile ${params.id}:`, error)
+    console.error(`Error adding finish to LED profile ${resolvedParams.id}:`, error)
     return NextResponse.json(
       { error: 'Error al agregar el acabado' },
       { status: 500 }
