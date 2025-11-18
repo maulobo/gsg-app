@@ -9,11 +9,9 @@ import {
   GridIcon,
   HorizontaLDots,
   PlugInIcon,
-  TableIcon,
  UserCircleIcon,
   FolderIcon,
   ShootingStarIcon,
-  SwatchIcon,
   BoxIconLine,
   LedStripIcon,
   GroupIcon

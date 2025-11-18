@@ -2,8 +2,8 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getAccessoryByCode } from '@/features/accessories/queries'
 
-export async function generateMetadata({ params }: { params: { code: string } }): Promise<Metadata> {
-  const resolvedParams = await params as { code: string }
+export async function generateMetadata({ params }: { params: Promise<{ code: string }> }): Promise<Metadata> {
+  const resolvedParams = await params
   const accessory = await getAccessoryByCode(resolvedParams.code)
   
   return {
@@ -12,8 +12,8 @@ export async function generateMetadata({ params }: { params: { code: string } })
   }
 }
 
-export default async function AccessoryDetailPage({ params }: { params: { code: string } }) {
-  const resolvedParams = await params as { code: string }
+export default async function AccessoryDetailPage({ params }: { params: Promise<{ code: string }> }) {
+  const resolvedParams = await params
   const accessory = await getAccessoryByCode(resolvedParams.code)
 
   if (!accessory) {

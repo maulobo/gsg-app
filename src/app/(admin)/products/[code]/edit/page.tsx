@@ -4,8 +4,8 @@ import { getProductByCode } from '@/features/products/queries'
 import { ProductEditForm } from '@/components/products/ProductEditForm'
 
 
-export async function generateMetadata({ params }: { params: { code: string } }): Promise<Metadata> {
-  const resolvedParams = await params as { code: string }
+export async function generateMetadata({ params }: { params: Promise<{ code: string }> }): Promise<Metadata> {
+  const resolvedParams = await params
   const product = await getProductByCode(resolvedParams.code)
   return {
     title: product?.name ? `Editar ${product.name}` : 'Editar Producto',
@@ -13,8 +13,8 @@ export async function generateMetadata({ params }: { params: { code: string } })
   }
 }
 
-export default async function ProductEditPage({ params }: { params: { code: string } }) {
-  const resolvedParams = await params as { code: string }
+export default async function ProductEditPage({ params }: { params: Promise<{ code: string }> }) {
+  const resolvedParams = await params
   const product = await getProductByCode(resolvedParams.code)
 
   if (!product) {

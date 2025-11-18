@@ -36,7 +36,7 @@ async function getLightTones() {
   return data || []
 }
 
-export async function generateMetadata({ params }: { params: { code: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ code: string }> }): Promise<Metadata> {
   const resolvedParams = await params
   const product = await getProduct(resolvedParams.code)
   
@@ -46,7 +46,7 @@ export async function generateMetadata({ params }: { params: { code: string } })
   }
 }
 
-export default async function NewVariantPage({ params }: { params: { code: string } }) {
+export default async function NewVariantPage({ params }: { params: Promise<{ code: string }> }) {
   const resolvedParams = await params
   const [product, lightTones] = await Promise.all([
     getProduct(resolvedParams.code),

@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
 import { getProduct } from '@/lib/products'
 
-export async function generateMetadata({ params }: { params: { code: string } }): Promise<Metadata> {
-  const resolvedParams = await params as { code: string }
+export async function generateMetadata({ params }: { params: Promise<{ code: string }> }): Promise<Metadata> {
+  const resolvedParams = await params
   const product = await getProduct(resolvedParams.code)
   return {
     title: product?.name ? `${product.name} | Product` : 'Product',
@@ -11,8 +11,8 @@ export async function generateMetadata({ params }: { params: { code: string } })
 }
 
 
-export default async function ProductPage({ params }: { params: { code: string } }) {
-  const resolvedParams = await params as { code: string }
+export default async function ProductPage({ params }: { params: Promise<{ code: string }> }) {
+  const resolvedParams = await params
  const product = await getProduct(resolvedParams.code)
 
  console.log('=== VARIANTES CON IMÁGENES ===')
