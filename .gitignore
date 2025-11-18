@@ -41,3 +41,19 @@ next-env.d.ts
 # migration scripts with secrets
 migrate-all-tables.mjs
 migrate-missing-tables.mjs
+
+# Local scripts and migration helpers (keep local, remove from repo)
+/src/script/
+export-missing-tables.mjs
+import-to-new-project.mjs
+export-supabase-complete.mjs
+create-tables-direct.mjs
+apply-migrations.mjs
+run-sql.mjs
+detect-all-tables.mjs
+run-sql-migrations.mjs
+check-project-owner.mjs
+apply-migrations.sh
+instrucciones-migracion.sh
+run-migrations.sh
+apply-db-migrations.sh
