@@ -152,6 +152,8 @@ export interface LedProfileListItem {
   diffusers_count: number
   finishes_count: number
   cover_image: string | null
+  has_photo: boolean
+  has_pdf: boolean
 }
 
 // ============================================
@@ -270,12 +272,12 @@ export type LedMediaKind = 'cover' | 'gallery' | 'tech' | 'accessory'
 /**
  * Slugs de difusores comunes
  */
-export type LedDiffuserSlug = 'opal' | 'transparente' | string
+export type LedDiffuserSlug = 'opal' | 'transparente' | 'policarbonato' | 'pvc-uv' | string
 
 /**
  * Materiales de difusor
  */
-export type LedDiffuserMaterial = 'PC' | 'PVC' | string
+export type LedDiffuserMaterial = 'PC' | 'PVC' | 'PMMA' | string
 
 /**
  * Materiales de perfil

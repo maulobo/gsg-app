@@ -1,0 +1,335 @@
+[
+  {
+    "id": 10,
+    "product_id": 4,
+    "variant_code": "sxl-s",
+    "name": "Colgante Saturno XL simple",
+    "includes_led": true,
+    "includes_driver": true,
+    "cantidad": 1
+  },
+  {
+    "id": 11,
+    "product_id": 4,
+    "variant_code": "sxl-d",
+    "name": "Colgante Saturno XL doble",
+    "includes_led": true,
+    "includes_driver": true,
+    "cantidad": 2
+  },
+  {
+    "id": 12,
+    "product_id": 4,
+    "variant_code": "sxl-t",
+    "name": "Colgante Saturno XL triple",
+    "includes_led": true,
+    "includes_driver": true,
+    "cantidad": 3
+  },
+  {
+    "id": 15,
+    "product_id": 7,
+    "variant_code": "lai-600",
+    "name": "Aplique Lazo indirecto",
+    "includes_led": true,
+    "includes_driver": true,
+    "cantidad": 1
+  },
+  {
+    "id": 43,
+    "product_id": 29,
+    "variant_code": "URA-C-2",
+    "name": "Urano colgante doble",
+    "includes_led": true,
+    "includes_driver": true,
+    "cantidad": 1
+  },
+  {
+    "id": 44,
+    "product_id": 29,
+    "variant_code": "URA-C-3",
+    "name": "Urano colgante triple",
+    "includes_led": true,
+    "includes_driver": true,
+    "cantidad": 1
+  },
+  {
+    "id": 45,
+    "product_id": 29,
+    "variant_code": "URA-APL",
+    "name": "Urano aplicado",
+    "includes_led": true,
+    "includes_driver": true,
+    "cantidad": 1
+  },
+  {
+    "id": 46,
+    "product_id": 30,
+    "variant_code": "snk",
+    "name": "Colgante Snake",
+    "includes_led": true,
+    "includes_driver": true,
+    "cantidad": 1
+  },
+  {
+    "id": 47,
+    "product_id": 31,
+    "variant_code": "STK-H",
+    "name": "Stick horizontal",
+    "includes_led": true,
+    "includes_driver": true,
+    "cantidad": 1
+  },
+  {
+    "id": 48,
+    "product_id": 31,
+    "variant_code": "stk-V",
+    "name": "Stick Vertical",
+    "includes_led": true,
+    "includes_driver": true,
+    "cantidad": 1
+  },
+  {
+    "id": 49,
+    "product_id": 31,
+    "variant_code": "STK-TP",
+    "name": "Stick Techo Piso",
+    "includes_led": true,
+    "includes_driver": true,
+    "cantidad": 1
+  },
+  {
+    "id": 50,
+    "product_id": 32,
+    "variant_code": "worm",
+    "name": "Velador Worm",
+    "includes_led": true,
+    "includes_driver": true,
+    "cantidad": 1
+  },
+  {
+    "id": 52,
+    "product_id": 34,
+    "variant_code": "lec",
+    "name": "Lectus",
+    "includes_led": true,
+    "includes_driver": true,
+    "cantidad": 1
+  },
+  {
+    "id": 7,
+    "product_id": 3,
+    "variant_code": "hex-s",
+    "name": "Colgante Hexa Simple",
+    "includes_led": true,
+    "includes_driver": true,
+    "cantidad": 1
+  },
+  {
+    "id": 8,
+    "product_id": 3,
+    "variant_code": "hex-d",
+    "name": "Colgante Hexa Doble",
+    "includes_led": true,
+    "includes_driver": true,
+    "cantidad": 2
+  },
+  {
+    "id": 9,
+    "product_id": 3,
+    "variant_code": "hex-t",
+    "name": "Colgante Hexa Triple",
+    "includes_led": true,
+    "includes_driver": true,
+    "cantidad": 3
+  },
+  {
+    "id": 51,
+    "product_id": 33,
+    "variant_code": "tex",
+    "name": "Aplique Texo",
+    "includes_led": true,
+    "includes_driver": true,
+    "cantidad": 1
+  },
+  {
+    "id": 20,
+    "product_id": 12,
+    "variant_code": "gar-ext",
+    "name": "Embutido de piso Garten",
+    "includes_led": true,
+    "includes_driver": true,
+    "cantidad": 1
+  },
+  {
+    "id": 4,
+    "product_id": 2,
+    "variant_code": "qdr-s",
+    "name": "Colgante Quadra Simple",
+    "includes_led": true,
+    "includes_driver": true,
+    "cantidad": 1
+  },
+  {
+    "id": 6,
+    "product_id": 2,
+    "variant_code": "qdr-t",
+    "name": "Colgante Quadra Triple",
+    "includes_led": true,
+    "includes_driver": true,
+    "cantidad": 3
+  },
+  {
+    "id": 5,
+    "product_id": 2,
+    "variant_code": "qdr-d",
+    "name": "Colgante Quadra Doble",
+    "includes_led": true,
+    "includes_driver": true,
+    "cantidad": 2
+  },
+  {
+    "id": 19,
+    "product_id": 11,
+    "variant_code": "est-ext",
+    "name": "Estaca Exterior",
+    "includes_led": true,
+    "includes_driver": false,
+    "cantidad": 1
+  },
+  {
+    "id": 16,
+    "product_id": 8,
+    "variant_code": "bod-170",
+    "name": "Lampara de pie boden",
+    "includes_led": true,
+    "includes_driver": true,
+    "cantidad": 1
+  },
+  {
+    "id": 21,
+    "product_id": 13,
+    "variant_code": "pla",
+    "name": "Mini Embutido Planar",
+    "includes_led": true,
+    "includes_driver": true,
+    "cantidad": 1
+  },
+  {
+    "id": 22,
+    "product_id": 14,
+    "variant_code": "hol",
+    "name": "Mini embutido Hole",
+    "includes_led": true,
+    "includes_driver": true,
+    "cantidad": 1
+  },
+  {
+    "id": 17,
+    "product_id": 9,
+    "variant_code": "kro-500",
+    "name": "Plafón Krov",
+    "includes_led": true,
+    "includes_driver": true,
+    "cantidad": 1
+  },
+  {
+    "id": 18,
+    "product_id": 10,
+    "variant_code": "lad-600",
+    "name": "Plafón Lazo Directo",
+    "includes_led": true,
+    "includes_driver": true,
+    "cantidad": 1
+  },
+  {
+    "id": 39,
+    "product_id": 28,
+    "variant_code": "PAB",
+    "name": "Panal de abejas 400",
+    "includes_led": true,
+    "includes_driver": false,
+    "cantidad": 1
+  },
+  {
+    "id": 41,
+    "product_id": 28,
+    "variant_code": "pab-800",
+    "name": "Panal de abejas 800",
+    "includes_led": true,
+    "includes_driver": false,
+    "cantidad": 1
+  },
+  {
+    "id": 40,
+    "product_id": 28,
+    "variant_code": "pab-600",
+    "name": "Panal de abejas 600",
+    "includes_led": true,
+    "includes_driver": false,
+    "cantidad": 1
+  },
+  {
+    "id": 1,
+    "product_id": 1,
+    "variant_code": "sat-s",
+    "name": "Colgante Saturno Simple",
+    "includes_led": true,
+    "includes_driver": true,
+    "cantidad": 1
+  },
+  {
+    "id": 2,
+    "product_id": 1,
+    "variant_code": "sat-d",
+    "name": "Colgante Saturno Doble",
+    "includes_led": true,
+    "includes_driver": true,
+    "cantidad": 2
+  },
+  {
+    "id": 3,
+    "product_id": 1,
+    "variant_code": "sat-t",
+    "name": "Colgante Saturno Triple",
+    "includes_led": true,
+    "includes_driver": true,
+    "cantidad": 1
+  },
+  {
+    "id": 14,
+    "product_id": 6,
+    "variant_code": "wal-600",
+    "name": "Aplique de pared Wall",
+    "includes_led": true,
+    "includes_driver": true,
+    "cantidad": 1
+  },
+  {
+    "id": 13,
+    "product_id": 5,
+    "variant_code": "bur-s",
+    "name": "Colgante Buro Directo",
+    "includes_led": true,
+    "includes_driver": true,
+    "cantidad": 1
+  },
+  {
+    "id": 53,
+    "product_id": 35,
+    "variant_code": "hall",
+    "name": "Hall",
+    "includes_led": true,
+    "includes_driver": true,
+    "cantidad": 1
+  },
+  {
+    "id": 42,
+    "product_id": 29,
+    "variant_code": "ura-c-s",
+    "name": "Urano colgante simple",
+    "includes_led": true,
+    "includes_driver": true,
+    "cantidad": 1
+  }
+]

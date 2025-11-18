@@ -10,7 +10,8 @@ type LedProfileCreationFormProps = {
 }
 
 type DiffuserRelation = {
-  diffuser_id: number
+  tone: string // 'opal' | 'transparente'
+  material: string // 'PVC' | 'PC' | 'Silicona'
   notes: string
 }
 
@@ -58,7 +59,8 @@ export function LedProfileCreationForm({ diffusers, finishes }: LedProfileCreati
 
   // Temp states for adding relations
   const [tempDiffuser, setTempDiffuser] = useState({
-    diffuser_id: 0,
+    tone: '', // 'opal' | 'transparente'
+    material: '', // 'PVC' | 'PC' | 'Silicona'
     notes: ''
   })
   const [tempIncludedPart, setTempIncludedPart] = useState<ProfilePart>({ 
@@ -213,12 +215,12 @@ export function LedProfileCreationForm({ diffusers, finishes }: LedProfileCreati
   }
 
   const addDiffuser = () => {
-    if (tempDiffuser.diffuser_id === 0) {
-      alert('Selecciona un difusor')
+    if (!tempDiffuser.tone || !tempDiffuser.material) {
+      alert('Selecciona el tono y material del difusor')
       return
     }
     setSelectedDiffusers([...selectedDiffusers, { ...tempDiffuser }])
-    setTempDiffuser({ diffuser_id: 0, notes: '' })
+    setTempDiffuser({ tone: '', material: '', notes: '' })
   }
 
   const removeDiffuser = (index: number) => {
@@ -481,24 +483,29 @@ export function LedProfileCreationForm({ diffusers, finishes }: LedProfileCreati
               <h3 className="font-medium mb-3 text-gray-900 dark:text-gray-100">Agregar Difusor</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 <div>
-                  <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Difusor *</label>
+                  <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Tono del Difusor *</label>
                   <select
-                    value={tempDiffuser.diffuser_id}
-                    onChange={(e) => setTempDiffuser({ ...tempDiffuser, diffuser_id: parseInt(e.target.value) })}
+                    value={tempDiffuser.tone}
+                    onChange={(e) => setTempDiffuser({ ...tempDiffuser, tone: e.target.value })}
                     className="w-full rounded-md border border-gray-300 px-3 py-2 bg-white text-gray-900 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
                   >
-                    <option value={0}>Seleccionar...</option>
-                    {diffusers.map(d => (
-                      <option key={d.id} value={d.id}>{d.name}</option>
-                    ))}
+                    <option value="">Seleccionar...</option>
+                    <option value="opal">Opal</option>
+                    <option value="transparente">Transparente</option>
                   </select>
                 </div>
-                {/* Material del difusor (solo visual) */}
                 <div>
-                  <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Material del difusor</label>
-                  <div className="w-full rounded-md border border-gray-200 px-3 py-2 bg-gray-50 text-gray-700 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-200">
-                    {diffusers.find(d => d.id === tempDiffuser.diffuser_id)?.material || '—'}
-                  </div>
+                  <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Material *</label>
+                  <select
+                    value={tempDiffuser.material}
+                    onChange={(e) => setTempDiffuser({ ...tempDiffuser, material: e.target.value })}
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 bg-white text-gray-900 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
+                  >
+                    <option value="">Seleccionar...</option>
+                    <option value="PVC">PVC</option>
+                    <option value="PC">PC (Policarbonato)</option>
+                    <option value="Silicona">Silicona</option>
+                  </select>
                 </div>
                 <div className="flex items-end">
                   <button
@@ -527,27 +534,26 @@ export function LedProfileCreationForm({ diffusers, finishes }: LedProfileCreati
               <div>
                 <h3 className="font-medium mb-2 text-gray-900 dark:text-gray-100">Difusores Seleccionados ({selectedDiffusers.length})</h3>
                 <div className="space-y-2">
-                  {selectedDiffusers.map((d, index) => {
-                    const diffuser = diffusers.find(df => df.id === d.diffuser_id)
-                    return (
-                      <div key={index} className="flex items-center justify-between bg-blue-light-50 p-3 rounded-lg border border-blue-light-200 dark:bg-blue-light-950 dark:border-blue-light-800">
-                        <div>
-                          <p className="font-medium text-blue-light-900 dark:text-blue-light-100">{diffuser?.name}</p>
-                          <p className="text-sm text-blue-light-700 dark:text-blue-light-300">
-                            Material: {diffuser?.material || '—'}
-                            {d.notes && ` • ${d.notes}`}
-                          </p>
-                        </div>
-                        <button
-                          type="button"
-                          onClick={() => removeDiffuser(index)}
-                          className="text-error-600 hover:text-error-700 font-medium px-3 py-1 rounded hover:bg-error-50 dark:text-error-400 dark:hover:text-error-300 dark:hover:bg-error-950 transition-colors"
-                        >
-                          Eliminar
-                        </button>
+                  {selectedDiffusers.map((d, index) => (
+                    <div key={index} className="flex items-center justify-between bg-blue-light-50 p-3 rounded-lg border border-blue-light-200 dark:bg-blue-light-950 dark:border-blue-light-800">
+                      <div>
+                        <p className="font-medium text-blue-light-900 dark:text-blue-light-100">
+                          {d.tone === 'opal' ? 'Opal' : d.tone === 'transparente' ? 'Transparente' : d.tone}
+                        </p>
+                        <p className="text-sm text-blue-light-700 dark:text-blue-light-300">
+                          Material: {d.material}
+                          {d.notes && ` • ${d.notes}`}
+                        </p>
                       </div>
-                    )
-                  })}
+                      <button
+                        type="button"
+                        onClick={() => removeDiffuser(index)}
+                        className="text-error-600 hover:text-error-700 font-medium px-3 py-1 rounded hover:bg-error-50 dark:text-error-400 dark:hover:text-error-300 dark:hover:bg-error-950 transition-colors"
+                      >
+                        Eliminar
+                      </button>
+                    </div>
+                  ))}
                 </div>
               </div>
             )}
@@ -1049,15 +1055,12 @@ export function LedProfileCreationForm({ diffusers, finishes }: LedProfileCreati
                 {selectedDiffusers.length === 0 ? (
                   <p className="text-sm text-gray-500 dark:text-gray-400 italic">No hay difusores seleccionados</p>
                 ) : (
-                  selectedDiffusers.map((d, i) => {
-                    const diffuser = diffusers.find(df => df.id === d.diffuser_id)
-                    return (
-                      <p key={i} className="text-sm mb-1 text-gray-900 dark:text-gray-100">
-                        • <strong>{diffuser?.name}</strong> - Material: {diffuser?.material || '—'}
-                        {d.notes && ` (${d.notes})`}
-                      </p>
-                    )
-                  })
+                  selectedDiffusers.map((d, i) => (
+                    <p key={i} className="text-sm mb-1 text-gray-900 dark:text-gray-100">
+                      • <strong>{d.tone === 'opal' ? 'Opal' : d.tone === 'transparente' ? 'Transparente' : d.tone}</strong> - Material: {d.material}
+                      {d.notes && ` (${d.notes})`}
+                    </p>
+                  ))
                 )}
               </div>
 

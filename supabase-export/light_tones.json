@@ -1,0 +1,56 @@
+[
+  {
+    "id": 23,
+    "slug": "fría",
+    "name": "fría",
+    "kelvin": null
+  },
+  {
+    "id": 24,
+    "slug": "cálida",
+    "name": "cálida",
+    "kelvin": null
+  },
+  {
+    "id": 25,
+    "slug": "neutra",
+    "name": "neutra",
+    "kelvin": null
+  },
+  {
+    "id": 26,
+    "slug": "súper-cálida",
+    "name": "súper cálida",
+    "kelvin": null
+  },
+  {
+    "id": 33,
+    "slug": "rgb",
+    "name": "rgb",
+    "kelvin": null
+  },
+  {
+    "id": 34,
+    "slug": "rgb+cw",
+    "name": "rgb+cw",
+    "kelvin": null
+  },
+  {
+    "id": 35,
+    "slug": "rgb+ww",
+    "name": "rgb+ww",
+    "kelvin": null
+  },
+  {
+    "id": 36,
+    "slug": "rgb-pixel",
+    "name": "rgb pixel",
+    "kelvin": null
+  },
+  {
+    "id": 37,
+    "slug": "calido+frio",
+    "name": "calido+frio",
+    "kelvin": null
+  }
+]

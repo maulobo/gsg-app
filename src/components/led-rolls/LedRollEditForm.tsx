@@ -94,44 +94,25 @@ export function LedRollEditForm({ roll, lightTones }: LedRollEditFormProps) {
     }
 
     try {
-      // Para modo mono, crear un modelo por cada tono seleccionado
-      if (tempModel.color_mode === 'mono' && tempModel.light_tone_ids && tempModel.light_tone_ids.length > 0) {
-        for (const toneId of tempModel.light_tone_ids) {
-          const modelData = {
-            ...tempModel,
-            light_tone_id: toneId,
-          }
-          delete modelData.light_tone_ids // Remover el campo temporal
-
-          const response = await fetch(`/api/led-rolls/${roll.id}/models`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(modelData),
-          })
-
-          if (!response.ok) {
-            const error = await response.json()
-            throw new Error(error.error || 'Error al crear modelo')
-          }
-        }
-      } else {
-        // Para otros modos (CCT, RGB), crear solo un modelo
-        const modelData = { ...tempModel }
-        delete modelData.light_tone_ids // Remover el campo temporal
-
-        const response = await fetch(`/api/led-rolls/${roll.id}/models`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(modelData),
-        })
-
-        if (!response.ok) {
-          const error = await response.json()
-          throw new Error(error.error || 'Error al crear modelo')
-        }
+      // Crear UN modelo con los tonos seleccionados como array
+      const modelData = {
+        ...tempModel,
+        light_tone_ids: tempModel.color_mode === 'mono' ? tempModel.light_tone_ids : undefined,
+        light_tone_id: tempModel.color_mode === 'mono' ? null : tempModel.light_tone_id,
       }
 
-      alert('✅ Modelo(s) agregado(s) exitosamente')
+      const response = await fetch(`/api/led-rolls/${roll.id}/models`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(modelData),
+      })
+
+      if (!response.ok) {
+        const error = await response.json()
+        throw new Error(error.error || 'Error al crear modelo')
+      }
+
+      alert('✅ Modelo agregado exitosamente')
       router.refresh()
       setTempModel({
         sku: '',
@@ -242,7 +223,7 @@ export function LedRollEditForm({ roll, lightTones }: LedRollEditFormProps) {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Panel izquierdo: Datos básicos y especificaciones */}
+        {/* Panel izquierdo: Datos básicos */}
         <div className="lg:col-span-2 space-y-6">
           {/* Info básica */}
           <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-theme-sm dark:bg-gray-dark dark:border-gray-800">
@@ -280,98 +261,6 @@ export function LedRollEditForm({ roll, lightTones }: LedRollEditFormProps) {
                 />
               </div>
             </div>
-          </div>
-
-          {/* Especificaciones */}
-          <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-theme-sm dark:bg-gray-dark dark:border-gray-800">
-            <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Especificaciones</h2>
-            <div className="space-y-4">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">CRI Mín</label>
-                  <input
-                    type="number"
-                    value={formData.cri_min || ''}
-                    onChange={(e) => setFormData({ ...formData, cri_min: parseInt(e.target.value) || 0 })}
-                    className="w-full rounded-md border border-gray-300 px-3 py-2 bg-white text-gray-900 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Voltaje</label>
-                  <select
-                    value={formData.voltage_v || 12}
-                    onChange={(e) => setFormData({ ...formData, voltage_v: parseInt(e.target.value) })}
-                    className="w-full rounded-md border border-gray-300 px-3 py-2 bg-white text-gray-900 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
-                  >
-                    <option value={12}>12V</option>
-                    <option value={24}>24V</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">IP Rating</label>
-                  <select
-                    value={formData.ip_rating || 'IP20'}
-                    onChange={(e) => setFormData({ ...formData, ip_rating: e.target.value })}
-                    className="w-full rounded-md border border-gray-300 px-3 py-2 bg-white text-gray-900 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
-                  >
-                    <option value="IP20">IP20</option>
-                    <option value="IP65">IP65</option>
-                    <option value="IP67">IP67</option>
-                  </select>
-                </div>
-                <div className="flex items-center">
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={formData.dimmable}
-                      onChange={(e) => setFormData({ ...formData, dimmable: e.target.checked })}
-                      className="w-4 h-4"
-                    />
-                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Dimeable</span>
-                  </label>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">LEDs/m Mín</label>
-                  <input
-                    type="number"
-                    value={formData.leds_per_m_min || ''}
-                    onChange={(e) => setFormData({ ...formData, leds_per_m_min: parseInt(e.target.value) || 0 })}
-                    className="w-full rounded-md border border-gray-300 px-3 py-2 bg-white text-gray-900 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">LEDs/m Máx</label>
-                  <input
-                    type="number"
-                    value={formData.leds_per_m_max || ''}
-                    onChange={(e) => setFormData({ ...formData, leds_per_m_max: parseInt(e.target.value) || 0 })}
-                    className="w-full rounded-md border border-gray-300 px-3 py-2 bg-white text-gray-900 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Longitud (m)</label>
-                  <input
-                    type="number"
-                    step="0.1"
-                    value={formData.roll_length_m || ''}
-                    onChange={(e) => setFormData({ ...formData, roll_length_m: parseFloat(e.target.value) || 0 })}
-                    className="w-full rounded-md border border-gray-300 px-3 py-2 bg-white text-gray-900 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Garantía (años)</label>
-                  <input
-                    type="number"
-                    value={formData.warranty_years || ''}
-                    onChange={(e) => setFormData({ ...formData, warranty_years: parseInt(e.target.value) || 0 })}
-                    className="w-full rounded-md border border-gray-300 px-3 py-2 bg-white text-gray-900 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
-                  />
-                </div>
-              </div>
-            </div>
 
             <div className="mt-4 flex justify-end">
               <button
@@ -385,7 +274,6 @@ export function LedRollEditForm({ roll, lightTones }: LedRollEditFormProps) {
             </div>
           </div>
 
-          {/* Agregar modelo */}
           <div className="rounded-lg border border-blue-light-200 bg-blue-light-50 p-6 shadow-theme-sm dark:bg-blue-light-950 dark:border-blue-light-800">
             <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Agregar Nuevo Modelo</h2>
             
@@ -595,6 +483,12 @@ export function LedRollEditForm({ roll, lightTones }: LedRollEditFormProps) {
                       {model.color_mode.toUpperCase()}
                       {model.price && model.price > 0 && ` • $${model.price.toFixed(2)}`}
                     </p>
+                    {/* Mostrar tonos de luz si existen */}
+                    {model.light_tones && model.light_tones.length > 0 && (
+                      <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">
+                        Tonos: {model.light_tones.map(t => t.name).join(', ')}
+                      </p>
+                    )}
                   </div>
                 ))}
               </div>

@@ -37,3 +37,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# migration scripts with secrets
+migrate-all-tables.mjs
+migrate-missing-tables.mjs

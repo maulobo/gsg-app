@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "slug": "opal",
+    "name": "Opal",
+    "material": "PVC",
+    "uv_protection": true
+  },
+  {
+    "id": 2,
+    "slug": "transparente",
+    "name": "Transparente",
+    "material": "PVC",
+    "uv_protection": true
+  },
+  {
+    "id": 7,
+    "slug": "policarbonato",
+    "name": "Policarbonato (PC)",
+    "material": "PC",
+    "uv_protection": false
+  },
+  {
+    "id": 8,
+    "slug": "pvc-uv",
+    "name": "PVC con protección UV",
+    "material": "PVC",
+    "uv_protection": true
+  }
+]

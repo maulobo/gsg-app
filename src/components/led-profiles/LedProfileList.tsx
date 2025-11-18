@@ -33,15 +33,12 @@ const TrashIcon = ({ className = "w-4 h-4" }) => (
 
 import type { LedProfileListItem } from '@/features/led-profiles/types'
 
-const INITIAL_VISIBLE_COLUMNS = ['name', 'code', 'material', 'max_w_per_m', 'diffusers_count', 'finishes_count', 'actions']
+const INITIAL_VISIBLE_COLUMNS = ['name', 'code', 'has_media', 'actions']
 
 const columns = [
   { name: 'NOMBRE', uid: 'name', sortable: true },
   { name: 'CÓDIGO', uid: 'code', sortable: true },
-  { name: 'MATERIAL', uid: 'material', sortable: true },
-  { name: 'POTENCIA (W/m)', uid: 'max_w_per_m', sortable: true },
-  { name: 'DIFUSORES', uid: 'diffusers_count', sortable: true },
-  { name: 'ACABADOS', uid: 'finishes_count', sortable: true },
+  { name: 'MEDIA', uid: 'has_media' },
   { name: 'ACCIONES', uid: 'actions' },
 ]
 
@@ -161,51 +158,45 @@ export function LedProfileList({ profiles }: LedProfileListProps) {
         )
       case 'code':
         return <div className="font-mono text-sm text-gray-700 dark:text-gray-200">{profile.code}</div>
-      case 'material':
-        return profile.material ? (
-          <span className="inline-block px-2 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-theme-xs text-gray-700 dark:text-gray-300">
-            {profile.material}
-          </span>
-        ) : (
-          <span className="text-gray-400 dark:text-gray-500 text-sm">-</span>
-        )
-      case 'max_w_per_m':
-        return profile.max_w_per_m ? (
-          <span className="text-sm font-medium text-gray-900 dark:text-white">
-            {profile.max_w_per_m} W/m
-          </span>
-        ) : (
-          <span className="text-gray-400 dark:text-gray-500 text-sm">-</span>
-        )
-      case 'diffusers_count':
+      case 'has_media':
         return (
-          <div className="flex items-center justify-center">
-            <span className="inline-flex items-center justify-center rounded-full bg-blue-50 px-2.5 py-0.5 text-sm font-medium text-blue-700 dark:bg-blue-500/[0.12] dark:text-blue-400">
-              {profile.diffusers_count}
-            </span>
-          </div>
-        )
-      case 'finishes_count':
-        return (
-          <div className="flex items-center justify-center">
-            <span className="inline-flex items-center justify-center rounded-full bg-purple-50 px-2.5 py-0.5 text-sm font-medium text-purple-700 dark:bg-purple-500/[0.12] dark:text-purple-400">
-              {profile.finishes_count}
-            </span>
+          <div className="flex gap-3 items-center justify-center">
+            {/* Indicador de Foto */}
+            <div className="flex items-center gap-1" title={profile.has_photo ? 'Tiene foto' : 'Sin foto'}>
+              {profile.has_photo ? (
+                <svg className="w-4 h-4 text-success-600 dark:text-success-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+              ) : (
+                <svg className="w-4 h-4 text-gray-300 dark:text-gray-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
+              )}
+              <span className={`text-xs ${profile.has_photo ? 'text-success-600 dark:text-success-400' : 'text-gray-400 dark:text-gray-500'}`}>
+                Foto
+              </span>
+            </div>
+            
+            {/* Indicador de PDF */}
+            <div className="flex items-center gap-1" title={profile.has_pdf ? 'Tiene PDF' : 'Sin PDF'}>
+              {profile.has_pdf ? (
+                <svg className="w-4 h-4 text-success-600 dark:text-success-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+              ) : (
+                <svg className="w-4 h-4 text-gray-300 dark:text-gray-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
+              )}
+              <span className={`text-xs ${profile.has_pdf ? 'text-success-600 dark:text-success-400' : 'text-gray-400 dark:text-gray-500'}`}>
+                PDF
+              </span>
+            </div>
           </div>
         )
       case 'actions':
         return (
           <div className="flex justify-end gap-2">
-            <Button 
-              isIconOnly
-              size="sm" 
-              variant="flat" 
-              onPress={() => router.push(`/led-profiles/${profile.code}`)} 
-              className="text-brand-600 dark:text-brand-400 hover:bg-brand-50 dark:hover:bg-brand-500/10"
-              aria-label="Ver perfil LED"
-            >
-              <EyeIcon className="w-4 h-4" />
-            </Button>
             <Button 
               isIconOnly
               size="sm" 
@@ -416,14 +407,19 @@ export function LedProfileList({ profiles }: LedProfileListProps) {
           {topContent}
           
           {/* Vista de tabla para desktop */}
-          <div className="hidden md:block overflow-auto shadow-sm rounded-md">
-            <table className="w-full table-fixed border-collapse rounded-md">
-              <thead className="bg-white/95 dark:bg-gray-900/95 sticky top-0 z-10 border-b border-gray-200 dark:border-gray-800">
+          <div className="hidden md:block overflow-auto shadow-sm rounded-lg border border-gray-200 dark:border-gray-700">
+            <table className="w-full border-collapse">
+              <thead className="bg-gray-50 dark:bg-gray-800/50 sticky top-0 z-10">
                 <tr>
                   {headerColumns.map((col) => (
                     <th
                       key={col.uid}
-                      className={`text-left px-4 py-3 text-theme-sm text-gray-700 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700 ${col.uid === 'actions' ? 'text-right' : ''} ${col.sortable ? 'cursor-pointer select-none' : ''}`}
+                      className={`px-6 py-4 text-theme-xs font-semibold uppercase tracking-wider text-gray-700 dark:text-gray-300 
+                        ${col.uid === 'name' ? 'text-left w-[40%]' : ''}
+                        ${col.uid === 'code' ? 'text-left w-[20%]' : ''}
+                        ${col.uid === 'has_media' ? 'text-center w-[25%]' : ''}
+                        ${col.uid === 'actions' ? 'text-right w-[15%]' : ''}
+                        ${col.sortable ? 'cursor-pointer select-none hover:bg-gray-100 dark:hover:bg-gray-700/50' : ''}`}
                       onClick={() => {
                         if (!col.sortable) return
                         setSortDescriptor((s) => {
@@ -434,10 +430,10 @@ export function LedProfileList({ profiles }: LedProfileListProps) {
                         })
                       }}
                     >
-                      <div className="flex items-center gap-2">
-                        <span className="font-medium">{col.name}</span>
+                      <div className={`flex items-center gap-2 ${col.uid === 'actions' ? 'justify-end' : col.uid === 'has_media' ? 'justify-center' : 'justify-start'}`}>
+                        <span>{col.name}</span>
                         {col.sortable && sortDescriptor.column === col.uid && (
-                          <svg className="w-3 h-3 text-gray-400 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                          <svg className="w-3 h-3 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
                             {sortDescriptor.direction === 'ascending' ? (
                               <path d="M5 12h10l-5-8-5 8z" />
                             ) : (
@@ -450,18 +446,22 @@ export function LedProfileList({ profiles }: LedProfileListProps) {
                   ))}
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800">
                 {sortedItems.length === 0 ? (
                   <tr>
-                    <td colSpan={headerColumns.length} className="px-4 py-6 text-center text-gray-400 dark:text-gray-500">
+                    <td colSpan={headerColumns.length} className="px-6 py-12 text-center text-gray-400 dark:text-gray-500">
                       No se encontraron perfiles LED
                     </td>
                   </tr>
                 ) : (
                   sortedItems.map((item) => (
-                    <tr key={item.id} className="transition-colors odd:bg-white even:bg-gray-50 hover:bg-gray-100 dark:odd:bg-gray-900 dark:even:bg-gray-800 dark:hover:bg-gray-800">
+                    <tr key={item.id} className="transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/50">
                       {headerColumns.map((col) => (
-                        <td key={col.uid} className={`px-4 py-3 align-top text-theme-sm text-gray-700 dark:text-gray-300 border-b border-gray-100 dark:border-gray-800 ${col.uid === 'actions' ? 'text-right' : ''}`}>
+                        <td key={col.uid} className={`px-6 py-4 align-middle
+                          ${col.uid === 'name' ? 'text-left' : ''}
+                          ${col.uid === 'code' ? 'text-left' : ''}
+                          ${col.uid === 'has_media' ? 'text-center' : ''}
+                          ${col.uid === 'actions' ? 'text-right' : ''}`}>
                           {renderCell(item, col.uid)}
                         </td>
                       ))}

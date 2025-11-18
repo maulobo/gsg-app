@@ -1,0 +1,31 @@
+[
+  {
+    "id": 1,
+    "code": "LED-COB",
+    "name": "Tira Led-cob",
+    "description": "Tira led continuo sin puntos visibles.",
+    "typology": "LED COB",
+    "color_control": "monocromatico / rgbw  ",
+    "cri_min": 90,
+    "voltage_v": 12,
+    "ip_rating": "IP20",
+    "dimmable": true,
+    "dynamic_effects": "",
+    "cut_step_mm_min": 0,
+    "cut_step_mm_max": 0,
+    "width_mm_min": 0,
+    "width_mm_max": 0,
+    "eff_lm_per_w_min": 0,
+    "eff_lm_per_w_max": 0,
+    "flux_lm_per_m_min": 0,
+    "flux_lm_per_m_max": 0,
+    "leds_per_m_min": 0,
+    "leds_per_m_max": 0,
+    "roll_length_m": 5,
+    "warranty_years": 2,
+    "packaging": "Rollo termoencogido con etiqueta identificatoria",
+    "is_active": false,
+    "created_at": "2025-11-13T19:05:02.134538+00:00",
+    "updated_at": "2025-11-13T19:39:52.606192+00:00"
+  }
+]

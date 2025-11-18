@@ -15,7 +15,8 @@ import {
   ShootingStarIcon,
   SwatchIcon,
   BoxIconLine,
-  LedStripIcon
+  LedStripIcon,
+  GroupIcon
 } from "../icons";
 import SidebarWidget from "./SidebarWidget";
 
@@ -60,6 +61,11 @@ const navItems: NavItem[] = [
     icon: <LedStripIcon />,
     name: "Rollos LED",
     path: "/led-rolls",
+  },
+  {
+    icon: <GroupIcon />,
+    name: "Distribuidores",
+    path: "/distributors",
   },
   {
     icon: <ShootingStarIcon />,

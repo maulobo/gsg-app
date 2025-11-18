@@ -1,0 +1,200 @@
+[
+  {
+    "id": 2,
+    "code": "QDR",
+    "name": "Quadra",
+    "category_id": 4,
+    "description": "La geometría en su máxima expresión nos dislumbra con su minimalismo en estos puros elementos geométricos. Diferentes configuraciones posibles gracias a su regulación de tensores.",
+    "is_featured": false,
+    "created_at": "2025-10-13T18:42:58.385619+00:00"
+  },
+  {
+    "id": 4,
+    "code": "SXL",
+    "name": "Saturno XL",
+    "category_id": 4,
+    "description": "Este imponente colgante resalta por el tamaño de sus aros logrando un gran impacto visual. Combinando varios aros podemos obtener un elemento dinámico con solo mover los aros a la posición deseada.",
+    "is_featured": false,
+    "created_at": "2025-10-13T18:42:58.385619+00:00"
+  },
+  {
+    "id": 5,
+    "code": "BUR",
+    "name": "Buro Directo",
+    "category_id": 4,
+    "description": "La sencillez no quita funcionalidad. Es ideal para colocar sobre escritorios para tener una luz uniforme y agradable. Disponible en luz directa e indirecta permite generar ambientes modernos y funcionales.",
+    "is_featured": false,
+    "created_at": "2025-10-13T18:42:58.385619+00:00"
+  },
+  {
+    "id": 6,
+    "code": "WAL",
+    "name": "Aplique de pared",
+    "category_id": 3,
+    "description": "Este aplique direccionable está especialmente diseñado para baños. Permite regular el ángulo para modificar la dirección de la luz. Colocándolo sobre un espejo lograremos una luz ideal para maquillarse o simplemente mirarse.",
+    "is_featured": false,
+    "created_at": "2025-10-13T18:42:58.385619+00:00"
+  },
+  {
+    "id": 7,
+    "code": "LAI",
+    "name": "Aplique Lazo indirecto",
+    "category_id": 3,
+    "description": "Este aplique direccionable está especialmente diseñado para baños. Permite regular el ángulo para modificar la dirección de la luz. Colocándolo sobre un espejo lograremos una luz ideal para maquillarse o simplemente mirarse.",
+    "is_featured": false,
+    "created_at": "2025-10-13T18:42:58.385619+00:00"
+  },
+  {
+    "id": 8,
+    "code": "BOD",
+    "name": "Lampara de pie boden",
+    "category_id": 7,
+    "description": "Creado con una nueva tecnología de led permite dimmerizar, asi como encender/ apagar con solo pasar la mano por encima del sensor",
+    "is_featured": false,
+    "created_at": "2025-10-13T18:42:58.385619+00:00"
+  },
+  {
+    "id": 9,
+    "code": "KRO",
+    "name": "Plafón Krov",
+    "category_id": 2,
+    "description": "Un nuevo concepto dentro de un plafón de lineas marcadamente geométricas impacta por sus cuadrados concéntricos.",
+    "is_featured": false,
+    "created_at": "2025-10-13T18:42:58.385619+00:00"
+  },
+  {
+    "id": 10,
+    "code": "LAD",
+    "name": "Plafón Lazo Directo",
+    "category_id": 2,
+    "description": "Moderno y minimalista. Geométrico y asimétrico, así nos ilumina este nuevo plafón que ilumina con un diseño distinguido y modernsita. Especialmente diseñado para techos bajos.",
+    "is_featured": false,
+    "created_at": "2025-10-13T18:42:58.385619+00:00"
+  },
+  {
+    "id": 13,
+    "code": "PLA",
+    "name": "Mini Embutido Planar",
+    "category_id": 2,
+    "description": "Este embutido de dimensiones reducidas aporta un diseño minimalista en cualquiera de sus presentaciones.",
+    "is_featured": false,
+    "created_at": "2025-10-13T18:42:58.385619+00:00"
+  },
+  {
+    "id": 14,
+    "code": "HOL",
+    "name": "Mini embutido Hole",
+    "category_id": 2,
+    "description": "Su diseño de suave curva refleja un degradé lumínico que parece salir de un agujero.",
+    "is_featured": false,
+    "created_at": "2025-10-13T18:42:58.385619+00:00"
+  },
+  {
+    "id": 11,
+    "code": "EST",
+    "name": "Estaca Exterior",
+    "category_id": 6,
+    "description": "Inspirado en ligeras curvas femeninas creamos este pequeño artefacto torneado en aluminio. Ideal para uso en exteriores, patios y jardines.",
+    "is_featured": false,
+    "created_at": "2025-10-13T18:42:58.385619+00:00"
+  },
+  {
+    "id": 3,
+    "code": "HEX",
+    "name": "Hexa",
+    "category_id": 4,
+    "description": "El hexágono proveniente de un panal de abejas es utilizado en este destacado diseño de colgante. Combinando varios podemos llegar al diseño del panal.",
+    "is_featured": true,
+    "created_at": "2025-10-13T18:42:58.385619+00:00"
+  },
+  {
+    "id": 28,
+    "code": "PAB",
+    "name": "Panal de abejas",
+    "category_id": 4,
+    "description": "El diseño modular permite crear increibles colgantes en forma de panal de abejas. sujeto con tensores al techo diferentes e increibles diseños pueden llevarse a la realidad. Con uniones por detras se logra una sencilla instalacion y práctica a la hora del transporte. escalable sin límites. Disponible en medidas de 40/ 60 y 80 cm entre caras no combinables entre si.",
+    "is_featured": false,
+    "created_at": "2025-10-13T18:42:58.385619+00:00"
+  },
+  {
+    "id": 29,
+    "code": "URA-C",
+    "name": "Urano colgante",
+    "category_id": 4,
+    "description": "La iluminación superior-directa que brinda Urano sumado a su esteticidad minimalista hacen en conjunto un artefacto con amplia versatilidad. Desde salas de reunión hasta espacios en común. Existiendo dos formas de instalacion: standard con florón o aplicado a techos flotantes con un conjunto de imanes. Es sin dudas un artefacto sin fecha de caducidad. El usuario puede combinar los aros a gusto en un solo colgante",
+    "is_featured": false,
+    "created_at": "2025-10-13T18:42:58.385619+00:00"
+  },
+  {
+    "id": 30,
+    "code": "SNK",
+    "name": "Snake",
+    "category_id": 4,
+    "description": "Una forma recta y dura sostiene una morfología orgánica que recorre diferentes configuraciones fácilmente modificables, generando dinamismo y adaptabilidad",
+    "is_featured": false,
+    "created_at": "2025-10-13T18:42:58.385619+00:00"
+  },
+  {
+    "id": 31,
+    "code": "STK",
+    "name": "Stick",
+    "category_id": 4,
+    "description": "La iluminación indirecta se ha convertido en un recurso muy útil a la hora de ambientar un espacio ya que no genera molestias visuales ni luz excesiva lo cual es ideal para momentos de relax.",
+    "is_featured": false,
+    "created_at": "2025-10-13T18:42:58.385619+00:00"
+  },
+  {
+    "id": 32,
+    "code": "WOR",
+    "name": "Worm",
+    "category_id": 7,
+    "description": "Una ligera curva envolvente genera una lámpara de mesa dinámica y novedosa. Creado con una nueva tecnología de led permite dimmerizar, asi como encender/ apagar con solo pasar la mano por encima del sensor.",
+    "is_featured": false,
+    "created_at": "2025-10-13T18:42:58.385619+00:00"
+  },
+  {
+    "id": 33,
+    "code": "TEX",
+    "name": "Texo",
+    "category_id": 3,
+    "description": "Nacido desde la unión de volúmenes perfectamente gemoétricos, los cuales insinúan una morfología simple y minimalista generando una luz tenue e indirecta.",
+    "is_featured": false,
+    "created_at": "2025-10-13T18:42:58.385619+00:00"
+  },
+  {
+    "id": 34,
+    "code": "LEC",
+    "name": "Lectus",
+    "category_id": 3,
+    "description": "La iluminación debe brindar calidez y bienestar, y por sobre todo debe ser útil en las tareas como la lectura. Es por eso que diseñamos este pequeño aplique que permite direccionar la luz a la zona que se desee. Además posee una tecla de encendido/apagado para tener el control en todo momento. Es ideal para cabeceras de cama.",
+    "is_featured": false,
+    "created_at": "2025-10-13T18:42:58.385619+00:00"
+  },
+  {
+    "id": 35,
+    "code": "HAL",
+    "name": "Aplique de pared Hall",
+    "category_id": 3,
+    "description": "Aplique fijo de luz directa. Su simpicidad permite múltiples usos como en pasillos, baños o escaleras. Su tecnología LED brinda una luz uniforme, ideal para baños y toilettes.",
+    "is_featured": false,
+    "created_at": "2025-10-13T18:42:58.385619+00:00"
+  },
+  {
+    "id": 1,
+    "code": "SAT",
+    "name": "Saturno",
+    "category_id": 4,
+    "description": "Un delgado aro de aluminio nos ilumina desde su interior, como flotando en el aire gracias a sus casi imperceptibles tensores dando una imagen moderna y llamativa. Permite diferentes configuraciones al momento de instalarlo.",
+    "is_featured": false,
+    "created_at": "2025-10-13T18:42:58.385619+00:00"
+  },
+  {
+    "id": 12,
+    "code": "GAR",
+    "name": "Embutido de piso Garten",
+    "category_id": 6,
+    "description": "Este pequeño embutido de piso permite lograr efectos muy decorativos si los hubicamos cerca de paredes o columnas. Permite el alto tránsito gracias a su frente de acero inoxidable y posee una protección IP67 contra agentes externos como el agua de lluvia o riego. Ideal para uso en exteriores, patios y jardines.",
+    "is_featured": false,
+    "created_at": "2025-10-13T18:42:58.385619+00:00"
+  }
+]

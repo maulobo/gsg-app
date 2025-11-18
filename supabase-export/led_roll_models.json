@@ -1,0 +1,28 @@
+[
+  {
+    "id": 1,
+    "roll_id": 1,
+    "sku": "LED-COB-10W-CAL-12V",
+    "name": "LED COB 10 W 3000K 12 V IP20",
+    "description": null,
+    "watt_per_m": 10,
+    "leds_per_m": 320,
+    "luminous_efficacy_lm_w": 110,
+    "luminous_flux_per_m_lm": 1100,
+    "cut_step_mm": 10,
+    "width_mm": 8,
+    "ip_rating": "IP20",
+    "voltage_v": null,
+    "dimmable": null,
+    "cri": null,
+    "color_mode": "mono",
+    "light_tone_id": 23,
+    "cct_min_k": null,
+    "cct_max_k": null,
+    "price": 0,
+    "stock": 0,
+    "is_active": true,
+    "created_at": "2025-11-13T19:05:03.890576+00:00",
+    "updated_at": "2025-11-13T19:05:03.890576+00:00"
+  }
+]

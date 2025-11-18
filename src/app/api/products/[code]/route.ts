@@ -93,17 +93,13 @@ export async function DELETE(
 
     // 3. Eliminar imágenes de R2
     if (mediaAssets && mediaAssets.length > 0) {
-      console.log(`Eliminando ${mediaAssets.length} imágenes de R2...`)
-      
       for (const asset of mediaAssets) {
         const key = extractKeyFromUrl(asset.path)
         if (key) {
           try {
             await deleteFromR2(key)
-            console.log(`✅ Imagen eliminada de R2: ${key}`)
           } catch (r2Error) {
-            console.error(`❌ Error eliminando imagen de R2: ${key}`, r2Error)
-            // Continuar con las demás imágenes aunque falle una
+            console.error(`Error eliminando imagen de R2: ${key}`, r2Error)
           }
         }
       }

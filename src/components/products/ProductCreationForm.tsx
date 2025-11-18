@@ -37,6 +37,7 @@ type VariantData = {
 }
 
 type ConfigData = {
+  name?: string
   sku: string
   watt: number
   lumens: number
@@ -828,14 +829,21 @@ export function ProductCreationForm({ categories, finishes: initialFinishes, lig
                         key={idx}
                         className="flex items-center justify-between rounded-lg bg-gray-100 px-3 py-2 dark:bg-gray-800"
                       >
-                        <div className="flex items-center gap-3 text-theme-sm">
-                          <span className="font-mono font-medium text-gray-900 dark:text-white">
-                            {config.sku}
-                          </span>
-                          <span className="text-gray-600 dark:text-gray-400">
-                            {config.watt}W · {config.lumens}lm
-                            {config.voltage && ` · ${config.voltage}V`}
-                          </span>
+                        <div className="flex flex-col gap-1">
+                          {config.name && (
+                            <span className="text-theme-sm font-semibold text-gray-900 dark:text-white">
+                              {config.name}
+                            </span>
+                          )}
+                          <div className="flex items-center gap-3 text-theme-sm">
+                            <span className="font-mono font-medium text-gray-900 dark:text-white">
+                              {config.sku}
+                            </span>
+                            <span className="text-gray-600 dark:text-gray-400">
+                              {config.watt}W · {config.lumens}lm
+                              {config.voltage && ` · ${config.voltage}V`}
+                            </span>
+                          </div>
                         </div>
                         <button
                           onClick={() =>
@@ -863,6 +871,19 @@ export function ProductCreationForm({ categories, finishes: initialFinishes, lig
                   </p>
 
                   <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+                    <div className="col-span-2 sm:col-span-3">
+                      <label className="mb-1.5 block text-theme-xs font-medium text-gray-700 dark:text-gray-300">
+                        Nombre de la configuración
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="ej: Bur-d-30w-3000k"
+                        value={currentConfig.name || ''}
+                        onChange={(e) => setCurrentConfig({ ...currentConfig, name: e.target.value })}
+                        className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-theme-sm text-gray-900 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500"
+                      />
+                    </div>
+
                     <div>
                       <label className="mb-1.5 block text-theme-xs font-medium text-gray-700 dark:text-gray-300">
                         SKU *

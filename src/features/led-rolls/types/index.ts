@@ -124,10 +124,22 @@ export interface LedRollModelWithTone extends LedRollModel {
 }
 
 /**
+ * Modelo con múltiples tonos de luz (nueva estructura)
+ */
+export interface LedRollModelWithTones extends Omit<LedRollModel, 'light_tone_id'> {
+  light_tones?: Array<{
+    id: number
+    name: string
+    slug: string
+    kelvin: number | null
+  }>
+}
+
+/**
  * Rollo con sus modelos y media
  */
 export interface LedRollFull extends LedRoll {
-  models: LedRollModelWithTone[]
+  models: LedRollModelWithTones[]
   media: LedRollMedia[]
 }
 
@@ -197,7 +209,8 @@ export interface LedRollModelFormData {
   dimmable?: boolean | null
   cri?: number | null
   color_mode: 'mono' | 'cct' | 'rgb' | 'rgb_pixel'
-  light_tone_id?: number | null
+  light_tone_id?: number | null // Deprecado: usar light_tone_ids
+  light_tone_ids?: number[] // Nuevo: array de IDs de tonos de luz
   cct_min_k?: number | null
   cct_max_k?: number | null
   price?: number | null
