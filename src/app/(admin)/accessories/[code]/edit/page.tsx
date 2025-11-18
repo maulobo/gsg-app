@@ -5,8 +5,8 @@ import { getFinishes } from '@/features/finishes/queries'
 import { getLightTones } from '@/features/light-tones/queries'
 import AccessoryEditForm from '@/components/accessories/AccessoryEditForm'
 
-export async function generateMetadata({ params }: { params: { code: string } }): Promise<Metadata> {
-  const resolvedParams = await params as { code: string }
+export async function generateMetadata({ params }: { params: Promise<{ code: string }> }): Promise<Metadata> {
+  const resolvedParams = await params
   const accessory = await getAccessoryByCode(resolvedParams.code)
   return {
     title: accessory?.name ? `Editar ${accessory.name}` : 'Editar Accesorio',
@@ -14,8 +14,8 @@ export async function generateMetadata({ params }: { params: { code: string } })
   }
 }
 
-export default async function AccessoryEditPage({ params }: { params: { code: string } }) {
-  const resolvedParams = await params as { code: string }
+export default async function AccessoryEditPage({ params }: { params: Promise<{ code: string }> }) {
+  const resolvedParams = await params
   
   // Cargar datos en paralelo
   const [accessory, finishes, lightTones] = await Promise.all([
