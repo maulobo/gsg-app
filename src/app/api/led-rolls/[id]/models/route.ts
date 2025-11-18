@@ -25,9 +25,9 @@ export async function POST(
     }
 
     // Validación de color_mode
-    if (body.color_mode === 'mono' && !body.light_tone_id) {
+    if (body.color_mode === 'mono' && !body.light_tone_ids && !body.light_tone_id) {
       return NextResponse.json(
-        { error: 'light_tone_id es requerido para modo monocromático' },
+        { error: 'light_tone_ids (array) o light_tone_id es requerido para modo monocromático' },
         { status: 400 }
       )
     }

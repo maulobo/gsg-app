@@ -1,0 +1,65 @@
+[
+  {
+    "profile_id": 1,
+    "diffuser_id": 1,
+    "included_by_m": true,
+    "included_qty_per_m": 0,
+    "notes": null
+  },
+  {
+    "profile_id": 1,
+    "diffuser_id": 2,
+    "included_by_m": true,
+    "included_qty_per_m": 0,
+    "notes": null
+  },
+  {
+    "profile_id": 2,
+    "diffuser_id": 1,
+    "included_by_m": true,
+    "included_qty_per_m": 1,
+    "notes": "con protección UV"
+  },
+  {
+    "profile_id": 2,
+    "diffuser_id": 2,
+    "included_by_m": true,
+    "included_qty_per_m": 1,
+    "notes": "con protección UV"
+  },
+  {
+    "profile_id": 5,
+    "diffuser_id": 1,
+    "included_by_m": false,
+    "included_qty_per_m": 0,
+    "notes": null
+  },
+  {
+    "profile_id": 5,
+    "diffuser_id": 2,
+    "included_by_m": false,
+    "included_qty_per_m": 0,
+    "notes": null
+  },
+  {
+    "profile_id": 5,
+    "diffuser_id": 8,
+    "included_by_m": false,
+    "included_qty_per_m": 0,
+    "notes": null
+  },
+  {
+    "profile_id": 6,
+    "diffuser_id": 8,
+    "included_by_m": false,
+    "included_qty_per_m": 0,
+    "notes": null
+  },
+  {
+    "profile_id": 6,
+    "diffuser_id": 1,
+    "included_by_m": false,
+    "included_qty_per_m": 0,
+    "notes": null
+  }
+]

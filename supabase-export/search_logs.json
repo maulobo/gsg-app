@@ -1,0 +1,53 @@
+[
+  {
+    "id": 2,
+    "query": "lámpara exterior jardín patio",
+    "results_count": 5,
+    "top_similarity": 0.588159813613926,
+    "execution_time_ms": 1665,
+    "user_ip": "::1",
+    "user_agent": "curl/8.7.1",
+    "source": "api",
+    "created_at": "2025-10-14T17:02:20.879341",
+    "results_ids": null,
+    "user_clicked_product_id": null,
+    "user_feedback": null,
+    "feedback_at": null
+  },
+  {
+    "id": 3,
+    "query": "lámpara LED que sea colgante y que incluya equipo y led",
+    "results_count": 5,
+    "top_similarity": 0.569273616714867,
+    "execution_time_ms": 2027,
+    "user_ip": "::1",
+    "user_agent": "curl/8.7.1",
+    "source": "api",
+    "created_at": "2025-10-14T17:10:35.036134",
+    "results_ids": [
+      5,
+      5,
+      5,
+      5,
+      3
+    ],
+    "user_clicked_product_id": null,
+    "user_feedback": null,
+    "feedback_at": null
+  },
+  {
+    "id": 1,
+    "query": "que es lo mejor que puedo conseguir para el patio? cuanto ilumina?",
+    "results_count": 0,
+    "top_similarity": null,
+    "execution_time_ms": 3960,
+    "user_ip": "::1",
+    "user_agent": "curl/8.7.1",
+    "source": "api",
+    "created_at": "2025-10-14T16:53:08.714688",
+    "results_ids": null,
+    "user_clicked_product_id": 5,
+    "user_feedback": "helpful",
+    "feedback_at": "2025-10-14T17:10:52.065"
+  }
+]

@@ -1,0 +1,37 @@
+[
+  {
+    "id": 2,
+    "slug": "techo",
+    "name": "Techo"
+  },
+  {
+    "id": 3,
+    "slug": "pared",
+    "name": "Pared"
+  },
+  {
+    "id": 4,
+    "slug": "colgantes",
+    "name": "Colgantes"
+  },
+  {
+    "id": 5,
+    "slug": "perfiles",
+    "name": "Perfiles"
+  },
+  {
+    "id": 6,
+    "slug": "exterior",
+    "name": "Exterior"
+  },
+  {
+    "id": 7,
+    "slug": "pie",
+    "name": "De Pie"
+  },
+  {
+    "id": 21,
+    "slug": "tiras-de-led",
+    "name": "tiras de led"
+  }
+]

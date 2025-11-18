@@ -1,0 +1,34 @@
+[
+  {
+    "profile_id": 1,
+    "finish_id": 42
+  },
+  {
+    "profile_id": 1,
+    "finish_id": 46
+  },
+  {
+    "profile_id": 2,
+    "finish_id": 40
+  },
+  {
+    "profile_id": 2,
+    "finish_id": 43
+  },
+  {
+    "profile_id": 2,
+    "finish_id": 41
+  },
+  {
+    "profile_id": 5,
+    "finish_id": 40
+  },
+  {
+    "profile_id": 6,
+    "finish_id": 40
+  },
+  {
+    "profile_id": 6,
+    "finish_id": 54
+  }
+]

@@ -13,6 +13,7 @@ type LightTone = {
 
 type Configuration = {
   id?: number
+  name?: string
   sku: string
   watt: number
   lumens: number
@@ -477,6 +478,20 @@ export function VariantEditForm({ variant, productCode, lightTones }: VariantEdi
                 </div>
 
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {/* Nombre */}
+                  <div className="sm:col-span-2">
+                    <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+                      Nombre de la configuración
+                    </label>
+                    <input
+                      type="text"
+                      value={config.name || ''}
+                      onChange={(e) => handleConfigChange(index, 'name', e.target.value)}
+                      placeholder="ej: Bur-d-30w-3000k"
+                      className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+                    />
+                  </div>
+
                   {/* SKU */}
                   <div>
                     <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">

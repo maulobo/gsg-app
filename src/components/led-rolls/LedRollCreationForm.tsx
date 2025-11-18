@@ -30,7 +30,7 @@ type RollModel = {
 export function LedRollCreationForm({ lightTones }: LedRollCreationFormProps) {
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [currentStep, setCurrentStep] = useState<'basic' | 'specs' | 'models' | 'images' | 'review'>('basic')
+  const [currentStep, setCurrentStep] = useState<'basic' | 'models' | 'images' | 'review'>('basic')
 
   // Paso 1: Info básica
   const [formData, setFormData] = useState({
@@ -42,28 +42,7 @@ export function LedRollCreationForm({ lightTones }: LedRollCreationFormProps) {
     packaging: 'Rollo termoencogido con etiqueta identificatoria',
   })
 
-  // Paso 2: Especificaciones
-  const [specs, setSpecs] = useState({
-    cri_min: 0,
-    voltage_v: 12,
-    ip_rating: 'IP20',
-    dimmable: true,
-    dynamic_effects: '',
-    cut_step_mm_min: 0,
-    cut_step_mm_max: 0,
-    width_mm_min: 0,
-    width_mm_max: 0,
-    eff_lm_per_w_min: 0,
-    eff_lm_per_w_max: 0,
-    flux_lm_per_m_min: 0,
-    flux_lm_per_m_max: 0,
-    leds_per_m_min: 0,
-    leds_per_m_max: 0,
-    roll_length_m: 0,
-    warranty_years: 0,
-  })
-
-  // Paso 3: Modelos
+  // Paso 2: Modelos (las especificaciones están en cada modelo)
   const [models, setModels] = useState<RollModel[]>([])
   const [tempModel, setTempModel] = useState<RollModel>({
     sku: '',
@@ -123,19 +102,16 @@ export function LedRollCreationForm({ lightTones }: LedRollCreationFormProps) {
       return
     }
 
-    // Para modo mono, crear un modelo por cada tono seleccionado
-    if (tempModel.color_mode === 'mono' && tempModel.light_tone_ids && tempModel.light_tone_ids.length > 0) {
-      const newModels = tempModel.light_tone_ids.map(toneId => ({
-        ...tempModel,
-        light_tone_id: toneId,
-        light_tone_ids: undefined, // Remover el campo temporal
-      }))
-      setModels([...models, ...newModels])
-    } else {
-      // Para otros modos (CCT, RGB), agregar solo un modelo
-      const newModel = { ...tempModel, light_tone_ids: undefined }
-      setModels([...models, newModel])
+    // Crear UN modelo con los tonos seleccionados como array
+    // Ya no creamos múltiples modelos, sino un modelo con light_tone_ids
+    const newModel = { 
+      ...tempModel,
+      // Asegurarse de que light_tone_ids esté presente para modo mono
+      light_tone_ids: tempModel.color_mode === 'mono' ? tempModel.light_tone_ids : undefined,
+      // Limpiar light_tone_id si existe (campo deprecado)
+      light_tone_id: tempModel.color_mode === 'mono' ? null : tempModel.light_tone_id,
     }
+    setModels([...models, newModel])
 
     setTempModel({
       sku: '',
@@ -172,7 +148,7 @@ export function LedRollCreationForm({ lightTones }: LedRollCreationFormProps) {
       const rollResponse = await fetch('/api/led-rolls', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, ...specs }),
+        body: JSON.stringify(formData),
       })
 
       if (!rollResponse.ok) {
@@ -244,10 +220,9 @@ export function LedRollCreationForm({ lightTones }: LedRollCreationFormProps) {
       <div className="mb-8 flex items-center justify-center gap-2 overflow-x-auto pb-2">
         {[
           { key: 'basic', label: '1. Info Básica' },
-          { key: 'specs', label: '2. Especificaciones' },
-          { key: 'models', label: '3. Modelos' },
-          { key: 'images', label: '4. Imágenes' },
-          { key: 'review', label: '5. Revisar' }
+          { key: 'models', label: '2. Modelos' },
+          { key: 'images', label: '3. Imágenes' },
+          { key: 'review', label: '4. Revisar' }
         ].map((step, index) => (
           <div key={step.key} className="flex items-center flex-shrink-0">
             <button
@@ -345,223 +320,6 @@ export function LedRollCreationForm({ lightTones }: LedRollCreationFormProps) {
             <div className="flex justify-end gap-3 mt-6">
               <button
                 type="button"
-                onClick={() => setCurrentStep('specs')}
-                className="rounded-md bg-brand-500 px-6 py-2 text-white hover:bg-brand-600"
-              >
-                Siguiente: Especificaciones →
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Step 2: Specifications */}
-        {currentStep === 'specs' && (
-          <div className="space-y-6">
-            <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Especificaciones Técnicas</h2>
-
-            {/* Electrical */}
-            <div>
-              <h3 className="font-semibold mb-3 text-gray-900 dark:text-gray-100">Características Eléctricas</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">CRI Mínimo</label>
-                  <input
-                    type="number"
-                    value={specs.cri_min || ''}
-                    onChange={(e) => setSpecs({ ...specs, cri_min: parseInt(e.target.value) || 0 })}
-                    className="w-full rounded-md border border-gray-300 px-3 py-2 bg-white text-gray-900 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Voltaje (V)</label>
-                  <select
-                    value={specs.voltage_v}
-                    onChange={(e) => setSpecs({ ...specs, voltage_v: parseInt(e.target.value) })}
-                    className="w-full rounded-md border border-gray-300 px-3 py-2 bg-white text-gray-900 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
-                  >
-                    <option value={12}>12V</option>
-                    <option value={24}>24V</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">IP Rating</label>
-                  <select
-                    value={specs.ip_rating}
-                    onChange={(e) => setSpecs({ ...specs, ip_rating: e.target.value })}
-                    className="w-full rounded-md border border-gray-300 px-3 py-2 bg-white text-gray-900 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
-                  >
-                    <option value="IP20">IP20</option>
-                    <option value="IP65">IP65</option>
-                    <option value="IP67">IP67</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            {/* Dimensions */}
-            <div>
-              <h3 className="font-semibold mb-3 text-gray-900 dark:text-gray-100">Dimensiones y Corte</h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Corte mín (mm)</label>
-                  <input
-                    type="number"
-                    value={specs.cut_step_mm_min || ''}
-                    onChange={(e) => setSpecs({ ...specs, cut_step_mm_min: parseInt(e.target.value) || 0 })}
-                    className="w-full rounded-md border border-gray-300 px-3 py-2 bg-white text-gray-900 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Corte máx (mm)</label>
-                  <input
-                    type="number"
-                    value={specs.cut_step_mm_max || ''}
-                    onChange={(e) => setSpecs({ ...specs, cut_step_mm_max: parseInt(e.target.value) || 0 })}
-                    className="w-full rounded-md border border-gray-300 px-3 py-2 bg-white text-gray-900 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Ancho mín (mm)</label>
-                  <input
-                    type="number"
-                    step="0.1"
-                    value={specs.width_mm_min || ''}
-                    onChange={(e) => setSpecs({ ...specs, width_mm_min: parseFloat(e.target.value) || 0 })}
-                    className="w-full rounded-md border border-gray-300 px-3 py-2 bg-white text-gray-900 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Ancho máx (mm)</label>
-                  <input
-                    type="number"
-                    step="0.1"
-                    value={specs.width_mm_max || ''}
-                    onChange={(e) => setSpecs({ ...specs, width_mm_max: parseFloat(e.target.value) || 0 })}
-                    className="w-full rounded-md border border-gray-300 px-3 py-2 bg-white text-gray-900 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* LEDs */}
-            <div>
-              <h3 className="font-semibold mb-3 text-gray-900 dark:text-gray-100">LEDs por Metro</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">LEDs/m Mínimo</label>
-                  <input
-                    type="number"
-                    value={specs.leds_per_m_min || ''}
-                    onChange={(e) => setSpecs({ ...specs, leds_per_m_min: parseInt(e.target.value) || 0 })}
-                    className="w-full rounded-md border border-gray-300 px-3 py-2 bg-white text-gray-900 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">LEDs/m Máximo</label>
-                  <input
-                    type="number"
-                    value={specs.leds_per_m_max || ''}
-                    onChange={(e) => setSpecs({ ...specs, leds_per_m_max: parseInt(e.target.value) || 0 })}
-                    className="w-full rounded-md border border-gray-300 px-3 py-2 bg-white text-gray-900 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Efficiency */}
-            <div>
-              <h3 className="font-semibold mb-3 text-gray-900 dark:text-gray-100">Eficiencia Lumínica</h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Efic. mín (lm/W)</label>
-                  <input
-                    type="number"
-                    step="0.1"
-                    value={specs.eff_lm_per_w_min || ''}
-                    onChange={(e) => setSpecs({ ...specs, eff_lm_per_w_min: parseFloat(e.target.value) || 0 })}
-                    className="w-full rounded-md border border-gray-300 px-3 py-2 bg-white text-gray-900 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Efic. máx (lm/W)</label>
-                  <input
-                    type="number"
-                    step="0.1"
-                    value={specs.eff_lm_per_w_max || ''}
-                    onChange={(e) => setSpecs({ ...specs, eff_lm_per_w_max: parseFloat(e.target.value) || 0 })}
-                    className="w-full rounded-md border border-gray-300 px-3 py-2 bg-white text-gray-900 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Flujo mín (lm/m)</label>
-                  <input
-                    type="number"
-                    step="0.1"
-                    value={specs.flux_lm_per_m_min || ''}
-                    onChange={(e) => setSpecs({ ...specs, flux_lm_per_m_min: parseFloat(e.target.value) || 0 })}
-                    className="w-full rounded-md border border-gray-300 px-3 py-2 bg-white text-gray-900 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Flujo máx (lm/m)</label>
-                  <input
-                    type="number"
-                    step="0.1"
-                    value={specs.flux_lm_per_m_max || ''}
-                    onChange={(e) => setSpecs({ ...specs, flux_lm_per_m_max: parseFloat(e.target.value) || 0 })}
-                    className="w-full rounded-md border border-gray-300 px-3 py-2 bg-white text-gray-900 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Other */}
-            <div>
-              <h3 className="font-semibold mb-3 text-gray-900 dark:text-gray-100">Otros</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Longitud rollo (m)</label>
-                  <input
-                    type="number"
-                    step="0.1"
-                    value={specs.roll_length_m || ''}
-                    onChange={(e) => setSpecs({ ...specs, roll_length_m: parseFloat(e.target.value) || 0 })}
-                    className="w-full rounded-md border border-gray-300 px-3 py-2 bg-white text-gray-900 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Garantía (años)</label>
-                  <input
-                    type="number"
-                    value={specs.warranty_years || ''}
-                    onChange={(e) => setSpecs({ ...specs, warranty_years: parseInt(e.target.value) || 0 })}
-                    className="w-full rounded-md border border-gray-300 px-3 py-2 bg-white text-gray-900 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
-                  />
-                </div>
-                <div className="flex items-center">
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={specs.dimmable}
-                      onChange={(e) => setSpecs({ ...specs, dimmable: e.target.checked })}
-                      className="w-4 h-4"
-                    />
-                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Dimeable</span>
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex justify-between gap-3 mt-6">
-              <button
-                type="button"
-                onClick={() => setCurrentStep('basic')}
-                className="rounded-md border px-6 py-2 hover:bg-gray-50"
-              >
-                ← Anterior
-              </button>
-              <button
-                type="button"
                 onClick={() => setCurrentStep('models')}
                 className="rounded-md bg-brand-500 px-6 py-2 text-white hover:bg-brand-600"
               >
@@ -571,7 +329,7 @@ export function LedRollCreationForm({ lightTones }: LedRollCreationFormProps) {
           </div>
         )}
 
-        {/* Step 3: Models */}
+        {/* Step 2: Models */}
         {currentStep === 'models' && (
           <div className="space-y-4">
             <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Modelos/SKUs</h2>
@@ -816,7 +574,7 @@ export function LedRollCreationForm({ lightTones }: LedRollCreationFormProps) {
             <div className="flex justify-between gap-3 mt-6">
               <button
                 type="button"
-                onClick={() => setCurrentStep('specs')}
+                onClick={() => setCurrentStep('basic')}
                 className="rounded-md border px-6 py-2 hover:bg-gray-50"
               >
                 ← Anterior
@@ -832,7 +590,7 @@ export function LedRollCreationForm({ lightTones }: LedRollCreationFormProps) {
           </div>
         )}
 
-        {/* Step 4: Images */}
+        {/* Step 3: Images */}
         {currentStep === 'images' && (
           <div className="space-y-6">
             <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Imágenes</h2>
@@ -912,7 +670,7 @@ export function LedRollCreationForm({ lightTones }: LedRollCreationFormProps) {
           </div>
         )}
 
-        {/* Step 5: Review */}
+        {/* Step 4: Review */}
         {currentStep === 'review' && (
           <div className="space-y-6">
             <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Revisar y Confirmar</h2>
@@ -931,30 +689,19 @@ export function LedRollCreationForm({ lightTones }: LedRollCreationFormProps) {
               </div>
 
               <div className="border-b pb-4 dark:border-gray-700">
-                <h3 className="font-semibold mb-2 text-gray-900 dark:text-gray-100">Especificaciones</h3>
-                <dl className="grid grid-cols-2 gap-2 text-sm">
-                  <dt className="text-gray-600 dark:text-gray-400">CRI:</dt>
-                  <dd className="font-medium text-gray-900 dark:text-gray-100">{specs.cri_min}</dd>
-                  <dt className="text-gray-600 dark:text-gray-400">Voltaje:</dt>
-                  <dd className="font-medium text-gray-900 dark:text-gray-100">{specs.voltage_v}V</dd>
-                  <dt className="text-gray-600 dark:text-gray-400">IP Rating:</dt>
-                  <dd className="font-medium text-gray-900 dark:text-gray-100">{specs.ip_rating}</dd>
-                  <dt className="text-gray-600 dark:text-gray-400">LEDs/m:</dt>
-                  <dd className="font-medium text-gray-900 dark:text-gray-100">{specs.leds_per_m_min} - {specs.leds_per_m_max}</dd>
-                </dl>
-              </div>
-
-              <div className="border-b pb-4 dark:border-gray-700">
                 <h3 className="font-semibold mb-2 text-gray-900 dark:text-gray-100">Modelos ({models.length})</h3>
                 {models.map((model, i) => {
-                  const toneName = model.light_tone_id 
-                    ? lightTones.find(t => t.id === model.light_tone_id)?.name || ''
-                    : null
+                  // Soporte para múltiples tonos de luz
+                  const toneNames = model.light_tone_ids && model.light_tone_ids.length > 0
+                    ? model.light_tone_ids.map(id => lightTones.find(t => t.id === id)?.name).filter(Boolean).join(', ')
+                    : model.light_tone_id 
+                      ? lightTones.find(t => t.id === model.light_tone_id)?.name || ''
+                      : null
                   
                   return (
                     <p key={i} className="text-sm mb-1 text-gray-700 dark:text-gray-300">
                       • <strong className="text-gray-900 dark:text-gray-100">{model.sku}</strong> - {model.watt_per_m}W/m, {model.leds_per_m} LED/m, {model.color_mode.toUpperCase()}
-                      {toneName && ` - ${toneName}`}
+                      {toneNames && ` - ${toneNames}`}
                     </p>
                   )
                 })}

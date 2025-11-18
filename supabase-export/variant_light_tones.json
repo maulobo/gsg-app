@@ -1,0 +1,486 @@
+[
+  {
+    "variant_id": 51,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 6,
+    "light_tone_id": 23
+  },
+  {
+    "variant_id": 6,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 6,
+    "light_tone_id": 25
+  },
+  {
+    "variant_id": 6,
+    "light_tone_id": 26
+  },
+  {
+    "variant_id": 10,
+    "light_tone_id": 23
+  },
+  {
+    "variant_id": 10,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 10,
+    "light_tone_id": 25
+  },
+  {
+    "variant_id": 10,
+    "light_tone_id": 26
+  },
+  {
+    "variant_id": 12,
+    "light_tone_id": 23
+  },
+  {
+    "variant_id": 12,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 12,
+    "light_tone_id": 25
+  },
+  {
+    "variant_id": 12,
+    "light_tone_id": 26
+  },
+  {
+    "variant_id": 16,
+    "light_tone_id": 33
+  },
+  {
+    "variant_id": 22,
+    "light_tone_id": 23
+  },
+  {
+    "variant_id": 22,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 17,
+    "light_tone_id": 23
+  },
+  {
+    "variant_id": 17,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 17,
+    "light_tone_id": 25
+  },
+  {
+    "variant_id": 17,
+    "light_tone_id": 26
+  },
+  {
+    "variant_id": 39,
+    "light_tone_id": 23
+  },
+  {
+    "variant_id": 39,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 39,
+    "light_tone_id": 25
+  },
+  {
+    "variant_id": 39,
+    "light_tone_id": 26
+  },
+  {
+    "variant_id": 40,
+    "light_tone_id": 23
+  },
+  {
+    "variant_id": 40,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 40,
+    "light_tone_id": 25
+  },
+  {
+    "variant_id": 40,
+    "light_tone_id": 26
+  },
+  {
+    "variant_id": 1,
+    "light_tone_id": 23
+  },
+  {
+    "variant_id": 1,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 1,
+    "light_tone_id": 25
+  },
+  {
+    "variant_id": 1,
+    "light_tone_id": 26
+  },
+  {
+    "variant_id": 3,
+    "light_tone_id": 23
+  },
+  {
+    "variant_id": 3,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 3,
+    "light_tone_id": 25
+  },
+  {
+    "variant_id": 3,
+    "light_tone_id": 26
+  },
+  {
+    "variant_id": 14,
+    "light_tone_id": 23
+  },
+  {
+    "variant_id": 14,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 14,
+    "light_tone_id": 25
+  },
+  {
+    "variant_id": 14,
+    "light_tone_id": 26
+  },
+  {
+    "variant_id": 53,
+    "light_tone_id": 23
+  },
+  {
+    "variant_id": 53,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 53,
+    "light_tone_id": 25
+  },
+  {
+    "variant_id": 53,
+    "light_tone_id": 26
+  },
+  {
+    "variant_id": 43,
+    "light_tone_id": 23
+  },
+  {
+    "variant_id": 43,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 43,
+    "light_tone_id": 25
+  },
+  {
+    "variant_id": 43,
+    "light_tone_id": 26
+  },
+  {
+    "variant_id": 44,
+    "light_tone_id": 23
+  },
+  {
+    "variant_id": 44,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 44,
+    "light_tone_id": 25
+  },
+  {
+    "variant_id": 44,
+    "light_tone_id": 26
+  },
+  {
+    "variant_id": 45,
+    "light_tone_id": 23
+  },
+  {
+    "variant_id": 45,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 45,
+    "light_tone_id": 25
+  },
+  {
+    "variant_id": 45,
+    "light_tone_id": 26
+  },
+  {
+    "variant_id": 46,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 47,
+    "light_tone_id": 23
+  },
+  {
+    "variant_id": 47,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 47,
+    "light_tone_id": 25
+  },
+  {
+    "variant_id": 47,
+    "light_tone_id": 26
+  },
+  {
+    "variant_id": 48,
+    "light_tone_id": 23
+  },
+  {
+    "variant_id": 48,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 48,
+    "light_tone_id": 25
+  },
+  {
+    "variant_id": 48,
+    "light_tone_id": 26
+  },
+  {
+    "variant_id": 49,
+    "light_tone_id": 23
+  },
+  {
+    "variant_id": 49,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 49,
+    "light_tone_id": 25
+  },
+  {
+    "variant_id": 49,
+    "light_tone_id": 26
+  },
+  {
+    "variant_id": 50,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 52,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 4,
+    "light_tone_id": 23
+  },
+  {
+    "variant_id": 4,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 4,
+    "light_tone_id": 25
+  },
+  {
+    "variant_id": 4,
+    "light_tone_id": 26
+  },
+  {
+    "variant_id": 5,
+    "light_tone_id": 23
+  },
+  {
+    "variant_id": 5,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 5,
+    "light_tone_id": 25
+  },
+  {
+    "variant_id": 5,
+    "light_tone_id": 26
+  },
+  {
+    "variant_id": 11,
+    "light_tone_id": 23
+  },
+  {
+    "variant_id": 11,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 11,
+    "light_tone_id": 25
+  },
+  {
+    "variant_id": 7,
+    "light_tone_id": 23
+  },
+  {
+    "variant_id": 7,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 7,
+    "light_tone_id": 25
+  },
+  {
+    "variant_id": 7,
+    "light_tone_id": 26
+  },
+  {
+    "variant_id": 8,
+    "light_tone_id": 23
+  },
+  {
+    "variant_id": 8,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 8,
+    "light_tone_id": 25
+  },
+  {
+    "variant_id": 8,
+    "light_tone_id": 26
+  },
+  {
+    "variant_id": 9,
+    "light_tone_id": 23
+  },
+  {
+    "variant_id": 9,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 9,
+    "light_tone_id": 25
+  },
+  {
+    "variant_id": 9,
+    "light_tone_id": 26
+  },
+  {
+    "variant_id": 11,
+    "light_tone_id": 26
+  },
+  {
+    "variant_id": 15,
+    "light_tone_id": 23
+  },
+  {
+    "variant_id": 15,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 19,
+    "light_tone_id": 23
+  },
+  {
+    "variant_id": 19,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 21,
+    "light_tone_id": 23
+  },
+  {
+    "variant_id": 21,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 18,
+    "light_tone_id": 23
+  },
+  {
+    "variant_id": 18,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 18,
+    "light_tone_id": 25
+  },
+  {
+    "variant_id": 18,
+    "light_tone_id": 26
+  },
+  {
+    "variant_id": 41,
+    "light_tone_id": 23
+  },
+  {
+    "variant_id": 41,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 41,
+    "light_tone_id": 25
+  },
+  {
+    "variant_id": 41,
+    "light_tone_id": 26
+  },
+  {
+    "variant_id": 2,
+    "light_tone_id": 23
+  },
+  {
+    "variant_id": 2,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 2,
+    "light_tone_id": 25
+  },
+  {
+    "variant_id": 2,
+    "light_tone_id": 26
+  },
+  {
+    "variant_id": 13,
+    "light_tone_id": 23
+  },
+  {
+    "variant_id": 13,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 13,
+    "light_tone_id": 25
+  },
+  {
+    "variant_id": 13,
+    "light_tone_id": 26
+  },
+  {
+    "variant_id": 42,
+    "light_tone_id": 23
+  },
+  {
+    "variant_id": 42,
+    "light_tone_id": 24
+  },
+  {
+    "variant_id": 42,
+    "light_tone_id": 25
+  },
+  {
+    "variant_id": 42,
+    "light_tone_id": 26
+  }
+]

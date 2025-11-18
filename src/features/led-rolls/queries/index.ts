@@ -58,16 +58,35 @@ export async function getLedRollById(id: number): Promise<LedRollFull | null> {
     return null
   }
   
-  // Modelos con light tones
+  // Modelos con light tones (nueva estructura con múltiples tonos)
   const { data: modelsData } = await supabase
     .from('led_roll_models')
-    .select(`
-      *,
-      light_tone:light_tones(id, name, slug, kelvin)
-    `)
+    .select('*')
     .eq('roll_id', id)
     .eq('is_active', true)
     .order('sku', { ascending: true })
+  
+  // Para cada modelo, obtener sus tonos de luz de la tabla de relación
+  const modelsWithTones = await Promise.all(
+    (modelsData || []).map(async (model) => {
+      const { data: toneRelations } = await supabase
+        .from('led_roll_model_light_tones')
+        .select(`
+          light_tone:light_tones(id, name, slug, kelvin)
+        `)
+        .eq('model_id', model.id)
+      
+      const tones = toneRelations?.map(r => {
+        const tone = Array.isArray(r.light_tone) ? r.light_tone[0] : r.light_tone
+        return tone
+      }).filter(Boolean) || []
+      
+      return {
+        ...model,
+        light_tones: tones.length > 0 ? tones : undefined,
+      }
+    })
+  )
   
   // Media
   const { data: mediaData } = await supabase
@@ -78,13 +97,7 @@ export async function getLedRollById(id: number): Promise<LedRollFull | null> {
   
   return {
     ...roll,
-    models: modelsData?.map(m => {
-      const tone = Array.isArray(m.light_tone) ? m.light_tone[0] : m.light_tone
-      return {
-        ...m,
-        light_tone: tone || undefined,
-      }
-    }) || [],
+    models: modelsWithTones,
     media: mediaData || [],
   } as LedRollFull
 }
@@ -256,15 +269,37 @@ export async function getLedRollModels(rollId: number) {
 export async function createLedRollModel(model: LedRollModelFormData): Promise<LedRollModel | null> {
   const supabase = await createServerSupabaseClient()
   
+  // Separar light_tone_ids del resto de los datos
+  const { light_tone_ids, ...modelData } = model
+  
+  // Insertar el modelo (sin light_tone_ids, ya que va en otra tabla)
   const { data, error } = await supabase
     .from('led_roll_models')
-    .insert(model)
+    .insert(modelData)
     .select()
     .single()
   
   if (error) {
     console.error('Error creating LED roll model:', error)
     return null
+  }
+  
+  // Si hay múltiples tonos de luz, insertarlos en la tabla de relación
+  if (light_tone_ids && light_tone_ids.length > 0 && data) {
+    const toneRelations = light_tone_ids.map(toneId => ({
+      model_id: data.id,
+      light_tone_id: toneId
+    }))
+    
+    const { error: toneError } = await supabase
+      .from('led_roll_model_light_tones')
+      .insert(toneRelations)
+    
+    if (toneError) {
+      console.error('Error creating light tone relations:', toneError)
+      // No retornamos null porque el modelo ya fue creado
+      // Solo logueamos el error
+    }
   }
   
   return data

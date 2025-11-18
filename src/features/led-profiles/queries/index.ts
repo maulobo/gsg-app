@@ -161,7 +161,10 @@ export async function getLedProfilesListItems(): Promise<LedProfileListItem[]> {
   
   const { data: profiles, error } = await supabase
     .from('led_profiles')
-    .select('*')
+    .select(`
+      *,
+      led_profile_media ( kind )
+    `)
     .order('name', { ascending: true })
   
   if (error || !profiles) {
@@ -191,6 +194,17 @@ export async function getLedProfilesListItems(): Promise<LedProfileListItem[]> {
         .eq('profile_id', profile.id)
         .eq('kind', 'cover')
         .single()
+
+      // Verificar presencia de media
+      const media = (profile.led_profile_media as any[]) || []
+      
+      // Debug: ver qué media tiene cada perfil
+      if (media.length > 0) {
+        console.log(`Profile ${profile.code}:`, media.map((m: any) => m.kind))
+      }
+      
+      const hasPhoto = media.some((m: any) => m.kind === 'cover' || m.kind === 'tech')
+      const hasPdf = media.some((m: any) => m.kind === 'datasheet' || m.kind === 'spec')
       
       return {
         id: profile.id,
@@ -202,6 +216,8 @@ export async function getLedProfilesListItems(): Promise<LedProfileListItem[]> {
         diffusers_count: diffusersCount || 0,
         finishes_count: finishesCount || 0,
         cover_image: coverMedia?.path || null,
+        has_photo: hasPhoto,
+        has_pdf: hasPdf,
       }
     })
   )

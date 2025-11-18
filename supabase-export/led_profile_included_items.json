@@ -1,0 +1,17 @@
+[
+  {
+    "profile_id": 2,
+    "accessory_id": 41,
+    "qty_per_m": 2
+  },
+  {
+    "profile_id": 2,
+    "accessory_id": 42,
+    "qty_per_m": 1
+  },
+  {
+    "profile_id": 2,
+    "accessory_id": 43,
+    "qty_per_m": 1
+  }
+]

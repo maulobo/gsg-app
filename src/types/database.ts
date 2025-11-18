@@ -125,6 +125,7 @@ export type Database = {
         Row: {
           id: number
           variant_id: number
+          name: string | null
           sku: string | null
           watt: number
           lumens: number
@@ -137,6 +138,7 @@ export type Database = {
         Insert: {
           id?: number
           variant_id: number
+          name?: string | null
           sku?: string | null
           watt: number
           lumens: number
@@ -149,6 +151,7 @@ export type Database = {
         Update: {
           id?: number
           variant_id?: number
+          name?: string | null
           sku?: string | null
           watt?: number
           lumens?: number
@@ -199,6 +202,20 @@ export type Database = {
         }
         Update: {
           variant_id?: number
+          light_tone_id?: number
+        }
+      }
+      led_roll_model_light_tones: {
+        Row: {
+          model_id: number
+          light_tone_id: number
+        }
+        Insert: {
+          model_id: number
+          light_tone_id: number
+        }
+        Update: {
+          model_id?: number
           light_tone_id?: number
         }
       }
@@ -427,6 +444,79 @@ export type Database = {
           embedding?: string | number[]
         }
       }
+      distributor_zones: {
+        Row: {
+          id: number
+          name: string
+          display_order: number
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: number
+          name: string
+          display_order?: number
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: number
+          name?: string
+          display_order?: number
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      distributors: {
+        Row: {
+          id: number
+          zone_id: number
+          name: string
+          address: string
+          locality: string
+          phone: string | null
+          google_maps_url: string | null
+          email: string | null
+          website: string | null
+          notes: string | null
+          active: boolean
+          display_order: number
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: number
+          zone_id: number
+          name: string
+          address: string
+          locality: string
+          phone?: string | null
+          google_maps_url?: string | null
+          email?: string | null
+          website?: string | null
+          notes?: string | null
+          active?: boolean
+          display_order?: number
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: number
+          zone_id?: number
+          name?: string
+          address?: string
+          locality?: string
+          phone?: string | null
+          google_maps_url?: string | null
+          email?: string | null
+          website?: string | null
+          notes?: string | null
+          active?: boolean
+          display_order?: number
+          created_at?: string
+          updated_at?: string
+        }
+      }
     }
   }
 }
@@ -513,3 +603,16 @@ export type LedProfileWithRelations = LedProfile & {
   optional_items?: Array<LedProfileOptionalItem & { accessory: { id: number; code: string; name: string } }>
   media?: LedProfileMedia[]
 }
+
+// =============================================
+// DISTRIBUTORS TYPES
+// =============================================
+
+export type DistributorZone = Database['public']['Tables']['distributor_zones']['Row']
+export type Distributor = Database['public']['Tables']['distributors']['Row']
+
+export type DistributorZoneInsert = Database['public']['Tables']['distributor_zones']['Insert']
+export type DistributorInsert = Database['public']['Tables']['distributors']['Insert']
+
+export type DistributorZoneUpdate = Database['public']['Tables']['distributor_zones']['Update']
+export type DistributorUpdate = Database['public']['Tables']['distributors']['Update']
