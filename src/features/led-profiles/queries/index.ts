@@ -241,7 +241,6 @@ export async function createLedProfile(profile: LedProfileInsert): Promise<LedPr
     console.error('Error creating LED profile:', error)
     return null
   }
-  
   return data
 }
 

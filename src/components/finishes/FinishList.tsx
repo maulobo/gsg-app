@@ -2,6 +2,7 @@
 
 import { useMemo, useState, useCallback } from 'react'
 import { Button, Pagination } from '@heroui/react'
+import { AddFinishModal } from './AddFinishModal'
 
 // Iconos inline
 const SearchIcon = ({ className = "w-4 h-4" }) => (
@@ -49,6 +50,20 @@ export function FinishList({ finishes: initialFinishes }: FinishListProps) {
   const [editingFinish, setEditingFinish] = useState<Finish | null>(null)
   const [newColor, setNewColor] = useState<string>('#000000')
   const [loading, setLoading] = useState(false)
+
+  // Función para recargar los finishes
+  const handleFinishAdded = async () => {
+    try {
+      // Recargar la lista desde el servidor
+      const response = await fetch('/api/finishes')
+      if (response.ok) {
+        const data = await response.json()
+        setFinishes(data.finishes || [])
+      }
+    } catch (error) {
+      console.error('Error reloading finishes:', error)
+    }
+  }
 
   const hasSearchFilter = Boolean(filterValue)
 
@@ -310,10 +325,15 @@ export function FinishList({ finishes: initialFinishes }: FinishListProps) {
     <div className="w-full">
       <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-theme-xs dark:border-gray-800 dark:bg-white/[0.03]">
         <div className="border-b border-gray-200 px-4 sm:px-6 py-4 dark:border-gray-800 dark:bg-white/[0.02]">
-          <h1 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">Acabados</h1>
-          <p className="mt-1 text-theme-sm text-gray-500 dark:text-gray-400">
-            Gestiona los colores de los acabados de tus productos
-          </p>
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">Acabados</h1>
+              <p className="mt-1 text-theme-sm text-gray-500 dark:text-gray-400">
+                Gestiona los colores de los acabados de tus productos
+              </p>
+            </div>
+            <AddFinishModal onFinishAdded={handleFinishAdded} />
+          </div>
         </div>
         <div className="p-4 sm:p-6">
           {topContent}

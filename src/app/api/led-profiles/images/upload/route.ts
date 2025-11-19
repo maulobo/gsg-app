@@ -23,6 +23,8 @@ function generateLedProfileFileName(originalName: string, profileCode: string, k
 
 export async function POST(request: NextRequest) {
   try {
+    console.log('📤 [LED Profile Upload] Iniciando upload...')
+    
     // 1. Parsear FormData
     const formData = await request.formData()
     const file = formData.get('image') as File
@@ -30,6 +32,9 @@ export async function POST(request: NextRequest) {
     const profileCode = formData.get('profileCode') as string
     const kind = formData.get('kind') as 'cover' | 'gallery' | 'tech' | 'accessory' | 'datasheet' | 'spec' || 'gallery'
     const altText = formData.get('altText') as string || ''
+
+    console.log(`📄 Archivo: ${file?.name}, Tipo: ${file?.type}, Tamaño: ${file?.size} bytes`)
+    console.log(`📋 Profile ID: ${profileId}, Code: ${profileCode}, Kind: ${kind}`)
 
     if (!file) {
       return NextResponse.json(
@@ -46,24 +51,53 @@ export async function POST(request: NextRequest) {
     }
 
     // 2. Validar archivo
-    const validation = validateImageFile(file)
-    if (!validation.isValid) {
-      return NextResponse.json(
-        { error: validation.error },
-        { status: 400 }
-      )
+    const isPDF = file.name.toLowerCase().endsWith('.pdf') || file.type === 'application/pdf'
+    
+    if (!isPDF) {
+      // Solo validar imágenes si no es PDF
+      const validation = validateImageFile(file)
+      if (!validation.isValid) {
+        return NextResponse.json(
+          { error: validation.error },
+          { status: 400 }
+        )
+      }
+    } else {
+      // Validar tamaño de PDF (max 10MB)
+      const maxSize = 10 * 1024 * 1024
+      if (file.size > maxSize) {
+        return NextResponse.json(
+          { error: 'El PDF no debe superar 10MB' },
+          { status: 400 }
+        )
+      }
     }
 
-    // 3. Procesar imagen según el tipo
+    // 3. Procesar archivo según el tipo
     const fileBuffer = await fileToBuffer(file)
-    const imageType = kind === 'tech' ? 'tech' : 'cover'
-    const { optimizedBuffer, contentType } = await processProductImage(fileBuffer, imageType, file.type)
+    let optimizedBuffer: Buffer
+    let contentType: string
+
+    if (isPDF) {
+      // Para PDFs, no procesamos, solo subimos tal cual
+      optimizedBuffer = fileBuffer
+      contentType = 'application/pdf'
+    } else {
+      // Para imágenes, optimizamos
+      const imageType = kind === 'tech' ? 'tech' : 'cover'
+      const processed = await processProductImage(fileBuffer, imageType, file.type)
+      optimizedBuffer = processed.optimizedBuffer
+      contentType = processed.contentType
+    }
 
     // 4. Generar nombre único
     const fileName = generateLedProfileFileName(file.name, profileCode, kind)
+    console.log(`📝 Nombre de archivo generado: ${fileName}`)
 
     // 5. Subir a R2
+    console.log(`☁️  Subiendo a R2...`)
     const imageUrl = await uploadToR2(fileName, optimizedBuffer, contentType)
+    console.log(`✅ Archivo subido a R2: ${imageUrl}`)
 
     // 6. Guardar en base de datos
     const supabase = await createServerSupabaseClient()
@@ -75,6 +109,8 @@ export async function POST(request: NextRequest) {
       alt_text: altText || null,
     }
 
+    console.log(`💾 Guardando en DB:`, mediaData)
+    
     const { data: mediaAsset, error: dbError } = await supabase
       .from('led_profile_media')
       .insert(mediaData)
@@ -83,7 +119,7 @@ export async function POST(request: NextRequest) {
 
     // 7. Rollback en caso de error de DB
     if (dbError) {
-      console.error('Error guardando imagen en DB:', dbError)
+      console.error('❌ Error guardando imagen en DB:', dbError)
       // Intentar eliminar la imagen de R2
       const key = extractKeyFromUrl(imageUrl)
       if (key) {
@@ -100,6 +136,8 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    console.log(`✅ Upload completado exitosamente!`)
+    
     return NextResponse.json({
       success: true,
       media: mediaAsset,
@@ -107,7 +145,7 @@ export async function POST(request: NextRequest) {
     })
 
   } catch (error) {
-    console.error('Error subiendo imagen:', error)
+    console.error('❌ Error subiendo imagen:', error)
     return NextResponse.json(
       { error: 'Error interno al procesar la imagen' },
       { status: 500 }
