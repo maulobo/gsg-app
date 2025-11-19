@@ -52,22 +52,27 @@ export default function SignInForm() {
       // If we have tokens, ask the server to set the session cookies so
       // middleware and server-side code can read the session.
       if (access_token && refresh_token) {
-        await fetch('/api/auth/set-session', {
+        const setSessionResponse = await fetch('/api/auth/set-session', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ access_token, refresh_token }),
           credentials: 'include',
         })
         
+        if (!setSessionResponse.ok) {
+          throw new Error('Failed to set session on server')
+        }
+        
         // Force refresh the client session to sync with server cookies
         await refreshSession()
         
-        // Small delay to ensure session is fully set
-        await new Promise(resolve => setTimeout(resolve, 500))
+        // Delay to ensure session is fully set and cookies are propagated
+        await new Promise(resolve => setTimeout(resolve, 1000))
+        
+        // Use window.location to do a full page reload so middleware sees the cookies
+        window.location.href = '/'
+        return
       }
-
-      // Redirect to dashboard
-      router.push('/')
     } catch (err: any) {
       setError(err?.message ?? String(err))
     } finally {

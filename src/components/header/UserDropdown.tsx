@@ -23,9 +23,18 @@ export default function UserDropdown() {
   }
 
   const handleSignOut = async () => {
-    await signOut();
-    router.push('/signin');
     closeDropdown();
+    try {
+      await signOut();
+      // Small delay then redirect with full page reload
+      setTimeout(() => {
+        window.location.href = '/signin';
+      }, 300);
+    } catch (err) {
+      console.error('Sign out error:', err);
+      // Force redirect anyway
+      window.location.href = '/signin';
+    }
   };
 
   // Show loading state while checking authentication

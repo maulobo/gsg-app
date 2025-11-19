@@ -28,6 +28,7 @@ export async function POST(req: NextRequest) {
 
     return response
   } catch (err: any) {
+    console.error('Sign out error:', err)
     return NextResponse.json({ error: err?.message ?? String(err) }, { status: 500 })
   }
 }

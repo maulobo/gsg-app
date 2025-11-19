@@ -36,7 +36,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
-
+      console.log('Initial session:', session?.user?.email || 'No session')
       setSession(session)
       setUser(session?.user ?? null)
       setLoading(false)
@@ -45,8 +45,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // Listen for auth changes
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-    
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      console.log('Auth state change:', event, session?.user?.email || 'No session')
       setSession(session)
       setUser(session?.user ?? null)
       setLoading(false)
@@ -67,18 +67,37 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signOut = async () => {
     try {
-      // First, sign out on server (clears cookies)
-      await fetch('/api/auth/signout', {
+      console.log('Starting sign out...')
+      
+      // Sign out on client with local scope (doesn't require session to be in storage)
+      const { error } = await supabase.auth.signOut({ scope: 'local' })
+      if (error) {
+        console.error('Supabase signOut error:', error)
+        // Continue anyway - the session might already be gone
+      } else {
+        console.log('Supabase signOut successful')
+      }
+      
+      // Clear server cookies
+      const response = await fetch('/api/auth/signout', {
         method: 'POST',
         credentials: 'include',
       })
       
-      // Then sign out on client
-      await supabase.auth.signOut()
+      if (!response.ok) {
+        console.error('Server signout failed:', await response.text())
+      } else {
+        console.log('Server signout successful')
+      }
+      
+      // Ensure client state is cleared
+      setUser(null)
+      setSession(null)
     } catch (err) {
       console.error('Sign out error:', err)
-      // Fallback: at least sign out on client
-      await supabase.auth.signOut()
+      // Even if there's an error, clear the client state
+      setUser(null)
+      setSession(null)
     }
   }
 
