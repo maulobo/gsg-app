@@ -181,25 +181,11 @@ export function LedProfileCreationForm({ diffusers, finishes }: LedProfileCreati
         datasheetFormData.append('profileId', profileId.toString())
         datasheetFormData.append('profileCode', formData.code)
         datasheetFormData.append('kind', 'datasheet')
-        datasheetFormData.append('altText', `${formData.name} - Cartilla Técnica`)
+        datasheetFormData.append('altText', `${formData.name} - Ficha técnica`)
 
         await fetch('/api/led-profiles/images/upload', {
           method: 'POST',
           body: datasheetFormData,
-        })
-      }
-
-      if (specPdf) {
-        const specFormData = new FormData()
-        specFormData.append('image', specPdf)
-        specFormData.append('profileId', profileId.toString())
-        specFormData.append('profileCode', formData.code)
-        specFormData.append('kind', 'spec')
-        specFormData.append('altText', `${formData.name} - Especificaciones`)
-
-        await fetch('/api/led-profiles/images/upload', {
-          method: 'POST',
-          body: specFormData,
         })
       }
 
@@ -906,9 +892,9 @@ export function LedProfileCreationForm({ diffusers, finishes }: LedProfileCreati
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Datasheet PDF */}
                 <div className="border border-gray-200 rounded-lg p-4 bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
-                  <h4 className="font-medium mb-3 text-gray-900 dark:text-gray-100">Cartilla Técnica</h4>
+                  <h4 className="font-medium mb-3 text-gray-900 dark:text-gray-100">Ficha técnica</h4>
                   <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-                    Documento PDF con información técnica detallada
+                    Documento PDF con información técnica del perfil
                   </p>
                   
                   {!datasheetPreview ? (
@@ -941,53 +927,6 @@ export function LedProfileCreationForm({ diffusers, finishes }: LedProfileCreati
                       <button
                         type="button"
                         onClick={removeDatasheet}
-                        className="bg-error-600 text-white p-2 rounded-full hover:bg-error-700 transition-colors flex-shrink-0"
-                      >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                      </button>
-                    </div>
-                  )}
-                </div>
-
-                {/* Spec PDF */}
-                <div className="border border-gray-200 rounded-lg p-4 bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
-                  <h4 className="font-medium mb-3 text-gray-900 dark:text-gray-100">Especificaciones</h4>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-                    Documento PDF con especificaciones adicionales
-                  </p>
-                  
-                  {!specPreview ? (
-                    <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-brand-500 transition-colors dark:border-gray-600 dark:hover:border-brand-400">
-                      <div className="flex flex-col items-center justify-center">
-                        <svg className="w-10 h-10 mb-2 text-error-600" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18.5,19H16.5V18H18.5V19M18.5,17H16.5V14H18.5V17M13,19H11V18H13V19M13,17H11V14H13V17M15,13H5V11H15V13M13,9V3.5L18.5,9H13Z" />
-                        </svg>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">
-                          <span className="font-semibold">Subir PDF</span>
-                        </p>
-                        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">MAX. 10MB</p>
-                      </div>
-                      <input
-                        type="file"
-                        className="hidden"
-                        accept=".pdf,application/pdf"
-                        onChange={handleSpecChange}
-                      />
-                    </label>
-                  ) : (
-                    <div className="flex items-center gap-3 p-3 bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700">
-                      <svg className="w-8 h-8 text-error-600 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18.5,19H16.5V18H18.5V19M18.5,17H16.5V14H18.5V17M13,19H11V18H13V19M13,17H11V14H13V17M15,13H5V11H15V13M13,9V3.5L18.5,9H13Z" />
-                      </svg>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">{specPreview}</p>
-                        <p className="text-xs text-gray-500 dark:text-gray-400">PDF seleccionado</p>
-                      </div>
-                      <button
-                        type="button"
-                        onClick={removeSpec}
                         className="bg-error-600 text-white p-2 rounded-full hover:bg-error-700 transition-colors flex-shrink-0"
                       >
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

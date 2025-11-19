@@ -32,6 +32,8 @@ const TrashIcon = ({ className = "w-4 h-4" }) => (
 )
 
 import type { LedProfileListItem } from '@/features/led-profiles/types'
+import ViewLedProfileModal from './ViewLedProfileModal'
+import { useModal } from '@/hooks/useModal'
 
 const INITIAL_VISIBLE_COLUMNS = ['name', 'code', 'has_media', 'actions']
 
@@ -49,13 +51,15 @@ type LedProfileListProps = {
 export function LedProfileList({ profiles }: LedProfileListProps) {
   const router = useRouter()
   const [filterValue, setFilterValue] = useState('')
-  const [materialFilter, setMaterialFilter] = useState<string>('all')
+  // removed material filtering per request
   const [selectedKeys, setSelectedKeys] = useState(new Set([]))
   const [visibleColumns, setVisibleColumns] = useState(new Set(INITIAL_VISIBLE_COLUMNS))
   const [rowsPerPage, setRowsPerPage] = useState(10)
   const [sortDescriptor, setSortDescriptor] = useState({ column: 'name', direction: 'ascending' })
   const [page, setPage] = useState(1)
   const [isDeleting, setIsDeleting] = useState<string | null>(null)
+  const { isOpen: isViewOpen, openModal: openViewModal, closeModal: closeViewModal } = useModal()
+  const [viewProfileId, setViewProfileId] = useState<number | null>(null)
 
   const handleDelete = async (code: string) => {
     if (!confirm('⚠️ ¿Estás seguro de eliminar este perfil LED?\n\nSe eliminarán:\n- El perfil\n- Todas las relaciones con difusores\n- Todas las relaciones con acabados\n- Todos los items incluidos/opcionales\n- Todas las imágenes\n\nEsta acción no se puede deshacer.')) {
@@ -93,37 +97,24 @@ export function LedProfileList({ profiles }: LedProfileListProps) {
     return columns.filter((column) => Array.from(visibleColumns).includes(column.uid))
   }, [visibleColumns])
 
-  // Obtener materiales únicos
-  const materials = useMemo(() => {
-    const uniqueMaterials = new Set(
-      profiles
-        .map(p => p.material)
-        .filter(Boolean)
-    )
-    return Array.from(uniqueMaterials).sort()
-  }, [profiles])
+  // materials filter removed
 
   const filteredItems = useMemo(() => {
     let filteredProfiles = [...profiles]
 
     // Filtro por búsqueda
     if (hasSearchFilter) {
+      // Buscar por nombre o código
       filteredProfiles = filteredProfiles.filter((profile) =>
         profile.name.toLowerCase().includes(filterValue.toLowerCase()) ||
-        profile.code.toLowerCase().includes(filterValue.toLowerCase()) ||
-        (profile.description && profile.description.toLowerCase().includes(filterValue.toLowerCase()))
+        profile.code.toLowerCase().includes(filterValue.toLowerCase())
       )
     }
 
-    // Filtro por material
-    if (materialFilter !== 'all') {
-      filteredProfiles = filteredProfiles.filter(
-        (profile) => profile.material === materialFilter
-      )
-    }
+    // No hay otros filtros
 
     return filteredProfiles
-  }, [profiles, filterValue, materialFilter, hasSearchFilter])
+  }, [profiles, filterValue, hasSearchFilter])
 
   const pages = Math.ceil(filteredItems.length / rowsPerPage)
 
@@ -207,6 +198,19 @@ export function LedProfileList({ profiles }: LedProfileListProps) {
             >
               <PencilIcon className="w-4 h-4" />
             </Button>
+            <Button
+              isIconOnly
+              size="sm"
+              variant="flat"
+              onPress={() => {
+                setViewProfileId(profile.id)
+                openViewModal()
+              }}
+              className="text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+              aria-label="Ver perfil LED"
+            >
+              <EyeIcon className="w-4 h-4" />
+            </Button>
             <Button 
               isIconOnly
               size="sm" 
@@ -275,7 +279,7 @@ export function LedProfileList({ profiles }: LedProfileListProps) {
             </div>
             <input
               type="text"
-              placeholder="Buscar por nombre, código o descripción..."
+              placeholder="Buscar por nombre o código..."
               value={filterValue}
               onChange={(e) => onSearchChange(e.target.value)}
               className="w-full rounded-lg border border-gray-300 bg-white py-2 pl-9 sm:pl-10 pr-10 text-sm text-gray-900 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500"
@@ -293,25 +297,11 @@ export function LedProfileList({ profiles }: LedProfileListProps) {
             )}
           </div>
           
-          {/* Filtro de material y botón crear */}
+          {/* Botón crear (sin filtros) */}
           <div className="flex flex-col sm:flex-row gap-3">
-            <select
-              className="flex-1 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg px-3 py-2 text-theme-sm text-gray-900 dark:text-white shadow-theme-xs focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10"
-              value={materialFilter}
-              onChange={(e) => {
-                setMaterialFilter(e.target.value)
-                setPage(1)
-              }}
-            >
-              <option value="all">Todos los materiales</option>
-              {materials.map((material) => (
-                <option key={material || 'null'} value={material || ''}>
-                  {material}
-                </option>
-              ))}
-            </select>
-            <Button 
-              color="primary" 
+            <div className="flex-1" />
+            <Button
+              color="primary"
               endContent={<PlusIcon className="w-4 h-4" />}
               onPress={() => router.push('/led-profiles/new')}
               className="bg-brand-500 hover:bg-brand-600 text-white shadow-theme-xs w-full sm:w-auto"
@@ -341,7 +331,7 @@ export function LedProfileList({ profiles }: LedProfileListProps) {
         </div>
       </div>
     )
-  }, [filterValue, materialFilter, onSearchChange, onRowsPerPageChange, profiles.length, filteredItems.length, onClear, router, rowsPerPage, materials])
+  }, [filterValue, onSearchChange, onRowsPerPageChange, profiles.length, filteredItems.length, onClear, router, rowsPerPage])
 
   const bottomContent = useMemo(() => {
     const start = (page - 1) * rowsPerPage + 1
@@ -575,6 +565,7 @@ export function LedProfileList({ profiles }: LedProfileListProps) {
           {bottomContent}
         </div>
       </div>
+      <ViewLedProfileModal profileId={viewProfileId} isOpen={isViewOpen} onClose={() => { setViewProfileId(null); closeViewModal(); }} />
     </div>
   )
 }

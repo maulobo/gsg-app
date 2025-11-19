@@ -5,6 +5,8 @@
  */
 
 import { createServerSupabaseClient } from '@/lib/supabase-server'
+import { deleteFromR2, extractKeyFromUrl } from '@/lib/r2client'
+import { revalidatePath } from 'next/cache'
 import type {
   LedProfile,
   LedDiffuser,
@@ -274,6 +276,31 @@ export async function updateLedProfile(
 export async function deleteLedProfile(id: number): Promise<boolean> {
   const supabase = await createServerSupabaseClient()
   
+  // 0. Obtener media asociada al perfil para limpiar R2
+  try {
+    const { data: mediaItems, error: mediaFetchError } = await supabase
+      .from('led_profile_media')
+      .select('id, path')
+      .eq('profile_id', id)
+
+    if (mediaFetchError) {
+      console.error('Error fetching profile media before delete:', mediaFetchError)
+    } else if (mediaItems && mediaItems.length > 0) {
+      for (const item of mediaItems) {
+        const key = extractKeyFromUrl(item.path)
+        if (key) {
+          try {
+            console.log(`🗑️ Deleting R2 object for profile ${id}: ${key}`)
+            await deleteFromR2(key)
+          } catch (r2Error) {
+            console.error(`Error deleting from R2 for key ${key}:`, r2Error)
+          }
+        }
+      }
+    }
+  } catch (err) {
+    console.error('Unexpected error while cleaning R2 for profile:', err)
+  }
   const { error } = await supabase
     .from('led_profiles')
     .delete()
@@ -282,6 +309,13 @@ export async function deleteLedProfile(id: number): Promise<boolean> {
   if (error) {
     console.error('Error deleting LED profile:', error)
     return false
+  }
+
+  // Revalidate led profiles listing and profile page
+  try {
+    revalidatePath('/led-profiles')
+  } catch (err) {
+    // ignore revalidation failures in server contexts
   }
   
   return true
