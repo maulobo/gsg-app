@@ -24,12 +24,6 @@ const TrashIcon = ({ className = "w-4 h-4" }) => (
   </svg>
 )
 
-const ToggleIcon = ({ className = "w-4 h-4" }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
-  </svg>
-)
-
 import type { DistributorWithZone } from '@/features/distributors/types'
 
 const INITIAL_VISIBLE_COLUMNS = ['zone', 'name', 'locality', 'contact', 'active', 'actions']
@@ -82,26 +76,6 @@ export function DistributorList({ distributors }: DistributorListProps) {
       alert(`❌ Error: ${error.message}`)
     } finally {
       setIsDeleting(null)
-    }
-  }
-
-  const toggleActive = async (id: number, currentActive: boolean) => {
-    try {
-      const res = await fetch(`/api/distributors/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ active: !currentActive })
-      })
-
-      if (!res.ok) {
-        const errorData = await res.json()
-        throw new Error(errorData.error || 'Error al actualizar estado')
-      }
-
-      router.refresh()
-    } catch (error: any) {
-      console.error('Error toggling active:', error)
-      alert(`❌ Error: ${error.message}`)
     }
   }
 
@@ -228,20 +202,11 @@ export function DistributorList({ distributors }: DistributorListProps) {
               isIconOnly
               size="sm"
               variant="light"
+              color="primary"
               onPress={() => router.push(`/distributors/${distributor.id}/edit`)}
               title="Editar distribuidor"
             >
               <PencilIcon className="w-4 h-4" />
-            </Button>
-            <Button
-              isIconOnly
-              size="sm"
-              variant="light"
-              color={distributor.active ? 'warning' : 'success'}
-              onPress={() => toggleActive(distributor.id, distributor.active)}
-              title={distributor.active ? 'Desactivar' : 'Activar'}
-            >
-              <ToggleIcon className="w-4 h-4" />
             </Button>
             <Button
               isIconOnly

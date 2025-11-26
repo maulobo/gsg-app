@@ -17,10 +17,10 @@ type Configuration = {
   sku: string
   watt: number
   lumens: number
-  voltage?: number
+  voltage?: number | null
   diameter_description?: string
-  length_mm?: number
-  width_mm?: number
+  length_cm?: string
+  width_cm?: string
   specs?: Record<string, any>
 }
 
@@ -514,6 +514,7 @@ export function VariantEditForm({ variant, productCode, lightTones }: VariantEdi
                       type="number"
                       value={config.watt}
                       onChange={(e) => handleConfigChange(index, 'watt', Number(e.target.value))}
+                      onWheel={(e) => e.currentTarget.blur()}
                       required
                       min="0"
                       step="0.1"
@@ -530,6 +531,7 @@ export function VariantEditForm({ variant, productCode, lightTones }: VariantEdi
                       type="number"
                       value={config.lumens}
                       onChange={(e) => handleConfigChange(index, 'lumens', Number(e.target.value))}
+                      onWheel={(e) => e.currentTarget.blur()}
                       required
                       min="0"
                       className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
@@ -545,6 +547,7 @@ export function VariantEditForm({ variant, productCode, lightTones }: VariantEdi
                       type="number"
                       value={config.voltage || ''}
                       onChange={(e) => handleConfigChange(index, 'voltage', e.target.value ? Number(e.target.value) : undefined)}
+                      onWheel={(e) => e.currentTarget.blur()}
                       min="0"
                       className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
                     />
@@ -566,13 +569,13 @@ export function VariantEditForm({ variant, productCode, lightTones }: VariantEdi
                   {/* Length */}
                   <div>
                     <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      Largo (mm)
+                      Largo (cm)
                     </label>
                     <input
-                      type="number"
-                      value={config.length_mm || ''}
-                      onChange={(e) => handleConfigChange(index, 'length_mm', e.target.value ? Number(e.target.value) : undefined)}
-                      min="0"
+                      type="text"
+                      value={config.length_cm || ''}
+                      onChange={(e) => handleConfigChange(index, 'length_cm', e.target.value || undefined)}
+                      placeholder="Ej: 600, 30x60, etc."
                       className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
                     />
                   </div>
@@ -580,13 +583,13 @@ export function VariantEditForm({ variant, productCode, lightTones }: VariantEdi
                   {/* Width */}
                   <div>
                     <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      Ancho (mm)
+                      Ancho (cm)
                     </label>
                     <input
-                      type="number"
-                      value={config.width_mm || ''}
-                      onChange={(e) => handleConfigChange(index, 'width_mm', e.target.value ? Number(e.target.value) : undefined)}
-                      min="0"
+                      type="text"
+                      value={config.width_cm || ''}
+                      onChange={(e) => handleConfigChange(index, 'width_cm', e.target.value || undefined)}
+                      placeholder="Ej: 300, 30x30, etc."
                       className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
                     />
                   </div>

@@ -115,8 +115,8 @@ export async function createVariantConfig(data: {
   watt: number
   lumens: number
   diameter_description?: string
-  length_mm?: number
-  width_mm?: number
+  length_cm?: number
+  width_cm?: number
   voltage?: number
   includes_led?: boolean
   includes_driver?: boolean

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createServerSupabaseClient } from '@/lib/supabase-server'
+import { createServerSupabaseClient, createAdminSupabaseClient } from '@/lib/supabase-server'
 import { deleteFromR2, extractKeyFromUrl } from '@/lib/r2client'
 
 export async function PATCH(
@@ -46,6 +46,34 @@ export async function PATCH(
         { error: 'Error al actualizar el producto' },
         { status: 500 }
       )
+    }
+
+    // Actualizar finishes si se enviaron
+    if (body.finish_ids !== undefined) {
+      const adminSupabase = createAdminSupabaseClient()
+      
+      // Eliminar finishes existentes
+      await adminSupabase
+        .from('product_finishes')
+        .delete()
+        .eq('product_id', existingProduct.id)
+
+      // Insertar nuevos finishes
+      if (body.finish_ids.length > 0) {
+        const finishInserts = body.finish_ids.map((finish_id: number) => ({
+          product_id: existingProduct.id,
+          finish_id,
+        }))
+
+        const { error: finishError } = await adminSupabase
+          .from('product_finishes')
+          .insert(finishInserts)
+
+        if (finishError) {
+          console.error('Error actualizando finishes:', finishError)
+          // No fallar, solo loguear
+        }
+      }
     }
 
     return NextResponse.json({

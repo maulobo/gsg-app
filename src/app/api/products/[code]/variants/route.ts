@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createServerSupabaseClient } from '@/lib/supabase-server'
+import { createServerSupabaseClient, createAdminSupabaseClient } from '@/lib/supabase-server'
 
 type RouteParams = {
   code: string
@@ -55,7 +55,8 @@ export async function POST(
     }
 
     // 2. Crear la variante
-    const { data: variant, error: createError } = await supabase
+    const adminSupabase = createAdminSupabaseClient()
+    const { data: variant, error: createError } = await adminSupabase
       .from('product_variants')
       .insert({
         product_id,
@@ -69,9 +70,20 @@ export async function POST(
 
     if (createError || !variant) {
       console.error('[Variant Create] Error al crear variante:', createError)
+      
+      let errorMessage = 'Error al crear la variante'
+      
+      if (createError?.code === '23505') {
+        errorMessage = 'Ya existe una variante con ese código'
+      } else if (createError?.code === '23502') {
+        errorMessage = 'Faltan campos requeridos (nombre, código, etc.)'
+      } else if (createError?.message) {
+        errorMessage = createError.message
+      }
+      
       return NextResponse.json(
-        { error: 'Error al crear la variante' },
-        { status: 500 }
+        { error: errorMessage, code: createError?.code },
+        { status: 400 }
       )
     }
 
@@ -82,7 +94,7 @@ export async function POST(
         light_tone_id: toneId,
       }))
 
-      const { error: insertTonesError } = await supabase
+      const { error: insertTonesError } = await adminSupabase
         .from('variant_light_tones')
         .insert(tonesToInsert)
 
@@ -94,26 +106,58 @@ export async function POST(
 
     // 4. Insertar configuraciones
     if (configurations && Array.isArray(configurations) && configurations.length > 0) {
+      console.log('[Variant Create] Configuraciones a insertar:', configurations)
+      
       const configsToInsert = configurations.map((config: any) => ({
         variant_id: variant.id,
         sku: config.sku,
+        name: config.name || null,
         watt: config.watt,
         lumens: config.lumens,
         voltage: config.voltage,
         diameter_description: config.diameter_description,
-        length_mm: config.length_mm,
-        width_mm: config.width_mm,
-        specs: config.specs,
+        length_cm: config.length_cm,
+        width_cm: config.width_cm,
+        specs: config.specs || {}
       }))
 
-      const { error: insertConfigError } = await supabase
+      console.log('[Variant Create] Datos preparados para insert:', configsToInsert)
+
+      const { data: insertedConfigs, error: insertConfigError } = await adminSupabase
         .from('variant_configurations')
         .insert(configsToInsert)
+        .select()
 
       if (insertConfigError) {
         console.error('[Variant Create] Error al insertar configuraciones:', insertConfigError)
-        // No retornamos error aquí, la variante ya fue creada
+        
+        // Crear mensaje de error descriptivo
+        let errorMessage = 'Error al crear las configuraciones'
+        
+        if (insertConfigError.code === '23505') {
+          // Duplicate key error
+          const match = insertConfigError.details?.match(/Key \(sku\)=\(([^)]+)\)/)
+          const sku = match ? match[1] : 'desconocido'
+          errorMessage = `El SKU "${sku}" ya existe. Por favor, usa un SKU diferente.`
+        } else if (insertConfigError.code === '23502') {
+          // Not null violation
+          errorMessage = 'Faltan campos requeridos en las configuraciones (watt, lumens, etc.)'
+        } else if (insertConfigError.message) {
+          errorMessage = insertConfigError.message
+        }
+        
+        return NextResponse.json({
+          error: errorMessage,
+          code: insertConfigError.code,
+          variant_created: true,
+          variant_id: variant.id,
+          warning: 'La variante se creó pero las configuraciones fallaron'
+        }, { status: 400 })
+      } else {
+        console.log('[Variant Create] Configuraciones insertadas exitosamente:', insertedConfigs)
       }
+    } else {
+      console.log('[Variant Create] No hay configuraciones para insertar')
     }
 
     console.log('[Variant Create] Variante creada exitosamente:', variant.id)

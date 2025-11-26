@@ -20,7 +20,7 @@ export async function getProductVariants(productId: number): Promise<VariantWith
         light_tone:light_tones ( id, slug, name, kelvin )
       ),
       variant_configurations (
-        id, sku, watt, lumens, diameter_description, length_mm, width_mm,
+        id, sku, watt, lumens, diameter_description, length_cm, width_cm,
         voltage, specs
       )
     `
@@ -50,7 +50,7 @@ export async function getVariantById(id: number): Promise<VariantWithRelations |
         light_tone:light_tones ( id, slug, name, kelvin )
       ),
       variant_configurations (
-        id, sku, watt, lumens, diameter_description, length_mm, width_mm,
+        id, sku, watt, lumens, diameter_description, length_cm, width_cm,
         voltage, specs
       ),
       media_assets ( id, path, kind, alt_text )

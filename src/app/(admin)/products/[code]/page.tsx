@@ -244,8 +244,13 @@ export default async function ProductPage({ params }: { params: Promise<{ code: 
                     <div className="space-y-3">
                       {v.variant_configurations.map((c: any) => (
                         <div key={c.id} className="rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-800 dark:bg-white/[0.02]">
+                          {c.name && (
+                            <div className="mb-2 text-sm font-semibold text-gray-900 dark:text-white">
+                              {c.name}
+                            </div>
+                          )}
                           {c.sku && (
-                            <div className="mb-2 font-mono text-xs text-brand-600 dark:text-brand-400">
+                            <div className="mb-2 font-mono text-xs text-gray-600 dark:text-gray-400">
                               SKU: {c.sku}
                             </div>
                           )}
@@ -270,16 +275,16 @@ export default async function ProductPage({ params }: { params: Promise<{ code: 
                                 <span className="ml-2 text-gray-700 dark:text-gray-300">{c.diameter_description}</span>
                               </div>
                             )}
-                            {c.length_mm && (
+                            {c.length_cm && (
                               <div className="flex items-center text-gray-900 dark:text-white">
                                 <span className="font-medium">Largo:</span>
-                                <span className="ml-2 text-gray-700 dark:text-gray-300">{c.length_mm}mm</span>
+                                <span className="ml-2 text-gray-700 dark:text-gray-300">{c.length_cm}</span>
                               </div>
                             )}
-                            {c.width_mm && (
+                            {c.width_cm && (
                               <div className="flex items-center text-gray-900 dark:text-white">
                                 <span className="font-medium">Ancho:</span>
-                                <span className="ml-2 text-gray-700 dark:text-gray-300">{c.width_mm}mm</span>
+                                <span className="ml-2 text-gray-700 dark:text-gray-300">{c.width_cm}</span>
                               </div>
                             )}
                           </div>

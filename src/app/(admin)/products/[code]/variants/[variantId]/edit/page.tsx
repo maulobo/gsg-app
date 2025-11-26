@@ -27,13 +27,14 @@ async function getVariant(productCode: string, variantId: string) {
       ),
       variant_configurations (
         id,
+        name,
         sku,
         watt,
         lumens,
         voltage,
         diameter_description,
-        length_mm,
-        width_mm,
+        length_cm,
+        width_cm,
         specs
       )
     `)

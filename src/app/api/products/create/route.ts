@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createServerSupabaseClient } from '@/lib/supabase-server'
+import { createServerSupabaseClient, createAdminSupabaseClient } from '@/lib/supabase-server'
 
 type VariantData = {
   variant_code: string
@@ -8,13 +8,14 @@ type VariantData = {
   includes_driver: boolean
   light_tone_ids: number[]
   configurations: {
+    name?: string
     sku: string
     watt: number
     lumens: number
     voltage?: number
     diameter_description?: string
-    length_mm?: number
-    width_mm?: number
+    length_cm?: string
+    width_cm?: string
     specs?: Record<string, any>
   }[]
 }
@@ -62,11 +63,12 @@ export async function POST(request: NextRequest) {
     }
 
     // 3. Create variants with all their relations
+    const adminSupabase = createAdminSupabaseClient()
     const createdVariants = []
     
     for (const variant of variants as VariantData[]) {
       // 3.1 Create variant
-      const { data: newVariant, error: variantError } = await supabase
+      const { data: newVariant, error: variantError } = await adminSupabase
         .from('product_variants')
         .insert({
           product_id: newProduct.id,
@@ -93,7 +95,7 @@ export async function POST(request: NextRequest) {
           light_tone_id,
         }))
 
-        const { error: toneError } = await supabase
+        const { error: toneError } = await adminSupabase
           .from('variant_light_tones')
           .insert(toneInserts)
 
@@ -106,17 +108,18 @@ export async function POST(request: NextRequest) {
       if (variant.configurations && variant.configurations.length > 0) {
         const configInserts = variant.configurations.map((config) => ({
           variant_id: newVariant.id,
+          name: config.name || null,
           sku: config.sku,
           watt: config.watt,
           lumens: config.lumens,
           voltage: config.voltage,
           diameter_description: config.diameter_description,
-          length_mm: config.length_mm,
-          width_mm: config.width_mm,
+          length_cm: config.length_cm,
+          width_cm: config.width_cm,
           specs: config.specs || {},
         }))
 
-        const { error: configError } = await supabase
+        const { error: configError } = await adminSupabase
           .from('variant_configurations')
           .insert(configInserts)
 

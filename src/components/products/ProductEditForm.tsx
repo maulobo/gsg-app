@@ -4,14 +4,28 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { ProductWithRelations } from '@/types/database'
 
-type ProductEditFormProps = {
-  product: ProductWithRelations
+const TrashIcon = () => (
+  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+  </svg>
+)
+
+type Finish = {
+  id: number
+  slug: string
+  name: string
 }
 
-export function ProductEditForm({ product }: ProductEditFormProps) {
+type ProductEditFormProps = {
+  product: ProductWithRelations
+  finishes: Finish[]
+}
+
+export function ProductEditForm({ product, finishes }: ProductEditFormProps) {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(true)
   const [isSaving, setIsSaving] = useState(false)
+  const [deletingVariantId, setDeletingVariantId] = useState<number | null>(null)
 
   // Estado del formulario
   const [formData, setFormData] = useState({
@@ -19,6 +33,24 @@ export function ProductEditForm({ product }: ProductEditFormProps) {
     description: product.description || '',
     category_id: product.category_id,
     is_featured: product.is_featured,
+  })
+
+  // Estado de finishes seleccionados
+  const [selectedFinishIds, setSelectedFinishIds] = useState<number[]>(() => {
+    console.log('product.product_finishes:', product.product_finishes)
+    
+    if (!product.product_finishes || product.product_finishes.length === 0) {
+      return []
+    }
+    
+    // Intentar diferentes estructuras posibles
+    const ids = product.product_finishes.map((pf: any) => {
+      // Puede ser pf.finish.id o pf.finish_id
+      return pf.finish?.id || pf.finish_id
+    }).filter(Boolean)
+    
+    console.log('selectedFinishIds iniciales:', ids)
+    return ids
   })
 
   useEffect(() => {
@@ -34,7 +66,10 @@ export function ProductEditForm({ product }: ProductEditFormProps) {
       const response = await fetch(`/api/products/${product.code}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          finish_ids: selectedFinishIds
+        }),
       })
 
       if (!response.ok) {
@@ -48,6 +83,34 @@ export function ProductEditForm({ product }: ProductEditFormProps) {
       alert('Error al actualizar el producto')
     } finally {
       setIsSaving(false)
+    }
+  }
+
+  const handleDeleteVariant = async (variantId: number, variantName: string) => {
+    if (!confirm(`⚠️ ¿Estás seguro de eliminar la variante "${variantName}"?\n\nEsta acción no se puede deshacer y eliminará todas las configuraciones asociadas.`)) {
+      return
+    }
+
+    setDeletingVariantId(variantId)
+
+    try {
+      const res = await fetch(`/api/products/${product.code}/variants/${variantId}`, {
+        method: 'DELETE',
+      })
+
+      if (!res.ok) {
+        const errorData = await res.json()
+        throw new Error(errorData.error || 'Error al eliminar la variante')
+      }
+
+      alert('✅ Variante eliminada exitosamente')
+      // Forzar recarga completa de la página
+      window.location.reload()
+    } catch (error: any) {
+      console.error('Error eliminando variante:', error)
+      alert(`❌ Error: ${error.message}`)
+    } finally {
+      setDeletingVariantId(null)
     }
   }
 
@@ -133,6 +196,47 @@ export function ProductEditForm({ product }: ProductEditFormProps) {
         </div>
       </div>
 
+      {/* Terminaciones/Acabados */}
+      <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
+        <div className="border-b border-gray-200 bg-gray-50 px-6 py-4 dark:border-gray-800 dark:bg-gray-900/50">
+          <h2 className="text-lg font-semibold text-black dark:text-white">Terminaciones Disponibles</h2>
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+            Selecciona los acabados disponibles para este producto
+          </p>
+        </div>
+        <div className="p-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+            {finishes.map((finish) => (
+              <label
+                key={finish.id}
+                className="flex items-center gap-2 p-3 rounded-lg border border-gray-200 hover:border-brand-500 hover:bg-brand-50 cursor-pointer transition-colors dark:border-gray-700 dark:hover:border-brand-500 dark:hover:bg-brand-500/10"
+              >
+                <input
+                  type="checkbox"
+                  checked={selectedFinishIds.includes(finish.id)}
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      setSelectedFinishIds([...selectedFinishIds, finish.id])
+                    } else {
+                      setSelectedFinishIds(selectedFinishIds.filter(id => id !== finish.id))
+                    }
+                  }}
+                  className="h-4 w-4 rounded border-gray-300 text-brand-600 focus:ring-brand-500"
+                />
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  {finish.name}
+                </span>
+              </label>
+            ))}
+          </div>
+          {selectedFinishIds.length === 0 && (
+            <p className="text-sm text-amber-600 dark:text-amber-500 mt-3">
+              ⚠️ No has seleccionado ninguna terminación
+            </p>
+          )}
+        </div>
+      </div>
+
       {/* Variantes */}
       <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-theme-xs dark:border-gray-800 dark:bg-white/[0.03]">
         <div className="border-b border-gray-200 bg-gray-50 px-6 py-4 dark:border-gray-800 dark:bg-white/[0.02]">
@@ -163,13 +267,24 @@ export function ProductEditForm({ product }: ProductEditFormProps) {
                         <p className="text-sm text-gray-600 dark:text-gray-400">Código: {variant.variant_code}</p>
                       )}
                     </div>
-                    <button
-                      type="button"
-                      onClick={() => router.push(`/products/${product.code}/variants/${variant.id}/edit`)}
-                      className="text-sm font-medium text-brand-600 hover:text-brand-700 dark:text-brand-400 dark:hover:text-brand-300"
-                    >
-                      Editar variante →
-                    </button>
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() => router.push(`/products/${product.code}/variants/${variant.id}/edit`)}
+                        className="text-sm font-medium text-brand-600 hover:text-brand-700 dark:text-brand-400 dark:hover:text-brand-300"
+                      >
+                        Editar variante →
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteVariant(variant.id, variant.name)}
+                        disabled={deletingVariantId === variant.id}
+                        className="rounded-lg p-2 text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20 disabled:opacity-50"
+                        title="Eliminar variante"
+                      >
+                        <TrashIcon />
+                      </button>
+                    </div>
                   </div>
                   
                   {/* Imágenes de la variante */}

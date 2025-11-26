@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { createServerSupabaseClient } from '@/lib/supabase-server'
+import { createServerSupabaseClient, createAdminSupabaseClient } from '@/lib/supabase-server'
 
 export async function POST(request: Request) {
   try {
@@ -36,8 +36,9 @@ export async function POST(request: Request) {
       )
     }
 
-    // Crear el acabado
-    const { data: finish, error } = await supabase
+    // Crear el acabado usando admin client para evitar RLS
+    const adminSupabase = createAdminSupabaseClient()
+    const { data: finish, error } = await adminSupabase
       .from('finishes')
       .insert({
         name: name.trim(),

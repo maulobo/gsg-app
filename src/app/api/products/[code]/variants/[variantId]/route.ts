@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createServerSupabaseClient } from '@/lib/supabase-server'
+import { createServerSupabaseClient, createAdminSupabaseClient } from '@/lib/supabase-server'
 
 type RouteParams = {
   code: string
@@ -55,7 +55,8 @@ export async function PATCH(
     }
 
     // 2. Actualizar datos básicos de la variante
-    const { error: updateError } = await supabase
+    const adminSupabase = createAdminSupabaseClient()
+    const { error: updateError } = await adminSupabase
       .from('product_variants')
       .update({
         name,
@@ -76,8 +77,10 @@ export async function PATCH(
 
     // 3. Actualizar tonos de luz (borrar y recrear)
     if (light_tone_ids && Array.isArray(light_tone_ids)) {
+      // Reutilizar el mismo cliente admin
+
       // Eliminar tonos actuales
-      const { error: deleteTonesError } = await supabase
+      const { error: deleteTonesError } = await adminSupabase
         .from('variant_light_tones')
         .delete()
         .eq('variant_id', variantId)
@@ -93,7 +96,7 @@ export async function PATCH(
           light_tone_id: toneId,
         }))
 
-        const { error: insertTonesError } = await supabase
+        const { error: insertTonesError } = await adminSupabase
           .from('variant_light_tones')
           .insert(tonesToInsert)
 
@@ -109,8 +112,10 @@ export async function PATCH(
 
     // 4. Actualizar configuraciones
     if (configurations && Array.isArray(configurations)) {
+      const adminSupabase = createAdminSupabaseClient()
+
       // Obtener configuraciones existentes
-      const { data: existingConfigs, error: fetchError } = await supabase
+      const { data: existingConfigs, error: fetchError } = await adminSupabase
         .from('variant_configurations')
         .select('id, sku')
         .eq('variant_id', variantId)
@@ -129,25 +134,15 @@ export async function PATCH(
       const newSkus = new Set(configurations.map((c) => c.sku))
       const existingSkus = new Set((existingConfigs || []).map((c) => c.sku))
 
-      // Eliminar configuraciones que ya no existen (primero eliminar embeddings)
+      // Eliminar configuraciones que ya no existen
       const skusToDelete = [...existingSkus].filter((sku) => !newSkus.has(sku))
       if (skusToDelete.length > 0) {
         const configIdsToDelete = skusToDelete
           .map((sku) => existingConfigsMap.get(sku))
           .filter((id): id is number => id !== undefined)
 
-        // Primero eliminar los embeddings relacionados
-        const { error: deleteEmbeddingsError } = await supabase
-          .from('product_embeddings')
-          .delete()
-          .in('configuration_id', configIdsToDelete)
-
-        if (deleteEmbeddingsError) {
-          console.error('[Variant Update] Error al eliminar embeddings:', deleteEmbeddingsError)
-        }
-
-        // Luego eliminar las configuraciones
-        const { error: deleteConfigError } = await supabase
+        // Eliminar las configuraciones (CASCADE eliminará relaciones)
+        const { error: deleteConfigError } = await adminSupabase
           .from('variant_configurations')
           .delete()
           .in('id', configIdsToDelete)
@@ -164,40 +159,65 @@ export async function PATCH(
         const configData = {
           variant_id: parseInt(variantId),
           sku: config.sku,
+          name: config.name || null,
           watt: config.watt,
           lumens: config.lumens,
           voltage: config.voltage,
           diameter_description: config.diameter_description,
-          length_mm: config.length_mm,
-          width_mm: config.width_mm,
-          specs: config.specs,
+          length_cm: config.length_cm,
+          width_cm: config.width_cm,
+          specs: config.specs || {}
         }
 
         if (existingId) {
           // Actualizar configuración existente
-          const { error: updateError } = await supabase
+          const { error: updateError } = await adminSupabase
             .from('variant_configurations')
             .update(configData)
             .eq('id', existingId)
 
           if (updateError) {
             console.error('[Variant Update] Error al actualizar configuración:', updateError)
+            
+            let errorMessage = 'Error al actualizar configuración'
+            
+            if (updateError.code === '23505') {
+              const match = updateError.details?.match(/Key \(sku\)=\(([^)]+)\)/)
+              const sku = match ? match[1] : config.sku
+              errorMessage = `El SKU "${sku}" ya existe en otra configuración`
+            } else if (updateError.message) {
+              errorMessage = updateError.message
+            }
+            
             return NextResponse.json(
-              { error: 'Error al actualizar configuración' },
-              { status: 500 }
+              { error: errorMessage, code: updateError.code },
+              { status: 400 }
             )
           }
         } else {
           // Insertar nueva configuración
-          const { error: insertError } = await supabase
+          const { error: insertError } = await adminSupabase
             .from('variant_configurations')
             .insert(configData)
 
           if (insertError) {
             console.error('[Variant Update] Error al insertar configuración:', insertError)
+            
+            let errorMessage = 'Error al insertar configuración'
+            
+            if (insertError.code === '23505') {
+              const match = insertError.details?.match(/Key \(sku\)=\(([^)]+)\)/)
+              const sku = match ? match[1] : config.sku
+              errorMessage = `El SKU "${sku}" ya existe. Por favor, usa un SKU diferente.`
+            } else if (insertError.code === '23502') {
+              errorMessage = 'Faltan campos requeridos en la configuración'
+            } else if (insertError.message) {
+              errorMessage = insertError.message
+            }
+            
             return NextResponse.json(
-              { error: 'Error al insertar configuración' },
-              { status: 500 }
+              { error: errorMessage, code: insertError.code },
+              { status: 400 }
             )
           }
         }
@@ -255,8 +275,36 @@ export async function DELETE(
       return NextResponse.json({ error: 'Producto no encontrado' }, { status: 404 })
     }
 
-    // Eliminar la variante (CASCADE eliminará configuraciones y relaciones)
-    const { error: deleteError } = await supabase
+    // Usar cliente admin para eliminar (bypass RLS)
+    const adminSupabase = createAdminSupabaseClient()
+    
+    // Primero eliminar las configuraciones de la variante
+    const { error: deleteConfigsError } = await adminSupabase
+      .from('variant_configurations')
+      .delete()
+      .eq('variant_id', variantId)
+
+    if (deleteConfigsError) {
+      console.error('[Variant Delete] Error al eliminar configuraciones:', deleteConfigsError)
+      return NextResponse.json(
+        { error: 'Error al eliminar las configuraciones de la variante' },
+        { status: 500 }
+      )
+    }
+
+    // Luego eliminar las relaciones variant_light_tones
+    const { error: deleteTonesError } = await adminSupabase
+      .from('variant_light_tones')
+      .delete()
+      .eq('variant_id', variantId)
+
+    if (deleteTonesError) {
+      console.error('[Variant Delete] Error al eliminar tonos:', deleteTonesError)
+      // No retornamos error, continuamos
+    }
+
+    // Finalmente eliminar la variante
+    const { error: deleteError } = await adminSupabase
       .from('product_variants')
       .delete()
       .eq('id', variantId)

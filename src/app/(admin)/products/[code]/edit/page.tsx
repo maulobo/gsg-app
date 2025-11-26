@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getProductByCode } from '@/features/products/queries'
+import { getFinishes } from '@/features/finishes/queries'
 import { ProductEditForm } from '@/components/products/ProductEditForm'
 
 
@@ -15,7 +16,10 @@ export async function generateMetadata({ params }: { params: Promise<{ code: str
 
 export default async function ProductEditPage({ params }: { params: Promise<{ code: string }> }) {
   const resolvedParams = await params
-  const product = await getProductByCode(resolvedParams.code)
+  const [product, finishes] = await Promise.all([
+    getProductByCode(resolvedParams.code),
+    getFinishes()
+  ])
 
   if (!product) {
     notFound()
@@ -30,7 +34,7 @@ export default async function ProductEditPage({ params }: { params: Promise<{ co
         </p>
       </div>
       
-      <ProductEditForm product={product} />
+      <ProductEditForm product={product} finishes={finishes} />
     </div>
   )
 }

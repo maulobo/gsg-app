@@ -8,7 +8,7 @@ import {
   deleteFromR2,
   extractKeyFromUrl
 } from '@/lib/r2client'
-import { createServerSupabaseClient } from '@/lib/supabase-server'
+import { createServerSupabaseClient, createAdminSupabaseClient } from '@/lib/supabase-server'
 
 export async function POST(request: NextRequest) {
   try {
@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
     const imageUrl = await uploadToR2(fileName, optimizedBuffer, contentType)
 
     // 6. Guardar en base de datos
-    const supabase = await createServerSupabaseClient()
+    const adminSupabase = createAdminSupabaseClient()
     
     const mediaData = {
       product_id: parseInt(productId),
@@ -65,7 +65,7 @@ export async function POST(request: NextRequest) {
       alt_text: altText || null,
     }
 
-    const { data: mediaAsset, error: dbError } = await supabase
+    const { data: mediaAsset, error: dbError } = await adminSupabase
       .from('media_assets')
       .insert(mediaData)
       .select()
@@ -122,10 +122,10 @@ export async function DELETE(request: NextRequest) {
       )
     }
 
-    const supabase = await createServerSupabaseClient()
+    const adminSupabase = createAdminSupabaseClient()
 
     // 1. Obtener datos del media asset
-    const { data: mediaAsset, error: fetchError } = await supabase
+    const { data: mediaAsset, error: fetchError } = await adminSupabase
       .from('media_assets')
       .select('*')
       .eq('id', mediaId)
@@ -150,7 +150,7 @@ export async function DELETE(request: NextRequest) {
     }
 
     // 3. Eliminar de base de datos
-    const { error: deleteError } = await supabase
+    const { error: deleteError } = await adminSupabase
       .from('media_assets')
       .delete()
       .eq('id', mediaId)

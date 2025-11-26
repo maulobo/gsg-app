@@ -126,8 +126,8 @@ export function generateConfigurationContent(product: any, variant: any, config:
   parts.push(`Lúmenes: ${config.lumens} lm`)
   if (config.voltage) parts.push(`Voltaje: ${config.voltage}V`)
   if (config.diameter_description) parts.push(`Diámetro: ${config.diameter_description}`)
-  if (config.length_mm) parts.push(`Largo: ${config.length_mm}mm`)
-  if (config.width_mm) parts.push(`Ancho: ${config.width_mm}mm`)
+  if (config.length_cm) parts.push(`Largo: ${config.length_cm}cm`)
+  if (config.width_cm) parts.push(`Ancho: ${config.width_cm}cm`)
 
   return parts.join('\n')
 }

@@ -123,8 +123,8 @@ export async function getProductByCode(code: string): Promise<ProductWithRelatio
           light_tone:light_tones ( id, slug, name, kelvin )
         ),
         variant_configurations (
-          id, sku, watt, lumens, diameter_description,
-          length_mm, width_mm, voltage, specs
+          id, name, sku, watt, lumens, diameter_description,
+          length_cm, width_cm, voltage, specs
         )
       )
     `)
@@ -184,7 +184,7 @@ export async function getProductById(id: number): Promise<ProductWithRelations |
         ),
         variant_configurations (
           id, sku, watt, lumens, diameter_description,
-          length_mm, width_mm, voltage, 
+          length_cm, width_cm, voltage, 
           includes_led, includes_driver, specs
         )
       )

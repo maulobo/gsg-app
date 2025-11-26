@@ -43,8 +43,8 @@ type ConfigData = {
   lumens: number
   voltage?: number
   diameter_description?: string
-  length_mm?: number
-  width_mm?: number
+  length_cm?: number
+  width_cm?: number
   specs?: Record<string, any>
 }
 
@@ -665,6 +665,7 @@ export function ProductCreationForm({ categories, finishes: initialFinishes, lig
                     onChange={(e) =>
                       setCurrentVariant({ ...currentVariant, cantidad: Number(e.target.value) || 0 })
                     }
+                    onWheel={(e) => e.currentTarget.blur()}
                     className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm text-gray-900 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500"
                   />
                 </div>
@@ -908,6 +909,7 @@ export function ProductCreationForm({ categories, finishes: initialFinishes, lig
                         onChange={(e) =>
                           setCurrentConfig({ ...currentConfig, watt: Number(e.target.value) })
                         }
+                        onWheel={(e) => e.currentTarget.blur()}
                         className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-theme-sm text-gray-900 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500"
                       />
                     </div>
@@ -923,6 +925,7 @@ export function ProductCreationForm({ categories, finishes: initialFinishes, lig
                         onChange={(e) =>
                           setCurrentConfig({ ...currentConfig, lumens: Number(e.target.value) })
                         }
+                        onWheel={(e) => e.currentTarget.blur()}
                         className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-theme-sm text-gray-900 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500"
                       />
                     </div>
@@ -941,6 +944,7 @@ export function ProductCreationForm({ categories, finishes: initialFinishes, lig
                             voltage: e.target.value ? Number(e.target.value) : undefined,
                           })
                         }
+                        onWheel={(e) => e.currentTarget.blur()}
                         className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-theme-sm text-gray-900 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500"
                       />
                     </div>
@@ -962,36 +966,38 @@ export function ProductCreationForm({ categories, finishes: initialFinishes, lig
 
                     <div>
                       <label className="mb-1.5 block text-theme-xs font-medium text-gray-700 dark:text-gray-300">
-                        Largo (mm)
+                        Largo (cm)
                       </label>
                       <input
                         type="number"
-                        placeholder="600"
-                        value={currentConfig.length_mm || ''}
+                        placeholder="60"
+                        value={currentConfig.length_cm || ''}
                         onChange={(e) =>
                           setCurrentConfig({
                             ...currentConfig,
-                            length_mm: e.target.value ? Number(e.target.value) : undefined,
+                            length_cm: e.target.value ? Number(e.target.value) : undefined,
                           })
                         }
+                        onWheel={(e) => e.currentTarget.blur()}
                         className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-theme-sm text-gray-900 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500"
                       />
                     </div>
 
                     <div>
                       <label className="mb-1.5 block text-theme-xs font-medium text-gray-700 dark:text-gray-300">
-                        Ancho (mm)
+                        Ancho (cm)
                       </label>
                       <input
                         type="number"
-                        placeholder="40"
-                        value={currentConfig.width_mm || ''}
+                        placeholder="4"
+                        value={currentConfig.width_cm || ''}
                         onChange={(e) =>
                           setCurrentConfig({
                             ...currentConfig,
-                            width_mm: e.target.value ? Number(e.target.value) : undefined,
+                            width_cm: e.target.value ? Number(e.target.value) : undefined,
                           })
                         }
+                        onWheel={(e) => e.currentTarget.blur()}
                         className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-theme-sm text-gray-900 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500"
                       />
                     </div>
