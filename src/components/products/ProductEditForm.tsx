@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { ProductWithRelations } from '@/types/database'
+import { ProductDetail } from '@/features/products/types'
+import { ProductAddonsManager, type AddonFormData } from './ProductAddonsManager'
 
 const TrashIcon = () => (
   <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -17,7 +18,7 @@ type Finish = {
 }
 
 type ProductEditFormProps = {
-  product: ProductWithRelations
+  product: ProductDetail
   finishes: Finish[]
 }
 
@@ -53,6 +54,24 @@ export function ProductEditForm({ product, finishes }: ProductEditFormProps) {
     return ids
   })
 
+  // Estado de addons
+  const [addons, setAddons] = useState<AddonFormData[]>(() => {
+    if (!product.product_addons || product.product_addons.length === 0) {
+      return []
+    }
+    
+    // Convertir los addons del producto al formato del manager
+    return product.product_addons.map((addon: any) => ({
+      id: addon.id,
+      code: addon.code,
+      name: addon.name,
+      description: addon.description || '',
+      category: addon.category,
+      specs: addon.specs || {},
+      stock_quantity: addon.stock_quantity || 0,
+    }))
+  })
+
   useEffect(() => {
     // Simular carga de datos adicionales si es necesario
     setIsLoading(false)
@@ -68,7 +87,8 @@ export function ProductEditForm({ product, finishes }: ProductEditFormProps) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...formData,
-          finish_ids: selectedFinishIds
+          finish_ids: selectedFinishIds,
+          addons: addons
         }),
       })
 
@@ -316,6 +336,22 @@ export function ProductEditForm({ product, finishes }: ProductEditFormProps) {
               No hay variantes creadas. Haz clic en "Agregar Variante" para crear una.
             </p>
           )}
+        </div>
+      </div>
+
+      {/* Addons */}
+      <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
+        <div className="border-b border-gray-200 bg-gray-50 px-6 py-4 dark:border-gray-800 dark:bg-gray-900/50">
+          <h2 className="text-lg font-semibold text-black dark:text-white">Accesorios y Complementos</h2>
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+            Gestiona los addons específicos de este producto (dimmers, tensores, drivers, etc.)
+          </p>
+        </div>
+        <div className="p-6">
+          <ProductAddonsManager
+            addons={addons}
+            onChange={setAddons}
+          />
         </div>
       </div>
 

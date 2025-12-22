@@ -7,6 +7,24 @@ import type { ProductWithRelations } from '@/types/database'
 // Re-export for convenience
 export type { ProductWithRelations }
 
+// Product Addon types
+export type ProductAddon = {
+  id: number
+  product_id: number
+  code: string
+  name: string
+  description: string | null
+  category: 'control' | 'installation' | 'accessory' | 'driver'
+  specs: Record<string, any>
+  price: number | null
+  stock_quantity: number
+  display_order: number
+  is_active: boolean
+  featured: boolean
+  created_at: string
+  updated_at: string
+}
+
 // Form data types
 export type ProductFormData = {
   code: string
@@ -34,4 +52,6 @@ export type ProductListItem = {
   variants_with_cover: number
 }
 
-export type ProductDetail = ProductWithRelations
+export type ProductDetail = ProductWithRelations & {
+  product_addons?: ProductAddon[]
+}

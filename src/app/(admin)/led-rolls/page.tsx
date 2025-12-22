@@ -17,7 +17,7 @@ export default async function LedRollsPage() {
             Rollos LED
           </h1>
           <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-            Gestiona el catálogo de tiras/rollos LED
+            Familias de rollos LED con sus variantes
           </p>
         </div>
         <Link
@@ -31,17 +31,17 @@ export default async function LedRollsPage() {
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-theme-sm dark:bg-gray-dark dark:border-gray-800">
-          <p className="text-sm text-gray-600 dark:text-gray-400">Total Rollos</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400">Total Familias</p>
           <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{rolls.length}</p>
         </div>
         <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-theme-sm dark:bg-gray-dark dark:border-gray-800">
-          <p className="text-sm text-gray-600 dark:text-gray-400">Total Modelos</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400">Total Variantes</p>
           <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
             {rolls.reduce((acc, r) => acc + r.models_count, 0)}
           </p>
         </div>
         <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-theme-sm dark:bg-gray-dark dark:border-gray-800">
-          <p className="text-sm text-gray-600 dark:text-gray-400">Tipologías</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400">Tipos LED</p>
           <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
             {new Set(rolls.map(r => r.typology).filter(Boolean)).size}
           </p>
@@ -120,7 +120,7 @@ export default async function LedRollsPage() {
 
                 <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
                   <p className="text-sm text-gray-600 dark:text-gray-400">
-                    <span className="font-medium">{roll.models_count}</span> modelo{roll.models_count !== 1 ? 's' : ''}
+                    <span className="font-medium">{roll.models_count}</span> variante{roll.models_count !== 1 ? 's' : ''}
                   </p>
                 </div>
               </div>

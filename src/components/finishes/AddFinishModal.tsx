@@ -58,10 +58,10 @@ export function AddFinishModal({ onFinishAdded }: AddFinishModalProps) {
         throw new Error(errorData.error || 'Error al crear el acabado')
       }
 
-      const { data: newFinish } = await createResponse.json()
+      const { finish: newFinish } = await createResponse.json()
 
       // Si hay un color hex, actualizarlo
-      if (hexColor && hexColor !== '#000000') {
+      if (hexColor && hexColor !== '#000000' && newFinish?.id) {
         const updateResponse = await fetch(`/api/finishes/${newFinish.id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },

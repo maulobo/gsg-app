@@ -37,6 +37,8 @@ export function LedProfileCreationForm({ diffusers, finishes }: LedProfileCreati
     material: 'aluminium',
     max_w_per_m: 0,
     use_cases: '',
+    includes_led: false,
+    includes_power_supply: false,
   })
 
   // Relations
@@ -443,6 +445,35 @@ export function LedProfileCreationForm({ diffusers, finishes }: LedProfileCreati
                 rows={3}
                 placeholder="Iluminación de tiras LED, instalaciones empotradas..."
               />
+            </div>
+
+            {/* Checkboxes para incluir LED y fuente */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="flex items-center gap-3 p-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+                <input
+                  type="checkbox"
+                  id="includes_led"
+                  checked={formData.includes_led}
+                  onChange={(e) => setFormData({ ...formData, includes_led: e.target.checked })}
+                  className="h-5 w-5 rounded border-gray-300 text-brand-500 focus:ring-brand-500 dark:border-gray-600 dark:bg-gray-700"
+                />
+                <label htmlFor="includes_led" className="text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer">
+                  Incluye tira LED
+                </label>
+              </div>
+
+              <div className="flex items-center gap-3 p-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+                <input
+                  type="checkbox"
+                  id="includes_power_supply"
+                  checked={formData.includes_power_supply}
+                  onChange={(e) => setFormData({ ...formData, includes_power_supply: e.target.checked })}
+                  className="h-5 w-5 rounded border-gray-300 text-brand-500 focus:ring-brand-500 dark:border-gray-600 dark:bg-gray-700"
+                />
+                <label htmlFor="includes_power_supply" className="text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer">
+                  Incluye fuente / transformador
+                </label>
+              </div>
             </div>
 
             <div className="flex justify-end gap-3 mt-6">
@@ -984,6 +1015,24 @@ export function LedProfileCreationForm({ diffusers, finishes }: LedProfileCreati
                     <p className="text-sm text-gray-900 dark:text-gray-100">{formData.description}</p>
                   </div>
                 )}
+                {formData.use_cases && (
+                  <div className="mt-2">
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Casos de uso:</p>
+                    <p className="text-sm text-gray-900 dark:text-gray-100">{formData.use_cases}</p>
+                  </div>
+                )}
+                <div className="mt-3 flex gap-3">
+                  {formData.includes_led && (
+                    <span className="inline-flex items-center gap-1 px-2 py-1 bg-success-100 text-success-700 rounded text-xs font-medium dark:bg-success-950 dark:text-success-400">
+                      ✓ Incluye LED
+                    </span>
+                  )}
+                  {formData.includes_power_supply && (
+                    <span className="inline-flex items-center gap-1 px-2 py-1 bg-success-100 text-success-700 rounded text-xs font-medium dark:bg-success-950 dark:text-success-400">
+                      ✓ Incluye Fuente
+                    </span>
+                  )}
+                </div>
               </div>
 
               <div className="border-b border-gray-200 dark:border-gray-700 pb-4">

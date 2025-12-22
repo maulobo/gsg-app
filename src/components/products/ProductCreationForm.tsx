@@ -4,6 +4,8 @@ import { useState, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import { Category, Finish, LightTone } from '@/types/database'
 import { LocalImageUpload } from './LocalImageUpload'
+import { LocalGalleryUpload } from './LocalGalleryUpload'
+import { ProductAddonsManager, type AddonFormData } from './ProductAddonsManager'
 
 type ProductFormProps = {
   categories: Category[]
@@ -31,6 +33,7 @@ type VariantData = {
   imageFiles?: {
     cover?: File
     tech?: File
+    gallery?: File[]  // Galería de imágenes adicionales
     datasheet?: File  // PDF de cartilla técnica
     spec?: File       // PDF de especificaciones
   }
@@ -50,8 +53,9 @@ type ConfigData = {
 
 export function ProductCreationForm({ categories, finishes: initialFinishes, lightTones }: ProductFormProps) {
   const router = useRouter()
-  const [currentStep, setCurrentStep] = useState<'product' | 'variants' | 'review'>('product')
+  const [currentStep, setCurrentStep] = useState<'product' | 'variants' | 'addons' | 'review'>('product')
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [addons, setAddons] = useState<AddonFormData[]>([])
   // Estado para acabados (permite agregar nuevos)
   const [finishes, setFinishes] = useState<Finish[]>(initialFinishes)
   const [showAddFinish, setShowAddFinish] = useState(false)
@@ -228,6 +232,21 @@ export function ProductCreationForm({ categories, finishes: initialFinishes, lig
               )
             )
           }
+
+          // Subir galería si existe
+          if (variant.imageFiles?.gallery && variant.imageFiles.gallery.length > 0) {
+            variant.imageFiles.gallery.forEach((file) => {
+              uploadPromises.push(
+                uploadVariantImage(
+                  file,
+                  result.product.id,
+                  result.product.code,
+                  createdVariant.id,
+                  'gallery'
+                )
+              )
+            })
+          }
           
           // Subir imagen tech si existe
           if (variant.imageFiles?.tech) {
@@ -277,6 +296,30 @@ export function ProductCreationForm({ categories, finishes: initialFinishes, lig
         await Promise.all(uploadPromises)
       }
       
+      // 3. Crear addons si existen
+      if (addons.length > 0) {
+        const addonsResponse = await fetch('/api/products/addons/create', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            productId: result.product.id,
+            addons: addons.map((addon) => ({
+              code: addon.code,
+              name: addon.name,
+              description: addon.description,
+              category: addon.category,
+              specs: addon.specs,
+              stock_quantity: addon.stock_quantity || 0,
+            })),
+          }),
+        })
+
+        if (!addonsResponse.ok) {
+          console.error('Error al crear addons')
+          // No bloquear el flujo si fallan los addons
+        }
+      }
+      
       alert('Producto e imágenes creados exitosamente')
       router.push(`/products/${result.product.code}`)
     } catch (error) {
@@ -293,7 +336,7 @@ export function ProductCreationForm({ categories, finishes: initialFinishes, lig
     productId: number,
     productCode: string,
     variantId: number,
-    kind: 'cover' | 'tech' | 'datasheet' | 'spec'
+    kind: 'cover' | 'tech' | 'datasheet' | 'spec' | 'gallery'
   ): Promise<void> => {
     const formData = new FormData()
     formData.append('image', file)
@@ -349,6 +392,16 @@ export function ProductCreationForm({ categories, finishes: initialFinishes, lig
           2. Variantes
         </button>
         <button
+          onClick={() => setCurrentStep('addons')}
+          className={`w-full rounded-md px-3 py-2 text-theme-sm font-medium transition-all ${
+            currentStep === 'addons'
+              ? 'bg-white text-gray-900 shadow-theme-xs dark:bg-gray-800 dark:text-white'
+              : 'text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white'
+          }`}
+        >
+          3. Addons
+        </button>
+        <button
           onClick={() => setCurrentStep('review')}
           className={`w-full rounded-md px-3 py-2 text-theme-sm font-medium transition-all ${
             currentStep === 'review'
@@ -356,7 +409,7 @@ export function ProductCreationForm({ categories, finishes: initialFinishes, lig
               : 'text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white'
           }`}
         >
-          3. Revisar
+          4. Revisar
         </button>
       </div>
 
@@ -764,6 +817,21 @@ export function ProductCreationForm({ categories, finishes: initialFinishes, lig
                     }}
                   />
 
+                  <LocalGalleryUpload
+                    label="Galería Adicional"
+                    description="Imágenes adicionales para mostrar detalles (opcional)"
+                    files={currentVariant.imageFiles?.gallery || []}
+                    onFilesChange={(files) => {
+                      setCurrentVariant({
+                        ...currentVariant,
+                        imageFiles: {
+                          ...currentVariant.imageFiles,
+                          gallery: files
+                        }
+                      })
+                    }}
+                  />
+
                   <LocalImageUpload
                     label="Ficha Técnica (Tech)"
                     description="Imagen con especificaciones técnicas (opcional)"
@@ -1040,9 +1108,49 @@ export function ProductCreationForm({ categories, finishes: initialFinishes, lig
               Volver
             </button>
             <button
-              onClick={() => setCurrentStep('review')}
+              onClick={() => setCurrentStep('addons')}
               disabled={variants.length === 0}
               className="inline-flex items-center gap-2 rounded-lg bg-brand-500 px-5 py-2.5 text-theme-sm font-medium text-white shadow-theme-xs hover:bg-brand-600 focus:outline-none focus:ring-4 focus:ring-brand-500/10 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Siguiente: Addons
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* PASO 3: Addons */}
+      {currentStep === 'addons' && (
+        <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
+          <div className="border-b border-gray-200 px-6 py-4 dark:border-gray-800">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+              Accesorios y Complementos
+            </h3>
+            <p className="mt-1 text-theme-sm text-gray-500 dark:text-gray-400">
+              Agrega dimmers, tensores, drivers y otros accesorios específicos de este producto (opcional)
+            </p>
+          </div>
+          <div className="p-6">
+            <ProductAddonsManager
+              addons={addons}
+              onChange={setAddons}
+            />
+          </div>
+          <div className="flex items-center justify-between border-t border-gray-200 px-6 py-4 dark:border-gray-800">
+            <button
+              onClick={() => setCurrentStep('variants')}
+              className="inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-5 py-2.5 text-theme-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+            >
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+              Volver
+            </button>
+            <button
+              onClick={() => setCurrentStep('review')}
+              className="inline-flex items-center gap-2 rounded-lg bg-brand-500 px-5 py-2.5 text-theme-sm font-medium text-white shadow-theme-xs hover:bg-brand-600 focus:outline-none focus:ring-4 focus:ring-brand-500/10"
             >
               Siguiente: Revisar
               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1053,7 +1161,7 @@ export function ProductCreationForm({ categories, finishes: initialFinishes, lig
         </div>
       )}
 
-      {/* PASO 3: Revisión */}
+      {/* PASO 4: Revisión */}
       {currentStep === 'review' && (
         <div className="space-y-6">
           <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
@@ -1205,9 +1313,62 @@ export function ProductCreationForm({ categories, finishes: initialFinishes, lig
             </div>
           </div>
 
+          {/* Addons */}
+          {addons.length > 0 && (
+            <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
+              <div className="border-b border-gray-200 px-6 py-4 dark:border-gray-800">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                  Addons ({addons.length})
+                </h3>
+              </div>
+              <div className="space-y-3 p-6">
+                {addons.map((addon, idx) => (
+                  <div
+                    key={idx}
+                    className="rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800/50"
+                  >
+                    <div className="flex items-start justify-between mb-2">
+                      <div>
+                        <h4 className="font-medium text-gray-900 dark:text-white">{addon.name}</h4>
+                        <p className="text-theme-sm text-gray-500 dark:text-gray-400 font-mono">
+                          {addon.code}
+                        </p>
+                      </div>
+                      <span className="inline-flex items-center rounded-full bg-brand-50 px-2.5 py-0.5 text-theme-xs font-medium text-brand-700 dark:bg-brand-900/20 dark:text-brand-400">
+                        {addon.category === 'control' && '🎛️ Control'}
+                        {addon.category === 'installation' && '🔧 Instalación'}
+                        {addon.category === 'driver' && '⚡ Driver'}
+                        {addon.category === 'accessory' && '🔌 Accesorio'}
+                      </span>
+                    </div>
+                    {addon.description && (
+                      <p className="text-theme-sm text-gray-600 dark:text-gray-400 mb-2">
+                        {addon.description}
+                      </p>
+                    )}
+                    {Object.keys(addon.specs).length > 0 && (
+                      <div className="space-y-1">
+                        {Object.entries(addon.specs).map(([key, value]) => (
+                          <div key={key} className="flex items-center justify-between text-theme-xs">
+                            <span className="text-gray-500 dark:text-gray-400 capitalize">
+                              {key.replace(/_/g, ' ')}:
+                            </span>
+                            <span className="font-medium text-gray-900 dark:text-white">
+                              {value}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div className="flex justify-between">
             <button
-              onClick={() => setCurrentStep('variants')}
+              onClick={() => setCurrentStep('addons')}
               className="inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300"
             >
               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
