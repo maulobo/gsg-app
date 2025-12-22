@@ -4,9 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import type { LedRollFamilyInsert, LedRollInsert } from '@/types/database'
 
-type LedRollCreationFormProps = {
-  // No necesita light tones, los tonos están en tone_label de cada variante
-}
+type LedRollCreationFormProps = Record<string, never>
 
 // Formulario de familia (modelo general)
 type FamilyFormData = {
@@ -653,7 +651,7 @@ export function LedRollCreationForm({}: LedRollCreationFormProps) {
             <div className="flex justify-between gap-3 mt-6">
               <button
                 type="button"
-                onClick={() => setCurrentStep('models')}
+                onClick={() => setCurrentStep('variants')}
                 className="rounded-md border px-6 py-2 hover:bg-gray-50"
               >
                 ← Anterior

@@ -43,7 +43,7 @@ export async function deleteFromR2(key: string): Promise<void> {
 // Procesamiento de imágenes de productos
 export async function processProductImage(
   buffer: Buffer, 
-  type: 'cover' | 'tech' | 'datasheet' | 'spec',
+  type: 'cover' | 'tech' | 'datasheet' | 'spec' | 'gallery',
   contentType?: string
 ) {
   // Si es PDF, no procesar, solo retornar el buffer original
@@ -63,6 +63,11 @@ export async function processProductImage(
       width = 1600
       height = 1200
       quality = 95
+      break
+    case 'gallery':
+      width = 1200
+      height = 900
+      quality = 90
       break
     default:
       width = 800
