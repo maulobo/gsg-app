@@ -126,6 +126,10 @@ export async function getProductByCode(code: string): Promise<ProductWithRelatio
           id, name, sku, watt, lumens, diameter_description,
           length_cm, width_cm, voltage, specs
         )
+      ),
+      product_addons (
+        id, code, name, description, category, specs, price, 
+        stock_quantity, display_order, is_active
       )
     `)
     .eq('code', code)

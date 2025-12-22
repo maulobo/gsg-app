@@ -2,7 +2,10 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
+import { X } from 'lucide-react'
 import { LocalImageUpload } from './LocalImageUpload'
+import { LocalGalleryUpload } from './LocalGalleryUpload'
 
 type LightTone = {
   id: number
@@ -58,6 +61,7 @@ export function VariantEditForm({ variant, productCode, lightTones }: VariantEdi
     tech: variant.media_assets?.find((m: any) => m.kind === 'tech'),
     datasheet: variant.media_assets?.find((m: any) => m.kind === 'datasheet'),
     spec: variant.media_assets?.find((m: any) => m.kind === 'spec'),
+    gallery: variant.media_assets?.filter((m: any) => m.kind === 'gallery') || [],
   })
 
   const [newImages, setNewImages] = useState<{
@@ -65,6 +69,7 @@ export function VariantEditForm({ variant, productCode, lightTones }: VariantEdi
     tech?: File
     datasheet?: File
     spec?: File
+    gallery?: File[]
   }>({})
 
   const handleToggleLightTone = (toneId: number) => {
@@ -120,6 +125,28 @@ export function VariantEditForm({ variant, productCode, lightTones }: VariantEdi
     }
   }
 
+  const handleDeleteGalleryImage = async (imageId: number) => {
+    if (!confirm('¿Estás seguro de eliminar esta imagen de la galería?')) return
+
+    try {
+      const response = await fetch(`/api/products/images/upload?mediaId=${imageId}`, {
+        method: 'DELETE',
+      })
+
+      if (!response.ok) {
+        throw new Error('Error al eliminar la imagen')
+      }
+
+      setExistingImages({
+        ...existingImages,
+        gallery: existingImages.gallery.filter((img: any) => img.id !== imageId)
+      })
+    } catch (error) {
+      console.error(error)
+      alert('Error al eliminar la imagen')
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSaving(true)
@@ -167,6 +194,14 @@ export function VariantEditForm({ variant, productCode, lightTones }: VariantEdi
         )
       }
 
+      if (newImages.gallery && newImages.gallery.length > 0) {
+        newImages.gallery.forEach(file => {
+          uploadPromises.push(
+            uploadImage(file, 'gallery')
+          )
+        })
+      }
+
       if (uploadPromises.length > 0) {
         await Promise.all(uploadPromises)
       }
@@ -181,7 +216,7 @@ export function VariantEditForm({ variant, productCode, lightTones }: VariantEdi
     }
   }
 
-  const uploadImage = async (file: File, kind: 'cover' | 'tech' | 'datasheet' | 'spec') => {
+  const uploadImage = async (file: File, kind: 'cover' | 'tech' | 'datasheet' | 'spec' | 'gallery') => {
     const formData = new FormData()
     formData.append('image', file)
     formData.append('productId', variant.product.id.toString())
@@ -320,6 +355,44 @@ export function VariantEditForm({ variant, productCode, lightTones }: VariantEdi
                 onFileSelect={(file) => setNewImages({ ...newImages, cover: file || undefined })}
               />
             )}
+          </div>
+
+          {/* Galería Adicional */}
+          <div>
+            <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">Galería Adicional</h3>
+            
+            {/* Imágenes existentes en galería */}
+            {existingImages.gallery && existingImages.gallery.length > 0 && (
+              <div className="mb-4">
+                <p className="mb-2 text-xs text-gray-500 dark:text-gray-400">Imágenes actuales:</p>
+                <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+                  {existingImages.gallery.map((img: any) => (
+                    <div key={img.id} className="group relative aspect-square overflow-hidden rounded-lg border border-gray-200 bg-gray-100 dark:border-gray-700 dark:bg-gray-800">
+                      <Image
+                        src={img.path.startsWith('http') ? img.path : `${process.env.NEXT_PUBLIC_R2_URL || ''}${img.path}`}
+                        alt={img.alt_text || 'Imagen de galería'}
+                        fill
+                        className="object-cover"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteGalleryImage(img.id)}
+                        className="absolute right-1 top-1 rounded-full bg-black/50 p-1 text-white opacity-0 transition-opacity hover:bg-error-500 group-hover:opacity-100"
+                      >
+                        <X className="h-4 w-4" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <LocalGalleryUpload
+              label="Agregar imágenes a la galería"
+              description="Sube nuevas imágenes para agregar a la galería existente"
+              files={newImages.gallery || []}
+              onFilesChange={(files) => setNewImages({ ...newImages, gallery: files })}
+            />
           </div>
 
           {/* Imagen Tech */}

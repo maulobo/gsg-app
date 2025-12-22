@@ -122,54 +122,54 @@ export async function getLedRollByCode(code: string): Promise<LedRollFull | null
 }
 
 /**
- * Obtener vista resumida para listados
+ * Obtener vista resumida para listados (NUEVA ESTRUCTURA NORMALIZADA)
  */
 export async function getLedRollsListItems(): Promise<LedRollListItem[]> {
   const supabase = await createServerSupabaseClient()
   
-  const { data: rolls, error } = await supabase
-    .from('led_rolls')
-    .select('*')
-    .eq('is_active', true)
+  // Usar la nueva estructura: led_roll_families con sus variantes
+  const { data: families, error } = await supabase
+    .from('led_roll_families')
+    .select(`
+      id,
+      name,
+      description,
+      led_type,
+      adhesive,
+      cri,
+      pcb_width_mm,
+      warranty_years,
+      technical_note,
+      cut_note,
+      general_note,
+      variants:led_rolls(count),
+      media:led_roll_family_media(
+        path,
+        kind
+      )
+    `)
     .order('name', { ascending: true })
   
-  if (error || !rolls) {
-    console.error('Error fetching LED rolls:', error)
+  if (error || !families) {
+    console.error('Error fetching LED roll families:', error)
     return []
   }
   
-  // Obtener contadores para cada rollo
-  const listItems = await Promise.all(
-    rolls.map(async (roll) => {
-      // Contar modelos
-      const { count: modelsCount } = await supabase
-        .from('led_roll_models')
-        .select('*', { count: 'exact', head: true })
-        .eq('roll_id', roll.id)
-        .eq('is_active', true)
-      
-      // Obtener imagen de portada
-      const { data: coverMedia } = await supabase
-        .from('led_roll_media')
-        .select('path')
-        .eq('roll_id', roll.id)
-        .eq('kind', 'cover')
-        .single()
-      
-      return {
-        id: roll.id,
-        code: roll.code,
-        name: roll.name,
-        description: roll.description,
-        typology: roll.typology,
-        color_control: roll.color_control,
-        models_count: modelsCount || 0,
-        cover_image: coverMedia?.path || null,
-      }
-    })
-  )
-  
-  return listItems
+  return families.map(family => {
+    const coverMedia = family.media?.find((m: any) => m.kind === 'cover')
+    const variantCount = Array.isArray(family.variants) ? family.variants[0]?.count || 0 : 0
+    
+    return {
+      id: family.id,
+      code: family.name, // Usar el nombre como identificador
+      name: family.name,
+      description: family.description || family.technical_note || '',
+      typology: family.led_type,
+      color_control: null, // No está en la nueva estructura
+      models_count: variantCount,
+      cover_image: coverMedia?.path || null,
+    }
+  })
 }
 
 /**

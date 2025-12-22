@@ -76,6 +76,41 @@ export async function PATCH(
       }
     }
 
+    // Actualizar addons si se enviaron
+    if (body.addons !== undefined) {
+      const adminSupabase = createAdminSupabaseClient()
+      
+      // Eliminar addons existentes
+      await adminSupabase
+        .from('product_addons')
+        .delete()
+        .eq('product_id', existingProduct.id)
+
+      // Insertar nuevos addons
+      if (body.addons.length > 0) {
+        const addonInserts = body.addons.map((addon: any, index: number) => ({
+          product_id: existingProduct.id,
+          code: addon.code,
+          name: addon.name,
+          description: addon.description || null,
+          category: addon.category,
+          specs: addon.specs || {},
+          stock_quantity: addon.stock_quantity || 0,
+          display_order: index,
+          is_active: true,
+        }))
+
+        const { error: addonError } = await adminSupabase
+          .from('product_addons')
+          .insert(addonInserts)
+
+        if (addonError) {
+          console.error('Error actualizando addons:', addonError)
+          // No fallar, solo loguear
+        }
+      }
+    }
+
     return NextResponse.json({
       success: true,
       product: updatedProduct,

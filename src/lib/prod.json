@@ -1,0 +1,464 @@
+[
+  {
+    "product": {
+      "code": "SAT",
+      "name": "Saturno",
+      "description": "Colgante circular LED de aluminio con difusor de policarbonato. Diseño minimalista y moderno.",
+      "category": "colgantes",
+      "is_featured": true,
+      "finishes": [
+        "negro-microtexturado",
+        "champagne-mate",
+        "cobre-mate",
+        "oro-mate",
+        "blanco-microtexturado",
+        "aluminio-anodizado"
+      ]
+    },
+    "variants": [
+      {
+        "variant_code": "SAT-S",
+        "name": "Saturno Simple",
+        "includes_led": true,
+        "light_tones": ["2700k", "3000k", "4000k", "6000k"],
+        "configurations": [
+          { "sku": "SAT-S45", "watt": 20, "lumens": 2340, "voltage": 220, "diameter_description": "Ø45cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "SAT-S60", "watt": 26, "lumens": 3100, "voltage": 220, "diameter_description": "Ø60cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "SAT-S80", "watt": 38, "lumens": 4640, "voltage": 220, "diameter_description": "Ø80cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "SAT-S10", "watt": 40, "lumens": 4640, "voltage": 220, "diameter_description": "Ø100cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "SAT-S12", "watt": 48, "lumens": 5560, "voltage": 220, "diameter_description": "Ø120cm", "specs": { "tensor": "1.2m" } }
+        ]
+      },
+      {
+        "variant_code": "SAT-D",
+        "name": "Saturno Doble",
+        "includes_led": true,
+        "light_tones": ["2700k", "3000k", "4000k", "6000k"],
+        "configurations": [
+          { "sku": "SAT-D01", "watt": 46, "lumens": 5330, "voltage": 220, "diameter_description": "Ø45/60cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "SAT-D02", "watt": 59, "lumens": 6840, "voltage": 220, "diameter_description": "Ø60/80cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "SAT-D03", "watt": 73, "lumens": 8460, "voltage": 220, "diameter_description": "Ø80/100cm", "specs": { "tensor": "1.2m" } }
+        ]
+      },
+      {
+        "variant_code": "SAT-T/C/Q/X",
+        "name": "Saturno Múltiple (Triple a Sextuple)",
+        "includes_led": true,
+        "light_tones": ["2700k", "3000k", "4000k", "6000k"],
+        "configurations": [
+          { "sku": "SAT-T01", "watt": 83, "lumens": 11600, "voltage": 220, "diameter_description": "Triple Ø45/60/80cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "SAT-T02", "watt": 100, "lumens": 11600, "voltage": 220, "diameter_description": "Triple Ø60/80/100cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "SAT-T03", "watt": 120, "lumens": 13920, "voltage": 220, "diameter_description": "Triple Ø80/100/120cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "SAT-C01", "watt": 120, "lumens": 13920, "voltage": 220, "diameter_description": "Cuádruple Ø45/60/80/100cm", "specs": { "tensor": "2.4m" } },
+          { "sku": "SAT-C02", "watt": 147, "lumens": 17052, "voltage": 220, "diameter_description": "Cuádruple Ø60/80/100/120cm", "specs": { "tensor": "2.4m" } },
+          { "sku": "SAT-Q01", "watt": 167, "lumens": 19372, "voltage": 220, "diameter_description": "Quíntuple Ø45/60/80/100/120cm", "specs": { "tensor": "2.8m" } },
+          { "sku": "SAT-X01", "watt": 205, "lumens": 23780, "voltage": 220, "diameter_description": "Séxtuple Ø45/60/75/90/105/120cm", "specs": { "tensor": "3.2m" } }
+        ]
+      }
+    ],
+    "addons": [
+      { "code": "SAT-DIM-LLA", "name": "Dimmer Llavero", "category": "control", "description": "Control remoto tipo llavero", "specs": { "alcance": "10m" } },
+      { "code": "SAT-DIM-TAC", "name": "Dimmer Táctil", "category": "control", "description": "Control remoto táctil", "specs": { "alcance": "15m" } },
+      { "code": "SAT-DIM-WIF", "name": "Dimmer Wifi", "category": "control", "description": "Control vía Wifi (App)", "specs": { "alcance": "Wifi" } },
+      { "code": "SAT-EXT-TEN", "name": "Extra Tensores", "category": "installation", "description": "Agregado de 1 metro de tensor por círculo" }
+    ]
+  },
+  {
+    "product": {
+      "code": "SAT-CCT",
+      "name": "Saturno CCT",
+      "description": "Colgante circular LED con blanco dinámico (3000K-6000K) ajustable. Incluye control remoto.",
+      "category": "colgantes",
+      "is_featured": false,
+      "finishes": [
+        "negro-microtexturado",
+        "champagne-mate",
+        "cobre-mate",
+        "oro-mate",
+        "blanco-microtexturado",
+        "aluminio-anodizado"
+      ]
+    },
+    "variants": [
+      {
+        "variant_code": "SAT-S-CCT",
+        "name": "Saturno CCT Simple",
+        "includes_led": true,
+        "light_tones": ["dinamico-3000k-6000k"],
+        "configurations": [
+          { "sku": "SAT-S45-CCT", "watt": 20, "lumens": 2340, "voltage": 220, "diameter_description": "Ø45cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "SAT-S60-CCT", "watt": 26, "lumens": 3000, "voltage": 220, "diameter_description": "Ø60cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "SAT-S80-CCT", "watt": 38, "lumens": 3800, "voltage": 220, "diameter_description": "Ø80cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "SAT-S10-CCT", "watt": 40, "lumens": 4640, "voltage": 220, "diameter_description": "Ø100cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "SAT-S12-CCT", "watt": 48, "lumens": 5560, "voltage": 220, "diameter_description": "Ø120cm", "specs": { "tensor": "1.2m" } }
+        ]
+      },
+      {
+        "variant_code": "SAT-D-CCT",
+        "name": "Saturno CCT Doble",
+        "includes_led": true,
+        "light_tones": ["dinamico-3000k-6000k"],
+        "configurations": [
+          { "sku": "SAT-D01-CCT", "watt": 46, "lumens": 5330, "voltage": 220, "diameter_description": "Ø45/60cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "SAT-D02-CCT", "watt": 59, "lumens": 6840, "voltage": 220, "diameter_description": "Ø60/80cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "SAT-D03-CCT", "watt": 73, "lumens": 8460, "voltage": 220, "diameter_description": "Ø80/100cm", "specs": { "tensor": "1.2m" } }
+        ]
+      }
+    ],
+    "addons": []
+  },
+  {
+    "product": {
+      "code": "QUADRA",
+      "name": "Quadra",
+      "description": "Colgante rectangular o cuadrado de aluminio anodizado.",
+      "category": "colgantes",
+      "finishes": [
+        "negro-microtexturado",
+        "champagne-mate",
+        "cobre-mate",
+        "oro-mate",
+        "blanco-microtexturado",
+        "aluminio-anodizado"
+      ]
+    },
+    "variants": [
+      {
+        "variant_code": "QDR-S",
+        "name": "Quadra Simple",
+        "includes_led": true,
+        "light_tones": ["2700k", "3000k", "4000k", "6000k"],
+        "configurations": [
+          { "sku": "QDR-S01", "watt": 23, "lumens": 2500, "voltage": 220, "diameter_description": "20x20cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "QDR-S02", "watt": 23, "lumens": 3200, "voltage": 220, "diameter_description": "30x60cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "QDR-S03", "watt": 31, "lumens": 4200, "voltage": 220, "diameter_description": "60x60cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "QDR-S04", "watt": 39, "lumens": 5400, "voltage": 220, "diameter_description": "30x120cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "QDR-S05", "watt": 46, "lumens": 6500, "voltage": 220, "diameter_description": "90x90cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "QDR-S06", "watt": 46, "lumens": 6600, "voltage": 220, "diameter_description": "60x120cm", "specs": { "tensor": "1.2m" } }
+        ]
+      },
+      {
+        "variant_code": "QDR-D/T",
+        "name": "Quadra Doble y Triple",
+        "includes_led": true,
+        "light_tones": ["2700k", "3000k", "4000k", "6000k"],
+        "configurations": [
+          { "sku": "QDR-D01", "watt": 46, "lumens": 6500, "voltage": 220, "diameter_description": "Doble 30x30/60x60cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "QDR-D02", "watt": 78, "lumens": 10300, "voltage": 220, "diameter_description": "Doble 60x60/90x90cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "QDR-D03", "watt": 70, "lumens": 9600, "voltage": 220, "diameter_description": "Doble 60x60/120x60cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "QDR-T01", "watt": 93, "lumens": 12400, "voltage": 220, "diameter_description": "Triple 30x30/60x60/90x90cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "QDR-T02", "watt": 102, "lumens": 13800, "voltage": 220, "diameter_description": "Triple 60x20/90x40/120x60cm", "specs": { "tensor": "1.2m" } }
+        ]
+      }
+    ],
+    "addons": [
+      { "code": "QDR-DIM-LLA", "name": "Dimmer Llavero", "category": "control", "description": "Control remoto tipo llavero", "specs": { "alcance": "15m" } },
+      { "code": "QDR-DIM-TAC", "name": "Dimmer Táctil", "category": "control", "description": "Control remoto táctil", "specs": { "alcance": "15m" } },
+      { "code": "QDR-DIM-WIF", "name": "Dimmer Wifi", "category": "control", "description": "Control vía Wifi (App)", "specs": { "alcance": "Wifi" } },
+      { "code": "QDR-EXT-TEN", "name": "Extra Tensores", "category": "installation", "description": "Agregado de 1 metro de tensor por cuadrado" }
+    ]
+  },
+  {
+    "product": {
+      "code": "URANO",
+      "name": "Urano Colgante",
+      "description": "Colgante circular LED con acabados en blanco, negro, oro, cobre o aluminio.",
+      "category": "colgantes",
+      "finishes": [
+        "blanco-microtexturado",
+        "negro-microtexturado",
+        "oro-mate",
+        "cobre-mate",
+        "aluminio"
+      ]
+    },
+    "variants": [
+      {
+        "variant_code": "URA-C",
+        "name": "Urano Circular Simple",
+        "includes_led": true,
+        "light_tones": ["2700k", "3000k", "4000k", "6000k"],
+        "configurations": [
+          { "sku": "URA-C60", "watt": 36, "lumens": 3500, "voltage": 220, "diameter_description": "Ø60cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "URA-C80", "watt": 48, "lumens": 4500, "voltage": 220, "diameter_description": "Ø80cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "URA-C10", "watt": 60, "lumens": 5400, "voltage": 220, "diameter_description": "Ø100cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "URA-C12", "watt": 71, "lumens": 6900, "voltage": 220, "diameter_description": "Ø120cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "URA-C14", "watt": 83, "lumens": 6900, "voltage": 220, "diameter_description": "Ø140cm", "specs": { "tensor": "1.2m" } }
+        ]
+      },
+      {
+        "variant_code": "URA-CD/CT",
+        "name": "Urano Múltiple (Doble y Triple)",
+        "includes_led": true,
+        "light_tones": ["2700k", "3000k", "4000k", "6000k"],
+        "configurations": [
+          { "sku": "URA-CD1", "watt": 83, "lumens": 6800, "voltage": 220, "diameter_description": "Doble Ø60/80cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "URA-CD2", "watt": 107, "lumens": 8100, "voltage": 220, "diameter_description": "Doble Ø80/100cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "URA-CD3", "watt": 131, "lumens": 10200, "voltage": 220, "diameter_description": "Doble Ø100/120cm", "specs": { "tensor": "1.4m" } },
+          { "sku": "URA-CD4", "watt": 154, "lumens": 12300, "voltage": 220, "diameter_description": "Doble Ø120/140cm", "specs": { "tensor": "1.8m" } },
+          { "sku": "URA-CT1", "watt": 143, "lumens": 11700, "voltage": 220, "diameter_description": "Triple Ø60/80/100cm", "specs": { "tensor": "1.8m" } },
+          { "sku": "URA-CT2", "watt": 174, "lumens": 14900, "voltage": 220, "diameter_description": "Triple Ø80/100/120cm", "specs": { "tensor": "1.8m" } },
+          { "sku": "URA-CT3", "watt": 214, "lumens": 17100, "voltage": 220, "diameter_description": "Triple Ø100/120/140cm", "specs": { "tensor": "2.4m" } }
+        ]
+      }
+    ],
+    "addons": [
+      { "code": "URA-DIM-LLA", "name": "Dimmer Llavero", "category": "control", "description": "Control remoto llavero", "specs": { "alcance": "15m" } },
+      { "code": "URA-DIM-TAC", "name": "Dimmer Táctil", "category": "control", "description": "Control remoto táctil", "specs": { "alcance": "15m" } },
+      { "code": "URA-DIM-WIF", "name": "Dimmer Wifi", "category": "control", "description": "Control wifi", "specs": { "alcance": "Wifi" } },
+      { "code": "URA-EXT-TEN", "name": "Extra Tensores", "category": "installation", "description": "Agregado de 1 metro de tensor por aro" }
+    ]
+  },
+  {
+    "product": {
+      "code": "UOV",
+      "name": "Urano Oval",
+      "description": "Colgante LED de forma ovalada.",
+      "category": "colgantes",
+      "finishes": [
+        "blanco-microtexturado",
+        "negro-microtexturado",
+        "oro-mate",
+        "cobre-mate",
+        "aluminio"
+      ]
+    },
+    "variants": [
+      {
+        "variant_code": "UOV-S",
+        "name": "Urano Oval Simple",
+        "includes_led": true,
+        "light_tones": ["2700k", "3000k", "4000k", "6000k"],
+        "configurations": [
+          { "sku": "UOV-S01", "watt": 59, "lumens": 5300, "voltage": 220, "diameter_description": "120x60cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "UOV-S02", "watt": 82, "lumens": 7300, "voltage": 220, "diameter_description": "160x60cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "UOV-S03", "watt": 71, "lumens": 6400, "voltage": 220, "diameter_description": "180x40cm", "specs": { "tensor": "1.4m" } },
+          { "sku": "UOV-S04", "watt": 94, "lumens": 8400, "voltage": 220, "diameter_description": "200x80cm", "specs": { "tensor": "1.8m" } }
+        ]
+      }
+    ],
+    "addons": []
+  },
+  {
+    "product": {
+      "code": "HEXA",
+      "name": "Hexa",
+      "description": "Colgante hexagonal de aluminio anodizado.",
+      "category": "colgantes",
+      "finishes": [
+        "negro-microtexturado",
+        "champagne-mate",
+        "cobre-mate",
+        "oro-mate",
+        "blanco-microtexturado",
+        "aluminio"
+      ]
+    },
+    "variants": [
+      {
+        "variant_code": "HEX",
+        "name": "Hexa Simple y Doble",
+        "includes_led": true,
+        "light_tones": ["2700k", "3000k", "4000k", "6000k"],
+        "configurations": [
+          { "sku": "HEX-S40", "watt": 18, "lumens": 2300, "voltage": 220, "diameter_description": "Simple 40cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "HEX-S60", "watt": 26, "lumens": 3300, "voltage": 220, "diameter_description": "Simple 60cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "HEX-S80", "watt": 36, "lumens": 4700, "voltage": 220, "diameter_description": "Simple 80cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "HEX-D46", "watt": 45, "lumens": 5900, "voltage": 220, "diameter_description": "Doble 40+60cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "HEX-D68", "watt": 63, "lumens": 8300, "voltage": 220, "diameter_description": "Doble 60+80cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "HEX-T68", "watt": 81, "lumens": 10500, "voltage": 220, "diameter_description": "Triple 40+60+80cm", "specs": { "tensor": "1.2m" } }
+        ]
+      }
+    ],
+    "addons": [
+      { "code": "HEX-DIM-LLA", "name": "Dimmer Llavero", "category": "control" },
+      { "code": "HEX-DIM-TAC", "name": "Dimmer Táctil", "category": "control" },
+      { "code": "HEX-DIM-WIF", "name": "Dimmer Wifi", "category": "control" },
+      { "code": "HEX-EXT-TEN", "name": "Extra Tensores", "category": "installation" }
+    ]
+  },
+  {
+    "product": {
+      "code": "PANAL",
+      "name": "Panal",
+      "description": "Sistema modular de hexágonos combinables.",
+      "category": "modular",
+      "finishes": [
+        "negro-microtexturado",
+        "blanco-microtexturado",
+        "aluminio"
+      ]
+    },
+    "variants": [
+      {
+        "variant_code": "PAN-H",
+        "name": "Módulo Hexagonal",
+        "includes_led": true,
+        "light_tones": ["2700k", "3000k", "4000k", "6000k"],
+        "configurations": [
+          { "sku": "PAN-H40", "watt": 18, "lumens": 2000, "voltage": 12, "diameter_description": "40cm" },
+          { "sku": "PAN-H60", "watt": 27, "lumens": 3100, "voltage": 12, "diameter_description": "60cm" },
+          { "sku": "PAN-H80", "watt": 36, "lumens": 4100, "voltage": 12, "diameter_description": "80cm" }
+        ]
+      },
+      {
+        "variant_code": "PAN-U",
+        "name": "Uniones",
+        "includes_led": false,
+        "configurations": [
+          { "sku": "PAN-U40-SIM", "name": "Unión Simple 40" },
+          { "sku": "PAN-U40-TRI", "name": "Unión Triple 40" },
+          { "sku": "PAN-U60-SIM", "name": "Unión Simple 60" },
+          { "sku": "PAN-U60-TRI", "name": "Unión Triple 60" }
+        ]
+      }
+    ],
+    "addons": [
+      { "code": "PAN-KIT-TEN-AL", "name": "Kit Tensor Aluminio", "category": "installation", "specs": { "largo": "1.2m" } },
+      { "code": "PAN-KIT-TEN-NG", "name": "Kit Tensor Negro", "category": "installation", "specs": { "largo": "1.2m" } },
+      { "code": "FUE-12V-8AS", "name": "Fuente 12V 8.3A", "category": "driver", "watt": 100 },
+      { "code": "FUE-12V-12S", "name": "Fuente 12V 12.5A", "category": "driver", "watt": 150 },
+      { "code": "FUE-12V-17S", "name": "Fuente 12V 16.6A", "category": "driver", "watt": 200 }
+    ]
+  },
+  {
+    "product": {
+      "code": "SNAKE",
+      "name": "Snake",
+      "description": "Colgante flexible 360 grados.",
+      "category": "colgantes",
+      "finishes": [
+        "negro-microtexturado",
+        "blanco-microtexturado",
+        "cromo",
+        "bronce-mate"
+      ]
+    },
+    "variants": [
+      {
+        "variant_code": "SNK",
+        "name": "Snake Standard",
+        "includes_led": true,
+        "light_tones": ["3000k"],
+        "configurations": [
+          { "sku": "SNK-120-CAL-NG", "watt": 42, "lumens": 3000, "voltage": 220, "diameter_description": "Largo 3m", "specs": { "tensor": "1.2m", "color": "Negro" } },
+          { "sku": "SNK-120-CAL-BL", "watt": 42, "lumens": 3000, "voltage": 220, "diameter_description": "Largo 3m", "specs": { "tensor": "1.2m", "color": "Blanco" } },
+          { "sku": "SNK-120-CAL-BR", "watt": 42, "lumens": 3000, "voltage": 220, "diameter_description": "Largo 3m", "specs": { "tensor": "1.2m", "color": "Bronce" } },
+          { "sku": "SNK-150-CAL-NG", "watt": 56, "lumens": 4000, "voltage": 220, "diameter_description": "Largo 4m", "specs": { "tensor": "1.2m", "color": "Negro" } },
+          { "sku": "SNK-150-CAL-BL", "watt": 56, "lumens": 4000, "voltage": 220, "diameter_description": "Largo 4m", "specs": { "tensor": "1.2m", "color": "Blanco" } },
+          { "sku": "SNK-150-CAL-CR", "watt": 56, "lumens": 4000, "voltage": 220, "diameter_description": "Largo 4m", "specs": { "tensor": "1.2m", "color": "Cromo" } }
+        ]
+      }
+    ],
+    "addons": [
+      { "code": "SNK-DIM-WIF", "name": "Dimmer Wifi", "category": "control" },
+      { "code": "SNK-EXT-TEN", "name": "Extra Tensores", "category": "installation" }
+    ]
+  },
+  {
+    "product": {
+      "code": "SNAKE FREE",
+      "name": "Snake Free",
+      "description": "Colgante flexible 360 grados por metro (silicona).",
+      "category": "tiras-led",
+      "finishes": [
+        "negro-microtexturado",
+        "blanco-microtexturado"
+      ]
+    },
+    "variants": [
+      {
+        "variant_code": "SFR",
+        "name": "Snake Free (Por metro)",
+        "includes_led": true,
+        "light_tones": ["3000k"],
+        "configurations": [
+          { "sku": "SFR-100-CAL", "watt": 14, "lumens": 1000, "voltage": 12, "diameter_description": "Por metro (max 5m)", "specs": { "material": "silicona" } }
+        ]
+      }
+    ],
+    "addons": [
+      { "code": "SFR-EXT-CIE-TR", "name": "Extremo Ciego", "category": "accessory", "specs": { "color": "transparente" } },
+      { "code": "SFR-EXT-CAB-TR", "name": "Extremo Cable", "category": "accessory", "specs": { "color": "transparente" } },
+      { "code": "SFR-SUJ-TEC-TR", "name": "Sujeción Techo", "category": "installation", "specs": { "color": "transparente" } },
+      { "SFR-KIT-TEN-AL": "Kit Tensor Colgante", "category": "installation", "specs": { "material": "aluminio", "largo": "1.2m" } }
+    ]
+  },
+  {
+    "product": {
+      "code": "SATURNO XL",
+      "name": "Saturno XL",
+      "description": "Versión XL del colgante circular LED Saturno.",
+      "category": "colgantes",
+      "finishes": [
+        "negro-microtexturado",
+        "champagne-mate",
+        "cobre-mate",
+        "oro-mate",
+        "blanco-microtexturado",
+        "aluminio-anodizado"
+      ]
+    },
+    "variants": [
+      {
+        "variant_code": "SXL",
+        "name": "Saturno XL Configuraciones",
+        "includes_led": true,
+        "light_tones": ["2700k", "3000k", "4000k", "6000k"],
+        "configurations": [
+          { "sku": "SXL-S60", "watt": 68, "lumens": 6100, "voltage": 220, "diameter_description": "Simple Ø60cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "SXL-S80", "watt": 90, "lumens": 7200, "voltage": 220, "diameter_description": "Simple Ø80cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "SXL-S10", "watt": 120, "lumens": 8640, "voltage": 220, "diameter_description": "Simple Ø100cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "SXL-S12", "watt": 130, "lumens": 10560, "voltage": 220, "diameter_description": "Simple Ø120cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "SXL-S15", "watt": 176, "lumens": 12600, "voltage": 220, "diameter_description": "Simple Ø150cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "SXL-D01", "watt": 158, "lumens": 12600, "voltage": 220, "diameter_description": "Doble Ø60/80cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "SXL-D02", "watt": 198, "lumens": 15840, "voltage": 220, "diameter_description": "Doble Ø80/100cm", "specs": { "tensor": "1.2m" } },
+          { "sku": "SXL-T01", "watt": 260, "lumens": 20800, "voltage": 220, "diameter_description": "Triple Ø60/80/100cm", "specs": { "tensor": "1.6m" } },
+          { "sku": "SXL-C01", "watt": 390, "lumens": 31300, "voltage": 220, "diameter_description": "Cuadruple Ø60/80/100/120cm", "specs": { "tensor": "2.4m" } }
+        ]
+      }
+    ],
+    "addons": [
+      { "code": "SXL-DIM-LLA", "name": "Dimmer Llavero", "category": "control" },
+      { "code": "SXL-DIM-TAC", "name": "Dimmer Táctil", "category": "control" },
+      { "code": "SXL-DIM-WIF", "name": "Dimmer Wifi", "category": "control" },
+      { "code": "SXL-EXT-TEN", "name": "Extra Tensores", "category": "installation" }
+    ]
+  },
+  {
+    "product": {
+      "code": "BATTI",
+      "name": "Batti",
+      "description": "Colgante combinado LED de aluminio anodizado con múltiples aros entrelazados.",
+      "category": "colgantes",
+      "finishes": [
+        "negro-microtexturado",
+        "champagne-mate",
+        "cobre-mate",
+        "oro-mate",
+        "blanco-microtexturado",
+        "aluminio"
+      ]
+    },
+    "variants": [
+      {
+        "variant_code": "BAT",
+        "name": "Batti Múltiple",
+        "includes_led": true,
+        "light_tones": ["2700k", "3000k", "4000k", "6000k"],
+        "configurations": [
+          { "sku": "BAT-T01", "watt": 190, "lumens": 19200, "voltage": 220, "diameter_description": "Triple Ø60/80/100XL", "specs": { "tensor": "2.4m" } },
+          { "sku": "BAT-C01", "watt": 220, "lumens": 25400, "voltage": 220, "diameter_description": "Cuadruple Ø80XL/100S/120XL", "specs": { "tensor": "2.4m" } },
+          { "sku": "BAT-C02", "watt": 306, "lumens": 30010, "voltage": 220, "diameter_description": "Cuadruple Ø100/120/120XL", "specs": { "tensor": "3.2m" } },
+          { "sku": "BAT-Q01", "watt": 326, "lumens": 32000, "voltage": 220, "diameter_description": "Quintuple Ø120XL/100S/80S/60XL/45S", "specs": { "tensor": "3.2m" } }
+        ]
+      }
+    ],
+    "addons": [
+      { "code": "BAT-DIM-LLA", "name": "Dimmer Llavero", "category": "control" },
+      { "code": "BAT-DIM-TAC", "name": "Dimmer Táctil", "category": "control" },
+      { "code": "BAT-DIM-WIF", "name": "Dimmer Wifi", "category": "control" },
+      { "code": "BAT-EXT-TEN", "name": "Extra Tensores", "category": "installation" }
+    ]
+  }
+]

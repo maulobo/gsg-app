@@ -3,8 +3,8 @@ import { LedRollCreationForm } from '@/components/led-rolls/LedRollCreationForm'
 import { redirect } from 'next/navigation'
 
 export const metadata = {
-  title: 'Crear Rollo LED | GSG Admin',
-  description: 'Crear nuevo rollo/tira LED con modelos específicos',
+  title: 'Crear Familia LED | GSG Admin',
+  description: 'Crear nueva familia de LED rolls con sus variantes',
 }
 
 export default async function NewLedRollPage() {
@@ -15,15 +15,9 @@ export default async function NewLedRollPage() {
     redirect('/auth/signin')
   }
 
-  // Fetch light tones for monocromatic models
-  const { data: lightTones } = await supabase
-    .from('light_tones')
-    .select('*')
-    .order('kelvin', { ascending: true })
-
   return (
     <div>
-      <LedRollCreationForm lightTones={lightTones || []} />
+      <LedRollCreationForm />
     </div>
   )
 }
