@@ -1,0 +1,632 @@
+[
+  {
+    "modelo": "COB 5 w/m",
+    "caracteristicas_generales": {
+      "tipo_led": "COB",
+      "adhesivo": "3M Original",
+      "largo_rollo": "5 metros",
+      "dimerizable": true,
+      "cri": "80",
+      "ancho_pcb": "8mm",
+      "garantia": "3 AÑOS"
+    },
+    "variantes": [
+      {
+        "codigo": "LED-COB-05W-CAL",
+        "consumo_w_m": 5,
+        "leds_por_metro": 320,
+        "lumenes": 750,
+        "tono": "3000K",
+        "voltaje": 12,
+        "ip": 20
+      }
+    ]
+  },
+  {
+    "modelo": "SMD 9,6 w/m",
+    "caracteristicas_generales": {
+      "tipo_led": "2835",
+      "adhesivo": "3M Original",
+      "largo_rollo": "5 metros",
+      "dimerizable": true,
+      "leds_por_metro": 120,
+      "cri": "90",
+      "ancho_pcb": "8mm",
+      "garantia": "3 AÑOS"
+    },
+    "variantes": [
+      {
+        "codigo": "LED-09W-FRI",
+        "consumo_w_m": 9.6,
+        "lumenes": 940,
+        "tono": "6000K",
+        "voltaje": 12,
+        "ip": 20
+      },
+      {
+        "codigo": "LED-09W-CAL",
+        "consumo_w_m": 9.6,
+        "lumenes": 920,
+        "tono": "3000K",
+        "voltaje": 12,
+        "ip": 20
+      }
+    ]
+  },
+  {
+    "modelo": "COB 10 w/m",
+    "caracteristicas_generales": {
+      "tipo_led": "COB",
+      "adhesivo": "3M Original",
+      "largo_rollo": "5 metros",
+      "dimerizable": true,
+      "ancho_pcb": "8mm",
+      "nota_corte": "Permite el corte cada 10 mm",
+      "garantia": "3 AÑOS"
+    },
+    "variantes": [
+      {
+        "codigo": "LED-COB-10W-NEU",
+        "consumo_w_m": 10,
+        "leds_por_metro": 512,
+        "lumenes": 920,
+        "tono": "4000K",
+        "voltaje": 12,
+        "ip": 20
+      },
+      {
+        "codigo": "LED-COB-10W-CAL",
+        "consumo_w_m": 10,
+        "leds_por_metro": 512,
+        "lumenes": 900,
+        "tono": "3000K",
+        "voltaje": 12,
+        "ip": 20
+      },
+      {
+        "codigo": "LED-COB-10W-CAL-24V",
+        "consumo_w_m": 10,
+        "leds_por_metro": 512,
+        "lumenes": null,
+        "tono": "3000K",
+        "voltaje": 24,
+        "ip": 20
+      },
+      {
+        "codigo": "LED-COB-10W-SCA-24V",
+        "consumo_w_m": 10,
+        "leds_por_metro": 512,
+        "lumenes": null,
+        "tono": "2700K",
+        "voltaje": 24,
+        "ip": 20
+      },
+      {
+        "codigo": "LED-COB-10W-SCA-24V-IP67",
+        "consumo_w_m": 10,
+        "leds_por_metro": 512,
+        "lumenes": null,
+        "tono": "2700K",
+        "voltaje": 24,
+        "ip": 67
+      }
+    ]
+  },
+  {
+    "modelo": "SMD 14,4 w/m",
+    "caracteristicas_generales": {
+      "tipo_led": "2835",
+      "adhesivo": "3M Original",
+      "largo_rollo": "5 metros",
+      "dimerizable": true,
+      "cri": "90",
+      "ancho_pcb": "8mm",
+      "garantia": "3 AÑOS",
+      "nota": "La silicona aumenta la temperatura color aprox 3000K -> 3500K"
+    },
+    "variantes": [
+      {
+        "codigo": "LED-14W-FRI",
+        "consumo_w_m": 14.4,
+        "leds_por_metro": 60,
+        "lumenes": 1400,
+        "tono": "6000K",
+        "voltaje": 12,
+        "ip": 20
+      },
+      {
+        "codigo": "LED-14W-NEU",
+        "consumo_w_m": 14.4,
+        "leds_por_metro": 60,
+        "lumenes": 1320,
+        "tono": "4000K",
+        "voltaje": 12,
+        "ip": 20
+      },
+      {
+        "codigo": "LED-14W-CAL",
+        "consumo_w_m": 14.4,
+        "leds_por_metro": 60,
+        "lumenes": 1290,
+        "tono": "3000K",
+        "voltaje": 12,
+        "ip": 20
+      },
+      {
+        "codigo": "LED-14W-SCA",
+        "consumo_w_m": 14.4,
+        "leds_por_metro": 60,
+        "lumenes": 1280,
+        "tono": "2700K",
+        "voltaje": 12,
+        "ip": 20
+      },
+      {
+        "codigo": "LED-14E-FRI",
+        "consumo_w_m": 14.4,
+        "leds_por_metro": 60,
+        "lumenes": 1350,
+        "tono": "6000K",
+        "voltaje": 12,
+        "ip": 65
+      },
+      {
+        "codigo": "LED-14E-NEU",
+        "consumo_w_m": 14.4,
+        "leds_por_metro": 60,
+        "lumenes": 1210,
+        "tono": "4000K",
+        "voltaje": 12,
+        "ip": 65
+      },
+      {
+        "codigo": "LED-14E-CAL",
+        "consumo_w_m": 14.4,
+        "leds_por_metro": 60,
+        "lumenes": 1180,
+        "tono": "3000K",
+        "voltaje": 12,
+        "ip": 65
+      },
+      {
+        "codigo": "LED-14E-SCA",
+        "consumo_w_m": 14.4,
+        "leds_por_metro": 60,
+        "lumenes": 1160,
+        "tono": "2700K",
+        "voltaje": 12,
+        "ip": 65
+      }
+    ]
+  },
+  {
+    "modelo": "SMD 10 w/m - 24v (IC)",
+    "caracteristicas_generales": {
+      "tipo_led": "2835 IC",
+      "largo_rollo": "5 metros",
+      "dimerizable": true,
+      "cri": "90",
+      "ancho_pcb": "10mm",
+      "nota_tecnica": "Permite alimentar 25m sin caída de tensión desde un solo extremo",
+      "garantia": "3 AÑOS"
+    },
+    "variantes": [
+      {
+        "codigo": "LED-10W-CAL",
+        "consumo_w_m": 10,
+        "leds_por_metro": 80,
+        "lumenes": 1220,
+        "tono": "3000K",
+        "voltaje": 24,
+        "ip": 20
+      }
+    ]
+  },
+  {
+    "modelo": "SMD 19,2 w/m",
+    "caracteristicas_generales": {
+      "tipo_led": "2835",
+      "adhesivo": "3M Original",
+      "largo_rollo": "5 metros",
+      "dimerizable": true,
+      "cri": "90",
+      "ancho_pcb": "8mm",
+      "garantia": "3 AÑOS"
+    },
+    "variantes": [
+      {
+        "codigo": "LED-19W-FRI",
+        "consumo_w_m": 19.2,
+        "leds_por_metro": 120,
+        "lumenes": 1950,
+        "tono": "6000K",
+        "voltaje": 12,
+        "ip": 20
+      },
+      {
+        "codigo": "LED-19W-NEU",
+        "consumo_w_m": 19.2,
+        "leds_por_metro": 120,
+        "lumenes": 1900,
+        "tono": "4000K",
+        "voltaje": 12,
+        "ip": 20
+      },
+      {
+        "codigo": "LED-19W-CAL",
+        "consumo_w_m": 19.2,
+        "leds_por_metro": 120,
+        "lumenes": 1830,
+        "tono": "3000K",
+        "voltaje": 12,
+        "ip": 20
+      },
+      {
+        "codigo": "LED-19W-SCA",
+        "consumo_w_m": 19.2,
+        "leds_por_metro": 120,
+        "lumenes": 1800,
+        "tono": "2700K",
+        "voltaje": 12,
+        "ip": 20
+      }
+    ]
+  },
+  {
+    "modelo": "SMD 36 w/m",
+    "caracteristicas_generales": {
+      "tipo_led": "2835",
+      "largo_rollo": "5 metros",
+      "dimerizable": true,
+      "cri": "90",
+      "ancho_pcb": "30mm",
+      "garantia": "3 AÑOS"
+    },
+    "variantes": [
+      {
+        "codigo": "LED-36W-FRI",
+        "consumo_w_m": 36,
+        "leds_por_metro": 240,
+        "lumenes": 4000,
+        "tono": "6000K",
+        "voltaje": 12,
+        "ip": 20
+      },
+      {
+        "codigo": "LED-36W-NEU",
+        "consumo_w_m": 36,
+        "leds_por_metro": 240,
+        "lumenes": 3940,
+        "tono": "4000K",
+        "voltaje": 12,
+        "ip": 20
+      },
+      {
+        "codigo": "LED-36W-CAL",
+        "consumo_w_m": 36,
+        "leds_por_metro": 240,
+        "lumenes": 3840,
+        "tono": "3000K",
+        "voltaje": 12,
+        "ip": 20
+      },
+      {
+        "codigo": "LED-36W-SCA",
+        "consumo_w_m": 36,
+        "leds_por_metro": 240,
+        "lumenes": 3800,
+        "tono": "2700K",
+        "voltaje": 12,
+        "ip": 20
+      }
+    ]
+  },
+  {
+    "modelo": "COB 40 w/m",
+    "caracteristicas_generales": {
+      "tipo_led": "COB",
+      "largo_rollo": "5 metros",
+      "dimerizable": true,
+      "cri": "90",
+      "ancho_pcb": "30mm",
+      "garantia": "3 AÑOS"
+    },
+    "variantes": [
+      {
+        "codigo": "LED-COB-40W-FRI",
+        "consumo_w_m": 40,
+        "leds_por_metro": 1600,
+        "lumenes": 4000,
+        "tono": "6000K",
+        "voltaje": 24,
+        "ip": 20
+      },
+      {
+        "codigo": "LED-COB-40W-NEU",
+        "consumo_w_m": 40,
+        "leds_por_metro": 1600,
+        "lumenes": 3940,
+        "tono": "4000K",
+        "voltaje": 24,
+        "ip": 20
+      },
+      {
+        "codigo": "LED-COB-40W-CAL",
+        "consumo_w_m": 40,
+        "leds_por_metro": 1600,
+        "lumenes": 3840,
+        "tono": "3000K",
+        "voltaje": 24,
+        "ip": 20
+      },
+      {
+        "codigo": "LED-COB-40W-SCA",
+        "consumo_w_m": 40,
+        "leds_por_metro": 1600,
+        "lumenes": 3800,
+        "tono": "2700K",
+        "voltaje": 24,
+        "ip": 20
+      }
+    ]
+  },
+  {
+    "modelo": "SMD 14,4w RGB",
+    "caracteristicas_generales": {
+      "tipo_led": "5050 RGB",
+      "largo_rollo": "5 metros",
+      "dimerizable": true,
+      "ancho_pcb": "10mm",
+      "garantia": "3 AÑOS"
+    },
+    "variantes": [
+      {
+        "codigo": "LED-INT-RGB",
+        "consumo_w_m": 14.4,
+        "leds_por_metro": 60,
+        "tono": "RGB",
+        "voltaje": 12,
+        "ip": 20
+      },
+      {
+        "codigo": "LED-EXT-RGB",
+        "consumo_w_m": 14.4,
+        "leds_por_metro": 60,
+        "tono": "RGB",
+        "voltaje": 12,
+        "ip": 65
+      }
+    ]
+  },
+  {
+    "modelo": "19,6W RGB+W",
+    "caracteristicas_generales": {
+      "tipo_led": "5050 RGBW",
+      "largo_rollo": "5 metros",
+      "dimerizable": true,
+      "ancho_pcb": "12mm",
+      "descripcion": "CHIP 4 EN 1 (RGB+BLANCO)",
+      "garantia": "3 AÑOS"
+    },
+    "variantes": [
+      {
+        "codigo": "LED-RGB-FRI",
+        "consumo_w_m": 19.6,
+        "leds_por_metro": 60,
+        "tono": "RGB+6000K",
+        "voltaje": 12,
+        "ip": 20
+      },
+      {
+        "codigo": "LED-RGB-CAL",
+        "consumo_w_m": 19.6,
+        "leds_por_metro": 60,
+        "tono": "RGB+3000K",
+        "voltaje": 12,
+        "ip": 20
+      }
+    ]
+  },
+  {
+    "modelo": "RGB COB",
+    "caracteristicas_generales": {
+      "tipo_led": "COB RGB",
+      "largo_rollo": "5 metros",
+      "ancho_pcb": "10mm",
+      "garantia": "3 AÑOS"
+    },
+    "variantes": [
+      {
+        "codigo": "LED-COB-RGB-12V",
+        "consumo_w_m": 15,
+        "leds_por_metro": 450,
+        "tono": "RGB",
+        "voltaje": 12,
+        "ip": 20
+      },
+      {
+        "codigo": "LED-COB-RGB-24V",
+        "consumo_w_m": 14,
+        "leds_por_metro": 576,
+        "tono": "RGB",
+        "voltaje": 24,
+        "ip": 20
+      }
+    ]
+  },
+  {
+    "modelo": "COB RGB+WW",
+    "caracteristicas_generales": {
+      "tipo_led": "COB RGBW",
+      "largo_rollo": "5 metros",
+      "dimerizable": true,
+      "ancho_pcb": "12mm",
+      "garantia": "3 AÑOS"
+    },
+    "variantes": [
+      {
+        "codigo": "LED-COB-RGBWW-24V",
+        "consumo_w_m": 25,
+        "leds_por_metro": 840,
+        "tono": "RGB+3000K",
+        "voltaje": 24,
+        "ip": 20
+      }
+    ]
+  },
+  {
+    "modelo": "COB CCT",
+    "caracteristicas_generales": {
+      "tipo_led": "COB CCT",
+      "descripcion": "BLANCO DINÁMICO (3000-6000K)",
+      "largo_rollo": "5 metros",
+      "ancho_pcb": "10mm",
+      "nota": "Necesita controladora CCT",
+      "garantia": "3 AÑOS"
+    },
+    "variantes": [
+      {
+        "codigo": "LED-COB-CCT",
+        "consumo_w_m": "11+11",
+        "leds_por_metro": 608,
+        "lumenes": 1050,
+        "tono": "3K-6K",
+        "voltaje": 12,
+        "ip": 20
+      }
+    ]
+  },
+  {
+    "modelo": "RGB COB DIGITAL",
+    "caracteristicas_generales": {
+      "tipo_led": "COB RGB",
+      "largo_rollo": "5 metros",
+      "descripcion": "Digital (magic) COB",
+      "ancho_pcb": "10mm",
+      "garantia": "3 AÑOS"
+    },
+    "variantes": [
+      {
+        "codigo": "LED-COB-RGB-DIG",
+        "consumo_w_m": 12,
+        "leds_por_metro": 450,
+        "tono": "RGB",
+        "voltaje": 12,
+        "ip": 20
+      }
+    ]
+  },
+  {
+    "modelo": "DIGITAL PIXEL",
+    "caracteristicas_generales": {
+      "tipo_led": "2835",
+      "descripcion": "PIXEL MONOCROMÁTICO SECUENCIAL",
+      "largo_rollo": "5 metros",
+      "cri": "90",
+      "nota": "Debe ir con controladora",
+      "garantia": "3 AÑOS"
+    },
+    "variantes": [
+      {
+        "codigo": "LED-2835-CAL-DIG",
+        "consumo_w_m": 12,
+        "leds_por_metro": 120,
+        "lumenes": 1300,
+        "tono": "3000K",
+        "voltaje": 12,
+        "ip": 20
+      }
+    ]
+  },
+  {
+    "modelo": "SMD 4,8 w/m (PROMOCIÓN)",
+    "caracteristicas_generales": {
+      "tipo_led": "2835",
+      "adhesivo": "3M Original",
+      "largo_rollo": "5 metros",
+      "dimerizable": true,
+      "cri": "80",
+      "ancho_pcb": "8mm",
+      "garantia": "3 AÑOS"
+    },
+    "variantes": [
+      {
+        "codigo": "LED-04W-FRI",
+        "consumo_w_m": 4.8,
+        "leds_por_metro": 60,
+        "lumenes": 496,
+        "tono": "6000K",
+        "voltaje": 12,
+        "ip": 20
+      },
+      {
+        "codigo": "LED-04W-CAL",
+        "consumo_w_m": 4.8,
+        "leds_por_metro": 60,
+        "lumenes": 480,
+        "tono": "3000K",
+        "voltaje": 12,
+        "ip": 20
+      },
+      {
+        "codigo": "LED-04E-FRI",
+        "consumo_w_m": 4.8,
+        "leds_por_metro": 60,
+        "lumenes": 450,
+        "tono": "6000K",
+        "voltaje": 12,
+        "ip": 65
+      },
+      {
+        "codigo": "LED-04E-CAL",
+        "consumo_w_m": 4.8,
+        "leds_por_metro": 60,
+        "lumenes": 430,
+        "tono": "3000K",
+        "voltaje": 12,
+        "ip": 65
+      },
+      {
+        "codigo": "LED-04E-SCA",
+        "consumo_w_m": 4.8,
+        "leds_por_metro": 60,
+        "lumenes": 420,
+        "tono": "2700K",
+        "voltaje": 12,
+        "ip": 65
+      }
+    ]
+  },
+  {
+    "modelo": "SMD 14,4 w/m (PROMOCIÓN)",
+    "caracteristicas_generales": {
+      "tipo_led": "5050",
+      "adhesivo": "3M Original",
+      "largo_rollo": "5 metros",
+      "dimerizable": true,
+      "cri": "90",
+      "ancho_pcb": "10mm",
+      "garantia": "3 AÑOS"
+    },
+    "variantes": [
+      {
+        "codigo": "LED-505-FRI",
+        "consumo_w_m": 14.4,
+        "leds_por_metro": 60,
+        "lumenes": 1600,
+        "tono": "6000K",
+        "voltaje": 12,
+        "ip": 20
+      },
+      {
+        "codigo": "LED-505-CAL",
+        "consumo_w_m": 14.4,
+        "leds_por_metro": 60,
+        "lumenes": 1540,
+        "tono": "3000K",
+        "voltaje": 12,
+        "ip": 20
+      }
+    ]
+  }
+]

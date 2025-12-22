@@ -45,6 +45,9 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: productError.message }, { status: 500 })
     }
 
+    // Admin client for RLS-protected tables
+    const adminSupabase = createAdminSupabaseClient()
+
     // 2. Create product_finishes relationships (if any)
     if (product.finish_ids && product.finish_ids.length > 0) {
       const finishInserts = product.finish_ids.map((finish_id: number) => ({
@@ -52,7 +55,7 @@ export async function POST(request: NextRequest) {
         finish_id,
       }))
 
-      const { error: finishError } = await supabase
+      const { error: finishError } = await adminSupabase
         .from('product_finishes')
         .insert(finishInserts)
 
@@ -63,7 +66,6 @@ export async function POST(request: NextRequest) {
     }
 
     // 3. Create variants with all their relations
-    const adminSupabase = createAdminSupabaseClient()
     const createdVariants = []
     
     for (const variant of variants as VariantData[]) {

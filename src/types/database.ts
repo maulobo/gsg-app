@@ -281,6 +281,9 @@ export type Database = {
           finish_surface: string | null
           max_w_per_m: number | null
           use_cases: string | null
+          available_lengths: string | null
+          includes_led: boolean
+          includes_power_supply: boolean
           created_at: string
         }
         Insert: {
@@ -292,6 +295,9 @@ export type Database = {
           finish_surface?: string | null
           max_w_per_m?: number | null
           use_cases?: string | null
+          available_lengths?: string | null
+          includes_led?: boolean
+          includes_power_supply?: boolean
           created_at?: string
         }
         Update: {
@@ -303,6 +309,9 @@ export type Database = {
           finish_surface?: string | null
           max_w_per_m?: number | null
           use_cases?: string | null
+          available_lengths?: string | null
+          includes_led?: boolean
+          includes_power_supply?: boolean
           created_at?: string
         }
       }
@@ -517,6 +526,185 @@ export type Database = {
           updated_at?: string
         }
       }
+      led_roll_families: {
+        Row: {
+          id: number
+          name: string
+          description: string | null
+          led_type: string | null
+          adhesive: string | null
+          roll_length_m: number | null
+          dimmable: boolean
+          leds_per_meter: number | null
+          cri: number | null
+          pcb_width_mm: number | null
+          warranty_years: number
+          technical_note: string | null
+          cut_note: string | null
+          general_note: string | null
+          is_active: boolean
+          featured: boolean
+          display_order: number
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: number
+          name: string
+          description?: string | null
+          led_type?: string | null
+          adhesive?: string | null
+          roll_length_m?: number | null
+          dimmable?: boolean
+          leds_per_meter?: number | null
+          cri?: number | null
+          pcb_width_mm?: number | null
+          warranty_years?: number
+          technical_note?: string | null
+          cut_note?: string | null
+          general_note?: string | null
+          is_active?: boolean
+          featured?: boolean
+          display_order?: number
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: number
+          name?: string
+          description?: string | null
+          led_type?: string | null
+          adhesive?: string | null
+          roll_length_m?: number | null
+          dimmable?: boolean
+          leds_per_meter?: number | null
+          cri?: number | null
+          pcb_width_mm?: number | null
+          warranty_years?: number
+          technical_note?: string | null
+          cut_note?: string | null
+          general_note?: string | null
+          is_active?: boolean
+          featured?: boolean
+          display_order?: number
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      led_rolls: {
+        Row: {
+          id: number
+          family_id: number
+          code: string
+          name: string | null
+          watts_per_meter: number
+          lumens_per_meter: number | null
+          kelvin: number | null
+          tone_label: string | null
+          voltage: number
+          ip_rating: number
+          leds_per_meter_variant: number | null
+          is_active: boolean
+          stock: number
+          price: number | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: number
+          family_id: number
+          code: string
+          name?: string | null
+          watts_per_meter: number
+          lumens_per_meter?: number | null
+          kelvin?: number | null
+          tone_label?: string | null
+          voltage: number
+          ip_rating?: number
+          leds_per_meter_variant?: number | null
+          is_active?: boolean
+          stock?: number
+          price?: number | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: number
+          family_id?: number
+          code?: string
+          name?: string | null
+          watts_per_meter?: number
+          lumens_per_meter?: number | null
+          kelvin?: number | null
+          tone_label?: string | null
+          voltage?: number
+          ip_rating?: number
+          leds_per_meter_variant?: number | null
+          is_active?: boolean
+          stock?: number
+          price?: number | null
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      led_roll_family_media: {
+        Row: {
+          id: number
+          family_id: number
+          path: string
+          kind: 'cover' | 'gallery' | 'tech' | 'video'
+          alt_text: string | null
+          display_order: number
+          created_at: string
+        }
+        Insert: {
+          id?: number
+          family_id: number
+          path: string
+          kind: 'cover' | 'gallery' | 'tech' | 'video'
+          alt_text?: string | null
+          display_order?: number
+          created_at?: string
+        }
+        Update: {
+          id?: number
+          family_id?: number
+          path?: string
+          kind?: 'cover' | 'gallery' | 'tech' | 'video'
+          alt_text?: string | null
+          display_order?: number
+          created_at?: string
+        }
+      }
+      led_roll_media: {
+        Row: {
+          id: number
+          roll_id: number
+          path: string
+          kind: 'cover' | 'detail' | 'application'
+          alt_text: string | null
+          display_order: number
+          created_at: string
+        }
+        Insert: {
+          id?: number
+          roll_id: number
+          path: string
+          kind: 'cover' | 'detail' | 'application'
+          alt_text?: string | null
+          display_order?: number
+          created_at?: string
+        }
+        Update: {
+          id?: number
+          roll_id?: number
+          path?: string
+          kind?: 'cover' | 'detail' | 'application'
+          alt_text?: string | null
+          display_order?: number
+          created_at?: string
+        }
+      }
     }
   }
 }
@@ -593,6 +781,22 @@ export type LedProfileFinishUpdate = Database['public']['Tables']['led_profile_f
 export type LedProfileIncludedItemUpdate = Database['public']['Tables']['led_profile_included_items']['Update']
 export type LedProfileOptionalItemUpdate = Database['public']['Tables']['led_profile_optional_items']['Update']
 export type LedProfileMediaUpdate = Database['public']['Tables']['led_profile_media']['Update']
+
+// LED Roll types
+export type LedRollFamily = Database['public']['Tables']['led_roll_families']['Row']
+export type LedRoll = Database['public']['Tables']['led_rolls']['Row']
+export type LedRollFamilyMedia = Database['public']['Tables']['led_roll_family_media']['Row']
+export type LedRollMedia = Database['public']['Tables']['led_roll_media']['Row']
+
+export type LedRollFamilyInsert = Database['public']['Tables']['led_roll_families']['Insert']
+export type LedRollInsert = Database['public']['Tables']['led_rolls']['Insert']
+export type LedRollFamilyMediaInsert = Database['public']['Tables']['led_roll_family_media']['Insert']
+export type LedRollMediaInsert = Database['public']['Tables']['led_roll_media']['Insert']
+
+export type LedRollFamilyUpdate = Database['public']['Tables']['led_roll_families']['Update']
+export type LedRollUpdate = Database['public']['Tables']['led_rolls']['Update']
+export type LedRollFamilyMediaUpdate = Database['public']['Tables']['led_roll_family_media']['Update']
+export type LedRollMediaUpdate = Database['public']['Tables']['led_roll_media']['Update']
 export type LedProfileEmbeddingUpdate = Database['public']['Tables']['led_profile_embeddings']['Update']
 
 // Extended types with relations
