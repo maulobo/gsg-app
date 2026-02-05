@@ -14,7 +14,8 @@ import {
   ShootingStarIcon,
   BoxIconLine,
   LedStripIcon,
-  GroupIcon
+  GroupIcon,
+  PieChartIcon
 } from "../icons";
 import SidebarWidget from "./SidebarWidget";
 
@@ -30,11 +31,11 @@ const navItems: NavItem[] = [
     icon: <GridIcon />,
     name: "Dashboard",
     subItems: [
-      { name: "Productos", path: "/products", pro: false },
-      { name: "Accesorios", path: "/accessories", pro: false }
+     {name: "Estadísticas", path: "/statistics", pro: false },
+     { name: "Productos", path: "/products", pro: false },
+     { name: "Accesorios", path: "/accessories", pro: false }
     ],
   },
-
   {
     icon: <FolderIcon />,
     name: "Productos",

@@ -381,7 +381,7 @@ export function LedProfileCreationForm({ diffusers, finishes }: LedProfileCreati
                 <input
                   type="text"
                   value={formData.code}
-                  onChange={(e) => setFormData({ ...formData, code: e.target.value })}
+                  onChange={(e) => setFormData({ ...formData, code: e.target.value.replace(/\s+/g, '-') })}
                   className="w-full rounded-md border border-gray-300 px-3 py-2 bg-white text-gray-900 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
                   placeholder="LED-ALU-001"
                 />
