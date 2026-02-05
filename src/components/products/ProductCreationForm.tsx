@@ -432,7 +432,7 @@ export function ProductCreationForm({ categories, finishes: initialFinishes, lig
                   placeholder="ej: BUR"
                   value={productData.code}
                   onChange={(e) =>
-                    setProductData({ ...productData, code: e.target.value.toUpperCase() })
+                    setProductData({ ...productData, code: e.target.value.toUpperCase().replace(/\s+/g, '-') })
                   }
                   className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm text-gray-900 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500"
                 />

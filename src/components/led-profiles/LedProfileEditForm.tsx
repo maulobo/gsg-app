@@ -46,7 +46,7 @@ export function LedProfileEditForm({ profile, diffusers, finishes }: LedProfileE
   // Relations - preloaded from profile
   const [selectedDiffusers, setSelectedDiffusers] = useState<DiffuserRelation[]>(
     profile.diffusers.map(d => ({
-      id: d.id,
+      diffuser_id: d.id, // d.id is the diffuser's id from led_diffusers table
       material: d.material || '',
       notes: (d as any).notes || ''
     }))
@@ -115,7 +115,7 @@ export function LedProfileEditForm({ profile, diffusers, finishes }: LedProfileE
 
   // Temp states for adding relations
   const [tempDiffuser, setTempDiffuser] = useState({
-    id: 0,
+    diffuser_id: 0,
     tone: '', // 'opal' | 'transparente'
     material: '', // 'PVC' | 'PC' | 'Silicona'
     notes: ''
@@ -163,13 +163,45 @@ export function LedProfileEditForm({ profile, diffusers, finishes }: LedProfileE
         throw new Error(error.error || 'Error al actualizar el perfil LED')
       }
 
-      // TODO: Add endpoints to update relations
-      // For now we would need to delete all relations and recreate them
-      // This should be improved in the future with proper PATCH endpoints
+      // 2. Update finishes (replace all)
+      const finishesResponse = await fetch(`/api/led-profiles/${profile.id}/finishes/bulk`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ finish_ids: selectedFinishIds }),
+      })
 
-      // 2. Update diffusers (delete all, then recreate)
-      // 3. Update finishes (delete all, then recreate)
-      // 4. Update items (delete all, then recreate)
+      if (!finishesResponse.ok) {
+        const error = await finishesResponse.json()
+        console.error('Error updating finishes:', error)
+        throw new Error(error.error || 'Error al actualizar acabados')
+      }
+
+      // 3. Update diffusers (replace all)
+      // Note: We need to map diffusers to include diffuser_id
+      // For now, this needs to be improved as the form doesn't capture diffuser_id properly
+      const diffusersWithIds = selectedDiffusers.filter(d => d.diffuser_id || d.id)
+      if (diffusersWithIds.length > 0) {
+        const diffusersToSend = diffusersWithIds.map(d => ({
+          diffuser_id: d.diffuser_id || d.id,
+          material: d.material,
+          notes: d.notes,
+        }))
+        
+        const diffusersResponse = await fetch(`/api/led-profiles/${profile.id}/diffusers/bulk`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ diffusers: diffusersToSend }),
+        })
+
+        if (!diffusersResponse.ok) {
+          const error = await diffusersResponse.json()
+          console.error('Error updating diffusers:', error)
+          // Don't throw - continue with the rest
+        }
+      }
+
+      // 4. Update items (included/optional) - TODO: This needs accessory_id mapping
+      // For now, skipping as the form doesn't properly handle accessory_id
       
       // 4.5 Delete removed images
       if (mediaToDelete.size > 0) {
@@ -257,12 +289,19 @@ export function LedProfileEditForm({ profile, diffusers, finishes }: LedProfileE
   }
 
   const addDiffuser = () => {
-    if (!tempDiffuser.tone || !tempDiffuser.material) {
-      alert('Selecciona el tono y material del difusor')
+    if (!tempDiffuser.diffuser_id || tempDiffuser.diffuser_id === 0) {
+      alert('Selecciona un difusor')
       return
     }
+    
+    // Check if already added
+    if (selectedDiffusers.some(d => d.diffuser_id === tempDiffuser.diffuser_id)) {
+      alert('Este difusor ya fue agregado')
+      return
+    }
+    
     setSelectedDiffusers([...selectedDiffusers, { ...tempDiffuser }])
-    setTempDiffuser({ id: 0, tone: '', material: '', notes: '' })
+    setTempDiffuser({ diffuser_id: 0, tone: '', material: '', notes: '' })
   }
 
   const removeDiffuser = (index: number) => {
@@ -494,7 +533,7 @@ export function LedProfileEditForm({ profile, diffusers, finishes }: LedProfileE
                 <input
                   type="text"
                   value={formData.code}
-                  onChange={(e) => setFormData({ ...formData, code: e.target.value })}
+                  onChange={(e) => setFormData({ ...formData, code: e.target.value.replace(/\s+/g, '-') })}
                   className="w-full rounded-md border border-gray-300 px-3 py-2 bg-white text-gray-900 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
                   placeholder="LED-ALU-001"
                 />
@@ -582,51 +621,50 @@ export function LedProfileEditForm({ profile, diffusers, finishes }: LedProfileE
             
             <div className="border border-blue-light-200 rounded-lg p-4 bg-blue-light-50 dark:bg-blue-light-950 dark:border-blue-light-800">
               <h3 className="font-medium mb-3 text-gray-900 dark:text-gray-100">Agregar Difusor</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Tono del Difusor *</label>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Seleccionar Difusor *</label>
                   <select
-                    value={tempDiffuser.tone}
-                    onChange={(e) => setTempDiffuser({ ...tempDiffuser, tone: e.target.value })}
+                    value={tempDiffuser.diffuser_id}
+                    onChange={(e) => {
+                      const diffuserId = parseInt(e.target.value, 10)
+                      const selectedDiff = diffusers.find(d => d.id === diffuserId)
+                      setTempDiffuser({ 
+                        ...tempDiffuser, 
+                        diffuser_id: diffuserId,
+                        tone: selectedDiff?.slug || '',
+                        material: selectedDiff?.material || ''
+                      })
+                    }}
                     className="w-full rounded-md border border-gray-300 px-3 py-2 bg-white text-gray-900 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
                   >
-                    <option value="">Seleccionar...</option>
-                    <option value="opal">Opal</option>
-                    <option value="transparente">Transparente</option>
+                    <option value={0}>Seleccionar...</option>
+                    {diffusers.map(diffuser => (
+                      <option key={diffuser.id} value={diffuser.id}>
+                        {diffuser.name} {diffuser.material ? `(${diffuser.material})` : ''}
+                      </option>
+                    ))}
                   </select>
                 </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Material *</label>
-                  <select
-                    value={tempDiffuser.material}
-                    onChange={(e) => setTempDiffuser({ ...tempDiffuser, material: e.target.value })}
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Notas</label>
+                  <input
+                    type="text"
+                    value={tempDiffuser.notes}
+                    onChange={(e) => setTempDiffuser({ ...tempDiffuser, notes: e.target.value })}
                     className="w-full rounded-md border border-gray-300 px-3 py-2 bg-white text-gray-900 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
-                  >
-                    <option value="">Seleccionar...</option>
-                    <option value="PVC">PVC</option>
-                    <option value="PC">PC (Policarbonato)</option>
-                    <option value="Silicona">Silicona</option>
-                  </select>
+                    placeholder="Notas adicionales..."
+                  />
                 </div>
-                <div className="flex items-end">
+                <div className="md:col-span-2">
                   <button
                     type="button"
                     onClick={addDiffuser}
                     className="w-full rounded-md bg-blue-light-500 px-4 py-2 text-white hover:bg-blue-light-600 transition-colors shadow-theme-sm"
                   >
-                    + Agregar
+                    + Agregar Difusor
                   </button>
                 </div>
-              </div>
-              <div className="mt-3">
-                <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Notas</label>
-                <input
-                  type="text"
-                  value={tempDiffuser.notes}
-                  onChange={(e) => setTempDiffuser({ ...tempDiffuser, notes: e.target.value })}
-                  className="w-full rounded-md border border-gray-300 px-3 py-2 bg-white text-gray-900 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
-                  placeholder="Notas adicionales..."
-                />
               </div>
             </div>
 
@@ -635,26 +673,29 @@ export function LedProfileEditForm({ profile, diffusers, finishes }: LedProfileE
               <div>
                 <h3 className="font-medium mb-2 text-gray-900 dark:text-gray-100">Difusores Seleccionados ({selectedDiffusers.length})</h3>
                 <div className="space-y-2">
-                  {selectedDiffusers.map((d, index) => (
-                    <div key={index} className="flex items-center justify-between bg-blue-light-50 p-3 rounded-lg border border-blue-light-200 dark:bg-blue-light-950 dark:border-blue-light-800">
-                      <div>
-                        <p className="font-medium text-blue-light-900 dark:text-blue-light-100">
-                          {d.tone === 'opal' ? 'Opal' : d.tone === 'transparente' ? 'Transparente' : d.tone}
-                        </p>
-                        <p className="text-sm text-blue-light-700 dark:text-blue-light-300">
-                          Material: {d.material}
-                          {d.notes && ` • ${d.notes}`}
-                        </p>
+                  {selectedDiffusers.map((d, index) => {
+                    const diffuserInfo = diffusers.find(diff => diff.id === d.diffuser_id)
+                    return (
+                      <div key={index} className="flex items-center justify-between bg-blue-light-50 p-3 rounded-lg border border-blue-light-200 dark:bg-blue-light-950 dark:border-blue-light-800">
+                        <div>
+                          <p className="font-medium text-blue-light-900 dark:text-blue-light-100">
+                            {diffuserInfo?.name || d.tone}
+                          </p>
+                          <p className="text-sm text-blue-light-700 dark:text-blue-light-300">
+                            {diffuserInfo?.material && `Material: ${diffuserInfo.material}`}
+                            {d.notes && ` • ${d.notes}`}
+                          </p>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => removeDiffuser(index)}
+                          className="text-error-600 hover:text-error-700 font-medium px-3 py-1 rounded hover:bg-error-50 dark:text-error-400 dark:hover:text-error-300 dark:hover:bg-error-950 transition-colors"
+                        >
+                          Eliminar
+                        </button>
                       </div>
-                      <button
-                        type="button"
-                        onClick={() => removeDiffuser(index)}
-                        className="text-error-600 hover:text-error-700 font-medium px-3 py-1 rounded hover:bg-error-50 dark:text-error-400 dark:hover:text-error-300 dark:hover:bg-error-950 transition-colors"
-                      >
-                        Eliminar
-                      </button>
-                    </div>
-                  ))}
+                    )
+                  })}
                 </div>
               </div>
             )}
