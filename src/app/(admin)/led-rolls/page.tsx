@@ -66,7 +66,7 @@ export default async function LedRollsPage() {
           {rolls.map((roll) => (
             <Link
               key={roll.id}
-              href={`/led-rolls/${roll.code}/edit`}
+              href={`/led-rolls/${roll.id}/edit`}
               className="group rounded-lg border border-gray-200 bg-white p-4 hover:border-brand-500 hover:shadow-lg transition-all dark:bg-gray-dark dark:border-gray-800 dark:hover:border-brand-400"
             >
               {/* Imagen */}

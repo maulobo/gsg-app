@@ -12,10 +12,8 @@ type LedProfileEditFormProps = {
 }
 
 type DiffuserRelation = {
-  diffuser_id?: number
-  id?: number
-  tone?: string
-  material: string
+  diffuser_id: number
+  name: string
   notes: string
 }
 
@@ -46,8 +44,8 @@ export function LedProfileEditForm({ profile, diffusers, finishes }: LedProfileE
   // Relations - preloaded from profile
   const [selectedDiffusers, setSelectedDiffusers] = useState<DiffuserRelation[]>(
     profile.diffusers.map(d => ({
-      diffuser_id: d.id, // d.id is the diffuser's id from led_diffusers table
-      material: d.material || '',
+      diffuser_id: d.id,
+      name: d.name,
       notes: (d as any).notes || ''
     }))
   )
@@ -116,8 +114,6 @@ export function LedProfileEditForm({ profile, diffusers, finishes }: LedProfileE
   // Temp states for adding relations
   const [tempDiffuser, setTempDiffuser] = useState({
     diffuser_id: 0,
-    tone: '', // 'opal' | 'transparente'
-    material: '', // 'PVC' | 'PC' | 'Silicona'
     notes: ''
   })
   const [tempIncludedPart, setTempIncludedPart] = useState<ProfilePart>({
@@ -300,8 +296,15 @@ export function LedProfileEditForm({ profile, diffusers, finishes }: LedProfileE
       return
     }
     
-    setSelectedDiffusers([...selectedDiffusers, { ...tempDiffuser }])
-    setTempDiffuser({ diffuser_id: 0, tone: '', material: '', notes: '' })
+    const diffuser = diffusers.find(d => d.id === tempDiffuser.diffuser_id)
+    if (diffuser) {
+      setSelectedDiffusers([...selectedDiffusers, { 
+        diffuser_id: diffuser.id, 
+        name: diffuser.name,
+        notes: tempDiffuser.notes 
+      }])
+      setTempDiffuser({ diffuser_id: 0, notes: '' })
+    }
   }
 
   const removeDiffuser = (index: number) => {
@@ -628,12 +631,9 @@ export function LedProfileEditForm({ profile, diffusers, finishes }: LedProfileE
                     value={tempDiffuser.diffuser_id}
                     onChange={(e) => {
                       const diffuserId = parseInt(e.target.value, 10)
-                      const selectedDiff = diffusers.find(d => d.id === diffuserId)
                       setTempDiffuser({ 
                         ...tempDiffuser, 
-                        diffuser_id: diffuserId,
-                        tone: selectedDiff?.slug || '',
-                        material: selectedDiff?.material || ''
+                        diffuser_id: diffuserId
                       })
                     }}
                     className="w-full rounded-md border border-gray-300 px-3 py-2 bg-white text-gray-900 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
@@ -641,7 +641,7 @@ export function LedProfileEditForm({ profile, diffusers, finishes }: LedProfileE
                     <option value={0}>Seleccionar...</option>
                     {diffusers.map(diffuser => (
                       <option key={diffuser.id} value={diffuser.id}>
-                        {diffuser.name} {diffuser.material ? `(${diffuser.material})` : ''}
+                        {diffuser.name}
                       </option>
                     ))}
                   </select>
@@ -674,17 +674,17 @@ export function LedProfileEditForm({ profile, diffusers, finishes }: LedProfileE
                 <h3 className="font-medium mb-2 text-gray-900 dark:text-gray-100">Difusores Seleccionados ({selectedDiffusers.length})</h3>
                 <div className="space-y-2">
                   {selectedDiffusers.map((d, index) => {
-                    const diffuserInfo = diffusers.find(diff => diff.id === d.diffuser_id)
                     return (
                       <div key={index} className="flex items-center justify-between bg-blue-light-50 p-3 rounded-lg border border-blue-light-200 dark:bg-blue-light-950 dark:border-blue-light-800">
                         <div>
                           <p className="font-medium text-blue-light-900 dark:text-blue-light-100">
-                            {diffuserInfo?.name || d.tone}
+                            {d.name}
                           </p>
-                          <p className="text-sm text-blue-light-700 dark:text-blue-light-300">
-                            {diffuserInfo?.material && `Material: ${diffuserInfo.material}`}
-                            {d.notes && ` • ${d.notes}`}
-                          </p>
+                          {d.notes && (
+                            <p className="text-sm text-blue-light-700 dark:text-blue-light-300">
+                              {d.notes}
+                            </p>
+                          )}
                         </div>
                         <button
                           type="button"
@@ -1181,10 +1181,9 @@ export function LedProfileEditForm({ profile, diffusers, finishes }: LedProfileE
                   <p className="text-sm text-gray-500 dark:text-gray-400 italic">No hay difusores seleccionados</p>
                 ) : (
                   selectedDiffusers.map((d, i) => {
-                    const diffuser = diffusers.find(df => df.id === d.diffuser_id)
                     return (
                       <p key={i} className="text-sm mb-1 text-gray-900 dark:text-gray-100">
-                        • <strong>{diffuser?.name}</strong> - Material: {diffuser?.material || '—'}
+                        • <strong>{d.name}</strong>
                         {d.notes && ` (${d.notes})`}
                       </p>
                     )
