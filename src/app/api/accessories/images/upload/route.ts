@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { 
-  uploadToR2, 
-  processProductImage, 
-  validateImageFile, 
-  generateUniqueFileName, 
+import {
+  uploadToR2,
+  processProductImage,
+  validateImageFile,
   fileToBuffer,
   deleteFromR2,
   extractKeyFromUrl
@@ -12,10 +11,11 @@ import { createServerSupabaseClient } from '@/lib/supabase-server'
 
 /**
  * POST /api/accessories/images/upload
- * Sube imágenes de accesorios a R2 y guarda en DB
- * 
- * - kind='cover' → Guarda en accessories.photo_url (imagen principal)
- * - kind='tech' → Guarda en accessory_media (fichas técnicas)
+ * Sube archivos de accesorios a R2 y guarda en DB
+ *
+ * - kind='cover'     → Guarda en accessories.photo_url (imagen principal)
+ * - kind='tech'      → Guarda en accessory_media (imagen técnica)
+ * - kind='datasheet' → Guarda en accessory_media (ficha técnica PDF)
  */
 export async function POST(request: NextRequest) {
   try {
@@ -23,12 +23,12 @@ export async function POST(request: NextRequest) {
     const formData = await request.formData()
     const file = formData.get('image') as File
     const accessoryCode = formData.get('accessoryCode') as string
-    const kind = formData.get('kind') as 'cover' | 'tech' || 'cover'
+    const kind = formData.get('kind') as 'cover' | 'tech' | 'datasheet' || 'cover'
     const altText = formData.get('altText') as string || ''
 
     if (!file) {
       return NextResponse.json(
-        { error: 'No se encontró archivo de imagen' },
+        { error: 'No se encontró archivo' },
         { status: 400 }
       )
     }
@@ -56,26 +56,38 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // 2. Validar archivo
-    const validation = validateImageFile(file)
-    if (!validation.isValid) {
-      return NextResponse.json(
-        { error: validation.error },
-        { status: 400 }
-      )
-    }
-
-    // 3. Procesar imagen
-    const fileBuffer = await fileToBuffer(file)
-    const { optimizedBuffer, contentType } = await processProductImage(fileBuffer, kind)
-
-    // 4. Generar nombre único en carpeta accessories
+    // 2. Validar y procesar según tipo de archivo
+    const isPDF = file.name.toLowerCase().endsWith('.pdf') || file.type === 'application/pdf'
     const timestamp = Date.now()
     const randomId = Math.random().toString(36).substring(2, 8)
     const folder = `accessories/${accessoryCode}`
-    const fileName = `${folder}/${kind}/${timestamp}-${randomId}.webp`
 
-    // 5. Subir a R2
+    let optimizedBuffer: Buffer
+    let contentType: string
+    let fileName: string
+
+    if (isPDF) {
+      // Validar tamaño PDF (max 10MB)
+      if (file.size > 10 * 1024 * 1024) {
+        return NextResponse.json({ error: 'El PDF no debe superar 10MB' }, { status: 400 })
+      }
+      optimizedBuffer = await fileToBuffer(file)
+      contentType = 'application/pdf'
+      fileName = `${folder}/${kind}/${timestamp}-${randomId}.pdf`
+    } else {
+      // Validar imagen
+      const validation = validateImageFile(file)
+      if (!validation.isValid) {
+        return NextResponse.json({ error: validation.error }, { status: 400 })
+      }
+      const fileBuffer = await fileToBuffer(file)
+      const processed = await processProductImage(fileBuffer, kind === 'cover' ? 'cover' : 'tech')
+      optimizedBuffer = processed.optimizedBuffer
+      contentType = processed.contentType
+      fileName = `${folder}/${kind}/${timestamp}-${randomId}.webp`
+    }
+
+    // 3. Subir a R2
     const imageUrl = await uploadToR2(fileName, optimizedBuffer, contentType)
 
     // 6. Guardar en base de datos según el tipo

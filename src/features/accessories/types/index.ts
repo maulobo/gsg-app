@@ -2,6 +2,14 @@
  * Accessory feature types - Modelo con relaciones N:N
  */
 
+export const ACCESSORY_TYPES = [
+  'Amplificadores',
+  'Controladoras',
+  'Dimmers',
+  'Conectores',
+  'Sensores',
+] as const
+
 // ---- DB base ----
 export type Accessory = {
   id: number
@@ -9,6 +17,7 @@ export type Accessory = {
   name: string
   description: string | null
   photo_url: string | null
+  tipo: string | null
   watt: number | null
   voltage_label: string | null
   voltage_min: number | null
@@ -22,6 +31,7 @@ export type AccessoryInsert = {
   name: string
   description?: string | null
   photo_url?: string | null
+  tipo?: string | null
   watt?: number | null
   voltage_label?: string | null
   voltage_min?: number | null
@@ -43,7 +53,7 @@ export type AccessoryFinishInsert = {
 export type AccessoryMediaInsert = {
   accessory_id: number
   path: string // URL o storage public URL
-  kind: 'tech'
+  kind: 'tech' | 'datasheet'
   alt_text?: string | null
 }
 
@@ -52,7 +62,7 @@ export type AccessoryMedia = {
   id: number
   accessory_id: number
   path: string
-  kind: 'tech'
+  kind: 'tech' | 'datasheet'
   alt_text: string | null
   created_at: string
 }
@@ -61,7 +71,7 @@ export type AccessoryMedia = {
 export type AccessoryWithRefs = Accessory & {
   accessory_light_tones: { light_tone: { id: number; slug: string; name: string; kelvin: number | null } }[]
   accessory_finishes: { finish: { id: number; slug: string; name: string } }[]
-  accessory_media: { id: number; path: string; kind: 'tech'; alt_text: string | null }[]
+  accessory_media: { id: number; path: string; kind: 'tech' | 'datasheet'; alt_text: string | null }[]
 }
 
 // List item for tables (simplified view)

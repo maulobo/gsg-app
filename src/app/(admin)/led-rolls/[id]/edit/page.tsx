@@ -9,11 +9,11 @@ export const metadata = {
 }
 
 type Props = {
-  params: Promise<{ code: string }>
+  params: Promise<{ id: string }>
 }
 
 export default async function EditLedRollPage({ params }: Props) {
-  const { code } = await params
+  const { id } = await params
   const supabase = await createServerSupabaseClient()
 
   const { data: { user } } = await supabase.auth.getUser()
@@ -21,19 +21,8 @@ export default async function EditLedRollPage({ params }: Props) {
     redirect('/auth/signin')
   }
 
-  // Fetch roll by code
-  const { data: rollData } = await supabase
-    .from('led_rolls')
-    .select('id')
-    .eq('code', code)
-    .eq('is_active', true)
-    .single()
-
-  if (!rollData) {
-    notFound()
-  }
-
-  const roll = await getLedRollById(rollData.id)
+  // Fetch roll by ID
+  const roll = await getLedRollById(parseInt(id, 10))
   if (!roll) {
     notFound()
   }
