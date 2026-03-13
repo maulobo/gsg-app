@@ -175,11 +175,10 @@ export function LedProfileEditForm({ profile, diffusers, finishes }: LedProfileE
       // 3. Update diffusers (replace all)
       // Note: We need to map diffusers to include diffuser_id
       // For now, this needs to be improved as the form doesn't capture diffuser_id properly
-      const diffusersWithIds = selectedDiffusers.filter(d => d.diffuser_id || d.id)
+      const diffusersWithIds = selectedDiffusers.filter(d => d.diffuser_id)
       if (diffusersWithIds.length > 0) {
         const diffusersToSend = diffusersWithIds.map(d => ({
-          diffuser_id: d.diffuser_id || d.id,
-          material: d.material,
+          diffuser_id: d.diffuser_id,
           notes: d.notes,
         }))
         
