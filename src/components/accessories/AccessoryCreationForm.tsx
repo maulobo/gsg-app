@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import type { Finish } from '@/features/finishes/types'
 import type { LightTone } from '@/features/light-tones/types'
 import type { AccessoryInsert } from '@/features/accessories/types'
+import { ACCESSORY_TYPES } from '@/features/accessories/types'
 
 interface Props {
   finishes: Finish[]
@@ -21,11 +22,16 @@ export default function AccessoryCreationForm({ finishes, lightTones }: Props) {
     name: '',
     description: null,
     photo_url: null,
+    tipo: null,
     watt: null,
     voltage_label: null,
     voltage_min: null,
     voltage_max: null,
   })
+  const [tipoOtro, setTipoOtro] = useState('')
+
+  // PDF ficha técnica
+  const [datasheetFile, setDatasheetFile] = useState<File | null>(null)
 
   // Relaciones N:N
   const [selectedToneIds, setSelectedToneIds] = useState<number[]>([])
@@ -98,6 +104,17 @@ export default function AccessoryCreationForm({ finishes, lightTones }: Props) {
         }
       }
 
+      // Subir PDF si existe
+      if (datasheetFile) {
+        const pdfForm = new FormData()
+        pdfForm.append('image', datasheetFile)
+        pdfForm.append('accessoryCode', result.code)
+        pdfForm.append('kind', 'datasheet')
+        pdfForm.append('altText', `${formData.name} - Ficha Técnica`)
+        const pdfRes = await fetch('/api/accessories/images/upload', { method: 'POST', body: pdfForm })
+        if (!pdfRes.ok) console.error('Error al subir la ficha técnica PDF')
+      }
+
       alert('Accesorio creado exitosamente')
       router.push(`/accessories`)
       router.refresh()
@@ -154,6 +171,40 @@ export default function AccessoryCreationForm({ finishes, lightTones }: Props) {
                 className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm text-gray-900 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500"
               />
             </div>
+          </div>
+
+          {/* Tipo */}
+          <div>
+            <label className="mb-2 block text-theme-sm font-medium text-gray-700 dark:text-gray-300">
+              Tipo de Accesorio
+            </label>
+            <select
+              value={formData.tipo ?? ''}
+              onChange={(e) => {
+                const val = e.target.value
+                setFormData({ ...formData, tipo: val || null })
+                if (val !== 'Otro') setTipoOtro('')
+              }}
+              className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm text-gray-900 shadow-theme-xs focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+            >
+              <option value="">Sin categoría</option>
+              {ACCESSORY_TYPES.map((t) => (
+                <option key={t} value={t}>{t}</option>
+              ))}
+              <option value="Otro">Otro...</option>
+            </select>
+            {formData.tipo === 'Otro' && (
+              <input
+                type="text"
+                placeholder="Especificá el tipo"
+                value={tipoOtro}
+                onChange={(e) => {
+                  setTipoOtro(e.target.value)
+                  setFormData({ ...formData, tipo: e.target.value || 'Otro' })
+                }}
+                className="mt-2 w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm text-gray-900 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500"
+              />
+            )}
           </div>
 
           {/* Descripción */}
@@ -334,6 +385,25 @@ export default function AccessoryCreationForm({ finishes, lightTones }: Props) {
                 </p>
               </div>
             </div>
+          </div>
+
+          {/* Ficha Técnica PDF */}
+          <div className="border-t border-gray-200 pt-6 dark:border-gray-800">
+            <h4 className="mb-4 text-base font-semibold text-gray-900 dark:text-white">
+              Ficha Técnica (PDF)
+            </h4>
+            <input
+              type="file"
+              accept="application/pdf,.pdf"
+              onChange={(e) => setDatasheetFile(e.target.files?.[0] ?? null)}
+              className="w-full text-theme-sm text-gray-900 file:mr-4 file:rounded-lg file:border-0 file:bg-brand-50 file:px-4 file:py-2 file:text-theme-sm file:font-medium file:text-brand-700 hover:file:bg-brand-100 dark:text-white dark:file:bg-brand-500/10 dark:file:text-brand-400"
+            />
+            {datasheetFile && (
+              <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                Seleccionado: {datasheetFile.name}
+              </p>
+            )}
+            <p className="mt-1 text-xs text-gray-400 dark:text-gray-500">Opcional · máx. 10MB</p>
           </div>
 
           {/* Botones de acción */}

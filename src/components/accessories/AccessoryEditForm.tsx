@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import type { AccessoryWithRefs } from '@/features/accessories/types'
+import { ACCESSORY_TYPES } from '@/features/accessories/types'
 import type { Finish } from '@/features/finishes/types'
 import type { LightTone } from '@/features/light-tones/types'
 
@@ -17,14 +18,24 @@ export default function AccessoryEditForm({ accessory, finishes, lightTones }: P
   const [isSaving, setIsSaving] = useState(false)
 
   // Estado del formulario
+  const isKnownType = accessory.tipo
+    ? (ACCESSORY_TYPES as readonly string[]).includes(accessory.tipo)
+    : true
   const [formData, setFormData] = useState({
     name: accessory.name,
     description: accessory.description || '',
+    tipo: isKnownType ? (accessory.tipo ?? '') : 'Otro',
     watt: accessory.watt || null,
     voltage_label: accessory.voltage_label || '',
     voltage_min: accessory.voltage_min || null,
     voltage_max: accessory.voltage_max || null,
   })
+  const [tipoOtro, setTipoOtro] = useState(isKnownType ? '' : (accessory.tipo ?? ''))
+
+  // PDF ficha técnica
+  const existingDatasheet = accessory.accessory_media?.find(m => m.kind === 'datasheet') ?? null
+  const [datasheetFile, setDatasheetFile] = useState<File | null>(null)
+  const [datasheetToDelete, setDatasheetToDelete] = useState<number | null>(null)
 
   // Estados para selección múltiple
   const [selectedToneIds, setSelectedToneIds] = useState<number[]>(
@@ -96,9 +107,11 @@ export default function AccessoryEditForm({ accessory, finishes, lightTones }: P
       }
 
       // 2. Actualizar el accesorio
+      const tipoFinal = formData.tipo === 'Otro' ? tipoOtro || null : formData.tipo || null
       const dataToSubmit = {
         accessory: {
           ...formData,
+          tipo: tipoFinal,
           photo_url: uploadedPhotoUrl,
         },
         light_tone_ids: selectedToneIds,
@@ -114,6 +127,22 @@ export default function AccessoryEditForm({ accessory, finishes, lightTones }: P
       if (!response.ok) {
         const errorData = await response.json()
         throw new Error(errorData.error || 'Error al actualizar el accesorio')
+      }
+
+      // 3. Eliminar PDF anterior si se marcó para borrar
+      if (datasheetToDelete) {
+        await fetch(`/api/accessories/images/upload?mediaId=${datasheetToDelete}`, { method: 'DELETE' })
+      }
+
+      // 4. Subir nuevo PDF si se seleccionó
+      if (datasheetFile) {
+        const pdfForm = new FormData()
+        pdfForm.append('image', datasheetFile)
+        pdfForm.append('accessoryCode', accessory.code)
+        pdfForm.append('kind', 'datasheet')
+        pdfForm.append('altText', `${formData.name} - Ficha Técnica`)
+        const pdfRes = await fetch('/api/accessories/images/upload', { method: 'POST', body: pdfForm })
+        if (!pdfRes.ok) console.error('Error al subir la ficha técnica PDF')
       }
 
       alert('Accesorio actualizado exitosamente')
@@ -163,6 +192,37 @@ export default function AccessoryEditForm({ accessory, finishes, lightTones }: P
               required
               className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm text-gray-900 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500"
             />
+          </div>
+
+          {/* Tipo */}
+          <div>
+            <label className="mb-2 block text-theme-sm font-medium text-gray-700 dark:text-gray-300">
+              Tipo de Accesorio
+            </label>
+            <select
+              value={formData.tipo}
+              onChange={(e) => {
+                const val = e.target.value
+                setFormData({ ...formData, tipo: val })
+                if (val !== 'Otro') setTipoOtro('')
+              }}
+              className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm text-gray-900 shadow-theme-xs focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+            >
+              <option value="">Sin categoría</option>
+              {ACCESSORY_TYPES.map((t) => (
+                <option key={t} value={t}>{t}</option>
+              ))}
+              <option value="Otro">Otro...</option>
+            </select>
+            {formData.tipo === 'Otro' && (
+              <input
+                type="text"
+                placeholder="Especificá el tipo"
+                value={tipoOtro}
+                onChange={(e) => setTipoOtro(e.target.value)}
+                className="mt-2 w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm text-gray-900 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500"
+              />
+            )}
           </div>
 
           {/* Descripción */}
@@ -354,6 +414,59 @@ export default function AccessoryEditForm({ accessory, finishes, lightTones }: P
               No se ha seleccionado ningún acabado
             </p>
           )}
+        </div>
+      </div>
+
+      {/* Ficha Técnica PDF */}
+      <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
+        <div className="border-b border-gray-200 px-6 py-4 dark:border-gray-800 dark:bg-white/[0.02]">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Ficha Técnica</h2>
+          <p className="mt-1 text-theme-sm text-gray-500 dark:text-gray-400">PDF con especificaciones del accesorio (máx. 10MB)</p>
+        </div>
+        <div className="p-6 space-y-4">
+          {/* PDF existente */}
+          {existingDatasheet && datasheetToDelete !== existingDatasheet.id && (
+            <div className="flex items-center justify-between rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 dark:border-gray-700 dark:bg-gray-800">
+              <div className="flex items-center gap-3">
+                <svg className="h-8 w-8 text-red-500" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM8 13h8v1H8v-1zm0 3h8v1H8v-1zm0-6h5v1H8v-1z"/>
+                </svg>
+                <div>
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">Ficha técnica actual</p>
+                  <a href={existingDatasheet.path} target="_blank" rel="noopener noreferrer" className="text-xs text-brand-500 hover:underline">
+                    Ver PDF
+                  </a>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setDatasheetToDelete(existingDatasheet.id)}
+                className="rounded-lg border border-red-200 bg-red-50 px-3 py-1.5 text-xs font-medium text-red-600 hover:bg-red-100 dark:border-red-800 dark:bg-red-900/20 dark:text-red-400"
+              >
+                Eliminar
+              </button>
+            </div>
+          )}
+          {datasheetToDelete === existingDatasheet?.id && (
+            <p className="text-sm text-amber-600 dark:text-amber-400">El PDF actual se eliminará al guardar.</p>
+          )}
+          {/* Subir nuevo PDF */}
+          <div>
+            <label className="mb-2 block text-theme-sm font-medium text-gray-700 dark:text-gray-300">
+              {existingDatasheet && datasheetToDelete !== existingDatasheet.id ? 'Reemplazar PDF' : 'Subir PDF'}
+            </label>
+            <input
+              type="file"
+              accept="application/pdf,.pdf"
+              onChange={(e) => setDatasheetFile(e.target.files?.[0] ?? null)}
+              className="w-full text-theme-sm text-gray-900 file:mr-4 file:rounded-lg file:border-0 file:bg-brand-50 file:px-4 file:py-2 file:text-theme-sm file:font-medium file:text-brand-700 hover:file:bg-brand-100 dark:text-white dark:file:bg-brand-500/10 dark:file:text-brand-400"
+            />
+            {datasheetFile && (
+              <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                Seleccionado: {datasheetFile.name}
+              </p>
+            )}
+          </div>
         </div>
       </div>
 
