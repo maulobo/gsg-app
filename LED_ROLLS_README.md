@@ -144,7 +144,7 @@ Path format: `led-rolls/{rollCode}/{kind}/{timestamp}-{filename}`
 - Sidebar: Item "Rollos LED" (entre Perfiles LED e Items Destacados)
 - `/led-rolls` - Listing
 - `/led-rolls/new` - Crear nuevo
-- `/led-rolls/[code]/edit` - Editar existente
+- `/led-rolls/[id]/edit` - Editar existente
 
 ## 🛡️ Seguridad (RLS Policies)
 

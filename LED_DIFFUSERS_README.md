@@ -4,49 +4,29 @@
 
 Los perfiles LED del catálogo generalmente vienen con opciones de difusor para controlar la distribución de luz y el acabado visual.
 
-### 1. Difusor Opal (PVC con UV)
-- **Slug**: `opal`
-- **Material**: PVC con protección UV
+### 1. OPAL (PVC)
+- **Slug**: `opal-pvc`
+- **Material**: PVC
 - **Características**:
-  - El más común y recomendado
-  - Ofrece luz uniforme y difusa
-  - Evita el deslumbramiento
-  - Oculta completamente los puntos individuales de LED
-  - Proporciona un acabado estético limpio
-- **Uso**: Ideal para aplicaciones residenciales y comerciales donde se busca iluminación suave
+  - Opción estándar para la mayoría de los perfiles.
 
-### 2. Difusor Transparente (PVC con UV)
-- **Slug**: `transparente`
-- **Material**: PVC con protección UV
-- **Características**:
-  - Alternativa al opal
-  - Mayor paso de luz (ganancia lumínica de ~10-15%)
-  - Permite ver los puntos individuales de LED
-  - Ideal para maximizar la salida lumínica
-- **Uso**: Recomendado cuando se necesita máxima luminosidad y los puntos LED no son problema
-
-### 3. Difusor de Policarbonato (PC)
-- **Slug**: `policarbonato`
+### 2. OPAL (POLICARBONATO)
+- **Slug**: `opal-pc`
 - **Material**: Policarbonato (PC)
 - **Características**:
-  - Mayor resistencia mecánica
-  - Apto para potencias altas (hasta 20W/m)
-  - Mayor resistencia al impacto y temperatura
-  - No requiere protección UV adicional (el PC ya es resistente)
-- **Uso**: Para perfiles específicos como:
-  - PERFIL INCLINADO
-  - PERFIL H
-  - Aplicaciones de alta potencia
+  - Mayor resistencia al calor y al impacto.
 
-### 4. PVC con Protección UV
-- **Slug**: `pvc-uv`
-- **Material**: PVC con protección UV
+### 3. TRANSPARENTE (POLICARBONATO)
+- **Slug**: `transparente-pc`
+- **Material**: Policarbonato (PC)
 - **Características**:
-  - Protección contra deterioro por rayos UV
-  - Mantiene propiedades ópticas en el tiempo
-  - Evita amarillamiento
-  - Base estándar para difusores Opal y Transparente
-- **Uso**: Opción estándar en todos los perfiles
+  - Máxima transmisión lumínica, alta resistencia.
+
+### 4. OPAL (SILICONA)
+- **Slug**: `opal-silicona`
+- **Material**: Silicona
+- **Características**:
+  - Flexible, ideal para perfiles curvos o aplicaciones especiales.
 
 ## Comparativa Rápida
 

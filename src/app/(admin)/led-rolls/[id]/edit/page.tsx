@@ -1,19 +1,24 @@
 import { createServerSupabaseClient } from '@/lib/supabase-server'
-import { getLedRollById } from '@/features/led-rolls/queries'
-import { LedRollEditForm } from '@/components/led-rolls/LedRollEditForm'
+import { LedRollFamilyEditForm } from '@/components/led-rolls/LedRollFamilyEditForm'
 import { redirect, notFound } from 'next/navigation'
 
 export const metadata = {
-  title: 'Editar Rollo LED | GSG Admin',
-  description: 'Editar rollo/tira LED existente',
+  title: 'Editar Familia LED | GSG Admin',
+  description: 'Editar familia de rollos/tiras LED y sus variantes',
 }
 
 type Props = {
   params: Promise<{ id: string }>
 }
 
-export default async function EditLedRollPage({ params }: Props) {
+export default async function EditLedRollFamilyPage({ params }: Props) {
   const { id } = await params
+  const familyId = parseInt(id, 10)
+
+  if (isNaN(familyId)) {
+    notFound()
+  }
+
   const supabase = await createServerSupabaseClient()
 
   const { data: { user } } = await supabase.auth.getUser()
@@ -21,21 +26,39 @@ export default async function EditLedRollPage({ params }: Props) {
     redirect('/auth/signin')
   }
 
-  // Fetch roll by ID
-  const roll = await getLedRollById(parseInt(id, 10))
-  if (!roll) {
+  // Fetch family
+  const { data: family, error: familyError } = await supabase
+    .from('led_roll_families')
+    .select('*')
+    .eq('id', familyId)
+    .single()
+
+  if (familyError || !family) {
     notFound()
   }
 
-  // Fetch light tones
-  const { data: lightTones } = await supabase
-    .from('light_tones')
+  // Fetch variants
+  const { data: variants } = await supabase
+    .from('led_rolls')
     .select('*')
-    .order('kelvin', { ascending: true })
+    .eq('family_id', familyId)
+    .eq('is_active', true)
+    .order('code', { ascending: true })
+
+  // Fetch media
+  const { data: media } = await supabase
+    .from('led_roll_family_media')
+    .select('*')
+    .eq('family_id', familyId)
+    .order('display_order', { ascending: true })
 
   return (
     <div>
-      <LedRollEditForm roll={roll} lightTones={lightTones || []} />
+      <LedRollFamilyEditForm
+        family={family}
+        variants={variants || []}
+        media={media || []}
+      />
     </div>
   )
 }
