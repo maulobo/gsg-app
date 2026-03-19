@@ -76,6 +76,10 @@ export function LedRollFamilyEditForm({ family, variants, media }: LedRollFamily
   const [coverImagePreview, setCoverImagePreview] = useState<string>('')
   const [uploadingImage, setUploadingImage] = useState(false)
 
+  const [techImage, setTechImage] = useState<File | null>(null)
+  const [techImagePreview, setTechImagePreview] = useState<string>('')
+  const [uploadingTechImage, setUploadingTechImage] = useState(false)
+
   const coverMedia = media.find(m => m.kind === 'cover')
   const techMedia = media.find(m => m.kind === 'tech')
 
@@ -242,6 +246,16 @@ export function LedRollFamilyEditForm({ family, variants, media }: LedRollFamily
     }
   }
 
+  const handleTechImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      setTechImage(file)
+      const reader = new FileReader()
+      reader.onloadend = () => setTechImagePreview(reader.result as string)
+      reader.readAsDataURL(file)
+    }
+  }
+
   const handleUploadImage = async (kind: string) => {
     if (!coverImage) return
 
@@ -268,6 +282,35 @@ export function LedRollFamilyEditForm({ family, variants, media }: LedRollFamily
       alert('Error al subir imagen')
     } finally {
       setUploadingImage(false)
+    }
+  }
+
+  const handleUploadTechImage = async () => {
+    if (!techImage) return
+
+    setUploadingTechImage(true)
+    try {
+      const formData = new FormData()
+      formData.append('image', techImage)
+      formData.append('kind', 'tech')
+      formData.append('altText', `${familyData.name} - técnica`)
+
+      const response = await fetch(`/api/led-rolls/families/${family.id}/images`, {
+        method: 'POST',
+        body: formData,
+      })
+
+      if (!response.ok) throw new Error('Error al subir imagen técnica')
+
+      alert('✅ Imagen técnica subida')
+      setTechImage(null)
+      setTechImagePreview('')
+      router.refresh()
+    } catch (error) {
+      console.error('Error:', error)
+      alert('Error al subir imagen técnica')
+    } finally {
+      setUploadingTechImage(false)
     }
   }
 
@@ -877,39 +920,39 @@ export function LedRollFamilyEditForm({ family, variants, media }: LedRollFamily
                 </div>
               )}
 
-              {!coverImagePreview && (
-                <div>
-                  <label className={labelClass}>Subir / Reemplazar</label>
+              <div>
+                <label className={labelClass}>Subir / Reemplazar</label>
+                {!techImagePreview ? (
                   <label className="flex flex-col items-center justify-center w-full h-28 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-brand-500 transition-colors dark:border-gray-600">
                     <svg className="w-6 h-6 text-gray-400 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                     </svg>
                     <p className="text-xs text-gray-500">Click para seleccionar</p>
-                    <input
-                      type="file"
-                      className="hidden"
-                      accept="image/*"
-                      onChange={(e) => {
-                        handleImageChange(e)
-                        // Will use handleUploadImage('tech') after preview
-                      }}
-                    />
+                    <input type="file" className="hidden" accept="image/*" onChange={handleTechImageChange} />
                   </label>
-                </div>
-              )}
-
-              {coverImagePreview && !coverMedia && (
-                <div className="mt-2">
-                  <button
-                    type="button"
-                    onClick={() => handleUploadImage('tech')}
-                    disabled={uploadingImage}
-                    className="w-full rounded-lg bg-brand-500 px-3 py-2 text-xs font-semibold text-white hover:bg-brand-600 disabled:opacity-50 transition-colors"
-                  >
-                    {uploadingImage ? 'Subiendo...' : 'Subir como Técnica'}
-                  </button>
-                </div>
-              )}
+                ) : (
+                  <div className="relative">
+                    <img src={techImagePreview} alt="Preview técnica" className="w-full rounded-lg max-h-48 object-cover" />
+                    <div className="mt-2 flex gap-2">
+                      <button
+                        type="button"
+                        onClick={handleUploadTechImage}
+                        disabled={uploadingTechImage}
+                        className="flex-1 rounded-lg bg-brand-500 px-3 py-2 text-xs font-semibold text-white hover:bg-brand-600 disabled:opacity-50 transition-colors"
+                      >
+                        {uploadingTechImage ? 'Subiendo...' : 'Subir como Técnica'}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => { setTechImage(null); setTechImagePreview('') }}
+                        className="rounded-lg border border-gray-300 px-3 py-2 text-xs hover:bg-gray-50 transition-colors dark:border-gray-600"
+                      >
+                        Cancelar
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
