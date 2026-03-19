@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createServerSupabaseClient } from '@/lib/supabase-server'
+import { createAdminSupabaseClient } from '@/lib/supabase-server'
 
 export async function PUT(
   request: NextRequest,
@@ -12,7 +12,7 @@ export async function PUT(
       return NextResponse.json({ error: 'ID inválido' }, { status: 400 })
     }
 
-    const supabase = await createServerSupabaseClient()
+    const supabase = createAdminSupabaseClient()
     const body = await request.json()
 
     const { data: variant, error } = await supabase
@@ -46,7 +46,7 @@ export async function DELETE(
       return NextResponse.json({ error: 'ID inválido' }, { status: 400 })
     }
 
-    const supabase = await createServerSupabaseClient()
+    const supabase = createAdminSupabaseClient()
 
     const { error } = await supabase
       .from('led_rolls')
