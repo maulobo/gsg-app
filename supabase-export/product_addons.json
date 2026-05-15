@@ -1,0 +1,773 @@
+[
+  {
+    "id": 1,
+    "product_id": 1,
+    "code": "SAT-DIM-LLA",
+    "name": "Dimmer Llavero",
+    "description": null,
+    "category": "control",
+    "specs": {
+      "tipo": "rf",
+      "alcance": "10 m",
+      "compatibilidad": "todos"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:51:37.041619+00:00",
+    "updated_at": "2025-12-03T11:51:37.041619+00:00"
+  },
+  {
+    "id": 2,
+    "product_id": 1,
+    "code": "SAT-DIM-TAC",
+    "name": "Dimmer Táctil",
+    "description": null,
+    "category": "control",
+    "specs": {
+      "tipo": "rf",
+      "alcance": "15 m",
+      "compatibilidad": "todos"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:51:37.848598+00:00",
+    "updated_at": "2025-12-03T11:51:37.848598+00:00"
+  },
+  {
+    "id": 3,
+    "product_id": 1,
+    "code": "SAT-DIM-WIF",
+    "name": "Dimmer Wifi",
+    "description": null,
+    "category": "control",
+    "specs": {
+      "app": "SmartLife",
+      "compatibilidad": "todos"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:51:38.601216+00:00",
+    "updated_at": "2025-12-03T11:51:38.601216+00:00"
+  },
+  {
+    "id": 4,
+    "product_id": 1,
+    "code": "SAT-EXT-TEN",
+    "name": "Tensor Extra",
+    "description": null,
+    "category": "installation",
+    "specs": {
+      "unidad": "metro",
+      "detalle": "Agregado de 1 metro por circulo"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:51:39.225462+00:00",
+    "updated_at": "2025-12-03T11:51:39.225462+00:00"
+  },
+  {
+    "id": 5,
+    "product_id": 2,
+    "code": "QDR-DIM-LLA",
+    "name": "Dimmer Llavero",
+    "description": null,
+    "category": "control",
+    "specs": {
+      "tipo": "rf",
+      "alcance": "15 m",
+      "compatibilidad": "todos"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:51:40.210543+00:00",
+    "updated_at": "2025-12-03T11:51:40.210543+00:00"
+  },
+  {
+    "id": 6,
+    "product_id": 2,
+    "code": "QDR-DIM-TAC",
+    "name": "Dimmer Táctil",
+    "description": null,
+    "category": "control",
+    "specs": {
+      "tipo": "rf",
+      "alcance": "15 m",
+      "compatibilidad": "todos"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:51:40.765707+00:00",
+    "updated_at": "2025-12-03T11:51:40.765707+00:00"
+  },
+  {
+    "id": 7,
+    "product_id": 2,
+    "code": "QDR-DIM-WIF",
+    "name": "Dimmer Wifi",
+    "description": null,
+    "category": "control",
+    "specs": {
+      "app": "SmartLife",
+      "compatibilidad": "simple"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:51:41.339783+00:00",
+    "updated_at": "2025-12-03T11:51:41.339783+00:00"
+  },
+  {
+    "id": 8,
+    "product_id": 2,
+    "code": "QDR-DIM-WIF-C",
+    "name": "Dimmer Wifi Combo",
+    "description": null,
+    "category": "control",
+    "specs": {
+      "app": "SmartLife",
+      "compatibilidad": "doble/triple/cuad/quint/sext"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:51:41.940914+00:00",
+    "updated_at": "2025-12-03T11:51:41.940914+00:00"
+  },
+  {
+    "id": 9,
+    "product_id": 2,
+    "code": "QDR-EXT-TEN",
+    "name": "Tensor Extra",
+    "description": null,
+    "category": "installation",
+    "specs": {
+      "unidad": "metro",
+      "detalle": "Agregado de 1 metro por cuadrado"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:51:42.541895+00:00",
+    "updated_at": "2025-12-03T11:51:42.541895+00:00"
+  },
+  {
+    "id": 10,
+    "product_id": 29,
+    "code": "URA-DIM-LLA",
+    "name": "Dimmer Llavero",
+    "description": null,
+    "category": "control",
+    "specs": {
+      "tipo": "rf",
+      "alcance": "15 m",
+      "compatibilidad": "todos"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:51:43.59269+00:00",
+    "updated_at": "2025-12-03T11:51:43.59269+00:00"
+  },
+  {
+    "id": 11,
+    "product_id": 29,
+    "code": "URA-DIM-TAC",
+    "name": "Dimmer Táctil",
+    "description": null,
+    "category": "control",
+    "specs": {
+      "tipo": "rf",
+      "alcance": "15 m",
+      "compatibilidad": "todos"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:51:44.247851+00:00",
+    "updated_at": "2025-12-03T11:51:44.247851+00:00"
+  },
+  {
+    "id": 12,
+    "product_id": 29,
+    "code": "URA-DIM-WIF",
+    "name": "Dimmer Wifi",
+    "description": null,
+    "category": "control",
+    "specs": {
+      "app": "SmartLife",
+      "compatibilidad": "simple"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:51:44.910546+00:00",
+    "updated_at": "2025-12-03T11:51:44.910546+00:00"
+  },
+  {
+    "id": 13,
+    "product_id": 29,
+    "code": "URA-DIM-WIF-C",
+    "name": "Dimmer Wifi Combo",
+    "description": null,
+    "category": "control",
+    "specs": {
+      "app": "SmartLife",
+      "compatibilidad": "doble/triple"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:51:45.505769+00:00",
+    "updated_at": "2025-12-03T11:51:45.505769+00:00"
+  },
+  {
+    "id": 14,
+    "product_id": 29,
+    "code": "URA-EXT-TEN",
+    "name": "Tensor Extra",
+    "description": null,
+    "category": "installation",
+    "specs": {
+      "unidad": "metro",
+      "detalle": "Agregado de 1 metro por aro"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:51:46.048754+00:00",
+    "updated_at": "2025-12-03T11:51:46.048754+00:00"
+  },
+  {
+    "id": 15,
+    "product_id": 3,
+    "code": "HEX-DIM-LLA",
+    "name": "Dimmer Llavero",
+    "description": null,
+    "category": "control",
+    "specs": {
+      "tipo": "rf",
+      "alcance": "15 m",
+      "compatibilidad": "todos"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:51:46.957447+00:00",
+    "updated_at": "2025-12-03T11:51:46.957447+00:00"
+  },
+  {
+    "id": 16,
+    "product_id": 3,
+    "code": "HEX-DIM-TAC",
+    "name": "Dimmer Táctil",
+    "description": null,
+    "category": "control",
+    "specs": {
+      "tipo": "rf",
+      "alcance": "15 m",
+      "compatibilidad": "todos"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:51:47.509373+00:00",
+    "updated_at": "2025-12-03T11:51:47.509373+00:00"
+  },
+  {
+    "id": 17,
+    "product_id": 3,
+    "code": "HEX-DIM-WIF",
+    "name": "Dimmer Wifi",
+    "description": null,
+    "category": "control",
+    "specs": {
+      "app": "SmartLife",
+      "compatibilidad": "simple"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:51:48.069092+00:00",
+    "updated_at": "2025-12-03T11:51:48.069092+00:00"
+  },
+  {
+    "id": 18,
+    "product_id": 3,
+    "code": "HEX-DIM-WIF-C",
+    "name": "Dimmer Wifi Combo",
+    "description": null,
+    "category": "control",
+    "specs": {
+      "app": "SmartLife",
+      "compatibilidad": "doble/triple"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:51:48.643566+00:00",
+    "updated_at": "2025-12-03T11:51:48.643566+00:00"
+  },
+  {
+    "id": 19,
+    "product_id": 3,
+    "code": "HEX-EXT-TEN",
+    "name": "Tensor Extra",
+    "description": null,
+    "category": "installation",
+    "specs": {
+      "unidad": "metro",
+      "detalle": "Agregado de 1 metro por aro"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:51:49.313478+00:00",
+    "updated_at": "2025-12-03T11:51:49.313478+00:00"
+  },
+  {
+    "id": 20,
+    "product_id": 30,
+    "code": "SNK-DIM-WIF",
+    "name": "Dimmer Wifi",
+    "description": null,
+    "category": "control",
+    "specs": {
+      "alcance": "Wifi",
+      "compatibilidad": "todos"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:51:50.473447+00:00",
+    "updated_at": "2025-12-03T11:51:50.473447+00:00"
+  },
+  {
+    "id": 21,
+    "product_id": 30,
+    "code": "SNK-EXT-TEN",
+    "name": "Tensor Extra Snake",
+    "description": null,
+    "category": "installation",
+    "specs": {
+      "unidad": "metro",
+      "detalle": "Extra tensores snake x metro"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:51:51.202789+00:00",
+    "updated_at": "2025-12-03T11:51:51.202789+00:00"
+  },
+  {
+    "id": 22,
+    "product_id": 38,
+    "code": "SFR-EXT-CIE-TR",
+    "name": "Extremo ciego",
+    "description": null,
+    "category": "accessory",
+    "specs": {
+      "color": "transp"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:51:52.255964+00:00",
+    "updated_at": "2025-12-03T11:51:52.255964+00:00"
+  },
+  {
+    "id": 23,
+    "product_id": 38,
+    "code": "SFR-EXT-CAB-TR",
+    "name": "Extremo cable",
+    "description": null,
+    "category": "accessory",
+    "specs": {
+      "color": "transp"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:51:52.812163+00:00",
+    "updated_at": "2025-12-03T11:51:52.812163+00:00"
+  },
+  {
+    "id": 24,
+    "product_id": 38,
+    "code": "SFR-SUJ-TEC-TR",
+    "name": "Sujeción techo",
+    "description": null,
+    "category": "installation",
+    "specs": {
+      "color": "transp"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:51:53.456871+00:00",
+    "updated_at": "2025-12-03T11:51:53.456871+00:00"
+  },
+  {
+    "id": 25,
+    "product_id": 38,
+    "code": "SFR-KIT-TEN-AL",
+    "name": "Tensor colgante",
+    "description": null,
+    "category": "installation",
+    "specs": {
+      "color": "aluminio",
+      "largo": "1.2m"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:51:54.082895+00:00",
+    "updated_at": "2025-12-03T11:51:54.082895+00:00"
+  },
+  {
+    "id": 26,
+    "product_id": 38,
+    "code": "SFR-UNI-REC-TR",
+    "name": "Unión recta",
+    "description": null,
+    "category": "accessory",
+    "specs": {
+      "color": "transp"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:51:54.698671+00:00",
+    "updated_at": "2025-12-03T11:51:54.698671+00:00"
+  },
+  {
+    "id": 27,
+    "product_id": 38,
+    "code": "SFR-SUJ-DUR-BL",
+    "name": "Sujeción embutida Blanca",
+    "description": null,
+    "category": "installation",
+    "specs": {
+      "color": "blanco"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:51:55.311044+00:00",
+    "updated_at": "2025-12-03T11:51:55.311044+00:00"
+  },
+  {
+    "id": 28,
+    "product_id": 38,
+    "code": "SFR-SUJ-DUR-NG",
+    "name": "Sujeción embutida Negra",
+    "description": null,
+    "category": "installation",
+    "specs": {
+      "color": "negro"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:51:55.924532+00:00",
+    "updated_at": "2025-12-03T11:51:55.924532+00:00"
+  },
+  {
+    "id": 29,
+    "product_id": 38,
+    "code": "SFR-SUJ-FIN-BL",
+    "name": "Sujeción ciega Blanca",
+    "description": null,
+    "category": "installation",
+    "specs": {
+      "color": "blanco"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:51:56.540142+00:00",
+    "updated_at": "2025-12-03T11:51:56.540142+00:00"
+  },
+  {
+    "id": 30,
+    "product_id": 38,
+    "code": "SFR-SUJ-FIN-NG",
+    "name": "Sujeción ciega Negra",
+    "description": null,
+    "category": "installation",
+    "specs": {
+      "color": "negro"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:51:57.167648+00:00",
+    "updated_at": "2025-12-03T11:51:57.167648+00:00"
+  },
+  {
+    "id": 31,
+    "product_id": 4,
+    "code": "SXL-DIM-LLA",
+    "name": "Dimmer Llavero",
+    "description": null,
+    "category": "control",
+    "specs": {
+      "tipo": "rf",
+      "alcance": "15 m",
+      "compatibilidad": "simple"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:51:58.118266+00:00",
+    "updated_at": "2025-12-03T11:51:58.118266+00:00"
+  },
+  {
+    "id": 32,
+    "product_id": 4,
+    "code": "SXL-DIM-LLA-C",
+    "name": "Dimmer Llavero Combo",
+    "description": null,
+    "category": "control",
+    "specs": {
+      "tipo": "rf",
+      "alcance": "15 m",
+      "compatibilidad": "doble/triple/cuad/quint"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:51:58.650987+00:00",
+    "updated_at": "2025-12-03T11:51:58.650987+00:00"
+  },
+  {
+    "id": 33,
+    "product_id": 4,
+    "code": "SXL-DIM-TAC",
+    "name": "Dimmer Táctil",
+    "description": null,
+    "category": "control",
+    "specs": {
+      "tipo": "rf",
+      "alcance": "15 m",
+      "compatibilidad": "simple"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:51:59.297+00:00",
+    "updated_at": "2025-12-03T11:51:59.297+00:00"
+  },
+  {
+    "id": 34,
+    "product_id": 4,
+    "code": "SXL-DIM-TAC-C",
+    "name": "Dimmer Táctil Combo",
+    "description": null,
+    "category": "control",
+    "specs": {
+      "tipo": "rf",
+      "alcance": "15 m",
+      "compatibilidad": "doble/triple/cuad/quint"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:51:59.957294+00:00",
+    "updated_at": "2025-12-03T11:51:59.957294+00:00"
+  },
+  {
+    "id": 35,
+    "product_id": 4,
+    "code": "SXL-DIM-WIF",
+    "name": "Dimmer Wifi",
+    "description": null,
+    "category": "control",
+    "specs": {
+      "app": "SmartLife",
+      "compatibilidad": "simple"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:52:00.567366+00:00",
+    "updated_at": "2025-12-03T11:52:00.567366+00:00"
+  },
+  {
+    "id": 36,
+    "product_id": 4,
+    "code": "SXL-DIM-WIF-C",
+    "name": "Dimmer Wifi Combo",
+    "description": null,
+    "category": "control",
+    "specs": {
+      "app": "SmartLife",
+      "compatibilidad": "doble/triple/cuad/quint"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:52:01.142476+00:00",
+    "updated_at": "2025-12-03T11:52:01.142476+00:00"
+  },
+  {
+    "id": 37,
+    "product_id": 4,
+    "code": "SXL-EXT-TEN",
+    "name": "Tensor Extra",
+    "description": null,
+    "category": "installation",
+    "specs": {
+      "unidad": "metro",
+      "detalle": "Agregado de 1 metro por circulo (Saturno XL)"
+    },
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-03T11:52:01.759078+00:00",
+    "updated_at": "2025-12-03T11:52:01.759078+00:00"
+  },
+  {
+    "id": 38,
+    "product_id": 40,
+    "code": "BAT-DIM-LLA",
+    "name": "Dimmer Llavero",
+    "description": null,
+    "category": "control",
+    "specs": {},
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-15T17:33:32.098825+00:00",
+    "updated_at": "2025-12-15T17:33:32.098825+00:00"
+  },
+  {
+    "id": 39,
+    "product_id": 40,
+    "code": "BAT-DIM-TAC",
+    "name": "Dimmer Táctil",
+    "description": null,
+    "category": "control",
+    "specs": {},
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-15T17:33:32.098825+00:00",
+    "updated_at": "2025-12-15T17:33:32.098825+00:00"
+  },
+  {
+    "id": 40,
+    "product_id": 40,
+    "code": "BAT-DIM-WIF",
+    "name": "Dimmer Wifi",
+    "description": null,
+    "category": "control",
+    "specs": {},
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-15T17:33:32.098825+00:00",
+    "updated_at": "2025-12-15T17:33:32.098825+00:00"
+  },
+  {
+    "id": 41,
+    "product_id": 40,
+    "code": "BAT-EXT-TEN",
+    "name": "Extra Tensores",
+    "description": null,
+    "category": "installation",
+    "specs": {},
+    "price": null,
+    "stock_quantity": 0,
+    "display_order": 100,
+    "is_active": true,
+    "featured": false,
+    "created_at": "2025-12-15T17:33:32.098825+00:00",
+    "updated_at": "2025-12-15T17:33:32.098825+00:00"
+  }
+]

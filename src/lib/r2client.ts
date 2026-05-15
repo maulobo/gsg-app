@@ -76,7 +76,7 @@ export async function processProductImage(
   }
 
   const optimizedBuffer = await sharp(buffer)
-    .resize(width, height, { fit: 'cover', position: 'center' })
+    .resize(width, height, { fit: 'inside', withoutEnlargement: false })
     .webp({ quality })
     .toBuffer()
     

@@ -1,30 +1,30 @@
 [
   {
     "id": 1,
-    "slug": "opal",
-    "name": "Opal",
+    "slug": "opal-pvc",
+    "name": "OPAL (PVC)",
     "material": "PVC",
     "uv_protection": true
   },
   {
     "id": 2,
-    "slug": "transparente",
-    "name": "Transparente",
-    "material": "PVC",
+    "slug": "opal-pc",
+    "name": "OPAL (POLICARBONATO)",
+    "material": "PC",
     "uv_protection": true
   },
   {
-    "id": 7,
-    "slug": "policarbonato",
-    "name": "Policarbonato (PC)",
+    "id": 3,
+    "slug": "transparente-pc",
+    "name": "TRANSPARENTE (POLICARBONATO)",
     "material": "PC",
-    "uv_protection": false
+    "uv_protection": true
   },
   {
-    "id": 8,
-    "slug": "pvc-uv",
-    "name": "PVC con protección UV",
-    "material": "PVC",
+    "id": 4,
+    "slug": "opal-silicona",
+    "name": "OPAL (SILICONA)",
+    "material": "Silicona",
     "uv_protection": true
   }
 ]

@@ -52,6 +52,7 @@ export async function PATCH(
         description: accessory.description || null,
         photo_url: accessory.photo_url || null,
         tipo: accessory.tipo ?? null,
+        amperage: accessory.amperage || null,
         watt: accessory.watt || null,
         voltage_label: accessory.voltage_label || null,
         voltage_min: accessory.voltage_min || null,

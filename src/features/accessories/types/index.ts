@@ -18,6 +18,7 @@ export type Accessory = {
   description: string | null
   photo_url: string | null
   tipo: string | null
+  amperage: number | null
   watt: number | null
   voltage_label: string | null
   voltage_min: number | null
@@ -32,6 +33,7 @@ export type AccessoryInsert = {
   description?: string | null
   photo_url?: string | null
   tipo?: string | null
+  amperage?: number | null
   watt?: number | null
   voltage_label?: string | null
   voltage_min?: number | null
@@ -80,6 +82,8 @@ export type AccessoryListItem = {
   code: string
   name: string
   photo_url: string | null
+  tipo: string | null
+  amperage: number | null
   watt: number | null
   voltage_label: string | null
   light_tones: { id: number; name: string }[]
