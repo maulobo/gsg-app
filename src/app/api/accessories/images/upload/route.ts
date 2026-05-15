@@ -7,7 +7,7 @@ import {
   deleteFromR2,
   extractKeyFromUrl
 } from '@/lib/r2client'
-import { createServerSupabaseClient } from '@/lib/supabase-server'
+import { createAdminSupabaseClient } from '@/lib/supabase-server'
 
 /**
  * POST /api/accessories/images/upload
@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const supabase = await createServerSupabaseClient()
+    const supabase = createAdminSupabaseClient()
 
     // 1.5. Obtener accessory_id desde el código
     const { data: accessory, error: fetchError } = await supabase
@@ -185,7 +185,7 @@ export async function DELETE(request: NextRequest) {
       )
     }
 
-    const supabase = await createServerSupabaseClient()
+    const supabase = createAdminSupabaseClient()
 
     // 1. Obtener datos del media asset
     const { data: mediaAsset, error: fetchError } = await supabase

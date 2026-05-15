@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import type { Finish } from '@/features/finishes/types'
 import type { LightTone } from '@/features/light-tones/types'
 import type { AccessoryInsert } from '@/features/accessories/types'
+import { ACCESSORY_TYPES } from '@/features/accessories/types'
 
 interface Props {
   finishes: Finish[]
@@ -21,11 +22,16 @@ export default function AccessoryCreationForm({ finishes, lightTones }: Props) {
     name: '',
     description: null,
     photo_url: null,
+    tipo: null,
+    amperage: null,
     watt: null,
     voltage_label: null,
     voltage_min: null,
     voltage_max: null,
   })
+
+  // Tipo custom
+  const [tipoOtro, setTipoOtro] = useState('')
 
   // Relaciones N:N
   const [selectedToneIds, setSelectedToneIds] = useState<number[]>([])
@@ -34,6 +40,9 @@ export default function AccessoryCreationForm({ finishes, lightTones }: Props) {
   // Imagen del accesorio
   const [coverImage, setCoverImage] = useState<File | null>(null)
   const [coverImagePreview, setCoverImagePreview] = useState<string | null>(null)
+
+  // Ficha técnica PDF
+  const [datasheetFile, setDatasheetFile] = useState<File | null>(null)
 
   const handleCoverImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -57,9 +66,11 @@ export default function AccessoryCreationForm({ finishes, lightTones }: Props) {
 
     try {
       // 1. Crear el accesorio primero (sin foto) con las relaciones N:N
+      const tipoFinal = formData.tipo === 'Otro' ? tipoOtro || null : formData.tipo || null
       const dataToSubmit = {
         accessory: {
           ...formData,
+          tipo: tipoFinal,
           photo_url: null, // Se actualizará después si hay imagen
         },
         light_tone_ids: selectedToneIds,
@@ -95,6 +106,20 @@ export default function AccessoryCreationForm({ finishes, lightTones }: Props) {
         if (!imageRes.ok) {
           console.error('Error al subir la imagen, pero el accesorio fue creado')
           alert('Accesorio creado, pero hubo un error al subir la imagen')
+        }
+      }
+
+      // 3. Subir ficha técnica PDF si existe
+      if (datasheetFile) {
+        const pdfForm = new FormData()
+        pdfForm.append('image', datasheetFile)
+        pdfForm.append('accessoryCode', result.code)
+        pdfForm.append('kind', 'datasheet')
+        pdfForm.append('altText', `${formData.name} - Ficha Técnica`)
+        const pdfRes = await fetch('/api/accessories/images/upload', { method: 'POST', body: pdfForm })
+        if (!pdfRes.ok) {
+          console.error('Error al subir la ficha técnica PDF')
+          alert('Accesorio creado, pero hubo un error al subir la ficha técnica')
         }
       }
 
@@ -156,6 +181,40 @@ export default function AccessoryCreationForm({ finishes, lightTones }: Props) {
             </div>
           </div>
 
+          {/* Tipo de Accesorio */}
+          <div>
+            <label className="mb-2 block text-theme-sm font-medium text-gray-700 dark:text-gray-300">
+              Tipo de Accesorio
+            </label>
+            <select
+              value={formData.tipo || ''}
+              onChange={(e) => {
+                const val = e.target.value
+                setFormData({ ...formData, tipo: val || null })
+                if (val !== 'Otro') setTipoOtro('')
+              }}
+              className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm text-gray-900 shadow-theme-xs focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+            >
+              <option value="">Sin categoría</option>
+              {ACCESSORY_TYPES.map((t) => (
+                <option key={t} value={t}>{t}</option>
+              ))}
+              <option value="Otro">Otro...</option>
+            </select>
+            {(formData.tipo === 'Otro' || tipoOtro) && (
+              <input
+                type="text"
+                placeholder="Especificá el tipo"
+                value={tipoOtro}
+                onChange={(e) => {
+                  setTipoOtro(e.target.value)
+                  setFormData({ ...formData, tipo: e.target.value || null })
+                }}
+                className="mt-2 w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm text-gray-900 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500"
+              />
+            )}
+          </div>
+
           {/* Descripción */}
           <div>
             <label className="mb-2 block text-theme-sm font-medium text-gray-700 dark:text-gray-300">
@@ -194,6 +253,24 @@ export default function AccessoryCreationForm({ finishes, lightTones }: Props) {
             </div>
           </div>
 
+          {/* Ficha Técnica PDF */}
+          <div>
+            <label className="mb-2 block text-theme-sm font-medium text-gray-700 dark:text-gray-300">
+              Ficha Técnica (PDF)
+            </label>
+            <input
+              type="file"
+              accept="application/pdf,.pdf"
+              onChange={(e) => setDatasheetFile(e.target.files?.[0] ?? null)}
+              className="w-full text-theme-sm text-gray-900 file:mr-4 file:rounded-lg file:border-0 file:bg-brand-50 file:px-4 file:py-2 file:text-theme-sm file:font-medium file:text-brand-700 hover:file:bg-brand-100 dark:text-white dark:file:bg-brand-500/10 dark:file:text-brand-400"
+            />
+            {datasheetFile && (
+              <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                Seleccionado: {datasheetFile.name}
+              </p>
+            )}
+          </div>
+
           {/* Especificaciones Técnicas */}
           <div className="border-t border-gray-200 pt-6 dark:border-gray-800">
             <h4 className="mb-4 text-base font-semibold text-gray-900 dark:text-white">
@@ -201,6 +278,21 @@ export default function AccessoryCreationForm({ finishes, lightTones }: Props) {
             </h4>
             
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              {/* Amperage */}
+              <div>
+                <label className="mb-2 block text-theme-sm font-medium text-gray-700 dark:text-gray-300">
+                  Amperaje Máximo (A)
+                </label>
+                <input
+                  type="number"
+                  step="0.1"
+                  placeholder="ej: 3"
+                  value={formData.amperage || ''}
+                  onChange={(e) => setFormData({ ...formData, amperage: e.target.value ? Number(e.target.value) : null })}
+                  className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm text-gray-900 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500"
+                />
+              </div>
+
               {/* Watt */}
               <div>
                 <label className="mb-2 block text-theme-sm font-medium text-gray-700 dark:text-gray-300">

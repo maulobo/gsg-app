@@ -1,0 +1,18 @@
+INSERT INTO distributor_zones (id, name, display_order, created_at, updated_at) VALUES (1, 'GBA OESTE', 1, '2025-11-15T14:35:44.478147+00:00', '2025-11-15T14:35:44.478147+00:00');
+INSERT INTO distributor_zones (id, name, display_order, created_at, updated_at) VALUES (2, 'GBA SUR', 2, '2025-11-15T14:35:44.478147+00:00', '2025-11-15T14:35:44.478147+00:00');
+INSERT INTO distributor_zones (id, name, display_order, created_at, updated_at) VALUES (3, 'MENDOZA', 3, '2025-11-15T14:35:44.478147+00:00', '2025-11-15T14:35:44.478147+00:00');
+INSERT INTO distributor_zones (id, name, display_order, created_at, updated_at) VALUES (4, 'NEUQUEN', 4, '2025-11-15T14:35:44.478147+00:00', '2025-11-15T14:35:44.478147+00:00');
+INSERT INTO distributor_zones (id, name, display_order, created_at, updated_at) VALUES (5, 'BUENOS AIRES', 100, '2025-11-15T15:35:00.623519+00:00', '2025-11-15T15:35:00.623519+00:00');
+INSERT INTO distributor_zones (id, name, display_order, created_at, updated_at) VALUES (6, 'CABA', 100, '2025-11-15T15:35:00.623519+00:00', '2025-11-15T15:35:00.623519+00:00');
+INSERT INTO distributor_zones (id, name, display_order, created_at, updated_at) VALUES (7, 'CATAMARCA', 100, '2025-11-15T15:35:00.623519+00:00', '2025-11-15T15:35:00.623519+00:00');
+INSERT INTO distributor_zones (id, name, display_order, created_at, updated_at) VALUES (8, 'CHACO', 100, '2025-11-15T15:35:00.623519+00:00', '2025-11-15T15:35:00.623519+00:00');
+INSERT INTO distributor_zones (id, name, display_order, created_at, updated_at) VALUES (9, 'CHUBUT', 100, '2025-11-15T15:35:00.623519+00:00', '2025-11-15T15:35:00.623519+00:00');
+INSERT INTO distributor_zones (id, name, display_order, created_at, updated_at) VALUES (10, 'CORDOBA', 100, '2025-11-15T15:35:00.623519+00:00', '2025-11-15T15:35:00.623519+00:00');
+INSERT INTO distributor_zones (id, name, display_order, created_at, updated_at) VALUES (11, 'CORRIENTES', 100, '2025-11-15T15:35:00.623519+00:00', '2025-11-15T15:35:00.623519+00:00');
+INSERT INTO distributor_zones (id, name, display_order, created_at, updated_at) VALUES (12, 'GBA NORTE', 100, '2025-11-15T15:35:00.623519+00:00', '2025-11-15T15:35:00.623519+00:00');
+INSERT INTO distributor_zones (id, name, display_order, created_at, updated_at) VALUES (17, 'RIO NEGRO', 100, '2025-11-15T15:35:00.623519+00:00', '2025-11-15T15:35:00.623519+00:00');
+INSERT INTO distributor_zones (id, name, display_order, created_at, updated_at) VALUES (18, 'SALTA', 100, '2025-11-15T15:35:00.623519+00:00', '2025-11-15T15:35:00.623519+00:00');
+INSERT INTO distributor_zones (id, name, display_order, created_at, updated_at) VALUES (19, 'SAN JUAN', 100, '2025-11-15T15:35:00.623519+00:00', '2025-11-15T15:35:00.623519+00:00');
+INSERT INTO distributor_zones (id, name, display_order, created_at, updated_at) VALUES (20, 'SANTA FE', 100, '2025-11-15T15:35:00.623519+00:00', '2025-11-15T15:35:00.623519+00:00');
+INSERT INTO distributor_zones (id, name, display_order, created_at, updated_at) VALUES (21, 'SANTIAGO DEL ESTERO', 100, '2025-11-15T15:35:00.623519+00:00', '2025-11-15T15:35:00.623519+00:00');
+INSERT INTO distributor_zones (id, name, display_order, created_at, updated_at) VALUES (22, 'TUCUMAN', 100, '2025-11-15T15:35:00.623519+00:00', '2025-11-15T15:35:00.623519+00:00');

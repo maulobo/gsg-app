@@ -25,6 +25,7 @@ export default function AccessoryEditForm({ accessory, finishes, lightTones }: P
     name: accessory.name,
     description: accessory.description || '',
     tipo: isKnownType ? (accessory.tipo ?? '') : 'Otro',
+    amperage: accessory.amperage || null,
     watt: accessory.watt || null,
     voltage_label: accessory.voltage_label || '',
     voltage_min: accessory.voltage_min || null,
@@ -129,9 +130,10 @@ export default function AccessoryEditForm({ accessory, finishes, lightTones }: P
         throw new Error(errorData.error || 'Error al actualizar el accesorio')
       }
 
-      // 3. Eliminar PDF anterior si se marcó para borrar
-      if (datasheetToDelete) {
-        await fetch(`/api/accessories/images/upload?mediaId=${datasheetToDelete}`, { method: 'DELETE' })
+      // 3. Eliminar PDF anterior (marcado para borrar O si se va a reemplazar por uno nuevo)
+      const pdfToRemove = datasheetToDelete ?? (datasheetFile && existingDatasheet ? existingDatasheet.id : null)
+      if (pdfToRemove) {
+        await fetch(`/api/accessories/images/upload?mediaId=${pdfToRemove}`, { method: 'DELETE' })
       }
 
       // 4. Subir nuevo PDF si se seleccionó
@@ -271,6 +273,23 @@ export default function AccessoryEditForm({ accessory, finishes, lightTones }: P
         </div>
         <div className="p-6">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            {/* Amperage */}
+            <div>
+              <label className="mb-2 block text-theme-sm font-medium text-gray-700 dark:text-gray-300">
+                Amperaje Máximo (A)
+              </label>
+              <input
+                type="number"
+                step="0.1"
+                placeholder="ej: 3"
+                value={formData.amperage || ''}
+                onChange={(e) =>
+                  setFormData({ ...formData, amperage: e.target.value ? Number(e.target.value) : null })
+                }
+                className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm text-gray-900 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500"
+              />
+            </div>
+
             {/* Watt */}
             <div>
               <label className="mb-2 block text-theme-sm font-medium text-gray-700 dark:text-gray-300">
@@ -464,6 +483,11 @@ export default function AccessoryEditForm({ accessory, finishes, lightTones }: P
             {datasheetFile && (
               <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
                 Seleccionado: {datasheetFile.name}
+              </p>
+            )}
+            {datasheetFile && existingDatasheet && datasheetToDelete !== existingDatasheet.id && (
+              <p className="mt-2 text-xs text-amber-600 dark:text-amber-400">
+                Al guardar se reemplazará la ficha técnica actual.
               </p>
             )}
           </div>

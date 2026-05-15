@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "name": "GBA OESTE",
+    "display_order": 1,
+    "created_at": "2025-11-15T14:35:44.478147+00:00",
+    "updated_at": "2025-11-15T14:35:44.478147+00:00"
+  },
+  {
+    "id": 2,
+    "name": "GBA SUR",
+    "display_order": 2,
+    "created_at": "2025-11-15T14:35:44.478147+00:00",
+    "updated_at": "2025-11-15T14:35:44.478147+00:00"
+  },
+  {
+    "id": 3,
+    "name": "MENDOZA",
+    "display_order": 3,
+    "created_at": "2025-11-15T14:35:44.478147+00:00",
+    "updated_at": "2025-11-15T14:35:44.478147+00:00"
+  },
+  {
+    "id": 4,
+    "name": "NEUQUEN",
+    "display_order": 4,
+    "created_at": "2025-11-15T14:35:44.478147+00:00",
+    "updated_at": "2025-11-15T14:35:44.478147+00:00"
+  },
+  {
+    "id": 5,
+    "name": "BUENOS AIRES",
+    "display_order": 100,
+    "created_at": "2025-11-15T15:35:00.623519+00:00",
+    "updated_at": "2025-11-15T15:35:00.623519+00:00"
+  },
+  {
+    "id": 6,
+    "name": "CABA",
+    "display_order": 100,
+    "created_at": "2025-11-15T15:35:00.623519+00:00",
+    "updated_at": "2025-11-15T15:35:00.623519+00:00"
+  },
+  {
+    "id": 7,
+    "name": "CATAMARCA",
+    "display_order": 100,
+    "created_at": "2025-11-15T15:35:00.623519+00:00",
+    "updated_at": "2025-11-15T15:35:00.623519+00:00"
+  },
+  {
+    "id": 8,
+    "name": "CHACO",
+    "display_order": 100,
+    "created_at": "2025-11-15T15:35:00.623519+00:00",
+    "updated_at": "2025-11-15T15:35:00.623519+00:00"
+  },
+  {
+    "id": 9,
+    "name": "CHUBUT",
+    "display_order": 100,
+    "created_at": "2025-11-15T15:35:00.623519+00:00",
+    "updated_at": "2025-11-15T15:35:00.623519+00:00"
+  },
+  {
+    "id": 10,
+    "name": "CORDOBA",
+    "display_order": 100,
+    "created_at": "2025-11-15T15:35:00.623519+00:00",
+    "updated_at": "2025-11-15T15:35:00.623519+00:00"
+  },
+  {
+    "id": 11,
+    "name": "CORRIENTES",
+    "display_order": 100,
+    "created_at": "2025-11-15T15:35:00.623519+00:00",
+    "updated_at": "2025-11-15T15:35:00.623519+00:00"
+  },
+  {
+    "id": 12,
+    "name": "GBA NORTE",
+    "display_order": 100,
+    "created_at": "2025-11-15T15:35:00.623519+00:00",
+    "updated_at": "2025-11-15T15:35:00.623519+00:00"
+  },
+  {
+    "id": 17,
+    "name": "RIO NEGRO",
+    "display_order": 100,
+    "created_at": "2025-11-15T15:35:00.623519+00:00",
+    "updated_at": "2025-11-15T15:35:00.623519+00:00"
+  },
+  {
+    "id": 18,
+    "name": "SALTA",
+    "display_order": 100,
+    "created_at": "2025-11-15T15:35:00.623519+00:00",
+    "updated_at": "2025-11-15T15:35:00.623519+00:00"
+  },
+  {
+    "id": 19,
+    "name": "SAN JUAN",
+    "display_order": 100,
+    "created_at": "2025-11-15T15:35:00.623519+00:00",
+    "updated_at": "2025-11-15T15:35:00.623519+00:00"
+  },
+  {
+    "id": 20,
+    "name": "SANTA FE",
+    "display_order": 100,
+    "created_at": "2025-11-15T15:35:00.623519+00:00",
+    "updated_at": "2025-11-15T15:35:00.623519+00:00"
+  },
+  {
+    "id": 21,
+    "name": "SANTIAGO DEL ESTERO",
+    "display_order": 100,
+    "created_at": "2025-11-15T15:35:00.623519+00:00",
+    "updated_at": "2025-11-15T15:35:00.623519+00:00"
+  },
+  {
+    "id": 22,
+    "name": "TUCUMAN",
+    "display_order": 100,
+    "created_at": "2025-11-15T15:35:00.623519+00:00",
+    "updated_at": "2025-11-15T15:35:00.623519+00:00"
+  }
+]

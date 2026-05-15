@@ -20,3 +20,5 @@ INSERT INTO finishes (id, slug, name, hex_color, sheen, texture, material_base, 
 INSERT INTO finishes (id, slug, name, hex_color, sheen, texture, material_base, swatch_url, display_order, is_active) VALUES (42, 'blanco', 'blanco', '#FFFFFF', NULL, NULL, NULL, NULL, 10, true);
 INSERT INTO finishes (id, slug, name, hex_color, sheen, texture, material_base, swatch_url, display_order, is_active) VALUES (46, 'negro-mate', 'negro mate', '#1C1C1C', NULL, NULL, NULL, NULL, 10, true);
 INSERT INTO finishes (id, slug, name, hex_color, sheen, texture, material_base, swatch_url, display_order, is_active) VALUES (55, 'blanco-microtexturado', 'blanco microtexturado', '#F7F7F7', NULL, NULL, NULL, NULL, 10, true);
+INSERT INTO finishes (id, slug, name, hex_color, sheen, texture, material_base, swatch_url, display_order, is_active) VALUES (1, 'champagne-mate', 'Champagne Mate', '#F7E7CE', NULL, NULL, NULL, NULL, 100, true);
+INSERT INTO finishes (id, slug, name, hex_color, sheen, texture, material_base, swatch_url, display_order, is_active) VALUES (3, 'translucido', 'translucido', '#ffffff', NULL, NULL, NULL, NULL, 100, true);

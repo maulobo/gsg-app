@@ -262,5 +262,29 @@
     "swatch_url": null,
     "display_order": 10,
     "is_active": true
+  },
+  {
+    "id": 1,
+    "slug": "champagne-mate",
+    "name": "Champagne Mate",
+    "hex_color": "#F7E7CE",
+    "sheen": null,
+    "texture": null,
+    "material_base": null,
+    "swatch_url": null,
+    "display_order": 100,
+    "is_active": true
+  },
+  {
+    "id": 3,
+    "slug": "translucido",
+    "name": "translucido",
+    "hex_color": "#ffffff",
+    "sheen": null,
+    "texture": null,
+    "material_base": null,
+    "swatch_url": null,
+    "display_order": 100,
+    "is_active": true
   }
 ]
