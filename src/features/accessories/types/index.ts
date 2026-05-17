@@ -10,6 +10,20 @@ export const ACCESSORY_TYPES = [
   'Sensores',
 ] as const
 
+export type AccessorySpecs = {
+  power?: { '12v_w'?: number; '24v_w'?: number }
+  amperage?: { '12v_a'?: number; '24v_a'?: number }
+  power_12v_raw?: string
+  power_24v_raw?: string
+  amperage_12v_raw?: string
+  amperage_24v_raw?: string
+  reach_or_total?: string
+  led_type?: string
+  notes?: string
+  signal_type?: string
+  [key: string]: any
+}
+
 // ---- DB base ----
 export type Accessory = {
   id: number
@@ -23,6 +37,8 @@ export type Accessory = {
   voltage_label: string | null
   voltage_min: number | null
   voltage_max: number | null
+  specs: AccessorySpecs | null
+  notes: string | null
   created_at: string // ISO
 }
 
@@ -38,6 +54,8 @@ export type AccessoryInsert = {
   voltage_label?: string | null
   voltage_min?: number | null
   voltage_max?: number | null
+  specs?: AccessorySpecs | null
+  notes?: string | null
 }
 
 // Relaciones N:N
@@ -86,6 +104,8 @@ export type AccessoryListItem = {
   amperage: number | null
   watt: number | null
   voltage_label: string | null
+  specs: AccessorySpecs | null
+  notes: string | null
   light_tones: { id: number; name: string }[]
   finishes: { id: number; name: string }[]
   created_at: string

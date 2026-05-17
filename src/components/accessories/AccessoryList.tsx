@@ -32,11 +32,14 @@ const TrashIcon = ({ className = "w-4 h-4" }) => (
   </svg>
 )
 
-const INITIAL_VISIBLE_COLUMNS = ['code', 'name', 'has_media', 'actions']
+const INITIAL_VISIBLE_COLUMNS = ['code', 'name', 'tipo', 'watt', 'amperage', 'has_media', 'actions']
 
 const columns = [
   { name: 'CÓDIGO', uid: 'code', sortable: true },
   { name: 'NOMBRE', uid: 'name', sortable: true },
+  { name: 'TIPO', uid: 'tipo', sortable: true },
+  { name: 'POTENCIA', uid: 'watt' },
+  { name: 'AMPERAJE', uid: 'amperage' },
   { name: 'MEDIA', uid: 'has_media' },
   { name: 'ACCIONES', uid: 'actions' },
 ]
@@ -115,6 +118,24 @@ export default function AccessoryList({ accessories }: Props) {
             <span className="text-theme-sm font-medium text-gray-900 dark:text-white">{accessory.name}</span>
             <span className="text-theme-xs text-gray-500 dark:text-gray-400">ID: {accessory.id}</span>
           </div>
+        )
+      case 'tipo':
+        return (
+          <span className="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-700 dark:bg-gray-800 dark:text-gray-300">
+            {accessory.tipo || '-'}
+          </span>
+        )
+      case 'watt':
+        return (
+          <span className="text-theme-sm text-gray-700 dark:text-gray-300">
+            {accessory.watt ? `${accessory.watt}W` : '-'}
+          </span>
+        )
+      case 'amperage':
+        return (
+          <span className="text-theme-sm text-gray-700 dark:text-gray-300">
+            {accessory.amperage ? `${accessory.amperage}A` : '-'}
+          </span>
         )
       case 'has_media':
         return (

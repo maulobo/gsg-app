@@ -57,6 +57,8 @@ export async function PATCH(
         voltage_label: accessory.voltage_label || null,
         voltage_min: accessory.voltage_min || null,
         voltage_max: accessory.voltage_max || null,
+        specs: accessory.specs || null,
+        notes: accessory.notes || null,
       })
       .eq('id', existingAccessory.id)
       .select()
