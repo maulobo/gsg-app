@@ -61,6 +61,8 @@ CREATE TABLE IF NOT EXISTS public.accessories (
   voltage_label text,
   voltage_min integer,
   voltage_max integer,
+  specs jsonb DEFAULT '{}'::jsonb,
+  notes text,
   created_at timestamp with time zone DEFAULT now(),
   CONSTRAINT accessories_pkey PRIMARY KEY (id)
 );

@@ -28,6 +28,8 @@ export default function AccessoryCreationForm({ finishes, lightTones }: Props) {
     voltage_label: null,
     voltage_min: null,
     voltage_max: null,
+    specs: null,
+    notes: null,
   })
 
   // Tipo custom
@@ -44,6 +46,20 @@ export default function AccessoryCreationForm({ finishes, lightTones }: Props) {
   // Ficha técnica PDF
   const [datasheetFile, setDatasheetFile] = useState<File | null>(null)
 
+  // Campos detallados del specs (del Excel del cliente)
+  const [specsPower12v, setSpecsPower12v] = useState<number | null>(null)
+  const [specsPower24v, setSpecsPower24v] = useState<number | null>(null)
+  const [specsAmp12v, setSpecsAmp12v] = useState<number | null>(null)
+  const [specsAmp24v, setSpecsAmp24v] = useState<number | null>(null)
+  const [specsPower12vRaw, setSpecsPower12vRaw] = useState('')
+  const [specsPower24vRaw, setSpecsPower24vRaw] = useState('')
+  const [specsAmp12vRaw, setSpecsAmp12vRaw] = useState('')
+  const [specsAmp24vRaw, setSpecsAmp24vRaw] = useState('')
+  const [specsReach, setSpecsReach] = useState('')
+  const [specsSignal, setSpecsSignal] = useState('')
+  const [specsLedType, setSpecsLedType] = useState('')
+  const [notes, setNotes] = useState('')
+
   const handleCoverImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (file) {
@@ -56,6 +72,29 @@ export default function AccessoryCreationForm({ finishes, lightTones }: Props) {
     }
   }
 
+  const buildSpecs = () => {
+    const specs: Record<string, any> = {}
+    if (specsPower12v !== null || specsPower24v !== null) {
+      specs.power = {}
+      if (specsPower12v !== null) specs.power['12v_w'] = specsPower12v
+      if (specsPower24v !== null) specs.power['24v_w'] = specsPower24v
+    }
+    if (specsAmp12v !== null || specsAmp24v !== null) {
+      specs.amperage = {}
+      if (specsAmp12v !== null) specs.amperage['12v_a'] = specsAmp12v
+      if (specsAmp24v !== null) specs.amperage['24v_a'] = specsAmp24v
+    }
+    if (specsPower12vRaw.trim()) specs.power_12v_raw = specsPower12vRaw.trim()
+    if (specsPower24vRaw.trim()) specs.power_24v_raw = specsPower24vRaw.trim()
+    if (specsAmp12vRaw.trim()) specs.amperage_12v_raw = specsAmp12vRaw.trim()
+    if (specsAmp24vRaw.trim()) specs.amperage_24v_raw = specsAmp24vRaw.trim()
+    if (specsReach.trim()) specs.reach_or_total = specsReach.trim()
+    if (specsSignal.trim()) specs.signal_type = specsSignal.trim()
+    if (specsLedType.trim()) specs.led_type = specsLedType.trim()
+    if (notes.trim()) specs.notes = notes.trim()
+    return Object.keys(specs).length > 0 ? specs : null
+  }
+
   const handleSubmit = async () => {
     if (!formData.code || !formData.name) {
       alert('Código y nombre son requeridos')
@@ -65,12 +104,19 @@ export default function AccessoryCreationForm({ finishes, lightTones }: Props) {
     setIsSubmitting(true)
 
     try {
-      // 1. Crear el accesorio primero (sin foto) con las relaciones N:N
+      const specs = buildSpecs()
       const tipoFinal = formData.tipo === 'Otro' ? tipoOtro || null : formData.tipo || null
+      // Usar potencia 24V como watt principal (o 12V si no hay 24V)
+      const primaryWatt = specsPower24v ?? specsPower12v ?? formData.watt
+      const primaryAmp = specsAmp24v ?? specsAmp12v ?? formData.amperage
       const dataToSubmit = {
         accessory: {
           ...formData,
           tipo: tipoFinal,
+          watt: primaryWatt,
+          amperage: primaryAmp,
+          specs,
+          notes: notes.trim() || null,
           photo_url: null, // Se actualizará después si hay imagen
         },
         light_tone_ids: selectedToneIds,
@@ -276,45 +322,16 @@ export default function AccessoryCreationForm({ finishes, lightTones }: Props) {
             <h4 className="mb-4 text-base font-semibold text-gray-900 dark:text-white">
               Especificaciones Técnicas
             </h4>
-            
+
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-              {/* Amperage */}
-              <div>
-                <label className="mb-2 block text-theme-sm font-medium text-gray-700 dark:text-gray-300">
-                  Amperaje Máximo (A)
-                </label>
-                <input
-                  type="number"
-                  step="0.1"
-                  placeholder="ej: 3"
-                  value={formData.amperage || ''}
-                  onChange={(e) => setFormData({ ...formData, amperage: e.target.value ? Number(e.target.value) : null })}
-                  className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm text-gray-900 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500"
-                />
-              </div>
-
-              {/* Watt */}
-              <div>
-                <label className="mb-2 block text-theme-sm font-medium text-gray-700 dark:text-gray-300">
-                  Potencia (W)
-                </label>
-                <input
-                  type="number"
-                  placeholder="ej: 10"
-                  value={formData.watt || ''}
-                  onChange={(e) => setFormData({ ...formData, watt: e.target.value ? Number(e.target.value) : null })}
-                  className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm text-gray-900 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500"
-                />
-              </div>
-
-              {/* Voltage Label */}
+              {/* Voltage */}
               <div>
                 <label className="mb-2 block text-theme-sm font-medium text-gray-700 dark:text-gray-300">
                   Voltaje (Etiqueta)
                 </label>
                 <input
                   type="text"
-                  placeholder="ej: 110-220"
+                  placeholder="ej: 12/24 o 5-24"
                   value={formData.voltage_label || ''}
                   onChange={(e) => setFormData({ ...formData, voltage_label: e.target.value || null })}
                   className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm text-gray-900 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500"
@@ -328,7 +345,7 @@ export default function AccessoryCreationForm({ finishes, lightTones }: Props) {
                 </label>
                 <input
                   type="number"
-                  placeholder="ej: 110"
+                  placeholder="ej: 12"
                   value={formData.voltage_min || ''}
                   onChange={(e) => setFormData({ ...formData, voltage_min: e.target.value ? Number(e.target.value) : null })}
                   className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm text-gray-900 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500"
@@ -342,12 +359,177 @@ export default function AccessoryCreationForm({ finishes, lightTones }: Props) {
                 </label>
                 <input
                   type="number"
-                  placeholder="ej: 220"
+                  placeholder="ej: 24"
                   value={formData.voltage_max || ''}
                   onChange={(e) => setFormData({ ...formData, voltage_max: e.target.value ? Number(e.target.value) : null })}
                   className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm text-gray-900 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500"
                 />
               </div>
+            </div>
+
+            {/* Potencia por voltaje (del Excel) */}
+            <div className="mt-6">
+              <h5 className="mb-3 text-sm font-semibold text-gray-800 dark:text-gray-200">
+                Potencia y Amperaje por Voltaje (del Excel del cliente)
+              </h5>
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                <div>
+                  <label className="mb-2 block text-theme-sm font-medium text-gray-700 dark:text-gray-300">
+                    Potencia 12V (W)
+                  </label>
+                  <input
+                    type="number"
+                    placeholder="ej: 360"
+                    value={specsPower12v ?? ''}
+                    onChange={(e) => setSpecsPower12v(e.target.value ? Number(e.target.value) : null)}
+                    className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm text-gray-900 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500"
+                  />
+                </div>
+                <div>
+                  <label className="mb-2 block text-theme-sm font-medium text-gray-700 dark:text-gray-300">
+                    Potencia 24V (W)
+                  </label>
+                  <input
+                    type="number"
+                    placeholder="ej: 720"
+                    value={specsPower24v ?? ''}
+                    onChange={(e) => setSpecsPower24v(e.target.value ? Number(e.target.value) : null)}
+                    className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm text-gray-900 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500"
+                  />
+                </div>
+                <div>
+                  <label className="mb-2 block text-theme-sm font-medium text-gray-700 dark:text-gray-300">
+                    Amperaje 12V (A)
+                  </label>
+                  <input
+                    type="number"
+                    step="0.1"
+                    placeholder="ej: 30"
+                    value={specsAmp12v ?? ''}
+                    onChange={(e) => setSpecsAmp12v(e.target.value ? Number(e.target.value) : null)}
+                    className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm text-gray-900 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500"
+                  />
+                </div>
+                <div>
+                  <label className="mb-2 block text-theme-sm font-medium text-gray-700 dark:text-gray-300">
+                    Amperaje 24V (A)
+                  </label>
+                  <input
+                    type="number"
+                    step="0.1"
+                    placeholder="ej: 30"
+                    value={specsAmp24v ?? ''}
+                    onChange={(e) => setSpecsAmp24v(e.target.value ? Number(e.target.value) : null)}
+                    className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm text-gray-900 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500"
+                  />
+                </div>
+              </div>
+
+              {/* Valores raw (strings tipo "3x6A") */}
+              <div className="mt-4 grid grid-cols-1 gap-6 md:grid-cols-2">
+                <div>
+                  <label className="mb-2 block text-theme-sm font-medium text-gray-600 dark:text-gray-400">
+                    Potencia 12V (texto original si aplica)
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="ej: 72 o 3x6A"
+                    value={specsPower12vRaw}
+                    onChange={(e) => setSpecsPower12vRaw(e.target.value)}
+                    className="w-full rounded-lg border border-gray-200 bg-gray-50 px-4 py-2.5 text-theme-sm text-gray-700 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:placeholder:text-gray-500"
+                  />
+                </div>
+                <div>
+                  <label className="mb-2 block text-theme-sm font-medium text-gray-600 dark:text-gray-400">
+                    Potencia 24V (texto original si aplica)
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="ej: 144 o 3x6A"
+                    value={specsPower24vRaw}
+                    onChange={(e) => setSpecsPower24vRaw(e.target.value)}
+                    className="w-full rounded-lg border border-gray-200 bg-gray-50 px-4 py-2.5 text-theme-sm text-gray-700 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:placeholder:text-gray-500"
+                  />
+                </div>
+                <div>
+                  <label className="mb-2 block text-theme-sm font-medium text-gray-600 dark:text-gray-400">
+                    Amperaje 12V (texto original si aplica)
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="ej: 6A o 3x6A"
+                    value={specsAmp12vRaw}
+                    onChange={(e) => setSpecsAmp12vRaw(e.target.value)}
+                    className="w-full rounded-lg border border-gray-200 bg-gray-50 px-4 py-2.5 text-theme-sm text-gray-700 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:placeholder:text-gray-500"
+                  />
+                </div>
+                <div>
+                  <label className="mb-2 block text-theme-sm font-medium text-gray-600 dark:text-gray-400">
+                    Amperaje 24V (texto original si aplica)
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="ej: 6A o 3x6A"
+                    value={specsAmp24vRaw}
+                    onChange={(e) => setSpecsAmp24vRaw(e.target.value)}
+                    className="w-full rounded-lg border border-gray-200 bg-gray-50 px-4 py-2.5 text-theme-sm text-gray-700 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:placeholder:text-gray-500"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Otros campos del Excel */}
+            <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+              <div>
+                <label className="mb-2 block text-theme-sm font-medium text-gray-700 dark:text-gray-300">
+                  Alcance / Total
+                </label>
+                <input
+                  type="text"
+                  placeholder="ej: 10m, WiFi, RGB, en cascada..."
+                  value={specsReach}
+                  onChange={(e) => setSpecsReach(e.target.value)}
+                  className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm text-gray-900 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500"
+                />
+              </div>
+              <div>
+                <label className="mb-2 block text-theme-sm font-medium text-gray-700 dark:text-gray-300">
+                  Tipo de Señal
+                </label>
+                <input
+                  type="text"
+                  placeholder="ej: Llavero, Táctil, IR, PIR..."
+                  value={specsSignal}
+                  onChange={(e) => setSpecsSignal(e.target.value)}
+                  className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm text-gray-900 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500"
+                />
+              </div>
+            <div>
+              <label className="mb-2 block text-theme-sm font-medium text-gray-700 dark:text-gray-300">
+                LED / Tipo
+              </label>
+              <input
+                type="text"
+                placeholder="ej: mini RGB, RGBW, Monocrom."
+                value={specsLedType}
+                onChange={(e) => setSpecsLedType(e.target.value)}
+                className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm text-gray-900 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500"
+              />
+            </div>
+          </div>
+
+            {/* Notas */}
+            <div className="mt-6">
+              <label className="mb-2 block text-theme-sm font-medium text-gray-700 dark:text-gray-300">
+                Notas Técnicas
+              </label>
+              <textarea
+                placeholder="Notas adicionales del Excel (ej: VERIFICAR, datos de fábrica, funciones, etc.)"
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+                rows={3}
+                className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm text-gray-900 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500"
+              />
             </div>
           </div>
 
