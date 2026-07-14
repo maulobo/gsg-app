@@ -224,3 +224,18 @@ git commit -m "feat: load Alabastro catalog products into generic product schema
 
 - Images: once the user sends photos, upload them via the admin product edit UI (same flow as accessories) — creates `media_assets` rows, no SQL needed.
 - `lumens_estimado: true` in `specs` flags every LED-integrated config's lumens as an estimate; Aura's `lumens = 0` is an explicit "no data" placeholder — both can be corrected later from the admin panel once real photometric data is available.
+
+---
+
+## Execution note (2026-07-14)
+
+Executed via `load-alabastro-products.mjs` (supabase-js upserts) instead of a raw SQL file, because:
+- `run-sql.mjs`'s `exec_sql` RPC and `apply-migrations.mjs`'s hardcoded DB password don't work against this
+  project's database.
+- The live `variant_configurations` schema differs from `FULL_SCHEMA.sql`: dimensions are `length_cm`/`width_cm`
+  (not `length_mm`/`width_mm`), and there's an additional `name` column. All dimensions from the JSON were
+  converted from mm to cm accordingly, and `diameter_description` follows the existing `"Ø<n>cm"` convention
+  seen in other products' data.
+
+Verified after load: all 7 products under `category=alabastro` with the expected variant/config/finish counts
+(AUR 1/1/1, VEL 2/2/1, CAL 2/2/2, ECL 4/4/2, SEN 4/4/2, LIR 2/2/2, ORB 1/1/1).
