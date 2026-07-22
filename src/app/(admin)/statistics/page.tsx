@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import DashboardStats from "@/components/dashboard/DashboardStats";
 import ProductViewsDashboard from "@/components/analytics/ProductViewsDashboard";
 
 export const metadata: Metadata = {
@@ -19,14 +18,7 @@ export default function StatisticsPage() {
         </p>
       </div>
       
-      {/* Dashboard completo de visualizaciones */}
       <ProductViewsDashboard />
-
-      {/* Resumen rápido - Top productos por período */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <DashboardStats limit={10} daysBack={7} />
-        <DashboardStats limit={10} daysBack={30} />
-      </div>
     </div>
   );
 }
