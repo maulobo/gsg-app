@@ -62,6 +62,11 @@ const navItems: NavItem[] = [
     path: "/led-rolls",
   },
   {
+    icon: <PlugInIcon />,
+    name: "Fuentes LED",
+    path: "/power-supplies",
+  },
+  {
     icon: <GroupIcon />,
     name: "Distribuidores",
     path: "/distributors",
