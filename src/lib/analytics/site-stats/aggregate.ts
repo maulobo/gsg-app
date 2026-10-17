@@ -71,6 +71,7 @@ export interface SiteStats {
   family: Family | null;
   generatedAt: string;
   excludedDevEvents: number;
+  includesDevEvents: boolean;
   metrics: Record<MetricKey, MetricResult>;
   series: {
     labels: string[];
@@ -138,6 +139,8 @@ interface AggregateInput {
   family: Family | null;
   coverage: Coverage;
   now: Date;
+  /** Solo para verificar en desarrollo con datos de prueba: incluye eventos de localhost/preview */
+  includeDevEvents?: boolean;
 }
 
 /**
@@ -150,7 +153,7 @@ export function aggregateSiteStats(input: AggregateInput): SiteStats {
   let excludedDevEvents = 0;
   const keep = (events: AnalyticsEventRow[], countExcluded: boolean) =>
     events.filter((e) => {
-      if (isDevEvent(e)) {
+      if (!input.includeDevEvents && isDevEvent(e)) {
         if (countExcluded) excludedDevEvents += 1;
         return false;
       }
@@ -366,6 +369,7 @@ export function aggregateSiteStats(input: AggregateInput): SiteStats {
     family,
     generatedAt: now.toISOString(),
     excludedDevEvents,
+    includesDevEvents: !!input.includeDevEvents,
     metrics,
     series,
     products: productRows,

@@ -182,3 +182,19 @@ test("Origen de las visitas agrupado", () => {
   assert.equal(stats.sources.total, 2);
   assert.deepEqual(stats.sources.kinds.map((k) => k.id).sort(), ["direct", "search"]);
 });
+
+test("includeDevEvents (solo verificación en desarrollo) cuenta los eventos de prueba", () => {
+  const dev = view("2026-10-16T12:00:00Z", "fuentes", "GSG-36WHH", { env: "development" });
+  const stats = aggregateSiteStats({
+    current: [dev],
+    previous: [],
+    period: week,
+    comparisonRange,
+    family: null,
+    coverage: coverage(),
+    now: NOW,
+    includeDevEvents: true,
+  });
+  assert.equal(stats.metrics.views.value, 1);
+  assert.equal(stats.includesDevEvents, true);
+});

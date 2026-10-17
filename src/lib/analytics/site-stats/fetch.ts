@@ -43,13 +43,11 @@ const PRODUCTION_FILTER = "metadata->>env.is.null,metadata->>env.eq.production";
 async function firstEventAt(
   admin: SupabaseClient,
   eventType: string,
+  includeDev: boolean,
   extra?: (q: any) => any,
 ): Promise<string | null> {
-  let query = admin
-    .from("analytics_events")
-    .select("created_at")
-    .eq("event_type", eventType)
-    .or(PRODUCTION_FILTER);
+  let query = admin.from("analytics_events").select("created_at").eq("event_type", eventType);
+  if (!includeDev) query = query.or(PRODUCTION_FILTER);
   if (extra) query = extra(query);
   const { data, error } = await query.order("created_at", { ascending: true }).limit(1);
   if (error) throw error;
@@ -57,16 +55,16 @@ async function firstEventAt(
 }
 
 /** Desde cuándo existe cada medición (primer evento de producción) */
-export async function fetchCoverage(admin: SupabaseClient): Promise<Coverage> {
+export async function fetchCoverage(admin: SupabaseClient, includeDev = false): Promise<Coverage> {
   const types = TRACKED_EVENT_TYPES.filter((t) => t !== "view_product");
   const [byType, byFamily] = await Promise.all([
-    Promise.all(types.map(async (t) => [t, await firstEventAt(admin, t)] as const)),
+    Promise.all(types.map(async (t) => [t, await firstEventAt(admin, t, includeDev)] as const)),
     Promise.all(
       FAMILIES.map(
         async (f) =>
           [
             f,
-            await firstEventAt(admin, "view_product", (q) =>
+            await firstEventAt(admin, "view_product", includeDev, (q) =>
               // Histórico sin familia = luminarias
               f === "luminarias" ? q.or("metadata->>family.is.null,metadata->>family.eq.luminarias") : q.eq("metadata->>family", f),
             ),
