@@ -1,3 +1,5 @@
+import Link from 'next/link'
+import { ArrowLeft } from 'lucide-react'
 import DownloadPageForm from '@/components/download-pages/DownloadPageForm'
 
 export const metadata = {
@@ -7,12 +9,14 @@ export const metadata = {
 export default function NewDownloadPage() {
   return (
     <div className="mx-auto max-w-7xl p-6">
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Nueva página de descargas</h1>
-        <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-          Primero elegí el nombre y la dirección. Después vas a poder subir los PDFs y bajar el QR.
-        </p>
-      </div>
+      <Link
+        href="/download-pages"
+        className="mb-4 inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-900 dark:hover:text-white"
+      >
+        <ArrowLeft className="h-4 w-4" />
+        QR Descargables
+      </Link>
+      <h1 className="mb-6 text-3xl font-bold text-gray-900 dark:text-white">Nueva página de descargas</h1>
       <DownloadPageForm />
     </div>
   )
