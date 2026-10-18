@@ -15,7 +15,8 @@ import {
   BoxIconLine,
   LedStripIcon,
   GroupIcon,
-  PieChartIcon
+  PieChartIcon,
+  DownloadIcon
 } from "../icons";
 import SidebarWidget from "./SidebarWidget";
 
@@ -65,6 +66,11 @@ const navItems: NavItem[] = [
     icon: <PlugInIcon />,
     name: "Fuentes LED",
     path: "/power-supplies",
+  },
+  {
+    icon: <DownloadIcon />,
+    name: "QR Descargables",
+    path: "/download-pages",
   },
   {
     icon: <GroupIcon />,
