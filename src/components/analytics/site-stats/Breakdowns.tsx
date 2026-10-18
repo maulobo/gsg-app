@@ -5,7 +5,7 @@ import type { CountRow, SiteStats } from "@/lib/analytics/site-stats/aggregate";
 import { formatDate, formatInt, GSG_ACCENT, share } from "./format";
 
 /** Fila con barra proporcional. La barra usa el acento solo en la primera fila. */
-function BarRow({ label, detail, count, max, total, strong }: { label: string; detail?: string; count: number; max: number; total?: number; strong?: boolean }) {
+export function BarRow({ label, detail, count, max, total, strong }: { label: string; detail?: string; count: number; max: number; total?: number; strong?: boolean }) {
   return (
     <li className="py-1.5">
       <div className="flex items-baseline justify-between gap-3 text-sm">
@@ -28,7 +28,7 @@ function BarRow({ label, detail, count, max, total, strong }: { label: string; d
   );
 }
 
-function RowList({ rows, total, empty }: { rows: CountRow[]; total?: number; empty: string }) {
+export function RowList({ rows, total, empty }: { rows: CountRow[]; total?: number; empty: string }) {
   if (!rows.length) return <p className="py-2 text-sm text-gray-500">{empty}</p>;
   const max = rows[0].count;
   return (

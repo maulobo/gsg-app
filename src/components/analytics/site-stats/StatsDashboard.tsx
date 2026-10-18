@@ -12,6 +12,7 @@ import { formatDate, formatInt, formatYmd } from "./format";
 import KpiStrip from "./KpiStrip";
 import ProductRanking from "./ProductRanking";
 import StatsFilters, { type StatsQuery } from "./StatsFilters";
+import TrafficPanel from "./TrafficPanel";
 import TrendChart from "./TrendChart";
 
 function initialQuery(): StatsQuery {
@@ -144,6 +145,8 @@ export default function StatsDashboard() {
               <TrendChart stats={stats} metric={metric} />
             )}
           </div>
+
+          <TrafficPanel query={query} isPartial={stats.period.isPartial} byHour={stats.period.granularity === "hour"} />
 
           {!noActivity && (
             <>
